@@ -1,0 +1,8 @@
+needs-decision [key=a]: first
+needs-decision [key=b]: second
+resolved [key=a]: answered
+needs-decision [key=c]: third
+needs-decision [key=d]: fourth
+needs-decision [key=b]: second again
+working: resumed
+resolved [key=missing]: unknown key closes nothing

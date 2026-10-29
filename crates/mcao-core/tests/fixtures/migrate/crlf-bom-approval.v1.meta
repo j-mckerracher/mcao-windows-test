@@ -1,0 +1,11 @@
+﻿window=firstmate:fm-dpes-901-approval
+endpoint_task_id=dpes-901-approval
+worktree=/Users/REDACTED/.treehouse/pool/1/proj
+project=/Users/REDACTED/agent-tools/firstmate-pstack/projects/proj
+harness=claude
+kind=ship
+decision_keys=d1
+approval=granted at=1792101960 by=owner
+proof_sha=9f2c1d0e4b7a
+decision_keys=d2
+future_key=a=b=c

@@ -1,0 +1,3 @@
+tasks[2]{id,hold_kind,hold_kind,state}:
+  d1,captain,external,queued
+  d2,external,captain,queued

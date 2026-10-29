@@ -1,0 +1,13 @@
+DPES-889 .meta encoding fixtures: provenance
+
+windows-v2.meta, posix-v2.meta
+  Written by hand, not taken from a live home, because no Windows writer exists yet. Each
+  follows the DPES-889 encoding: format=2, a path_style line, and path values in the verbatim
+  form of the writing system. Every line ends in LF and no file starts with a byte order mark.
+  windows-v2.meta carries a drive path, a UNC path, a \\?\ path, the windows backend token, and
+  one key this reader does not know, to show unknown keys are tolerated. Usernames are
+  redacted. No expected value in tests/state_encoding.rs is generated from Rust.
+
+Existing records
+  The four version 1 records under tests/fixtures/meta/ are unchanged and are read by
+  tests/state_encoding.rs as version 1.

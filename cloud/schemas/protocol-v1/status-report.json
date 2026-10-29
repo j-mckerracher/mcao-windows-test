@@ -1,0 +1,125 @@
+{
+  "additionalProperties": false,
+  "description": "Runner-written status. Telemetry until the controller accepts it.\n\nseq must strictly increase for liveness; log_watermark is the highest log seq durably\nwritten. observed_at is the worker's clock and never moves liveness or deadlines.",
+  "properties": {
+    "attempt": {
+      "minimum": 1,
+      "title": "Attempt",
+      "type": "integer",
+      "x-origin": "controller-assigned"
+    },
+    "claim_id": {
+      "pattern": "^claim_[0-9a-f]{32}$",
+      "title": "Claim Id",
+      "type": "string",
+      "x-origin": "controller-assigned"
+    },
+    "fence": {
+      "minimum": 1,
+      "title": "Fence",
+      "type": "integer",
+      "x-origin": "controller-assigned"
+    },
+    "log_watermark": {
+      "minimum": 0,
+      "title": "Log Watermark",
+      "type": "integer",
+      "x-origin": "runner-reported"
+    },
+    "message": {
+      "default": "",
+      "maxLength": 512,
+      "title": "Message",
+      "type": "string",
+      "x-origin": "runner-reported"
+    },
+    "observed_at": {
+      "format": "date-time",
+      "title": "Observed At",
+      "type": "string",
+      "x-origin": "runner-reported"
+    },
+    "phase": {
+      "enum": [
+        "starting",
+        "running",
+        "collecting"
+      ],
+      "title": "Phase",
+      "type": "string",
+      "x-origin": "runner-reported"
+    },
+    "protocol_version": {
+      "const": "v1",
+      "title": "Protocol Version",
+      "type": "string",
+      "x-origin": "runner-reported"
+    },
+    "run_id": {
+      "pattern": "^run_[0-9a-f]{32}$",
+      "title": "Run Id",
+      "type": "string",
+      "x-origin": "controller-assigned"
+    },
+    "seq": {
+      "minimum": 1,
+      "title": "Seq",
+      "type": "integer",
+      "x-origin": "runner-reported"
+    }
+  },
+  "required": [
+    "protocol_version",
+    "run_id",
+    "attempt",
+    "fence",
+    "claim_id",
+    "seq",
+    "phase",
+    "observed_at",
+    "log_watermark"
+  ],
+  "title": "StatusReport",
+  "type": "object",
+  "x-forbidden-inputs": [
+    "access_token",
+    "actor",
+    "argv",
+    "attempt_number",
+    "body",
+    "claim",
+    "claim_nonce",
+    "command",
+    "container_image",
+    "control",
+    "credential",
+    "credentials",
+    "download_url",
+    "env",
+    "environment",
+    "fence_token",
+    "id_token",
+    "image",
+    "image_digest",
+    "image_ref",
+    "local_path",
+    "owner",
+    "owner_id",
+    "path",
+    "principal",
+    "runtime_identity",
+    "secret",
+    "secret_name",
+    "secret_ref",
+    "secrets",
+    "server_id",
+    "service_account",
+    "service_account_email",
+    "signed_url",
+    "source_bytes",
+    "source_content",
+    "token",
+    "upload_url",
+    "url"
+  ]
+}

@@ -1,0 +1,8 @@
+# Every text file checks out with LF line endings, so Windows runners and laptops read identical bytes.
+* text=auto eol=lf
+# Bash parses shell scripts with LF line endings on every supported platform.
+*.sh text eol=lf
+# Frozen parity fixtures hold raw bytes (CRLF, BOM, invalid UTF-8) that git must not rewrite.
+crates/mcao-cli/tests/fixtures/util-awaiting/** -text
+# Saved real records and parity fixtures hold raw bytes that git must not rewrite.
+crates/**/tests/fixtures/** -text

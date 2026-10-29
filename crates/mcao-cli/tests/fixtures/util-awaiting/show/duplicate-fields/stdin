@@ -1,0 +1,9 @@
+task:
+  id: first-id
+  id: second-id
+  hold_kind: captain
+  hold_kind: external
+  state: queued
+  hold_reason: R
+  created: 2026-10-23
+  body: ""

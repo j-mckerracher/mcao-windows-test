@@ -1,0 +1,4 @@
+tasks[3]{id,state,kind,repo,title,hold_kind,hold_until}:
+  q1,queued,ship,sample,"Has, comma",captain,"-"
+  "q,2",queued,ship,sample,"say \"hi\"",captain,-
+  q3,"done",ship,sample,t,captain,-

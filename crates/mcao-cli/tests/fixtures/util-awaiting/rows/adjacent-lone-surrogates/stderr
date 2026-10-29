@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<string>", line 47, in <module>
+    print(row.get("id", ""))
+    ~~~~~^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'utf-8' codec can't encode characters in position 0-1: surrogates not allowed

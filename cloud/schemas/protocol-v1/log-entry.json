@@ -1,0 +1,72 @@
+{
+  "additionalProperties": false,
+  "description": "One log object holds exactly one entry; its seq must equal the object's seq.\n\nLines are redacted at the model boundary, so storage never holds secrets.",
+  "properties": {
+    "lines": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 500,
+      "title": "Lines",
+      "type": "array"
+    },
+    "protocol_version": {
+      "const": "v1",
+      "title": "Protocol Version",
+      "type": "string"
+    },
+    "seq": {
+      "minimum": 1,
+      "title": "Seq",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "protocol_version",
+    "seq",
+    "lines"
+  ],
+  "title": "LogEntry",
+  "type": "object",
+  "x-forbidden-inputs": [
+    "access_token",
+    "actor",
+    "argv",
+    "attempt_number",
+    "body",
+    "claim",
+    "claim_nonce",
+    "command",
+    "container_image",
+    "control",
+    "credential",
+    "credentials",
+    "download_url",
+    "env",
+    "environment",
+    "fence_token",
+    "id_token",
+    "image",
+    "image_digest",
+    "image_ref",
+    "local_path",
+    "owner",
+    "owner_id",
+    "path",
+    "principal",
+    "runtime_identity",
+    "secret",
+    "secret_name",
+    "secret_ref",
+    "secrets",
+    "server_id",
+    "service_account",
+    "service_account_email",
+    "signed_url",
+    "source_bytes",
+    "source_content",
+    "token",
+    "upload_url",
+    "url"
+  ]
+}

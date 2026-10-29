@@ -1,0 +1,19 @@
+DPES-753 slice 753.H pilot config fixture: provenance
+
+config/
+  One pilot config directory, written by hand. The setting files use the names the shell
+  reads (developer-name, branch-prefix, crew-harness, claude-permission-mode, backend). Two
+  carry CRLF endings, as a Windows editor writes them. max-workers is absent, so its default
+  applies. The unknown files are kept verbatim: crew-dispatch.json (text), notes.txt (CRLF, no
+  final newline), and blob.bin (binary). archive/ is a directory, which a load ignores.
+  No symlink is included, because Windows checkouts do not create one reliably.
+
+expected-files.txt, expected-overrides.txt
+  The frozen result of loading config/ with no flags and no environment, and with the flag
+  branch-prefix=feat/ and the environment variable FM_BACKEND=tmux. Written by hand from the
+  precedence and parsing rules in src/config.rs, not generated from Rust. Paths are relative to
+  config/ and use /, so the same text holds on every platform.
+
+Cross-platform
+  The same bytes are checked out on Linux, macOS, and Windows, where CI runs the workspace tests
+  natively. .gitattributes marks tests/fixtures/** as -text, so git does not rewrite them.

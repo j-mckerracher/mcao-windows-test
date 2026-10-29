@@ -1,0 +1,6 @@
+needs-decision [key=ok]: kept
+resolved [key=bad slug]: space in slug, skipped
+resolved [key=]: empty slug, skipped
+needs-decision [key=a/b]: slash in slug, skipped
+needs-decision: summary mentions [key=ok] inline, opens default
+resolved: mentions [key=ok] inline in its note, closes default only

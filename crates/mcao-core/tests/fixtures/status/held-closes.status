@@ -1,0 +1,6 @@
+needs-decision [key=a]: moved to the backlog
+captain-held [key=a]: held until the owner decides
+blocked [key=b]: waiting on access
+captain-held [key=c]: unknown key, closes nothing
+resolved [key=b]
+needs-decision [key=e]: last

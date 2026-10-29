@@ -1,0 +1,3 @@
+tasks[2]{id,state,kind,repo,title,hold_kind,hold_until}:
+  c1,queued,ship,sample,t,captain,-
+  c2,queued,ship,sample,t,captain,-

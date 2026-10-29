@@ -1,0 +1,62 @@
+DPES-864 herdr-workspace-move parity fixtures: provenance
+
+Each directory here is one recorded case of bin/backends/herdr-workspace-move.py, the Python
+reference client that `mcao herdr workspace-move` must match. tests/herdr-workspace-move.rs reads
+every case and checks the Rust output against the recorded stdout, exit status, and request line.
+No expected value in that file is generated from Rust.
+
+Reference
+  file:      bin/backends/herdr-workspace-move.py
+  commit:    838db32, the last commit that changed the file in this checkout
+  sha256:    07fba3b51fb79cc4cf07c4ec1ed6e7b50813ec01e92cac908b5e417f8685d86a
+             (checked against the working tree this change is based on)
+
+Recording
+  interpreter: Python 3.14.6, run as `python3 -I` (isolated mode, so no environment or
+               current-directory imports).
+  host:        macOS (darwin).
+  generator:   a developer-only script kept outside the repository. It refuses to run unless the
+               reference sha256 matches. For each case it starts a scripted fake control socket
+               in a short temporary directory, runs the reference with the case's arguments, and
+               writes the files below. Two independent runs produced byte-identical files, which
+               `diff -r` confirmed.
+  stderr:      the reference's stderr was kept out of the repository. It is not part of the
+               contract, because the Rust messages differ.
+
+Case files
+  case.json  the scripted input, written by the generator from the case table. It holds the
+             arguments after the script name ("{socket}" stands for the socket path), the
+             replies in order, and the end mode: close ends after the replies, hold keeps the
+             connection open until the reference closes it, absent runs no server. Each reply
+             string is sent byte for byte, so a reply without a newline is sent without one.
+  stdout     the reference's stdout bytes.
+  exit       the reference's exit status.
+  request    the one request line the reference sent, newline included. Absent when it never
+             connected.
+
+The replies were scripted, not captured from a live herdr session.
+
+Compared as
+  stdout, exit, and request: exact bytes. The reference serializes its request compactly, as
+  the client does, so ASCII requests match byte for byte.
+
+Not covered (known divergences; no fixture asserts them)
+  - An insert index above 2^64 - 1. The reference sends the integer as given, while parse_insert_index
+    rejects it as a usage error (exit 2).
+  - A non-ASCII workspace id. The reference escapes it as \uXXXX in the request, while the Rust
+    client sends the UTF-8 bytes. Both are valid JSON with the same value.
+  - A non-ASCII string or a non-compact spelling in a reply. The reference re-serializes the
+    reply with ensure_ascii and compact separators, while the Rust client prints the reply text
+    as received, so stdout differs by bytes and the parsed value is the same.
+  - A reply with a CRLF line ending. The reference's stdout has no carriage return, while the
+    Rust client prints the line with its carriage return.
+  - A duplicate key in a reply. The reference keeps one entry per key, while the Rust client
+    prints the reply text as received.
+  - NaN, Infinity, or a number out of range in a reply. Python's json accepts these and the
+    reference can succeed, while serde_json refuses them, so the Rust client exits 4.
+  - A reply whose JSON is not an object, such as an array, number, string, or null. The reference
+    exits 1 with an uncaught exception, while the Rust client exits 4 as a refused reply.
+  - The connect bound (5 seconds). It is not reproduced here: on this host (macOS) a full listen
+    backlog refuses a connect rather than blocking it, so the fake server cannot trigger the
+    reference's connect timeout. The Rust bound is tested in src/herdr/workspace_move.rs with an
+    injected connect.

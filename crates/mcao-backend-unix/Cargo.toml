@@ -1,0 +1,9 @@
+[package]
+name = "mcao-backend-unix"
+description = "PROPOSED (DPES-752 unconfirmed): Unix tmux pane capture and lsof holder probe; herdr and selector pending."
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[dependencies]
+mcao-core = { path = "../mcao-core" }

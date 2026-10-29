@@ -1,0 +1,17 @@
+[package]
+name = "mcao-probe"
+description = "PROPOSED (DPES-752 unconfirmed): lifecycle probe. The native backend drives the stub harness only; it produces no pilot-harness evidence."
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[dependencies]
+mcao-core = { path = "../mcao-core" }
+serde.workspace = true
+serde_json.workspace = true
+
+[target.'cfg(unix)'.dependencies]
+mcao-backend-unix = { path = "../mcao-backend-unix" }
+
+[target.'cfg(windows)'.dependencies]
+mcao-backend-windows = { path = "../mcao-backend-windows" }

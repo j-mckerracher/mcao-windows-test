@@ -1,0 +1,93 @@
+{
+  "additionalProperties": false,
+  "description": "Runner-written, create-only. Proves the runner took this attempt and fence.\n\nrunner_nonce is unpredictable per runner process. After an ambiguous create response the runner\nreads the claim back by its exact key: a readback carrying this process's nonce proves it owns\nthe attempt, and any other value proves another runner owns it.",
+  "properties": {
+    "attempt": {
+      "minimum": 1,
+      "title": "Attempt",
+      "type": "integer",
+      "x-origin": "controller-assigned"
+    },
+    "claim_id": {
+      "pattern": "^claim_[0-9a-f]{32}$",
+      "title": "Claim Id",
+      "type": "string",
+      "x-origin": "controller-assigned"
+    },
+    "fence": {
+      "minimum": 1,
+      "title": "Fence",
+      "type": "integer",
+      "x-origin": "controller-assigned"
+    },
+    "protocol_version": {
+      "const": "v1",
+      "title": "Protocol Version",
+      "type": "string",
+      "x-origin": "runner-reported"
+    },
+    "run_id": {
+      "pattern": "^run_[0-9a-f]{32}$",
+      "title": "Run Id",
+      "type": "string",
+      "x-origin": "controller-assigned"
+    },
+    "runner_nonce": {
+      "pattern": "^[0-9a-f]{32}$",
+      "title": "Runner Nonce",
+      "type": "string",
+      "x-origin": "runner-reported"
+    }
+  },
+  "required": [
+    "protocol_version",
+    "run_id",
+    "attempt",
+    "fence",
+    "claim_id",
+    "runner_nonce"
+  ],
+  "title": "ClaimDocument",
+  "type": "object",
+  "x-forbidden-inputs": [
+    "access_token",
+    "actor",
+    "argv",
+    "attempt_number",
+    "body",
+    "claim",
+    "claim_nonce",
+    "command",
+    "container_image",
+    "control",
+    "credential",
+    "credentials",
+    "download_url",
+    "env",
+    "environment",
+    "fence_token",
+    "id_token",
+    "image",
+    "image_digest",
+    "image_ref",
+    "local_path",
+    "owner",
+    "owner_id",
+    "path",
+    "principal",
+    "runtime_identity",
+    "secret",
+    "secret_name",
+    "secret_ref",
+    "secrets",
+    "server_id",
+    "service_account",
+    "service_account_email",
+    "signed_url",
+    "source_bytes",
+    "source_content",
+    "token",
+    "upload_url",
+    "url"
+  ]
+}

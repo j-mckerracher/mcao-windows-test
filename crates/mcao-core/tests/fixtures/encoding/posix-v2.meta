@@ -1,0 +1,7 @@
+format=2
+path_style=posix
+backend=tmux
+kind=ship
+home=/home/REDACTED/mcao/home
+worktree=/home/REDACTED/wt/t1
+harness=claude

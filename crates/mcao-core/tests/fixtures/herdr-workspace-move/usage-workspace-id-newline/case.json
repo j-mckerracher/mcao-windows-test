@@ -1,0 +1,9 @@
+{
+  "args": [
+    "{socket}",
+    "ws\n1",
+    "1"
+  ],
+  "replies": [],
+  "end": "absent"
+}

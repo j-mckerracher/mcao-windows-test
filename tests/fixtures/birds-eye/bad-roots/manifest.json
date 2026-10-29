@@ -1,0 +1,32 @@
+{
+  "configured": [
+    "/fleet/good",
+    "/fleet/future",
+    "/fleet/schema",
+    "/fleet/idmismatch",
+    "/fleet/badjson",
+    "/fleet/missing"
+  ],
+  "homes": {
+    "/fleet/good": {
+      "file": "../snapshots/good.json",
+      "exit": 0
+    },
+    "/fleet/future": {
+      "file": "../snapshots/bad-future.json",
+      "exit": 0
+    },
+    "/fleet/schema": {
+      "file": "../snapshots/bad-schema.json",
+      "exit": 0
+    },
+    "/fleet/idmismatch": {
+      "file": "../snapshots/bad-id.json",
+      "exit": 0
+    },
+    "/fleet/badjson": {
+      "file": "../snapshots/bad-json.json",
+      "exit": 0
+    }
+  }
+}

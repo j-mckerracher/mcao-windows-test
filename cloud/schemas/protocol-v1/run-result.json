@@ -1,0 +1,168 @@
+{
+  "$defs": {
+    "ArtifactRef": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._/-]{0,255}$",
+          "title": "Name",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 209715200,
+          "minimum": 0,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "ArtifactRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "artifacts": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ArtifactRef"
+      },
+      "title": "Artifacts",
+      "type": "array",
+      "x-origin": "runner-reported"
+    },
+    "attempt": {
+      "minimum": 1,
+      "title": "Attempt",
+      "type": "integer",
+      "x-origin": "controller-assigned"
+    },
+    "claim_id": {
+      "pattern": "^claim_[0-9a-f]{32}$",
+      "title": "Claim Id",
+      "type": "string",
+      "x-origin": "controller-assigned"
+    },
+    "commit_sha": {
+      "anyOf": [
+        {
+          "pattern": "^[0-9a-f]{40}$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Commit Sha",
+      "x-origin": "runner-reported"
+    },
+    "exit_code": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Exit Code",
+      "x-origin": "runner-reported"
+    },
+    "fence": {
+      "minimum": 1,
+      "title": "Fence",
+      "type": "integer",
+      "x-origin": "controller-assigned"
+    },
+    "outcome": {
+      "enum": [
+        "succeeded",
+        "failed"
+      ],
+      "title": "Outcome",
+      "type": "string",
+      "x-origin": "runner-reported"
+    },
+    "protocol_version": {
+      "const": "v1",
+      "title": "Protocol Version",
+      "type": "string",
+      "x-origin": "runner-reported"
+    },
+    "redacted": {
+      "const": true,
+      "default": true,
+      "title": "Redacted",
+      "type": "boolean",
+      "x-origin": "runner-reported"
+    },
+    "run_id": {
+      "pattern": "^run_[0-9a-f]{32}$",
+      "title": "Run Id",
+      "type": "string",
+      "x-origin": "controller-assigned"
+    }
+  },
+  "required": [
+    "protocol_version",
+    "run_id",
+    "attempt",
+    "fence",
+    "claim_id",
+    "outcome"
+  ],
+  "title": "RunResultDocument",
+  "type": "object",
+  "x-forbidden-inputs": [
+    "access_token",
+    "actor",
+    "argv",
+    "attempt_number",
+    "body",
+    "claim",
+    "claim_nonce",
+    "command",
+    "container_image",
+    "control",
+    "credential",
+    "credentials",
+    "download_url",
+    "env",
+    "environment",
+    "fence_token",
+    "id_token",
+    "image",
+    "image_digest",
+    "image_ref",
+    "local_path",
+    "owner",
+    "owner_id",
+    "path",
+    "principal",
+    "runtime_identity",
+    "secret",
+    "secret_name",
+    "secret_ref",
+    "secrets",
+    "server_id",
+    "service_account",
+    "service_account_email",
+    "signed_url",
+    "source_bytes",
+    "source_content",
+    "token",
+    "upload_url",
+    "url"
+  ]
+}

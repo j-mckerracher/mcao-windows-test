@@ -1,0 +1,24 @@
+{
+  "schema": "fm-fleet-snapshot.v1",
+  "fm_home": "/fleet/h9",
+  "generated": "2026-10-18T05:06:30Z",
+  "generated_epoch": null,
+  "backlog": {},
+  "contributions": {},
+  "main_inventory": {},
+  "scout_reports": [],
+  "secondmate_current": {
+    "registry": {
+      "present": true,
+      "available": true,
+      "complete": true,
+      "reasons": []
+    },
+    "records": [],
+    "total_registered": 0,
+    "total": 0,
+    "shown": 0,
+    "truncated": 0
+  },
+  "tasks": []
+}

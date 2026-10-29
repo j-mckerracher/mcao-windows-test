@@ -1,0 +1,2014 @@
+{
+  "schema": "fm-fleet-snapshot.v1",
+  "fm_home": "/fleet/h3",
+  "generated": "2026-10-18T05:06:30Z",
+  "generated_epoch": null,
+  "backlog": {},
+  "contributions": {},
+  "main_inventory": {},
+  "scout_reports": [],
+  "secondmate_current": {
+    "registry": {
+      "present": true,
+      "available": true,
+      "complete": true,
+      "reasons": []
+    },
+    "records": [
+      {
+        "id": "mate-4",
+        "home": "/fleet/h4",
+        "host": null,
+        "remote": false,
+        "registered": true,
+        "spawn_gen": null,
+        "current": {
+          "state": "active_child_work",
+          "reason": null
+        },
+        "invalidity": null,
+        "reconcile_inventory": null,
+        "provenance": {
+          "selected": "structured-home",
+          "structured_home": "/fleet/h4",
+          "summary_source": "local-ledger",
+          "summary_valid": true,
+          "trust": "complete",
+          "parent_event_role": "historical-only"
+        },
+        "freshness": {
+          "status": "fresh",
+          "observed_at": "2026-10-18T05:06:30Z",
+          "age_seconds": 0
+        },
+        "active_children": [],
+        "decisions_open": [],
+        "holds": 0,
+        "queued": 0,
+        "landed": 0,
+        "endpoints": 0,
+        "counts": {},
+        "omitted": 0
+      }
+    ],
+    "total_registered": 1,
+    "total": 1,
+    "shown": 1,
+    "truncated": 0
+  },
+  "tasks": [
+    {
+      "id": "mate-4",
+      "kind": "secondmate",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/mate-4",
+      "project": null,
+      "spawn_gen": "1",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [
+        "p3",
+        "p4"
+      ],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "mate-4",
+        "state": "in_flight",
+        "kind": "secondmate",
+        "id": "mate-4"
+      },
+      "current_state": {
+        "state": "working",
+        "source": "pane",
+        "detail": null,
+        "raw": "working",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/mate-4"
+        },
+        "home": {
+          "path": "/fleet/h4",
+          "present": true
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/mate-4.status",
+          "present": true,
+          "kind": "status",
+          "last_event": null
+        }
+      },
+      "endpoint": {
+        "target": "tmux:mate-4",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-1",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-1",
+      "project": "p0",
+      "spawn_gen": "2",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-1",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-1"
+      },
+      "current_state": {
+        "state": "parked",
+        "source": "pane",
+        "detail": null,
+        "raw": "parked",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-1"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-1.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "needs-decision",
+            "note": "question",
+            "age_seconds": 600
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-1",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-2",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-2",
+      "project": "p1",
+      "spawn_gen": "3",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": true,
+        "hold_kind": "captain",
+        "hold_reason": "captain call needed",
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-2",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-2"
+      },
+      "current_state": {
+        "state": "done",
+        "source": "pane",
+        "detail": null,
+        "raw": "done",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-2"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-2.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-2",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": "claude-opus-x",
+        "requested_effort": "xhigh"
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-3",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-3",
+      "project": "p2",
+      "spawn_gen": "1",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-3",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-3"
+      },
+      "current_state": {
+        "state": "blocked",
+        "source": "pane",
+        "detail": null,
+        "raw": "blocked",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": true,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-3"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-3.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "blocked",
+            "note": "waiting on dependency",
+            "age_seconds": 120
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-3",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-4",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-4",
+      "project": "p3",
+      "spawn_gen": "2",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-4",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-4"
+      },
+      "current_state": {
+        "state": "paused",
+        "source": "pane",
+        "detail": null,
+        "raw": "paused",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-4"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-4.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-4",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": "claude-opus-x",
+        "requested_effort": "xhigh"
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-5",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-5",
+      "project": "p4",
+      "spawn_gen": "3",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": true,
+        "hold_kind": null,
+        "hold_reason": "waiting on credential",
+        "hold_bucket": null,
+        "hold_age_days": 5,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-5",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-5"
+      },
+      "current_state": {
+        "state": "failed",
+        "source": "pane",
+        "detail": null,
+        "raw": "failed",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "cached"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-5"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-5.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-5",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-6",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-6",
+      "project": "p5",
+      "spawn_gen": "1",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [
+          "w3-5"
+        ],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-6",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-6"
+      },
+      "current_state": {
+        "state": "unknown",
+        "source": "pane",
+        "detail": null,
+        "raw": "unknown",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-6"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-6.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-6",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": "claude-opus-x",
+        "requested_effort": "xhigh"
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-7",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-7",
+      "project": "p6",
+      "spawn_gen": "2",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-7",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-7"
+      },
+      "current_state": {
+        "state": "reviewing",
+        "source": "pane",
+        "detail": null,
+        "raw": "reviewing",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-7"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-7.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "step",
+            "age_seconds": null
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-7",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-8",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-8",
+      "project": "p7",
+      "spawn_gen": "3",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-8",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-8"
+      },
+      "current_state": {
+        "state": "working",
+        "source": "pane",
+        "detail": null,
+        "raw": "working",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-8"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-8.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-8",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": "claude-opus-x",
+        "requested_effort": "xhigh"
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-9",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-9",
+      "project": "p8",
+      "spawn_gen": "1",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-9",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-9"
+      },
+      "current_state": {
+        "state": "parked",
+        "source": "pane",
+        "detail": null,
+        "raw": "parked",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-9"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-9.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "needs-decision",
+            "note": "question",
+            "age_seconds": 600
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-9",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-10",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-10",
+      "project": null,
+      "spawn_gen": "2",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-10",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-10"
+      },
+      "current_state": {
+        "state": "done",
+        "source": "pane",
+        "detail": null,
+        "raw": "done",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "cached"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-10"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-10.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-10",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": "claude-opus-x",
+        "requested_effort": "xhigh"
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-11",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-11",
+      "project": "p0",
+      "spawn_gen": "3",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-11",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-11"
+      },
+      "current_state": null,
+      "hints": {
+        "blocked_event": true,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-11"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-11.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "blocked",
+            "note": "waiting on dependency",
+            "age_seconds": 120
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-11",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-12",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-12",
+      "project": "p1",
+      "spawn_gen": "1",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-12",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-12"
+      },
+      "current_state": {
+        "state": "paused",
+        "source": "pane",
+        "detail": null,
+        "raw": "paused",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-12"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-12.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-12",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": "claude-opus-x",
+        "requested_effort": "xhigh"
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-13",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-13",
+      "project": "p2",
+      "spawn_gen": "2",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [
+          "w3-12"
+        ],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-13",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-13"
+      },
+      "current_state": {
+        "state": "failed",
+        "source": "pane",
+        "detail": null,
+        "raw": "failed",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-13"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-13.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-13",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-14",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-14",
+      "project": "p3",
+      "spawn_gen": "3",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-14",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-14"
+      },
+      "current_state": {
+        "state": "unknown",
+        "source": "pane",
+        "detail": null,
+        "raw": "unknown",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-14"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-14.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-14",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": "claude-opus-x",
+        "requested_effort": "xhigh"
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-15",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-15",
+      "project": "p4",
+      "spawn_gen": "1",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-15",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-15"
+      },
+      "current_state": {
+        "state": "reviewing",
+        "source": "pane",
+        "detail": null,
+        "raw": "reviewing",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "cached"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-15"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-15.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-15",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-16",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-16",
+      "project": "p5",
+      "spawn_gen": "2",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-16",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-16"
+      },
+      "current_state": {
+        "state": "working",
+        "source": "pane",
+        "detail": null,
+        "raw": "working",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-16"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-16.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-16",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": "claude-opus-x",
+        "requested_effort": "xhigh"
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-17",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-17",
+      "project": "p6",
+      "spawn_gen": "3",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-17",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-17"
+      },
+      "current_state": {
+        "state": "parked",
+        "source": "pane",
+        "detail": null,
+        "raw": "parked",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-17"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-17.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "needs-decision",
+            "note": "question",
+            "age_seconds": 600
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-17",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-18",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-18",
+      "project": "p7",
+      "spawn_gen": "1",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": true,
+        "hold_kind": null,
+        "hold_reason": "waiting on credential",
+        "hold_bucket": null,
+        "hold_age_days": 18,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-18",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-18"
+      },
+      "current_state": {
+        "state": "done",
+        "source": "pane",
+        "detail": null,
+        "raw": "done",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-18"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-18.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "step",
+            "age_seconds": null
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-18",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": "claude-opus-x",
+        "requested_effort": "xhigh"
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-19",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-19",
+      "project": "p8",
+      "spawn_gen": "2",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": true,
+        "hold_kind": "captain",
+        "hold_reason": "captain call needed",
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-19",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-19"
+      },
+      "current_state": {
+        "state": "blocked",
+        "source": "pane",
+        "detail": null,
+        "raw": "blocked",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": true,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-19"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-19.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "blocked",
+            "note": "waiting on dependency",
+            "age_seconds": 120
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-19",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-20",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-20",
+      "project": null,
+      "spawn_gen": "3",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [
+          "w3-19"
+        ],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-20",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-20"
+      },
+      "current_state": {
+        "state": "paused",
+        "source": "pane",
+        "detail": null,
+        "raw": "paused",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "cached"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-20"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-20.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-20",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": "claude-opus-x",
+        "requested_effort": "xhigh"
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-21",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-21",
+      "project": "p0",
+      "spawn_gen": "1",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-21",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-21"
+      },
+      "current_state": {
+        "state": "failed",
+        "source": "pane",
+        "detail": null,
+        "raw": "failed",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-21"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-21.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "heartbeat",
+            "age_seconds": 30
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-21",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "w3-22",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/w3-22",
+      "project": "p1",
+      "spawn_gen": "2",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Worker w3-22",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "w3-22"
+      },
+      "current_state": {
+        "state": "unknown",
+        "source": "pane",
+        "detail": null,
+        "raw": "unknown",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/w3-22"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/w3-22.status",
+          "present": true,
+          "kind": "status",
+          "last_event": {
+            "state": "working",
+            "note": "bad",
+            "age_seconds": -5
+          }
+        }
+      },
+      "endpoint": {
+        "target": "tmux:w3-22",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": "claude-opus-x",
+        "requested_effort": "xhigh"
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    }
+  ]
+}

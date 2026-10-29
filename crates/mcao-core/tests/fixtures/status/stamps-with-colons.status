@@ -1,0 +1,4 @@
+needs-decision [at=10:30] [key=a]: first
+resolved [at=10:31] [key=a]: answered
+needs-decision [at=10:32]: bare after stamp
+needs-decision [at=10:33] [key=b]: stamp before key

@@ -1,0 +1,37 @@
+DPES-864 mem-guard golden fixtures: provenance
+
+Reference program
+  file:    bin/fm-jev-mem-guard.py
+  commit:  65906846fd75a25d00ebde3e8c1606113c04db1c (comparison base)
+  sha256:  4e32c37a9baf36394cf70f9c66a48ebca89a137aea26380905a3cdfe0325ca1d
+  saved:   reference/fm-jev-mem-guard.py.txt (byte copy, same sha256)
+
+Interpreter and host
+  python:  3.11.2, CPython, x86_64, run under emulation on an arm64 macOS host
+  image:   node:24-bookworm
+           digest sha256:14078204b6bb268c107ceff6d3c43f45a888105e5c2b18b14c32b3409d93a1b0
+  kernel:  7.2.9-orbstack-00391-g2b298d05fbd4
+  docker:  29.8.2 (OrbStack), networking disabled with --network none
+  invoked: python3 -I /ref/fm-jev-mem-guard.py --json --check
+           --warn-mem-pct W --crit-mem-pct C --warn-swap-pct WS --crit-swap-pct CS
+
+Inputs (one directory per case)
+  meminfo  The /proc/meminfo the Python run read. It is bind-mounted over the container's
+           /proc/meminfo. linux-live-captured-ok copies the container's own file; the other
+           cases write the MemTotal, MemFree, MemAvailable, SwapTotal and SwapFree lines.
+           meminfo-unavailable omits MemAvailable.
+  limits   The four thresholds in flag order: memory warn, memory crit, swap warn, swap crit.
+  procs    The top_processes rows that Python reported for that run, as pid, comm and rss_mb,
+           tab-separated. The Rust test replays these as the sampler's process list.
+
+Expected output
+  stdout   Python stdout of that run, byte for byte. print() adds the final newline.
+           checked_at is the recorded run time and is replayed as-is, not masked.
+  exit     The Python exit status for that run. It is 1 for WARNING or CRITICAL under --check.
+  stderr   Empty for every case. Not stored.
+
+Generation
+  The developer-only generator lives outside the repository. It was run once, and cargo test
+  never runs Python or the generator. Rust code never produces an expected value.
+  linux-live-captured-ok runs a 200 MB hold process so the process listing is non-empty; its
+  rows are recorded from that run, not reproduced.

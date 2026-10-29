@@ -1,0 +1,62 @@
+import base64, json, re, sys
+
+fields = {}
+for line in sys.stdin.read().split("\n"):
+    m = re.match(r"^  ([a-z_]+): (.*)$", line)
+    if m and m.group(1) not in fields:
+        fields[m.group(1)] = m.group(2)
+
+def value(name):
+    raw = fields.get(name)
+    if raw is None:
+        return None
+    if raw.startswith('"'):
+        try:
+            return json.loads(raw)
+        except ValueError:
+            return raw
+    return raw
+
+def clean(v):
+    return None if v in (None, "", "-", "none") else v
+
+if value("hold_kind") != "captain" or value("state") == "done":
+    sys.exit(0)
+
+# The class is read only from the hold header run, as the fleet snapshot does.
+hold_class = None
+for line in (value("body") or "").split("\n"):
+    if line.strip() == "":
+        continue
+    if not re.match(r"^Captain hold (set|origin|class):", line):
+        break
+    c = re.match(r"^Captain hold class:[ \t]*([^ \t]+)$", line)
+    if c and hold_class is None:
+        hold_class = c.group(1)
+if hold_class in ("dependency-wait", "answered-bookkeeping"):
+    sys.exit(0)
+
+reason = clean(value("hold_reason")) or ""
+if reason.startswith("fm-hold-v1:"):
+    try:
+        reason = base64.b64decode(reason[len("fm-hold-v1:"):]).decode("utf-8")
+    except (ValueError, UnicodeDecodeError):
+        reason = ""
+
+title = value("title") or ""
+summary = " ".join((reason or title).split()) or (value("id") or "")
+if len(summary) > 160:
+    summary = summary[:157].rstrip() + "..."
+
+body_first = (value("body") or "").split("\n", 1)[0]
+m = re.match(r"^Captain hold set: ([0-9]{4}-[0-9]{2}-[0-9]{2}(?:T[0-9]{2}:[0-9]{2}:[0-9]{2}Z)?)$", body_first)
+hold_set = m.group(1) if m else (value("created") or "unknown")
+raised_at = hold_set if "T" in hold_set else hold_set + "T00:00:00Z"
+
+print(json.dumps({
+    "id": value("id"),
+    "summary": summary,
+    "hold_set": hold_set,
+    "raised_at": raised_at,
+    "hold_until": clean(value("hold_until")),
+}))

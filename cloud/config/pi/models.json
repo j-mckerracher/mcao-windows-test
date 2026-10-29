@@ -1,0 +1,7 @@
+{
+  "providers": {
+    "google-vertex": {
+      "apiKey": "gcp-vertex-credentials"
+    }
+  }
+}

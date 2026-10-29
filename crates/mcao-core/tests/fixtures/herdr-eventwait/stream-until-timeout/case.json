@@ -1,0 +1,41 @@
+{
+  "args": [
+    "{socket}",
+    "1.0",
+    "1-1",
+    "2-1"
+  ],
+  "end": "hold",
+  "replies": [
+    {
+      "id": "fm-eventwait",
+      "result": {
+        "type": "subscription_started"
+      }
+    },
+    {
+      "event": "pane.agent_status_changed",
+      "data": {
+        "pane_id": "1-1",
+        "workspace_id": "ws-1",
+        "agent_status": "idle",
+        "agent": "claude"
+      }
+    },
+    {
+      "event": "pane.output",
+      "data": {
+        "pane_id": "1-1"
+      }
+    },
+    {
+      "event": "pane.agent_status_changed",
+      "data": {
+        "pane_id": "2-1",
+        "workspace_id": "ws-1",
+        "agent_status": "working",
+        "agent": "codex"
+      }
+    }
+  ]
+}

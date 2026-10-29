@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+# mcao - the entry command. Routes `mcao setup` to bin/mcao-setup.sh.
+# Usage: mcao setup [section | --check | --show | --answers <file>]
+# Installed as a symlink (for example ~/.local/bin/mcao), so it resolves its own location first.
+set -u
+
+src=${BASH_SOURCE[0]}
+while [ -L "$src" ]; do
+  dir=$(cd -P "$(dirname "$src")" && pwd)
+  src=$(readlink "$src")
+  case $src in /*) ;; *) src=$dir/$src ;; esac
+done
+SCRIPT_DIR=$(cd -P "$(dirname "$src")" && pwd)
+
+usage() {
+  cat <<'USAGE'
+Usage: mcao setup [section | --check | --show [--format answers] | --answers <file>]
+USAGE
+}
+
+case "${1:-}" in
+  setup) shift; exec "$SCRIPT_DIR/mcao-setup.sh" "$@" ;;
+  -h | --help | help) usage; exit 0 ;;
+  "") usage >&2; exit 2 ;;
+  *) printf 'mcao: unknown command: %s\n' "$1" >&2; usage >&2; exit 2 ;;
+esac

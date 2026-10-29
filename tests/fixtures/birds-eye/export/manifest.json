@@ -1,0 +1,19 @@
+{
+  "configured": [
+    "/fleet/parent"
+  ],
+  "homes": {
+    "/fleet/parent": {
+      "file": "hostile-parent.json",
+      "exit": 0
+    },
+    "/fleet/child": {
+      "file": "../snapshots/child.json",
+      "exit": 0
+    },
+    "/fleet/broken": {
+      "file": "broken.json",
+      "exit": 0
+    }
+  }
+}

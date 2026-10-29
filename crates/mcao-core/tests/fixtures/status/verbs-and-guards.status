@@ -1,0 +1,11 @@
+working: fine
+paused: waiting for the cache to clear
+needs-decision
+blocked
+resolved
+done
+needs-decisions: plural verb is not a transition
+Needs-Decision: case sensitive verb
+   needs-decision: indented verb still opens after trim
+captain-held
+prose with needs-decision inside but no colon

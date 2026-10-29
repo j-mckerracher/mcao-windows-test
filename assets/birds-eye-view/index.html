@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; base-uri 'none'; form-action 'none'">
+  <link rel="icon" href="data:,">
+  <title>Bird's-eye view</title>
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+  <a class="skip-link" href="#work">Skip to work</a>
+
+  <header class="app-header">
+    <div class="heading">
+      <h1>Bird's-eye view</h1>
+      <p id="scope-line" class="scope-line">Loading the first view.</p>
+    </div>
+    <div class="mode-row">
+      <span id="mode-badge" class="mode-badge">Loading</span>
+      <span id="stale-badge" class="stale-badge" hidden>Stale</span>
+    </div>
+    <div class="refresh-controls" role="group" aria-label="Refresh">
+      <button type="button" id="refresh-now">Refresh now</button>
+      <label class="inline-field">Auto refresh
+        <select id="refresh-interval">
+          <option value="0">Off</option>
+          <option value="5">Every 5 s</option>
+          <option value="10" selected>Every 10 s</option>
+          <option value="30">Every 30 s</option>
+          <option value="60">Every 60 s</option>
+        </select>
+      </label>
+    </div>
+    <p id="refresh-status" class="refresh-status"></p>
+  </header>
+
+  <p id="notice" class="notice" role="status" hidden></p>
+
+  <section class="overview" aria-labelledby="overview-title">
+    <h2 id="overview-title">Overview</h2>
+    <div class="overview-grid">
+      <section class="attention-block" aria-labelledby="attention-title">
+        <h3 id="attention-title">Needs attention</h3>
+        <ol id="attention-list" class="attention-list"></ol>
+        <p id="attention-empty" class="muted" hidden>Nothing needs attention in this view.</p>
+      </section>
+      <section aria-labelledby="counts-title">
+        <h3 id="counts-title">Counts</h3>
+        <h4>Workers by state</h4>
+        <dl id="counts-workers" class="kv-list"></dl>
+        <h4>Supervisors by classification</h4>
+        <dl id="counts-supervisors" class="kv-list"></dl>
+        <p id="counts-unique" class="muted"></p>
+      </section>
+      <section aria-labelledby="scope-title">
+        <h3 id="scope-title">Observed scope</h3>
+        <ul id="roots-list" class="plain-list"></ul>
+        <h4>Not observed</h4>
+        <ul id="unsupported-list" class="plain-list"></ul>
+        <p id="history-line" class="muted"></p>
+      </section>
+      <section aria-labelledby="projects-title">
+        <h3 id="projects-title">Projects</h3>
+        <ul id="projects-list" class="plain-list"></ul>
+      </section>
+    </div>
+  </section>
+
+  <main id="work" class="workspace">
+    <section class="work-pane" aria-labelledby="work-title">
+      <div class="work-heading">
+        <h2 id="work-title">Work</h2>
+        <p id="match-summary" class="muted" aria-live="polite"></p>
+      </div>
+      <div class="toolbar">
+        <label class="field search-field">Search
+          <input type="search" id="search" autocomplete="off" placeholder="Name, task ID, or project">
+        </label>
+        <label class="field">State
+          <select id="filter-state"></select>
+        </label>
+        <label class="field">Project
+          <select id="filter-project"></select>
+        </label>
+        <div class="button-row" role="group" aria-label="Layout">
+          <button type="button" id="view-tree" aria-pressed="true">Tree</button>
+          <button type="button" id="view-list" aria-pressed="false">List</button>
+        </div>
+        <div class="button-row" role="group" aria-label="Branches">
+          <button type="button" id="expand-all">Expand all</button>
+          <button type="button" id="collapse-all">Collapse all</button>
+        </div>
+      </div>
+      <p class="hint">Press / to search. Arrow keys move, Enter opens details, Escape returns here.</p>
+      <div id="work-scroll" class="work-scroll">
+        <div id="tree" class="tree" role="tree" aria-label="Work tree"></div>
+        <div id="list" class="list" role="listbox" aria-label="Work list" hidden></div>
+      </div>
+    </section>
+
+    <aside class="side-pane" aria-label="Selected item">
+      <section class="details" aria-labelledby="details-title">
+        <h2 id="details-title" tabindex="-1">Details</h2>
+        <div id="details-body"></div>
+      </section>
+      <section class="output" aria-labelledby="output-title">
+        <h2 id="output-title">Output</h2>
+        <div class="output-controls">
+          <label class="field">Lines
+            <select id="output-lines">
+              <option value="20">20</option>
+              <option value="40" selected>40</option>
+              <option value="100">100</option>
+            </select>
+          </label>
+          <button type="button" id="output-load">Load output</button>
+          <button type="button" id="output-back">Back to tree</button>
+        </div>
+        <p id="output-status" class="muted" aria-live="polite"></p>
+        <pre id="output-text" class="output-text" tabindex="0" hidden></pre>
+      </section>
+    </aside>
+  </main>
+
+  <noscript><p class="notice">This dashboard needs JavaScript.</p></noscript>
+  <script src="app.js"></script>
+</body>
+</html>

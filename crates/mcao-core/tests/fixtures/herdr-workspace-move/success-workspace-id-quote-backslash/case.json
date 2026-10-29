@@ -1,0 +1,11 @@
+{
+  "args": [
+    "{socket}",
+    "a\"b\\c",
+    "1"
+  ],
+  "replies": [
+    "{\"id\":\"fm-workspace-move\",\"result\":{\"type\":\"workspace_list\",\"workspaces\":[{\"id\":\"ws-1\"}]}}\n"
+  ],
+  "end": "close"
+}

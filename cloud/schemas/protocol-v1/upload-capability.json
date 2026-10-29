@@ -1,0 +1,39 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "expires_at": {
+      "format": "date-time",
+      "title": "Expires At",
+      "type": "string"
+    },
+    "headers": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "title": "Headers",
+      "type": "object"
+    },
+    "method": {
+      "const": "PUT",
+      "title": "Method",
+      "type": "string"
+    },
+    "object_name": {
+      "title": "Object Name",
+      "type": "string"
+    },
+    "url": {
+      "title": "Url",
+      "type": "string"
+    }
+  },
+  "required": [
+    "object_name",
+    "method",
+    "url",
+    "headers",
+    "expires_at"
+  ],
+  "title": "UploadCapability",
+  "type": "object"
+}

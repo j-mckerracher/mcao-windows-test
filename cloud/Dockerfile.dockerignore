@@ -1,0 +1,10 @@
+# Build-context allowlist for the worker image (DPES-819 AC2).
+# The reusable build workflow sends the repository root as context. Exclude everything first, then
+# re-include only what cloud/Dockerfile copies. Later rules win, so the bytecode and env exclusions
+# come after the allow rules.
+**
+!cloud/src/mao_cloud/**
+!cloud/toolchain.json
+**/__pycache__
+**/*.pyc
+**/.env*

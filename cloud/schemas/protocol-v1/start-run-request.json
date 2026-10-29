@@ -1,0 +1,104 @@
+{
+  "$defs": {
+    "SourceReceipt": {
+      "additionalProperties": false,
+      "description": "A descriptor of an upload the client already completed. Not bytes.",
+      "properties": {
+        "object_generation": {
+          "minimum": 1,
+          "title": "Object Generation",
+          "type": "integer"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 536870912,
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "object_generation",
+        "sha256",
+        "size_bytes"
+      ],
+      "title": "SourceReceipt",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "canonical_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Canonical Digest",
+      "type": "string",
+      "x-origin": "client-manifest"
+    },
+    "protocol_version": {
+      "const": "v1",
+      "title": "Protocol Version",
+      "type": "string",
+      "x-origin": "client-manifest"
+    },
+    "source_upload": {
+      "$ref": "#/$defs/SourceReceipt",
+      "x-origin": "client-manifest"
+    }
+  },
+  "required": [
+    "protocol_version",
+    "canonical_digest",
+    "source_upload"
+  ],
+  "title": "StartRunRequest",
+  "type": "object",
+  "x-forbidden-inputs": [
+    "access_token",
+    "actor",
+    "argv",
+    "attempt",
+    "attempt_number",
+    "body",
+    "claim",
+    "claim_id",
+    "claim_nonce",
+    "command",
+    "container_image",
+    "control",
+    "credential",
+    "credentials",
+    "download_url",
+    "env",
+    "environment",
+    "fence",
+    "fence_token",
+    "id_token",
+    "image",
+    "image_digest",
+    "image_ref",
+    "local_path",
+    "owner",
+    "owner_id",
+    "path",
+    "principal",
+    "run_id",
+    "runtime_identity",
+    "secret",
+    "secret_name",
+    "secret_ref",
+    "secrets",
+    "server_id",
+    "service_account",
+    "service_account_email",
+    "signed_url",
+    "source_bytes",
+    "source_content",
+    "token",
+    "upload_url",
+    "url"
+  ]
+}

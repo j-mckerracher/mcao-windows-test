@@ -1,0 +1,4 @@
+needs-decision: [key=a] first form
+needs-decision [key=b]: [key=c] before-colon wins
+resolved: [key=a] closes a via note head
+needs-decision [key=d]: keeps the documented position

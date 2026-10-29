@@ -1,0 +1,63 @@
+{
+  "configured": [
+    "/fleet/d0"
+  ],
+  "homes": {
+    "/fleet/d0": {
+      "file": "../snapshots/deep-chain/d0.json",
+      "exit": 0
+    },
+    "/fleet/d1": {
+      "file": "../snapshots/deep-chain/d1.json",
+      "exit": 0
+    },
+    "/fleet/d2": {
+      "file": "../snapshots/deep-chain/d2.json",
+      "exit": 0
+    },
+    "/fleet/d3": {
+      "file": "../snapshots/deep-chain/d3.json",
+      "exit": 0
+    },
+    "/fleet/d4": {
+      "file": "../snapshots/deep-chain/d4.json",
+      "exit": 0
+    },
+    "/fleet/d5": {
+      "file": "../snapshots/deep-chain/d5.json",
+      "exit": 0
+    },
+    "/fleet/d6": {
+      "file": "../snapshots/deep-chain/d6.json",
+      "exit": 0
+    },
+    "/fleet/d7": {
+      "file": "../snapshots/deep-chain/d7.json",
+      "exit": 0
+    },
+    "/fleet/d8": {
+      "file": "../snapshots/deep-chain/d8.json",
+      "exit": 0
+    },
+    "/fleet/d9": {
+      "file": "../snapshots/deep-chain/d9.json",
+      "exit": 0
+    },
+    "/fleet/d10": {
+      "file": "../snapshots/deep-chain/d10.json",
+      "exit": 0
+    },
+    "/fleet/d11": {
+      "file": "../snapshots/deep-chain/d11.json",
+      "exit": 0
+    },
+    "/fleet/d12": {
+      "file": "../snapshots/deep-chain/d12.json",
+      "exit": 0
+    },
+    "/fleet/d13": {
+      "file": "../snapshots/deep-chain/d13.json",
+      "exit": 0
+    }
+  }
+}

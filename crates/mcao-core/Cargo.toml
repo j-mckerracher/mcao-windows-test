@@ -1,0 +1,12 @@
+[package]
+name = "mcao-core"
+description = "PROPOSED (DPES-752 unconfirmed): shared evidence model and backend boundary for the mcao Rust slice."
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[dependencies]
+serde.workspace = true
+serde_json = { workspace = true, features = ["float_roundtrip"] }
+sha2.workspace = true
+sysinfo.workspace = true

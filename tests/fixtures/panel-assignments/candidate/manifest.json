@@ -1,0 +1,103 @@
+{
+  "capability_source": "model-capabilities.md",
+  "fixtures": [
+    {
+      "id": "documentation-only",
+      "class": "documentation-only",
+      "assignment_intent": "Edit ordinary prose in one tracked Markdown file under docs/ with no behavioral content.",
+      "expected_surfaces": ["docs/<one-file>.md"],
+      "risk": "low",
+      "expected_stage_mapping": "Direct edit and review with no delegation or architecture stage. Derived from DPES-764 AC1 intent; unapproved.",
+      "expected_panel_roles": [],
+      "panel_request": null,
+      "panel_request_reason": "fm-panel-resolve.sh refuses a zero-seat request, so zero panel roles cannot be written as a request file.",
+      "sources": ["DPES-762 section 5 (one retrieval; DPES-761 epic wording differs, verify)", "DPES-764 AC1"],
+      "approval_status": "approved-as-authored",
+      "approved_on": "2026-10-20",
+      "approver_roles": ["DPES-762 policy owner", "DPES-764 mapping owner"],
+      "satisfies_ac8_t9": false,
+      "open_questions": ["Authoritative wording of the documentation-only definition, since two retrievals disagree on its source."]
+    },
+    {
+      "id": "small-low-risk",
+      "class": "small-low-risk",
+      "assignment_intent": "Change the wording of one help-text line in one bin script with no behavior change.",
+      "expected_surfaces": ["bin/<one-script>.sh help text"],
+      "risk": "low",
+      "expected_stage_mapping": "One writer candidate and one focused reviewer judge of the writer. Role names derived from DPES-764 AC2 'short planning and focused review'; unapproved.",
+      "expected_panel_roles": ["writer", "reviewer"],
+      "panel_request": "small-low-risk/panel-request.tsv",
+      "panel_request_reason": null,
+      "sources": ["DPES-764 AC2"],
+      "approval_status": "approved-as-authored",
+      "approved_on": "2026-10-20",
+      "approver_roles": ["DPES-762 policy owner", "DPES-764 mapping owner"],
+      "satisfies_ac8_t9": false,
+      "open_questions": [
+        "The small-low-risk eligibility criteria are not defined in any retrieved issue.",
+        "Whether a focused reviewer is a judge seat or a different role is not stated."
+      ]
+    },
+    {
+      "id": "standard",
+      "class": "standard",
+      "assignment_intent": "Behavioral change across several files in one subsystem, with no authority or security surface.",
+      "expected_surfaces": ["one subsystem's bin/ scripts and tests/"],
+      "risk": "medium",
+      "expected_stage_mapping": "Not defined. No retrieved text names stages or panel roles for this class.",
+      "expected_panel_roles": null,
+      "panel_request": null,
+      "panel_request_reason": "No panel roles are defined for this class, so no request is written rather than invent one.",
+      "sources": ["DPES-762 section 1 (names the class only)"],
+      "approval_status": "approved-as-authored",
+      "approved_on": "2026-10-20",
+      "approver_roles": ["DPES-762 policy owner", "DPES-764 mapping owner"],
+      "satisfies_ac8_t9": false,
+      "open_questions": [
+        "The standard eligibility criteria are not defined in any retrieved issue.",
+        "The stage and panel-role mapping for standard is not defined."
+      ]
+    },
+    {
+      "id": "high-risk-broad",
+      "class": "high-risk-broad",
+      "assignment_intent": "Change a cross-cutting dispatch-policy module that decides which panel launches.",
+      "expected_surfaces": ["bin/fm-panel-report.sh policy path", "docs/panel-receipts.md"],
+      "risk": "high",
+      "expected_stage_mapping": "Not defined. DPES-764 AC3 says required rigor is retained but names no stages or roles.",
+      "expected_panel_roles": null,
+      "panel_request": null,
+      "panel_request_reason": "The required rigor is undefined in retrieved text, so no request is written rather than invent one.",
+      "sources": ["DPES-764 AC3", "DPES-762 section 1 (names the class only)"],
+      "approval_status": "approved-as-authored",
+      "approved_on": "2026-10-20",
+      "approver_roles": ["DPES-762 policy owner", "DPES-764 mapping owner"],
+      "satisfies_ac8_t9": false,
+      "open_questions": [
+        "The high-risk eligibility criteria are not defined in any retrieved issue.",
+        "What 'required rigor' comprises for high-risk-broad is not defined."
+      ]
+    },
+    {
+      "id": "escalation-authorization-one-line",
+      "class": "small-low-risk escalated to high-risk-broad",
+      "assignment_intent": "Provisionally small: a one-line change intended as a wording fix.",
+      "expected_surfaces": ["one line in an authorization check"],
+      "risk": "high",
+      "expected_stage_mapping": "High-risk obligations apply regardless of size. The obligations themselves are not defined.",
+      "expected_panel_roles": null,
+      "panel_request": null,
+      "panel_request_reason": "The high-risk obligations are undefined, so no request is written.",
+      "sources": ["DPES-765 AC2 (actual-diff escalation example)", "DPES-765 AC1", "DPES-765 AC4"],
+      "approval_status": "approved-as-authored",
+      "approved_on": "2026-10-20",
+      "approver_roles": ["DPES-762 policy owner", "DPES-764 mapping owner"],
+      "satisfies_ac8_t9": false,
+      "open_questions": [
+        "The high-risk obligations applied by the DPES-765 escalation are not defined.",
+        "Whether the provisional small classification may be recorded before the actual diff is evaluated is not stated.",
+        "The DPES-765 owner has not approved this escalation example, so DPES-765 remains Draft."
+      ]
+    }
+  ]
+}

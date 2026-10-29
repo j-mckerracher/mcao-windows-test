@@ -1,0 +1,47 @@
+import json, re, sys
+
+def split_row(s):
+    out, i, n = [], 0, len(s)
+    while True:
+        if i < n and s[i] == '"':
+            j = i + 1
+            while j < n and s[j] != '"':
+                j += 2 if s[j] == "\\" else 1
+            token = s[i:j + 1]
+            try:
+                out.append(json.loads(token))
+            except ValueError:
+                out.append(token[1:-1])
+            i = j + 1
+        else:
+            j = s.find(",", i)
+            if j < 0:
+                j = n
+            out.append(s[i:j])
+            i = j
+        if i >= n:
+            return out
+        i += 1
+
+text = sys.stdin.read()
+header = None
+rows = []
+for line in text.split("\n"):
+    if header is None:
+        m = re.match(r"^tasks\[[0-9]+\]\{([^}]*)\}:$", line)
+        if m:
+            header = m.group(1).split(",")
+        continue
+    if line.startswith("  "):
+        rows.append(split_row(line[2:]))
+    else:
+        break
+if header is None:
+    if re.search(r"^count: 0$", text, re.M):
+        sys.exit(0)
+    sys.stderr.write("fm-awaiting-captain: backlog list output was not recognised\n")
+    sys.exit(4)
+for values in rows:
+    row = dict(zip(header, values))
+    if row.get("hold_kind") == "captain" and row.get("state") != "done":
+        print(row.get("id", ""))

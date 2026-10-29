@@ -1,0 +1,27 @@
+{
+  "name": "fm-jev-mem-guard",
+  "checked_at": "2026-10-24T16:31:13Z",
+  "status": "OK",
+  "recommendation": "Memory and swap utilization are within thresholds; the caller should continue unchanged.",
+  "reason": null,
+  "summary": {
+    "mem_total_gb": 15.66,
+    "mem_available_gb": 15.18,
+    "mem_used_pct": 3.1,
+    "swap_total_gb": 16.66,
+    "swap_used_gb": 0.0,
+    "swap_used_pct": 0.0
+  },
+  "top_processes": [
+    {
+      "pid": 7,
+      "comm": "python3",
+      "rss_mb": 214.0
+    },
+    {
+      "pid": 9,
+      "comm": "python3",
+      "rss_mb": 19.8
+    }
+  ]
+}

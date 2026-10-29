@@ -1,0 +1,47 @@
+{
+  "configured": [
+    "/fleet/h0"
+  ],
+  "homes": {
+    "/fleet/h0": {
+      "file": "../snapshots/fleet-200/h0.json",
+      "exit": 0
+    },
+    "/fleet/h1": {
+      "file": "../snapshots/fleet-200/h1.json",
+      "exit": 0
+    },
+    "/fleet/h2": {
+      "file": "../snapshots/fleet-200/h2.json",
+      "exit": 0
+    },
+    "/fleet/h3": {
+      "file": "../snapshots/fleet-200/h3.json",
+      "exit": 0
+    },
+    "/fleet/h4": {
+      "file": "../snapshots/fleet-200/h4.json",
+      "exit": 0
+    },
+    "/fleet/h5": {
+      "file": "../snapshots/fleet-200/h5.json",
+      "exit": 0
+    },
+    "/fleet/h6": {
+      "file": "../snapshots/fleet-200/h6.json",
+      "exit": 0
+    },
+    "/fleet/h7": {
+      "file": "../snapshots/fleet-200/h7.json",
+      "exit": 0
+    },
+    "/fleet/h8": {
+      "file": "../snapshots/fleet-200/h8.json",
+      "exit": 0
+    },
+    "/fleet/h9": {
+      "file": "../snapshots/fleet-200/h9.json",
+      "exit": 0
+    }
+  }
+}

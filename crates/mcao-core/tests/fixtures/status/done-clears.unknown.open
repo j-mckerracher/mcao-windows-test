@@ -1,0 +1,4 @@
+a	needs-decision	open before done
+b	blocked	also open
+c	needs-decision	opened before the terminal line
+d	needs-decision	after the terminal line

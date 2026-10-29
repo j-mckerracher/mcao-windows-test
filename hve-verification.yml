@@ -1,0 +1,18 @@
+contract_version: 1
+checks:
+  - id: cloud-pytest
+    command: uv --project cloud run --frozen pytest cloud/tests -q > "$FM_VERIFY_EVIDENCE_DIR/cloud-pytest.txt" 2>&1
+    evidence: cloud-pytest.txt
+  - id: controller-requirements
+    command: uv --project cloud export --frozen --no-dev --extra controller --no-emit-project --no-annotate --no-header > "$FM_VERIFY_EVIDENCE_DIR/controller-requirements.txt" && diff -u cloud/requirements/controller.txt "$FM_VERIFY_EVIDENCE_DIR/controller-requirements.txt"
+    evidence: controller-requirements.txt
+environment: []
+fixtures:
+  - cloud/uv.lock
+  - cloud/pyproject.toml
+  - cloud/toolchain.json
+  - cloud/Dockerfile
+  - cloud/Dockerfile.controller
+  - cloud/requirements/controller.txt
+  - cloud/release/compatibility-matrix.json
+cleanup: none

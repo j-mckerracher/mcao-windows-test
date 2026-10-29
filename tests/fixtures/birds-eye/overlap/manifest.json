@@ -1,0 +1,20 @@
+{
+  "configured": [
+    "/fleet/alpha",
+    "/fleet/beta"
+  ],
+  "homes": {
+    "/fleet/alpha": {
+      "file": "../snapshots/overlap-alpha.json",
+      "exit": 0
+    },
+    "/fleet/beta": {
+      "file": "../snapshots/overlap-beta.json",
+      "exit": 0
+    },
+    "/fleet/shared": {
+      "file": "../snapshots/overlap-shared.json",
+      "exit": 0
+    }
+  }
+}

@@ -1,0 +1,26 @@
+dir	a
+dir	a/inner
+dir	a/loopdir
+file	a/file
+file	a/inner/deep
+dir	with space
+file	with space/file name
+link	link-file	a/file
+link	link-dir	a
+link	chain1	chain2
+link	chain2	a/file
+link	abs-file	@ROOT@/a/file
+link	abs-dir	@ROOT@/a/inner
+link	dangling	missing/x
+link	loop	loop
+link	ping	pong
+link	pong	ping
+link	trail	a/inner/
+link	tail-dot	a/./inner/..
+link	dotdot-root	../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../../x
+link	a/inner/rel-file	../file
+link	a/inner/rel-up	../../with space
+link	a/inner/self	.
+link	a/loopdir/again	../loopdir/again
+link	wit-a	wit-b
+link	wit-b	wit-a/./..
