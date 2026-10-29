@@ -1,0 +1,1259 @@
+
+===== 1/3 windows-backend test: cargo test -p mcao-backend-windows --locked =====
+    Blocking waiting for file lock on package cache
+    Blocking waiting for file lock on shared package cache
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.27
+   Compiling quote v1.0.47
+   Compiling windows-link v0.2.1
+   Compiling version_check v0.9.5
+   Compiling typenum v1.20.1
+   Compiling winapi v0.3.9
+   Compiling serde_core v1.0.229
+   Compiling libc v0.2.191
+   Compiling ntapi v0.4.3
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling windows-result v0.4.1
+   Compiling windows-strings v0.5.1
+   Compiling generic-array v0.14.7
+   Compiling windows-threading v0.2.1
+   Compiling memchr v2.8.3
+   Compiling serde_json v1.0.154
+   Compiling cfg-if v1.0.5
+   Compiling itoa v1.0.18
+   Compiling cpufeatures v0.2.17
+   Compiling windows-sys v0.61.2
+   Compiling block-buffer v0.10.4
+   Compiling crypto-common v0.1.7
+   Compiling digest v0.10.7
+   Compiling sha2 v0.10.9
+   Compiling syn v2.0.119
+   Compiling syn v3.0.9
+   Compiling serde_derive v1.0.229
+   Compiling windows-interface v0.59.3
+   Compiling windows-implement v0.60.2
+   Compiling windows-core v0.62.2
+   Compiling windows-future v0.3.2
+   Compiling windows-numerics v0.3.1
+   Compiling windows-collections v0.3.2
+   Compiling windows v0.62.2
+   Compiling sysinfo v0.39.6
+   Compiling mcao-core v0.0.0 (C:\Users\jmckerra\Code\mcao-windows-test\crates\mcao-core)
+   Compiling mcao-backend-windows v0.0.0 (C:\Users\jmckerra\Code\mcao-windows-test\crates\mcao-backend-windows)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1m 33s
+     Running unittests src\lib.rs (target\debug\deps\mcao_backend_windows-6ea77684a73fc9b5.exe)
+
+running 77 tests
+test conpty::tests::a_console_window_reports_a_usable_size ... ok
+test conpty::tests::zero_and_oversize_dimensions_are_refused ... ok
+test conpty::tests::other_hresult_is_reported_in_hex ... ok
+test conpty::tests::largest_dimension_is_accepted ... ok
+test conpty::tests::init_sets_the_utf8_output_code_page_when_a_console_exists ... ok
+test conpty::tests::size_converts_to_coord ... ok
+test conpty::tests::negotiated_size_never_falls_below_the_minimum ... ok
+test conpty::tests::win32_hresult_maps_to_its_os_error ... ok
+test ctrl_break::tests::a_delivered_event_survives_a_failed_detach ... ok
+test ctrl_break::tests::a_clean_send_has_no_warning ... ok
+test ctrl_break::tests::a_delivered_event_survives_a_failed_restore ... ok
+test ctrl_break::tests::an_event_that_was_not_delivered_is_an_error_even_if_the_restore_worked ... ok
+test interrupt::tests::a_failed_reason_carries_the_evidence ... ok
+test interrupt::tests::a_ctrl_c_write_that_finishes_in_time_sends_exactly_the_ctrl_c_byte ... ok
+test interrupt::tests::a_first_ctrl_c_still_pending_at_the_deadline_terminates_the_job ... ok
+test interrupt::tests::a_quiet_terminal_is_not_a_stop ... ok
+test interrupt::tests::a_wait_past_the_maximum_is_refused ... ok
+test interrupt::tests::a_write_thread_that_cannot_start_is_an_error_and_nothing_is_written ... ok
+test interrupt::tests::a_zero_wait_is_refused_and_names_its_rung ... ok
+test interrupt::tests::an_empty_job_exits_without_writing_a_ctrl_c ... ok
+test interrupt::tests::an_exit_stops_ctrl_c_and_ctrl_break_but_not_the_keyless_rungs ... ok
+test interrupt::tests::each_rung_reads_its_own_wait ... ok
+test interrupt::tests::only_a_stop_an_exit_or_unreadable_evidence_ends_the_ladder ... ok
+test interrupt::tests::stub_idle ... ignored, re-exec stub; run only by the rung tests
+test interrupt::tests::only_a_stopped_rung_is_demonstrated ... ok
+test interrupt::tests::terminate_needs_an_exit_and_an_empty_job ... ok
+test interrupt::tests::the_marker_beats_an_exit_at_escape ... ok
+test interrupt::tests::the_marker_stops_every_rung_but_the_last ... ok
+test interrupt::tests::timeouts_within_range_are_accepted ... ok
+test interrupt::tests::the_report_names_the_rung_that_stopped ... ok
+test job::tests::a_named_job_opens_by_name_and_probes_as_empty ... ok
+test job::tests::a_second_job_with_the_same_name_is_refused ... ok
+test job::tests::a_zero_memory_limit_is_refused ... ok
+test job::tests::an_unknown_name_probes_as_absent ... ok
+test job::tests::names_outside_the_local_prefix_are_refused ... ok
+test job::tests::limits_read_back_as_set ... ok
+test job::tests::no_limits_is_a_successful_no_op ... ok
+test process::tests::absolute_program_with_spaced_argument_is_accepted ... ok
+test process::tests::any_colon_in_the_program_name_is_refused ... ok
+test process::tests::argument_with_space_is_quoted ... ok
+test process::tests::backslash_before_quote_is_doubled ... ok
+test process::tests::batch_and_cmd_programs_are_refused_after_trailing_dots_and_spaces_are_removed ... ok
+test process::tests::batch_and_cmd_programs_are_refused_in_any_case ... ok
+test process::tests::batch_and_cmd_programs_are_refused_with_an_ntfs_stream_suffix ... ok
+test process::tests::batch_program_is_refused_before_a_command_line_exists ... ok
+test process::tests::command_line_quotes_program_and_separates_args ... ok
+test process::tests::embedded_quote_is_escaped ... ok
+test process::tests::empty_argument_is_quoted ... ok
+test process::tests::launched_command_line_is_built_from_the_normalized_path ... ok
+test process::tests::names_that_only_resemble_batch_extensions_are_accepted ... ok
+test process::tests::nul_in_argument_is_refused ... ok
+test process::tests::nul_in_program_is_refused ... ok
+test process::tests::plain_argument_is_unchanged ... ok
+test process::tests::relative_program_is_refused ... ok
+test process::tests::tab_argument_is_quoted ... ok
+test process::tests::trailing_backslash_in_quoted_argument_is_doubled ... ok
+test conpty::tests::open_and_close_without_a_child ... ok
+test process::tests::validate_returns_the_normalized_path ... ok
+test process::tests::trailing_backslash_unquoted_is_literal ... ok
+test conpty::tests::attributes_build_for_an_open_console ... ok
+test session::tests::append_drops_the_oldest_bytes_past_the_limit ... ok
+test session::tests::append_keeps_everything_under_the_limit ... ok
+test session::tests::contains_after_counts_discarded_bytes_in_the_mark ... ok
+test session::tests::close_records_the_ending_error ... ok
+test session::tests::a_poisoned_buffer_is_an_error_and_is_never_read ... ok
+test session::tests::contains_after_ignores_bytes_before_the_mark ... ok
+test session::tests::contains_finds_a_needle_across_two_appends ... ok
+test session::tests::one_append_larger_than_the_limit_keeps_its_tail ... ok
+test process::tests::child_is_created_suspended ... ok
+test process::tests::failed_assignment_terminates_the_child_before_it_runs ... ok
+test process::tests::failed_resume_terminates_the_child_before_it_runs ... ok
+test interrupt::tests::a_break_that_was_not_delivered_is_a_send_failure_and_ends_no_wait ... ok
+test interrupt::tests::a_blocked_ctrl_c_write_is_abandoned_at_the_deadline ... ok
+test interrupt::tests::a_delivered_break_with_a_console_warning_is_waited_on_and_not_killed ... ok
+test interrupt::tests::a_second_ctrl_c_still_pending_at_the_deadline_terminates_the_job ... ok
+test interrupt::tests::a_slow_second_ctrl_c_does_not_carry_the_wait_past_its_end ... ok
+test interrupt::tests::a_failed_second_ctrl_c_does_not_stop_the_escalation ... ok
+
+test result: ok. 76 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 1.00s
+
+     Running tests\backend.rs (target\debug\deps\backend-998af95011437b78.exe)
+
+running 14 tests
+test backend_stub ... ignored, re-run as a child by the tests below
+test backend_stub_echo ... ignored, re-run as a child by the tests below
+test backend_stub_ignoring_ctrl_c ... ignored, re-run as a child by the tests below
+test backend_stub_with_descendant ... ignored, re-run as a child by the tests below
+test an_unknown_harness_is_refused_before_any_process_starts ... ok
+test the_backend_names_itself_runs_natively_and_declares_stop_or_kill ... ok
+test a_missing_program_fails_to_start ... ok
+test reconnect_reattaches_only_to_a_held_session ... ok
+test dropping_the_backend_terminates_the_job_of_a_live_session ... ok
+test an_exited_harness_with_a_live_descendant_is_not_reported_missing ... ok
+test a_started_session_is_running_and_its_output_is_captured_until_cleanup ... ok
+test send_text_reaches_the_child_terminal ... ok
+test interrupt_stops_a_child_that_uses_the_default_ctrl_c_handler ... ok
+test interrupt_terminates_a_child_that_ignores_ctrl_c_within_the_bound ... ok
+
+test result: ok. 10 passed; 0 failed; 4 ignored; 0 measured; 0 filtered out; finished in 0.69s
+
+     Running tests\conpty.rs (target\debug\deps\conpty-90e3b442bbc81f86.exe)
+
+running 25 tests
+test conpty_stub_codepage ... ignored, runs only as the child of the ConPTY tests
+test conpty_stub_echo ... ignored, runs only as the child of the ConPTY tests
+test conpty_stub_orchestrator ... ignored, runs only as the orchestrator stand-in of the orchestrator-exit test
+test a_bad_console_size_is_refused ... ok
+test conpty_stub_size ... ignored, runs only as the child of the ConPTY tests
+test conpty_stub_utf8 ... ignored, runs only as the child of the ConPTY tests
+test dropping_a_session_with_a_terminated_job_returns_promptly ... ok
+test capture_is_plain_utf8_with_lf_line_endings_and_no_escape_sequences ... ok
+test empty_text_is_accepted_and_changes_nothing ... ok
+test a_missing_program_is_reported_and_the_session_cleans_up ... ok
+test a_named_workers_identity_probes_alive_then_dead_and_a_reused_pid_is_ambiguous ... ok
+test a_short_input_wait_is_refused_and_leaves_later_input_open ... ok
+test a_session_sized_by_the_size_rule_opens_at_that_size ... ok
+test a_relative_program_is_refused_and_leaves_nothing_running ... ok
+test capture_is_a_snapshot_that_grows ... ok
+test a_named_session_job_is_reachable_by_its_name ... ok
+test a_worker_reports_its_true_state_after_its_orchestrator_exits ... ok
+test send_text_within_delivers_input_the_child_reads ... ok
+test output_is_captured_and_text_reaches_the_child ... ok
+test text_is_sent_as_utf8 ... ok
+test the_child_runs_inside_the_session_job ... ok
+test the_init_sets_utf8_code_pages_on_a_conpty_console ... ok
+test text_sent_in_pieces_is_one_line ... ok
+test waiting_for_missing_output_times_out_with_false ... ok
+test a_timed_out_input_write_stalls_all_later_input ... ok
+
+test result: ok. 20 passed; 0 failed; 5 ignored; 0 measured; 0 filtered out; finished in 0.67s
+
+     Running tests\interrupt.rs (target\debug\deps\interrupt-d636516869f1b660.exe)
+
+running 22 tests
+test interrupt_stub_ends_on_ctrl_break ... ignored, re-exec stub; run only by the ladder tests
+test interrupt_stub_ends_on_ctrl_c ... ignored, re-exec stub; run only by the ladder tests
+test interrupt_stub_exit_at_once ... ignored, re-exec stub; run only by the ladder tests
+test interrupt_stub_exits_on_escape ... ignored, re-exec stub; run only by the ladder tests
+test interrupt_stub_idle ... ignored, re-exec stub; run only by the ladder tests
+test interrupt_stub_stops_on_escape ... ignored, re-exec stub; run only by the ladder tests
+test interrupt_stub_uncooperative ... ignored, re-exec stub; run only by the ladder tests
+test escalation_on_an_empty_job_reports_exited_without_writing ... ok
+test ladder_refuses_a_child_that_already_exited ... ok
+test escape_stops_the_operation_and_the_child_stays_alive ... ok
+test a_child_that_exits_on_escape_is_not_credited_as_a_stopped_operation ... ok
+test escalation_reports_exited_when_ctrl_c_ends_the_child_inside_the_wait ... ok
+test escalation_sends_a_second_ctrl_c_then_terminates_the_tree_at_the_wait ... FAILED
+test escalation_after_an_abandoned_input_write_still_ends_the_job ... ok
+test escalation_refuses_a_child_that_cannot_receive_ctrl_c_before_writing ... ok
+test escalation_refuses_a_short_or_unbounded_wait_before_writing ... ok
+test ladder_refuses_bad_timeouts_and_an_empty_marker_before_sending_anything ... ok
+test ctrl_c_does_not_reach_a_child_in_a_new_group ... ok
+test ctrl_c_stops_a_child_that_ignores_escape ... ok
+test ctrl_break_stops_a_child_in_a_new_group_that_ignores_the_earlier_rungs ... ok
+test uncooperative_child_in_the_shared_group_skips_ctrl_break ... ok
+test uncooperative_child_in_a_new_group_escalates_through_every_rung_to_terminate ... ok
+
+failures:
+
+---- escalation_sends_a_second_ctrl_c_then_terminates_the_tree_at_the_wait stdout ----
+
+thread 'escalation_sends_a_second_ctrl_c_then_terminates_the_tree_at_the_wait' (56976) panicked at crates\mcao-backend-windows\tests\interrupt.rs:523:5:
+assertion `left == right` failed
+  left: Exited
+ right: TerminatedJob
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    escalation_sends_a_second_ctrl_c_then_terminates_the_tree_at_the_wait
+
+test result: FAILED. 14 passed; 1 failed; 7 ignored; 0 measured; 0 filtered out; finished in 10.39s
+
+error: test failed, to rerun pass `-p mcao-backend-windows --test interrupt`
+===== exit code: 101 =====
+
+===== 2/3 clippy: cargo clippy -p mcao-backend-windows --all-targets --locked -- -D warnings =====
+    Checking windows-link v0.2.1
+    Checking typenum v1.20.1
+    Checking windows-strings v0.5.1
+    Checking windows-result v0.4.1
+    Checking windows-threading v0.2.1
+    Checking winapi v0.3.9
+    Checking serde_core v1.0.229
+    Checking memchr v2.8.3
+    Checking libc v0.2.191
+    Checking zmij v1.0.23
+    Checking itoa v1.0.18
+    Checking cfg-if v1.0.5
+    Checking cpufeatures v0.2.17
+    Checking generic-array v0.14.7
+    Checking windows-sys v0.61.2
+    Checking windows-core v0.62.2
+    Checking crypto-common v0.1.7
+    Checking block-buffer v0.10.4
+    Checking digest v0.10.7
+    Checking sha2 v0.10.9
+    Checking windows-collections v0.3.2
+    Checking windows-future v0.3.2
+    Checking windows-numerics v0.3.1
+    Checking ntapi v0.4.3
+    Checking windows v0.62.2
+    Checking serde v1.0.229
+    Checking serde_json v1.0.154
+    Checking sysinfo v0.39.6
+    Checking mcao-core v0.0.0 (C:\Users\jmckerra\Code\mcao-windows-test\crates\mcao-core)
+    Checking mcao-backend-windows v0.0.0 (C:\Users\jmckerra\Code\mcao-windows-test\crates\mcao-backend-windows)
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 29.69s
+===== exit code: 0 =====
+
+===== 3/3 core test: cargo test -p mcao-core --locked =====
+   Compiling mcao-core v0.0.0 (C:\Users\jmckerra\Code\mcao-windows-test\crates\mcao-core)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 18.37s
+     Running unittests src\lib.rs (target\debug\deps\mcao_core-310bf1b4cbc2eb07.exe)
+
+running 579 tests
+test arm_shell_forms::tests::test_basename ... ok
+test arm_shell_forms::tests::test_is_assignment ... ok
+test arm_shell_forms::tests::test_word_references_any ... ok
+test arm_verdict::tests::error_with_protected_is_unclassifiable ... ok
+test arm_verdict::tests::background_forms_are_denied ... ok
+test arm_verdict::tests::direct_watch_is_denied_even_when_nested ... ok
+test arm_verdict::tests::approved_programs_are_allowed ... ok
+test arm_verdict::tests::bundled_programs_are_denied ... ok
+test arm_shell_forms::tests::test_eval_payload ... ok
+test arm_verdict::tests::every_code_carries_its_verbatim_reason ... ok
+test arm_verdict::tests::nested_flags_on_nodes_decide_like_the_summary ... ok
+test arm_shell_forms::tests::test_shell_invocation ... ok
+test arm_verdict::tests::bare_script_names_are_protected_only_without_a_directory ... ok
+test arm_verdict::tests::nested_protected_is_denied ... ok
+test arm_verdict::tests::bare_script_names_decide_like_bin_paths ... ok
+test arm_verdict::tests::nested_wrappers_and_prefixes_are_denied ... ok
+test arm_verdict::tests::pipeline_forms_are_denied ... ok
+test arm_verdict::tests::posix_normalize_matches_node_vectors ... ok
+test arm_verdict::tests::protected_identity_matches_node_vectors ... ok
+test arm_verdict::tests::protected_identity_with_empty_root ... ok
+test arm_verdict::tests::protected_nodes_count_when_summary_omits_them ... ok
+test arm_verdict::tests::redirection_and_substitution_are_denied ... ok
+test arm_verdict::tests::unprotected_or_error_without_protected_allows ... ok
+test attach::tests::find_detach_empty ... ok
+test attach::tests::find_detach_first_byte ... ok
+test attach::tests::find_detach_middle ... ok
+test attach::tests::find_detach_none ... ok
+test attach::tests::find_detach_multiple_first_wins ... ok
+test attach::tests::replay_cursor_advance_saturating ... ok
+test attach::tests::replay_cursor_advance ... ok
+test attach::tests::replay_cursor_at_current ... ok
+test attach::tests::replay_cursor_behind_oldest ... ok
+test attach::tests::replay_cursor_beyond_current ... ok
+test attach::tests::replay_cursor_inside_range ... ok
+test attach::tests::strip_after_detach_at_end ... ok
+test attach::tests::replay_cursor_empty_buffer ... ok
+test attach::tests::strip_after_detach_middle ... ok
+test attach::tests::strip_after_detach_empty ... ok
+test attach::tests::strip_after_detach_first_byte ... ok
+test attach::tests::strip_after_detach_multiple ... ok
+test attach::tests::strip_after_detach_none ... ok
+test audit_activity::tests::test_differing_pointers_escapes_keys ... ok
+test audit_activity::tests::test_differing_pointers_sorted_key_order ... ok
+test audit_activity::tests::test_differing_pointers ... ok
+test audit_activity::tests::test_project_error_display ... ok
+test audit_activity::tests::test_log_entry_success_and_missing ... ok
+test audit_activity::tests::test_project_absent_task_id_projects_null ... ok
+test audit_activity::tests::test_project_full_sample_envelope ... ok
+test audit_activity::tests::test_project_non_object_record_reports_the_document_pointer ... ok
+test audit_activity::tests::test_project_non_object_members_report_their_own_pointer ... ok
+test audit_activity::tests::test_project_refuses_missing_or_non_v1_schema ... ok
+test audit_activity::tests::test_project_second_sample_matches_python_golden ... ok
+test audit_envelope::tests::test_base_and_day_key_and_optional_task_id ... ok
+test audit_envelope::tests::test_reason_as_str ... ok
+test audit_envelope::tests::test_fleet_ledger_v1 ... ok
+test audit_envelope::tests::test_identity_gaps ... ok
+test audit_envelope::tests::test_cross_checks ... ok
+test audit_hmac::tests::test_canonical_json_float_band_edges_refused ... ok
+test audit_hmac::tests::test_canonical_json ... ok
+test audit_hmac::tests::test_canonical_json_integer_edges ... ok
+test audit_activity::tests::test_project_missing_members ... ok
+test audit_hmac::tests::test_canonical_json_nested_values ... ok
+test audit_hmac::tests::test_canonical_json_positive_zero ... ok
+test audit_hmac::tests::test_canonical_json_finite_floats_match_python_repr ... ok
+test audit_hmac::tests::test_canonical_json_refuses_integers_outside_exact_range ... ok
+test audit_hmac::tests::test_canonical_json_refuses_negative_zero ... ok
+test audit_hmac::tests::test_digest_error_display ... ok
+test audit_hmac::tests::test_parse_home_key ... ok
+test audit_hmac::tests::test_parsed_home_key_digest_known_answer ... ok
+test audit_hmac::tests::test_canonical_json_float_band_matches_python_reference ... ok
+test audit_envelope::tests::test_schema_checks ... ok
+test audit_hmac::tests::test_digest_value_refuses_ambiguous_integers ... ok
+test audit_hmac::tests::test_digest_value_refuses_negative_zero ... ok
+test audit_hmac::tests::test_digest_value ... ok
+test audit_hmac::tests::test_duplicate_keys_collapse_before_this_module ... ok
+test audit_hmac::tests::test_digest_error_precedence_with_multiple_unsupported_numbers ... ok
+test audit_hmac::tests::test_parse_boundary_refusals_happen_before_this_module ... ok
+test audit_hmac::tests::test_digest_value_matches_python_reference ... ok
+test audit_hmac::tests::test_hmac_sha256 ... ok
+test audit_path::tests::test_posix_basename ... ok
+test audit_path::tests::test_pointer_token ... ok
+test audit_path::tests::test_repo_relative ... ok
+test audit_path::tests::test_posix_normpath ... ok
+test audit_path::tests::test_truncate_chars ... ok
+test audit_path::tests::test_url_scheme_host ... ok
+test audit_redact_pii::py_word_table::tests::test_word_table_shape_is_pinned ... ok
+test audit_redact_pii::tests::test_case_fold_deviation_is_ascii_only_and_pinned ... ok
+test audit_redact_pii::tests::test_combined ... ok
+test audit_redact_pii::py_word_table::tests::test_word_table_content_matches_pinned_digest ... ok
+test audit_redact_pii::tests::test_digit_deviation_is_ascii_only_and_pinned ... ok
+test audit_redact_pii::tests::test_email_edges ... ok
+test audit_redact_pii::tests::test_dob_window_edge_and_literal_spaces ... ok
+test audit_redact_pii::tests::test_general ... ok
+test audit_redact_pii::tests::test_email ... ok
+test audit_redact_pii::tests::test_dob ... ok
+test audit_redact_pii::tests::test_mrn ... ok
+test audit_redact_pii::tests::test_mrn_gap_whitespace_matches_python_space_class ... ok
+test audit_redact_pii::tests::test_mrn_whitespace_classes ... ok
+test audit_redact_pii::tests::test_ssn ... ok
+test audit_redact_pii::tests::test_redaction_order_mrn_before_dob ... ok
+test audit_redact_pii::tests::test_word_boundary_index_past_end_is_not_a_boundary ... ok
+test audit_redact_pii::tests::test_phone ... ok
+test audit_redact_pii::tests::test_word_boundary_keeps_python_word_characters ... ok
+test audit_redact_pii::tests::test_ssn_group_and_word_boundary_edges ... ok
+test audit_redact_pii::tests::test_word_boundary_next_to_python_edge_code_points ... ok
+test audit_redact_pii::tests::test_word_boundary_matches_python_marks_symbols_and_unassigned ... ok
+test audit_redact_pii::tests::test_word_char_membership_samples ... ok
+test audit_redact_pii::tests::test_word_char_python_edges ... ok
+test backend::tests::op_errors_keep_their_reason_in_the_outcome ... ok
+test canonical_json::tests::test_empty_string ... ok
+test canonical_json::tests::test_cpython_object_sorting_and_escaping ... ok
+test canonical_json::tests::test_error_type_is_copy_and_displays ... ok
+test canonical_json::tests::test_escape_carriage_return_tab_and_space ... ok
+test canonical_json::tests::test_escape_special_string ... ok
+test canonical_json::tests::test_float_literal_inside_range_keeps_python_repr ... ok
+test canonical_json::tests::test_float_literals_in_out_of_range_magnitude_are_refused ... ok
+test canonical_json::tests::test_format_float_keeps_negative_zero_for_direct_formatting ... ok
+test canonical_json::tests::test_format_float_decimal_ties_round_half_even ... ok
+test canonical_json::tests::test_format_float_values_near_power_of_ten ... ok
+test canonical_json::tests::test_integer_boundaries_inside_64_bit_range_are_exact ... ok
+test canonical_json::tests::test_integer_literal_above_u64_max_is_refused ... ok
+test canonical_json::tests::test_format_float_cases ... ok
+test canonical_json::tests::test_format_float_neighbour_of_nearest_decimal_round_trips ... ok
+test canonical_json::tests::test_integer_literal_below_i64_min_is_refused ... ok
+test canonical_json::tests::test_integers ... ok
+test canonical_json::tests::test_invalid_neighbour_input_is_an_invariant_error ... ok
+test canonical_json::tests::test_key_order_independent_of_insertion_order ... ok
+test canonical_json::tests::test_lone_surrogate_escape_is_rejected_by_parser ... ok
+test canonical_json::tests::test_negative_zero_float_literal_is_refused ... ok
+test canonical_json::tests::test_negative_zero_integer_literal_is_refused ... ok
+test canonical_json::tests::test_nested_arrays_and_objects ... ok
+test canonical_json::tests::test_newline_in_key_and_nested_object_sort ... ok
+test canonical_json::tests::test_parsed_float_neighbour_of_nearest_decimal_round_trips ... ok
+test canonical_json::tests::test_parsed_float_needing_17_digits_round_trips ... ok
+test canonical_json::tests::test_overflowing_float_literal_is_rejected_by_parser ... ok
+test canonical_json::tests::test_parsed_float_vs_int ... ok
+test canonical_json::tests::test_printable_ascii_passes_through ... ok
+test canonical_json::tests::test_refusal_applies_nested_so_no_partial_output ... ok
+test canonical_json::tests::test_zero_and_negative_non_zero_are_unaffected ... ok
+test canonical_json::tests::test_to_canonical_string_panics_on_refused_input - should panic ... ok
+test cd_policy::tests::test_cd_alone_and_chains ... ok
+test cd_policy::tests::test_command_query_flag_matching ... ok
+test cd_policy::tests::test_edge_cases ... ok
+test cd_policy::tests::test_groups ... ok
+test cd_policy::tests::test_other_commands ... ok
+test cd_policy::tests::test_reason_and_code_constants ... ok
+test cd_policy::tests::test_query_forms ... ok
+test cd_policy::tests::test_wrappers ... ok
+test cloud_meta::tests::display_does_not_mark_a_value_at_the_limit_as_truncated ... ok
+test cloud_meta::tests::display_of_fixed_variants ... ok
+test cloud_meta::tests::display_truncates_and_escapes_every_untrusted_variant ... ok
+test cloud_meta::tests::new_checks_each_field ... ok
+test cloud_meta::tests::new_refuses_identifiers_outside_the_shell_shape ... ok
+test cloud_meta::tests::new_refuses_line_breaks_and_nul_in_text_fields ... ok
+test cloud_meta::tests::read_gcp_record_returns_every_field ... ok
+test cloud_meta::tests::read_keeps_leading_and_trailing_whitespace_in_values ... ok
+test cloud_meta::tests::read_local_record_has_no_cloud_fields_even_with_cloud_keys ... ok
+test cloud_meta::tests::read_parses_like_state_meta_with_bom_and_non_pair_lines ... ok
+test cloud_meta::tests::read_refuses_empty_cloud_values ... ok
+test cloud_meta::tests::read_refuses_interior_and_trailing_carriage_return ... ok
+test cloud_meta::tests::read_refuses_invalid_target_instead_of_reading_local ... ok
+test cloud_meta::tests::read_refuses_repeated_cloud_keys ... ok
+test cloud_meta::tests::read_refuses_missing_cloud_key ... ok
+test cloud_meta::tests::read_refuses_repeated_execution_target ... ok
+test cloud_meta::tests::set_cloud_fields_appends_to_empty_and_reads_back ... ok
+test cloud_meta::tests::set_cloud_fields_checks_owner_when_earlier_arguments_are_valid ... ok
+test cloud_meta::tests::set_cloud_fields_refuses_invalid_input_before_any_change ... ok
+test cloud_meta::tests::set_cloud_fields_refuses_repeated_keys ... ok
+test cloud_meta::tests::set_cloud_fields_replaces_in_place_and_keeps_other_lines ... ok
+test console::frame::tests::bad_detach_payload_length ... ok
+test console::frame::tests::bad_resize_payload_length ... ok
+test console::frame::tests::bad_subscribe_payload_length ... ok
+test console::frame::tests::clean_eof_is_ok_none ... ok
+test console::frame::tests::decode_length_65536_is_oversize_without_reading_body ... ok
+test console::frame::tests::eof_mid_frame_is_truncated ... ok
+test console::frame::tests::input_and_resize_round_trip ... ok
+test console::frame::tests::input_wire_bytes_exact ... ok
+test console::frame::tests::error_frame_truncation_on_multibyte_char_boundary ... ok
+test console::frame::tests::invalid_utf8_error_payload ... ok
+test console::frame::tests::length_five_is_oversize ... ok
+test console::frame::tests::resize_wire_bytes_exact_cols_then_rows_little_endian ... ok
+test console::frame::tests::max_size_output_and_oversize_on_encode ... ok
+test console::frame::tests::round_trip_for_each_of_the_four_frames ... ok
+test console::frame::tests::subscribe_offset_little_endian_bytes_exact ... ok
+test console::frame::tests::two_frames_back_to_back_decode_slice ... ok
+test console::frame::tests::unknown_tag ... ok
+test console::ring::tests::append_less_than_capacity_and_read_from_zero ... ok
+test console::ring::tests::capacity_from_env_value_test_cases ... ok
+test console::ring::tests::empty_buffer ... ok
+test console::ring::tests::capacity_zero_treated_as_one ... ok
+test console::ring::tests::exact_capacity ... ok
+test console::ring::tests::many_small_appends_equal_one_large_append ... ok
+test console::ring::tests::read_from_at_or_beyond_current_returns_empty ... ok
+test console::ring::tests::read_from_below_oldest_returns_empty ... ok
+test console::ring::tests::wrap_around_keeps_order ... ok
+test console::ring::tests::single_chunk_larger_than_capacity ... ok
+test env_expand::tests::adjacent_variables ... ok
+test env_expand::tests::empty_input ... ok
+test env_expand::tests::display_text ... ok
+test env_expand::tests::expand_env_fallback ... ok
+test env_expand::tests::one_variable ... ok
+test env_expand::tests::percent_literal ... ok
+test env_expand::tests::plain_text_unchanged ... ok
+test env_expand::tests::two_variables ... ok
+test env_expand::tests::unterminated ... ok
+test env_expand::tests::unset ... ok
+test env_expand::tests::value_containing_percent_not_re_expanded ... ok
+test evidence::tests::failures_are_never_demonstrated ... ok
+test evidence::tests::only_native_success_is_demonstrated ... ok
+test evidence::tests::record_support_is_derived_at_construction ... ok
+test evidence::tests::record_serializes_observation_fields_and_support_flat ... ok
+test hook_source::tests::extract_source_accepts_each_shell_space_class_around_colon ... ok
+test hook_source::tests::extract_source_keeps_trailing_whitespace_and_strips_only_newlines ... ok
+test hook_source::tests::extract_source_matches_key_exactly ... ok
+test hook_source::tests::extract_source_rejects_non_whitespace_around_colon ... ok
+test hook_source::tests::extract_source_rejects_separator_without_colon ... ok
+test hook_source::tests::extract_source_restarts_scan_after_non_colon_record ... ok
+test hook_source::tests::extract_source_requires_exactly_one_colon ... ok
+test hook_source::tests::parse_args_matches_pi_prerequisite_exactly ... ok
+test hook_source::tests::session_start_completed_requires_whole_pid_match ... ok
+test hook_source::tests::test_payload_is_foreign_host ... ok
+test hook_source::tests::test_extract_source ... ok
+test hook_source::tests::test_parse_args ... ok
+test hook_source::tests::test_route ... ok
+test hook_source::tests::test_session_start_completed ... ok
+test hook_source::tests::test_stand_down_exit_code ... ok
+test install_manifest::tests::test_error_display ... ok
+test install_manifest::tests::test_add_and_round_trip ... ok
+test install_manifest::tests::test_duplicate_case_insensitive ... ok
+test install_manifest::tests::test_backslash_normalised ... ok
+test install_manifest::tests::test_from_json_duplicate ... ok
+test install_manifest::tests::test_empty_manifest_round_trip ... ok
+test install_manifest::tests::test_from_json_version_2 ... ok
+test install_manifest::tests::test_from_json_with_dot_dot_path ... ok
+test install_manifest::tests::test_malformed_json ... ok
+test install_manifest::tests::test_removal_order ... ok
+test install_manifest::tests::test_unsafe_paths ... ok
+test mail_poll::tests::test_is_strip_ws_matches_python_isspace ... ok
+test mail_poll::tests::test_next_retry_pos ... ok
+test mail_poll::tests::test_clean ... ok
+test mail_poll::tests::test_parse_cap ... ok
+test mail_poll::tests::test_parse_cursor_basic ... ok
+test mail_poll::tests::test_parse_cursor_empty ... ok
+test mail_poll::tests::test_parse_cursor_last_uidvalidity_wins ... ok
+test mail_poll::tests::test_parse_retry ... ok
+test mail_poll::tests::test_parse_retry_pos ... ok
+test mail_poll::tests::test_parse_timeout_secs ... ok
+test mail_poll::tests::test_parse_turn ... ok
+test mail_poll::tests::test_retry_scan_window ... ok
+test mail_poll::tests::test_scenario_s1 ... ok
+test mail_poll::tests::test_scenario_s2 ... ok
+test mail_poll::tests::test_scenario_s4 ... ok
+test mail_poll::tests::test_scenario_s3 ... ok
+test mail_poll::tests::test_scenario_s5 ... ok
+test mail_poll::tests::test_scenario_s6 ... ok
+test mail_poll::tests::test_scenario_s7 ... ok
+test mail_poll::tests::test_scenario_s8 ... ok
+test mail_poll::tests::test_to_line_and_row_status ... ok
+test mail_poll::tests::test_scenario_s9 ... ok
+test merge_gate::tests::test_all_failure_pairs_matrix ... ok
+test merge_gate::tests::test_case_differing_heads ... ok
+test merge_gate::tests::test_all_good_facts_returns_ok ... ok
+test merge_gate::tests::test_classify_outcome_3x3_table ... ok
+test merge_gate::tests::test_display_text_all_variants ... ok
+test merge_gate::tests::test_empty_heads ... ok
+test merge_gate::tests::test_draft_and_closed_pr ... ok
+test merge_gate::tests::test_error_trait ... ok
+test merge_gate::tests::test_exit_codes ... ok
+test merge_gate::tests::test_permits_task_success ... ok
+test merge_gate::tests::test_lock_evidence_variants ... ok
+test merge_gate::tests::test_refusal_priority_pairs ... ok
+test merge_gate::tests::test_seven_failures_alone ... ok
+test notify::opener::tests::accepts_http_https_and_file_uris ... ok
+test notify::opener::tests::open_path_routes_through_open_url_and_refuses_metacharacters ... ok
+test notify::opener::tests::open_url_refuses_before_any_handler_runs ... ok
+test notify::opener::tests::refuses_metacharacters_and_control_bytes ... ok
+test notify::opener::tests::refuses_other_schemes ... ok
+test path_edit::tests::add_to_empty ... ok
+test path_edit::tests::add_to_existing ... ok
+test path_edit::tests::add_twice ... ok
+test path_edit::tests::case_insensitive_duplicate ... ok
+test path_edit::tests::dir_containing_semicolon_is_noop ... ok
+test path_edit::tests::dir_empty_after_normalization_is_noop ... ok
+test path_edit::tests::empty_dir_noop ... ok
+test path_edit::tests::empty_segments_survive_removal_unless_nothing_else_remains ... ok
+test path_edit::tests::no_leading_semicolon_after_removing_first_entry ... ok
+test path_edit::tests::lone_quote_entry_does_not_panic_or_match ... ok
+test path_edit::tests::only_one_trailing_separator_is_ignored ... ok
+test path_edit::tests::quoted_duplicate ... ok
+test path_edit::tests::quoted_separator_entry_matches_nothing ... ok
+test path_edit::tests::remove_absent ... ok
+test path_edit::tests::remove_all_duplicates ... ok
+test path_edit::tests::remove_last_entry_gives_empty ... ok
+test path_edit::tests::remove_present ... ok
+test path_edit::tests::trailing_backslash_duplicate ... ok
+test path_edit::tests::userprofile_bin_entries_untouched ... ok
+test path_edit::tests::semicolons_preserved ... ok
+test peek::tests::test_backlog_exceeded_display_text ... ok
+test peek::tests::test_backlog_tracker_default ... ok
+test peek::tests::test_backlog_tracker_drain_below_zero_saturates ... ok
+test peek::tests::test_backlog_tracker_drain_then_enqueue_succeeds ... ok
+test peek::tests::test_backlog_tracker_enqueue_max_refused ... ok
+test peek::tests::test_backlog_tracker_exactly_at_limit ... ok
+test peek::tests::test_backlog_tracker_one_over_refused_unchanged_state ... ok
+test peek::tests::test_last_lines_crlf_kept ... ok
+test peek::tests::test_last_lines_empty_input ... ok
+test peek::tests::test_last_lines_exact_n ... ok
+test peek::tests::test_last_lines_fewer_lines_than_n ... ok
+test peek::tests::test_last_lines_lone_newline ... ok
+test peek::tests::test_last_lines_not_utf8 ... ok
+test peek::tests::test_last_lines_many_lines_taking_last_three ... ok
+test peek::tests::test_last_lines_only_newlines ... ok
+test peek::tests::test_last_lines_zero_n ... ok
+test peek::tests::test_last_lines_unterminated_final_line ... ok
+test proc_info::tests::test_check_start_guard_diff_1000 ... ok
+test proc_info::tests::test_check_start_guard_diff_1001_mismatch ... ok
+test proc_info::tests::test_check_start_guard_none ... ok
+test proc_info::tests::test_error_display ... ok
+test proc_info::tests::test_exit_codes_and_constants ... ok
+test proc_info::tests::test_check_start_guard_equal ... ok
+test proc_info::tests::test_filetime_to_unix_ms_epoch_plus_ten_thousand ... ok
+test proc_info::tests::test_filetime_to_unix_ms_epoch ... ok
+test proc_info::tests::test_filetime_to_unix_ms_before_epoch ... ok
+test proc_info::tests::test_filetime_to_unix_ms_realistic ... ok
+test proc_info::tests::test_filetime_to_unix_ms_zero ... ok
+test proc_info::tests::test_parse_btime_ms_btimex_ignored ... ok
+test proc_info::tests::test_parse_btime_ms_first_line_wins ... ok
+test proc_info::tests::test_parse_btime_ms_absent ... ok
+test proc_info::tests::test_parse_btime_ms_invalid_number ... ok
+test proc_info::tests::test_parse_proc_stat_comm_with_spaces ... ok
+test proc_info::tests::test_parse_output_format ... ok
+test proc_info::tests::test_parse_proc_stat_comm_with_parentheses ... ok
+test proc_info::tests::test_parse_btime_ms_overflow ... ok
+test proc_info::tests::test_parse_btime_ms_realistic ... ok
+test proc_info::tests::test_parse_proc_stat_empty ... ok
+test proc_info::tests::test_parse_proc_stat_exactly_20_fields ... ok
+test proc_info::tests::test_parse_proc_stat_fewer_than_20_fields ... ok
+test proc_info::tests::test_parse_proc_stat_negative_ppid ... ok
+test proc_info::tests::test_parse_proc_stat_invalid_ppid_alpha ... ok
+test proc_info::tests::test_parse_proc_stat_extra_trailing_fields_ignored ... ok
+test proc_info::tests::test_parse_proc_stat_negative_starttime ... ok
+test proc_info::tests::test_parse_proc_stat_no_closing_paren ... ok
+test proc_info::tests::test_parse_proc_stat_standard ... ok
+test proc_info::tests::test_render ... ok
+test proc_info::tests::test_start_time_ms_standard ... ok
+test proc_info::tests::test_start_time_ms_max_boundary ... ok
+test proc_info::tests::test_start_time_ms_overflow ... ok
+test proc_info::tests::test_start_time_ms_zero_clock_tick ... ok
+test process_identity::tests::a_byte_order_mark_does_not_hide_the_first_identity_key ... ok
+test proc_info::tests::test_start_time_ms_truncation ... ok
+test process_identity::tests::a_job_still_holding_processes_without_the_pid_is_ambiguous ... ok
+test process_identity::tests::a_live_pid_with_its_job_members_is_alive ... ok
+test process_identity::tests::a_live_pid_outside_its_job_is_ambiguous ... ok
+test process_identity::tests::a_partial_or_malformed_identity_is_refused ... ok
+test process_identity::tests::an_exited_pid_with_an_empty_job_is_dead ... ok
+test process_identity::tests::a_reused_pid_is_dead_only_when_its_job_is_empty_or_absent ... ok
+test process_identity::tests::fnv1a_matches_its_published_vectors ... ok
+test process_identity::tests::merging_replaces_identity_and_keeps_other_lines ... ok
+test process_identity::tests::merging_appends_identity_to_a_record_without_a_trailing_newline ... ok
+test process_identity::tests::no_pid_and_no_job_is_missing ... ok
+test process_identity::tests::no_pid_with_an_empty_job_is_dead ... ok
+test audit_hmac::tests::test_sha256 ... ok
+test process_identity::tests::the_home_hash_is_stable_and_separates_homes ... ok
+test process_identity::tests::the_identity_keys_parse_back_as_one_identity ... ok
+test process_identity::tests::the_job_name_has_the_local_prefix_hash_and_task_id ... ok
+test process_identity::tests::unreadable_evidence_is_never_decided ... ok
+test resources::actions::tests::failing_action_warns_and_the_start_still_defers ... ok
+test resources::guard::tests::available_above_total_reads_zero_used_and_zero_swap_reads_zero ... ok
+test resources::guard::tests::rounds_half_to_even_on_the_exact_binary_value ... ok
+test resources::guard::tests::text_layout_follows_the_reference_prints ... ok
+test resources::guard::tests::thresholds_are_inclusive_and_compare_rounded_values ... ok
+test resources::guard::tests::top_processes_drop_small_ones_sort_by_size_and_cap_at_ten ... ok
+test resources::guard::tests::unknown_text_withholds_every_figure ... ok
+test resources::guard::tests::unreadable_or_empty_memory_is_unknown_never_ok ... ok
+test resources::sys::tests::mount_must_match_whole_path_components ... ok
+test resources::guard::tests::utc_stamp_formats_known_instants ... ok
+test resources::sys::tests::equal_depth_overmount_picks_the_later_entry ... ok
+test process_identity::tests::recording_identity_for_a_missing_record_leaves_no_sidecar_behind ... ok
+test resources::sys::tests::nested_mounts_choose_the_deepest_holding_mount ... ok
+test resources::sys::tests::no_holding_mount_is_none ... ok
+test resources::sys::tests::plain_path_is_unchanged ... ok
+test resources::sys::tests::top_n_handles_zero_and_oversized_limits ... ok
+test resources::sys::tests::verbatim_drive_prefix_is_dropped ... ok
+test resources::sys::tests::top_n_orders_by_rss_then_pid_and_keeps_n ... ok
+test resources::sys::tests::verbatim_unc_prefix_is_kept ... ok
+test routing::tests::test_check_authority_capacity_boundaries ... ok
+test routing::tests::test_check_authority_each_failure_alone ... ok
+test routing::tests::test_check_authority_failure_order ... ok
+test routing::tests::test_check_authority_success ... ok
+test routing::tests::test_check_op ... ok
+test routing::tests::test_display_texts ... ok
+test routing::tests::test_exit_codes ... ok
+test routing::tests::test_matrix_exhaustive ... ok
+test routing::tests::test_resolve_target ... ok
+test sha256::tests::test_audit_hash ... ok
+test sha256::tests::test_clone_mid_stream_forks_independent_states ... ok
+test sha256::tests::test_empty_updates_leave_digest_unchanged ... ok
+test sha256::tests::test_default_equals_new ... ok
+test sha256::tests::test_56_byte_vector_splits ... ok
+test sha256::tests::test_is_audit_hash ... ok
+test sha256::tests::test_is_audit_hash_accepts_full_hex_alphabet ... ok
+test sha256::tests::test_incremental_update_matches_one_shot_for_every_two_way_split ... ok
+test sha256::tests::test_is_audit_hash_rejects_neighbours_of_hex_ranges ... ok
+test sha256::tests::test_known_answer_mixed_chunk_updates ... ok
+test sha256::tests::test_known_answers_around_padding_boundary ... ok
+test sha256::tests::test_partial_eq_tracks_bytes_seen ... ok
+test sha256::tests::test_audit_hash_is_prefix_and_hex_digest_for_every_line_length ... ok
+test sha256::tests::test_padding_boundaries ... ok
+test shell_command_pos::tests::known_gap_env_option_after_assignment ... ok
+test shell_command_pos::tests::known_gap_unlisted_wrapper_hides_later_command ... ok
+test shell_command_pos::tests::known_gap_env_p_takes_argument ... ok
+test shell_command_pos::tests::position_env_cases ... ok
+test shell_command_pos::tests::position_other_wrapper_cases ... ok
+test shell_command_pos::tests::position_env_split_string_payloads ... ok
+test shell_command_pos::tests::position_plain_and_assignments ... ok
+test shell_command_pos::tests::position_sudo_cases ... ok
+test shell_command_pos::tests::position_timeout_cases ... ok
+test shell_command_pos::tests::position_timeout_does_not_collect_payloads ... ok
+test shell_command_pos::tests::position_wrapper_names ... ok
+test shell_command_pos::tests::split_at_operators ... ok
+test shell_command_pos::tests::split_keeps_node_tokens ... ok
+test shell_command_pos::tests::split_newline_handling ... ok
+test shell_command_pos::tests::split_simple_and_empty ... ok
+test shell_command_pos::tests::words_in_node_drops_redirect_targets ... ok
+test staleness::tests::display_state_for_each_freshness ... ok
+test staleness::tests::display_state_preserves_terminal_states ... ok
+test staleness::tests::freshness_at_boundary_seconds ... ok
+test shell_command_pos::tests::wrapper_table_entries_are_consumed ... ok
+test staleness::tests::freshness_fetch_failure ... ok
+test staleness::tests::freshness_future_timestamp ... ok
+test staleness::tests::merge_empty_inputs ... ok
+test staleness::tests::merge_ordering_with_ties_and_shared_id ... ok
+test staleness::tests::terminal_list_exact ... ok
+test state::migrate::tests::encoding_lines_are_removed_and_nothing_else ... ok
+test state::migrate::tests::a_missing_record_is_refused_and_leaves_no_sidecar_behind ... ok
+test process_identity::tests::a_cloud_record_is_refused_and_left_unchanged ... ok
+test state::store::tests::other_rename_errors_fail_at_once ... ok
+test state::store::tests::persistent_sharing_conflict_uses_doubling_pauses_then_reports_the_error ... ok
+test state::store::tests::sharing_conflict_that_clears_stops_retrying ... ok
+test steer::tests::test_detach_non_holder_does_not_release ... ok
+test steer::tests::test_finish_client ... ok
+test steer::tests::test_input_holder_no_reclaim ... ok
+test steer::tests::test_msg_conpty_constant ... ok
+test steer::tests::test_slot_claim_and_release ... ok
+test steer::tests::test_slot_poisoned_lock_panics - should panic ... ok
+test sha256::tests::test_known_vectors ... ok
+test steer::tests::test_task_id_rule_comes_from_task_id ... ok
+test steer::tests::test_to_console_size ... ok
+test steer::tests::test_unix_attach_argv ... ok
+test steer::tests::test_wire_detach_with_payload_closes_and_finish_releases ... ok
+test steer::tests::test_wire_empty_input_is_ignored_without_claim ... ok
+test steer::tests::test_wire_input_contention_and_detach ... ok
+test process_identity::tests::recording_identity_publishes_a_checked_record_with_the_identity ... ok
+test steer::tests::test_wire_resize ... ok
+test steer::tests::test_wire_subscr ... ok
+test steer::tests::test_wire_unknown_and_output_tags_reply_unknown ... ok
+test teardown_guard::tests::test_cancel_cloud_flag_ignored_for_terminal_runs ... ok
+test teardown_guard::tests::test_all_combinations_table ... ok
+test teardown_guard::tests::test_exit_codes ... ok
+test state::migrate::tests::failure_before_the_rename_keeps_the_original_and_leaves_no_temporary_file ... ok
+test teardown_guard::tests::test_reasons_and_remedies_non_empty_and_named_remedies_exact ... ok
+test terminal::tests::a_line_end_inside_an_unfinished_escape_does_not_eat_the_next_character ... ok
+test terminal::tests::a_control_string_within_the_cap_is_removed_whole ... ok
+test terminal::tests::an_unreadable_environment_size_falls_back_to_the_buffer ... ok
+test terminal::tests::a_new_escape_inside_a_string_starts_a_fresh_sequence ... ok
+test process_identity::tests::recording_identity_leaves_no_carriage_return_behind ... ok
+test terminal::tests::can_and_sub_cancel_a_sequence_in_progress ... ok
+test state::store::tests::failure_before_the_rename_keeps_the_previous_record ... ok
+test terminal::tests::controls_are_dropped_but_tabs_and_newlines_stay ... ok
+test terminal::tests::crlf_and_lone_cr_become_lf ... ok
+test terminal::tests::csi_colour_sequences_are_folded_away ... ok
+test terminal::tests::invalid_utf8_is_replaced_not_refused ... ok
+test terminal::tests::an_unterminated_control_string_is_abandoned_at_the_cap ... ok
+test terminal::tests::osc_sequences_end_at_bel_or_st ... ok
+test terminal::tests::sizes_below_the_minimum_are_raised_to_it ... ok
+test terminal::tests::size_from_the_environment_wins_when_it_parses ... ok
+test terminal::tests::sizes_above_the_conpty_limit_are_lowered_to_it ... ok
+test terminal::tests::the_default_applies_when_nothing_names_a_size ... ok
+test terminal::tests::string_sequences_end_only_at_st ... ok
+test terminal::tests::two_byte_and_charset_escapes_are_removed ... ok
+test terminal::tests::utf8_text_passes_through_unchanged ... ok
+test toolchain::discovery::tests::path_split_matches_join_on_this_platform ... ok
+test toolchain::discovery::tests::unix_requires_an_executable_file ... ok
+test toolchain::discovery::tests::unset_path_finds_nothing ... ok
+test toolchain::discovery::tests::windows_missing_name_is_missing ... ok
+test toolchain::discovery::tests::windows_path_separator_is_semicolon ... ok
+test toolchain::discovery::tests::windows_reports_bat_and_ps1_shims_without_running_them ... ok
+test toolchain::discovery::tests::windows_resolves_exe_and_rejects_script_shims ... ok
+test toolchain::host::tests::scripted_argv_matches_across_path_separator_styles ... ok
+test toolchain::npm::tests::manifest_without_bin_is_rejected ... ok
+test toolchain::npm::tests::missing_package_and_shim_only_node_are_errors ... ok
+test toolchain::npm::tests::npmrc_prefix_ignores_other_keys_and_empty_values ... ok
+test toolchain::npm::tests::object_bin_selects_the_package_entry ... ok
+test toolchain::npm::tests::unix_package_lives_under_lib_node_modules ... ok
+test toolchain::npm::tests::windows_prefix_error_names_both_sources ... ok
+test toolchain::npm::tests::unix_prefix_uses_config_env_then_npmrc ... ok
+test toolchain::npm::tests::windows_prefix_falls_back_to_npmrc ... ok
+test toolchain::npm::tests::windows_prefix_prefers_appdata_npm ... ok
+test toolchain::npm::tests::windows_resolves_package_to_node_argv_without_npm ... ok
+test toolchain::preflight::tests::absent_required_tool_is_refused_not_skipped ... ok
+test toolchain::preflight::tests::all_required_supported_passes ... ok
+test toolchain::preflight::tests::blocked_required_tool_is_refused ... ok
+test toolchain::preflight::tests::delivery_paths_map_to_their_required_tools ... ok
+test toolchain::preflight::tests::malformed_record_is_refused ... ok
+test toolchain::preflight::tests::success_message_is_the_ac11_text ... ok
+test toolchain::preflight::tests::refusal_quotes_the_recorded_blocker ... ok
+test toolchain::preflight::tests::unknown_delivery_path_is_a_usage_error ... ok
+test toolchain::preflight::tests::unrequired_unsupported_tool_does_not_block ... ok
+test toolchain::preflight::tests::unsupported_required_tool_is_refused_with_exit_three ... ok
+test toolchain::probe::tests::gh_auth_maps_exit_status_to_three_values ... ok
+test toolchain::probe::tests::codex_cmd_shim_is_unsupported_and_never_run ... ok
+test toolchain::probe::tests::git_is_supported_with_checkout_setting_limitations ... ok
+test toolchain::probe::tests::herdr_is_refused_on_windows_without_a_probe ... ok
+test toolchain::probe::tests::credential_manager_is_a_presence_boolean ... ok
+test toolchain::probe::tests::evidence_root_keys_follow_ac2 ... ok
+test toolchain::probe::tests::no_mistakes_is_unsupported_node_script_with_shell_wrapper ... ok
+test toolchain::probe::tests::npm_tool_runs_through_node_argv_and_is_supported ... ok
+test toolchain::probe::tests::qualify_on_windows_starts_no_shell_or_npm_process ... ok
+test toolchain::probe::tests::pilot_is_native_only ... ok
+test toolchain::record::tests::blockers_and_refusal_override_otherwise_supported_facts ... ok
+test toolchain::record::tests::settle_reads_the_record_facts ... ok
+test toolchain::probe::tests::tool_records_carry_the_normative_shape_and_evidence_link ... ok
+test toolchain::probe::tests::pilot_launcher_has_the_normative_four_field_shape ... ok
+test toolchain::probe::tests::version_run_that_does_not_start_is_unsupported_with_its_error ... ok
+test toolchain::record::tests::verdict_strings_are_the_record_vocabulary ... ok
+test toolchain::record::tests::verdict_table_follows_ac5 ... ok
+test util::base64::tests::matches_cpython_padding_rules ... ok
+test util::base64::tests::rejects_inputs_cpython_rejects ... ok
+test util::path::tests::absolute_link_target_resets_the_walk ... ok
+test util::path::tests::absolute_path_never_asks_for_the_working_directory ... ok
+test util::path::tests::absolute_path_ignores_the_working_directory ... ok
+test util::path::tests::chained_links_resolve_fully ... ok
+test util::path::tests::dangling_link_keeps_the_literal_remainder ... ok
+test util::path::tests::dotdot_after_a_cycle_pops_the_literal_path ... ok
+test util::path::tests::entry_error_stops_the_walk_and_is_returned ... ok
+test util::path::tests::dotdot_clamps_at_the_root ... ok
+test util::path::tests::empty_and_dot_name_the_working_directory ... ok
+test util::path::tests::paths_without_the_verbatim_prefix_are_unchanged ... ok
+test util::path::tests::link_to_a_file_is_followed ... ok
+test util::path::tests::plain_components_normalize_dot_and_dotdot ... ok
+test util::path::tests::relative_link_resolves_against_its_own_directory ... ok
+test util::path::tests::relative_path_returns_the_working_directory_error ... ok
+test util::path::tests::self_loop_keeps_the_remaining_parts ... ok
+test util::path::tests::settled_absolute_link_revisit_reuses_its_resolution ... ok
+test util::path::tests::settled_link_revisit_reuses_its_resolution ... ok
+test util::path::tests::settled_link_revisit_uses_the_cache_not_a_second_walk ... ok
+test util::path::tests::settled_multi_component_link_revisit_reuses_its_resolution ... ok
+test util::path::tests::trailing_slash_in_a_link_target_is_ignored ... ok
+test util::path::tests::two_link_cycle_stops_at_the_first_link ... ok
+test util::path::tests::verbatim_prefix_is_kept_for_unc_and_other_forms ... ok
+test util::path::tests::verbatim_prefix_is_stripped_from_plain_drive_paths ... ok
+test windows::onedrive::tests::a_home_beside_the_root_passes ... ok
+test windows::onedrive::tests::a_home_equal_to_the_root_is_refused ... ok
+test windows::onedrive::tests::a_plain_directory_named_onedrive_is_not_flagged ... ok
+test windows::onedrive::tests::a_relative_or_dotdot_home_is_refused_not_compared ... ok
+test state::migrate::tests::a_record_that_changed_since_it_was_read_is_a_state_conflict ... ok
+test windows::onedrive::tests::a_verbatim_home_is_refused_not_compared ... ok
+test windows::onedrive::tests::an_unset_or_empty_root_names_nothing ... ok
+test windows::onedrive::tests::every_onedrive_variable_names_a_root ... ok
+test windows::retry::tests::delay_after_failed_attempt ... ok
+test windows::retry::tests::is_retryable_cases ... ok
+test windows::retry::tests::retry_with_always_permission_denied ... ok
+test windows::retry::tests::retry_with_max_attempts_zero_calls_op_once ... ok
+test windows::retry::tests::retry_with_non_retryable_error ... ok
+test windows::retry::tests::retry_with_succeeds_on_third_attempt ... ok
+test windows::retry::tests::temp_rename_and_remove_no_file_name ... ok
+test windows::retry::tests::sibling_names_are_unique_and_next_to_the_target ... ok
+test windows::retry::tests::windows_retries_denied_and_sharing_codes ... ok
+test windows::retry::tests::rename_failure_is_returned_and_leaves_the_target ... ok
+test windows::retry::tests::rename_not_found_counts_as_success ... ok
+test windows::retry::tests::remove_dir_with_retry_using_real_temp ... ok
+test windows::retry::tests::failed_removal_names_the_orphan_sibling ... ok
+test windows::retry::tests::temp_rename_and_remove_using_cases ... ok
+test util::pystr::tests::test_is_space_is_python_whitespace_over_every_scalar ... ok
+test process_identity::tests::rollback_meta_waits_for_the_sidecar_lock_the_identity_write_uses ... ok
+test process_identity::tests::publishing_a_record_waits_for_the_sidecar_lock_the_identity_write_uses ... ok
+test process_identity::tests::publish_meta_waits_for_the_sidecar_lock_the_identity_write_uses ... ok
+test process_identity::tests::recording_identity_waits_for_the_record_lock_then_keeps_the_other_keys ... ok
+test process_identity::tests::a_migration_and_an_identity_write_both_wait_and_neither_loses_the_other ... ok
+
+test result: ok. 579 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.65s
+
+     Running tests\config.rs (target\debug\deps\config-09c7f0d07fe717b3.exe)
+
+running 20 tests
+test defaults_apply_when_no_config_exists_and_nothing_is_created ... ok
+test empty_flag_and_unknown_flag_are_refused ... ok
+test control_bytes_in_flags_and_env_are_refused ... ok
+test directory_under_a_key_tested_by_file_test_reads_as_unset ... ok
+test every_read_name_reaches_resolve_or_load ... ok
+test directory_under_a_key_tested_by_lstat_is_refused ... ok
+test blank_file_is_unset_and_the_default_applies ... ok
+test non_utf8_content_is_refused_only_when_read ... ok
+test later_lines_of_a_file_are_not_read ... ok
+test binary_and_control_byte_unknown_files_never_abort_the_load ... ok
+test non_breaking_space_is_text_not_shell_space ... ok
+test subdirectories_under_config_are_skipped_silently ... ok
+test unknown_files_never_change_known_settings ... ok
+test plain_keys_follow_flag_then_file_then_default ... ok
+test unknown_files_keep_their_exact_bytes_and_presence ... ok
+test branch_prefix_follows_the_shell_first_line_rule ... ok
+test control_bytes_in_a_file_value_are_refused ... ok
+test crew_harness_follows_the_shell_whole_file_rule ... ok
+test backend_precedence_covers_every_source_combination ... ok
+test claude_permission_mode_follows_the_spawn_whole_file_rule ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests\config_fixtures.rs (target\debug\deps\config_fixtures-288c42540f035eba.exe)
+
+running 3 tests
+test the_pilot_directory_keeps_the_raw_bytes_the_contract_depends_on ... ok
+test pilot_config_resolves_to_the_frozen_overrides_contract ... ok
+test pilot_config_resolves_to_the_frozen_files_contract ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+     Running tests\config_skipped.rs (target\debug\deps\config_skipped-90deaa03d6fd1c92.exe)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\error.rs (target\debug\deps\error-eb319c037ef2b218.exe)
+
+running 5 tests
+test a_task_id_refused_at_creation_exits_with_usage_code_two ... ok
+test display_matches_the_contract_wording ... ok
+test each_variant_maps_to_its_contract_exit_code ... ok
+test io_failures_convert_with_from_and_expose_their_source ... ok
+test non_io_failures_have_no_source ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\herdr-eventwait.rs (target\debug\deps\herdr_eventwait-e7ed5f627ac61618.exe)
+
+running 7 tests
+test failures_map_to_the_reference_exit_codes ... ok
+test timeout_accepts_positive_seconds_only ... ok
+test windows::eventwait_reports_unsupported_without_touching_a_socket ... ok
+test only_a_started_subscription_is_acknowledged ... ok
+test recorded_cases_are_present ... ok
+test subscribe_request_matches_the_reference_request ... ok
+test projection_matches_the_reference_output_lines ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.45s
+
+     Running tests\herdr-workspace-move.rs (target\debug\deps\herdr_workspace_move-85be6ac21a822fcb.exe)
+
+running 5 tests
+test failures_map_to_the_reference_exit_codes ... ok
+test insert_index_accepts_only_plain_non_negative_digits ... ok
+test request_checks_socket_path_and_workspace_id_as_the_reference_does ... ok
+test windows::workspace_move_reports_unsupported_without_touching_a_socket ... ok
+test only_a_workspace_list_reply_for_this_request_is_accepted ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\home.rs (target\debug\deps\home-8a246afae28bc375.exe)
+
+running 22 tests
+test env_capture::drive_relative_flag_is_refused_after_joining_the_working_directory ... ok
+test env_capture::names_match_case_insensitively_on_windows ... ok
+test env_capture::non_utf8_value_of_a_read_name_is_refused ... ok
+test env_capture::only_read_names_are_kept_with_their_values ... ok
+test env_capture::read_name_set_twice_is_refused ... ok
+test env_capture::non_utf8_value_of_an_unread_name_is_ignored ... ok
+test relative_results_are_refused_when_the_working_directory_is_relative ... ok
+test empty_flag_is_refused ... ok
+test control_bytes_are_refused_in_every_selected_input ... ok
+test empty_environment_values_count_as_unset ... ok
+test derived_directories_sit_under_the_root ... ok
+test missing_home_is_allowed_and_never_created ... ok
+test per_directory_overrides_replace_only_their_own_directory ... ok
+test relative_default_root_is_refused ... ok
+test parent_components_are_refused_in_every_input ... ok
+test relative_inputs_resolve_against_the_working_directory ... ok
+test derived_directory_that_is_a_file_is_refused ... ok
+test trailing_separators_and_dot_components_are_normalized_away ... ok
+test unselected_inputs_are_never_validated ... ok
+test regular_file_is_not_a_home ... ok
+test root_precedence_covers_all_sixteen_presence_combinations ... ok
+test working_directory_with_a_parent_component_still_resolves_relative_input ... ok
+
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests\lock_proof.rs (target\debug\deps\lock_proof-b2f03e4e8df30c88.exe)
+
+running 10 tests
+test missing_lock_is_not_provably_stale ... ok
+test probe_is_not_asked_when_the_lock_is_missing ... ok
+test probe_is_asked_about_the_lock_and_its_companion_dir ... ok
+test lock_refreshed_during_probe_is_not_provably_stale ... ok
+test live_holder_is_never_provably_stale ... ok
+test host_without_holder_probe_is_not_provably_stale ... ok
+test dead_holder_younger_than_min_age_is_not_provably_stale ... ok
+test dead_holder_past_min_age_is_provably_stale ... ok
+test unknown_probe_answer_blocks_the_proof_when_old ... ok
+test future_mtime_is_not_provably_stale ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests\preflight.rs (target\debug\deps\preflight-8b9f1ec46207f1f8.exe)
+
+running 21 tests
+test a_path_past_the_tool_warning_length_passes_with_a_warning ... ok
+test a_business_onedrive_root_is_refused_too ... ok
+test a_home_that_climbs_out_of_the_root_with_parent_components_is_refused ... ok
+test a_disk_prefixed_home_under_the_root_is_still_refused ... ok
+test a_home_under_onedrive_is_refused_with_the_remedy ... ok
+test a_home_under_the_root_with_parent_components_is_refused ... ok
+test a_path_at_the_classic_limit_is_refused_because_the_nul_needs_a_unit ... ok
+test a_path_at_the_tool_warning_length_is_within_budget ... ok
+test a_home_outside_onedrive_passes ... ok
+test a_relative_home_is_refused_when_a_root_is_set ... ok
+test a_relative_home_passes_when_no_root_is_set ... ok
+test a_path_one_unit_under_the_classic_limit_is_accepted_with_a_warning ... ok
+test a_sibling_folder_that_only_shares_a_name_prefix_passes ... ok
+test a_verbatim_prefixed_home_is_refused_rather_than_passed ... ok
+test an_empty_onedrive_variable_names_no_root ... ok
+test limits_match_the_windows_ceilings ... ok
+test long_paths_need_both_the_machine_and_git_settings ... ok
+test projected_length_counts_a_supplementary_character_as_two_units ... ok
+test projected_length_counts_both_separators_and_the_suffix ... ok
+test the_extended_limit_admits_long_paths_and_refuses_at_it ... ok
+test the_onedrive_root_matches_regardless_of_ascii_case ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\resources.rs (target\debug\deps\resources-d21f677a4ce82b28.exe)
+
+running 34 tests
+test boundaries_disk_free_breaches_only_strictly_below_minimum ... ok
+test boundaries_memory_swap_and_cpu_breach_at_or_above_limit ... ok
+test cpu_overshoot_is_kept_and_breaches_instead_of_reading_unknown ... ok
+test cpu_negative_reading_is_unknown_not_breach ... ok
+test disk_free_at_exactly_the_minimum_is_ok_through_sample ... ok
+test disk_free_percentage_is_pinned_through_sample_and_evaluate ... ok
+test enabled_running_agents_is_sampled_as_unavailable_with_a_reason ... ok
+test enabled_running_agents_without_a_count_is_unknown ... ok
+test fake_sampler_cpu_window_is_taken_only_when_cpu_threshold_enabled ... ok
+test fake_sampler_healthy_host_is_state_ok_with_no_breaches ... ok
+test fake_sampler_inconsistent_counts_are_unknown ... ok
+test disk_free_rounds_up_to_the_minimum_and_does_not_breach ... ok
+test fake_sampler_memory_is_not_called_when_memory_and_swap_are_off ... ok
+test fake_sampler_memory_over_limit_breaches_with_exact_values ... ok
+test fake_sampler_non_finite_cpu_is_unknown_not_breach ... ok
+test fake_sampler_unknown_does_not_hide_a_breach_elsewhere ... ok
+test fake_sampler_unreadable_memory_leaves_memory_and_swap_unknown ... ok
+test fake_sampler_zero_totals_do_not_divide_or_panic ... ok
+test hand_built_non_finite_values_evaluate_unknown_not_breach ... ok
+test full_memory_and_full_cpu_breach_at_the_top_of_the_range ... ok
+test serialized_names_match_the_live_snapshot_contract ... ok
+test sample_forwards_the_disk_path_to_the_sampler ... ok
+test running_agents_breaches_at_limit_when_a_count_is_supplied ... ok
+test rounding_to_one_decimal_happens_before_comparison ... ok
+test snapshot_json_uses_the_live_v1_shape ... ok
+test threshold_grammar_accepts_upper_bounds ... ok
+test threshold_grammar_accepts_valid_file_with_comments_and_off ... ok
+test threshold_leading_byte_order_mark_is_not_part_of_the_first_key ... ok
+test threshold_grammar_bad_line_discards_whole_file_with_file_and_line ... ok
+test threshold_warning_line_number_counts_comments_and_blank_lines ... ok
+test threshold_absent_file_uses_defaults_silently ... ok
+test threshold_unreadable_file_warns_and_uses_defaults ... ok
+test resources_module_spawns_no_processes_and_uses_no_shell ... ok
+test threshold_file_in_config_dir_is_loaded_and_named ... ok
+
+test result: ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests\resources_admit.rs (target\debug\deps\resources_admit-a9945fe2c7eb4de7.exe)
+
+running 12 tests
+test resource_keys_match_the_snapshot_contract ... ok
+test healthy_host_admits_and_runs_no_action ... ok
+test unreadable_memory_admits_with_unknown_state ... ok
+test default_memory_limit_defers_the_start_with_its_message ... ok
+test deferral_maps_to_exit_code_75_and_shows_its_message ... ok
+test failing_action_is_skipped_and_the_start_still_defers ... ok
+test first_defer_decides_and_later_actions_do_not_run ... ok
+test breach_runs_each_action_once_with_the_request_and_evaluation ... ok
+test disk_breach_message_uses_the_below_comparison ... ok
+test malformed_thresholds_file_keeps_the_defaults_and_reports_the_line ... ok
+test unmeasurable_running_agent_count_admits_as_unknown ... ok
+test running_agent_limit_counts_held_slots_across_homes_and_defers ... ok
+
+test result: ok. 12 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests\resources_agents.rs (target\debug\deps\resources_agents-2cd35a43a956f396.exe)
+
+running 19 tests
+test all_mode_reports_a_supplied_count ... ok
+test enabled_mode_samples_only_enabled_resources ... ok
+test a_failed_count_is_unavailable_with_its_reason ... ok
+test all_mode_levels_match_enabled_mode_for_enabled_limits ... ok
+test enabled_mode_leaves_a_supplied_count_out_when_its_limit_is_off ... ok
+test no_count_and_no_limit_leaves_running_agents_out ... ok
+test all_mode_samples_every_resource_even_when_disabled ... ok
+test no_home_supplied_is_an_error ... ok
+test plain_sample_is_the_enabled_mode_with_no_count ... ok
+test enabled_limit_with_a_supplied_count_breaches_at_the_limit ... ok
+test missing_home_is_an_error_not_zero ... ok
+test dot_prefixed_records_are_skipped_as_the_shell_glob_skips_them ... ok
+test record_with_an_invalid_task_id_is_an_error ... ok
+test unknown_execution_target_counts_as_a_slot_as_the_shell_does ... ok
+test each_home_counts_and_a_repeated_home_is_read_once ... ok
+test non_utf8_record_is_read_as_the_shell_reads_it ... ok
+test own_record_in_the_starting_home_is_not_counted ... ok
+test repeated_execution_target_reads_its_last_value_as_the_shell_does ... ok
+test counts_only_task_records_that_hold_a_slot ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests\resources_review_nits.rs (target\debug\deps\resources_review_nits-eb5689c98afad743.exe)
+
+running 10 tests
+test cpu_negative_zero_is_reported_as_plain_zero ... ok
+test swap_only_configuration_samples_swap_and_breaches ... ok
+test cpu_values_that_cannot_be_rounded_are_unknown_with_a_reason ... ok
+test derived_unknown_reasons_are_pinned_exactly ... ok
+test duplicate_readings_for_one_kind_the_first_one_decides ... ok
+test whitespace_only_and_indented_comment_lines_are_ignored ... ok
+test cpu_tiny_negative_rounds_to_zero_and_clear_negative_is_unknown ... ok
+test cpu_zero_is_a_valid_idle_reading ... ok
+test resources_sources_spawn_no_processes_at_any_depth ... ok
+test recursive_scan_reports_nested_and_import_forms ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests\state_encoding.rs (target\debug\deps\state_encoding-b59e6d7bfdf59881.exe)
+
+running 42 tests
+test a_new_task_id_that_is_a_windows_device_name_is_refused ... ok
+test a_device_name_with_an_extension_or_trailing_mark_is_refused_as_a_bad_character ... ok
+test a_name_that_only_resembles_a_device_name_is_accepted ... ok
+test a_new_task_id_is_lowercase_ascii_digits_and_hyphen ... ok
+test a_new_task_id_outside_that_set_is_refused_with_the_first_bad_character ... ok
+test a_local_record_reads_its_backend_token ... ok
+test a_record_with_a_cloud_target_has_no_terminal_backend ... ok
+test an_empty_backend_reads_as_tmux_as_in_the_shell ... ok
+test an_unknown_backend_is_rejected_and_never_read_as_tmux ... ok
+test an_unknown_format_or_path_style_is_an_error_not_a_guess ... ok
+test execution_target_is_local_when_absent_and_refuses_any_other_value ... ok
+test publishing_a_cloud_record_is_refused_and_writes_nothing ... ok
+test publishing_a_bom_record_checks_its_first_key ... ok
+test a_posix_record_reads_on_any_host_with_every_path_unchanged ... ok
+test publishing_a_format_other_than_one_or_two_is_refused ... ok
+test a_windows_record_reads_on_any_host_with_every_path_unchanged ... ok
+test an_unknown_key_is_kept_and_does_not_stop_the_read ... ok
+test a_crlf_record_reads_the_same_as_an_lf_record ... ok
+test publishing_a_tmux_window_not_naming_its_task_is_refused ... ok
+test publishing_a_bom_record_checks_and_writes_its_first_key_without_a_bom ... ok
+test publishing_a_crlf_record_writes_lf_only ... ok
+test publishing_an_unknown_backend_is_refused_and_writes_nothing ... ok
+test stamping_adds_exactly_one_format_line_and_one_path_style_line ... ok
+test stamping_leaves_a_value_that_merely_contains_the_key_alone ... ok
+test stamping_refuses_a_path_style_that_names_another_system ... ok
+test publishing_an_empty_or_repeated_backend_is_refused ... ok
+test stamping_refuses_an_unknown_path_style_rather_than_relabelling_it ... ok
+test stamping_removes_every_trailing_cr_and_a_leading_bom ... ok
+test stamping_replaces_old_encoding_lines_and_keeps_every_other_byte_of_an_lf_record ... ok
+test stamping_rewrites_crlf_line_endings_as_lf ... ok
+test the_host_path_style_matches_the_target ... ok
+test the_reader_still_accepts_ids_the_creation_rule_refuses ... ok
+test publishing_a_tmux_window_naming_its_task_is_kept ... ok
+test a_status_line_ending_in_cr_is_appended_without_it ... ok
+test publishing_stamped_writes_verbatim_paths_lf_only_and_no_bom ... ok
+test a_record_without_a_format_key_is_version_one ... ok
+test a_version_one_record_still_parses_to_the_same_pairs ... ok
+test a_crlf_status_log_folds_like_its_lf_twin ... ok
+test publishing_an_incomplete_or_foreign_endpoint_is_refused ... ok
+test publishing_keeps_a_matching_path_style_and_refuses_a_conflicting_one ... ok
+test publishing_an_inconsistent_herdr_endpoint_is_refused ... ok
+test publishing_keeps_a_known_or_absent_backend ... ok
+
+test result: ok. 42 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+     Running tests\state_meta.rs (target\debug\deps\state_meta-bead9f1e7b99356c.exe)
+
+running 22 tests
+test empty_text_is_a_record_with_no_keys ... ok
+test a_leading_byte_order_mark_is_not_part_of_the_first_key ... ok
+test final_line_without_newline_is_read ... ok
+test empty_typed_value_is_present_and_empty_not_absent ... ok
+test exact_lookup_of_a_repeated_window_or_worktree_is_ambiguous ... ok
+test final_line_keeps_a_lone_carriage_return_while_crlf_is_stripped ... ok
+test blank_lines_are_skipped ... ok
+test crlf_line_endings_are_not_part_of_values ... ok
+test key_named_id_is_an_ordinary_key_and_does_not_replace_the_file_identity ... ok
+test lines_with_an_empty_key_are_ignored ... ok
+test lines_without_a_separator_are_ignored_as_the_shell_ignores_them ... ok
+test padded_values_are_kept_verbatim_with_tabs ... ok
+test repeated_decision_keys_reads_the_last_value ... ok
+test record_missing_optional_keys_reads_them_as_none ... ok
+test task_id_accepts_the_shell_contract_charset ... ok
+test saved_record_reads_typed_fields_under_shell_names ... ok
+test unknown_keys_survive_verbatim_including_equals_in_values ... ok
+test task_id_refuses_what_the_shell_refuses ... ok
+test absent_backend_reads_as_none_not_a_default ... ok
+test a_saved_record_with_a_byte_order_mark_reads_as_its_bare_twin ... ok
+test saved_records_take_their_identity_from_the_file_name ... ok
+test every_saved_record_keeps_every_pair_in_file_order ... ok
+
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests\state_migrate.rs (target\debug\deps\state_migrate-4c8406c7d3e6d77a.exe)
+
+running 17 tests
+test a_missing_record_and_a_directory_in_its_place_are_reported ... ok
+test fixtures_keep_the_raw_bytes_the_expectations_depend_on ... ok
+test rollback_accepts_the_posix_v2_fixture ... ok
+test migrating_twice_changes_nothing_the_second_time ... ok
+test migrating_a_directory_reports_each_record_on_its_own ... ok
+test migration_keeps_approval_and_unknown_pairs_in_order_with_repeats ... ok
+test a_temporary_file_left_by_a_killed_writer_does_not_disturb_the_record_or_the_next_run ... ok
+test rollback_keeps_a_pair_written_after_the_migration ... ok
+test concurrent_migrations_of_one_record_leave_one_valid_migrated_record ... ok
+test rolling_back_a_record_with_neither_key_changes_nothing ... ok
+test rollback_of_a_crlf_record_keeps_every_pair_and_drops_the_line_endings ... ok
+test rolling_back_a_directory_reports_each_record_on_its_own ... ok
+test migrate_then_rollback_then_migrate_converges_on_the_same_bytes ... ok
+test rollback_refuses_a_record_only_version_2_can_read ... ok
+test a_refused_migration_leaves_the_original_bytes_and_no_other_file ... ok
+test legacy_records_migrate_to_the_frozen_bytes ... ok
+test rollback_restores_the_original_bytes_of_an_lf_record ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.13s
+
+     Running tests\state_publish.rs (target\debug\deps\state_publish-0b9b443733d7e4bd.exe)
+
+running 7 tests
+test publish_writes_the_record_verbatim_and_leaves_no_temporary_file ... ok
+test publish_replaces_the_previous_record ... ok
+test orphan_temporary_file_does_not_touch_the_record ... ok
+test concurrent_writers_leave_one_complete_record ... ok
+test readers_never_observe_a_partial_record ... ok
+test failed_publish_removes_its_temporary_file ... ok
+test publish_gives_up_after_bounded_retries_while_a_handle_stays_open ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 9.19s
+
+     Running tests\state_status.rs (target\debug\deps\state_status-52ca5f9f0199b25f.exe)
+
+running 21 tests
+test a_missing_file_holds_no_open_decisions ... ok
+test a_directory_in_the_status_path_is_uncertain_not_empty ... ok
+test append_on_a_directory_is_uncertain ... ok
+test append_refuses_an_embedded_newline_before_touching_the_file ... ok
+test append_creates_the_file_and_writes_one_line ... ok
+test a_stamp_after_the_colon_stays_in_the_note ... ok
+test a_note_head_key_token_is_not_part_of_the_note ... ok
+test a_carriage_return_is_space_before_a_closing_verb ... ok
+test a_torn_final_line_is_closed_before_the_next_record ... ok
+test a_reserved_key_opens_only_with_a_namespaced_note_and_a_colon ... ok
+test an_empty_key_slug_opens_no_decision ... ok
+test append_returns_the_byte_range_of_each_record ... ok
+test a_correlation_token_has_exactly_sixteen_hex_digits ... ok
+test append_never_rewrites_existing_bytes ... ok
+test non_utf8_bytes_are_replaced_in_the_note ... ok
+test reserved_keys_move_only_for_their_namespace ... ok
+test malformed_close_lines_never_close_a_decision ... ok
+test append_waits_for_the_sidecar_lock ... ok
+test folds_match_the_shell_classifier_on_saved_fixtures ... ok
+test concurrent_appends_keep_every_event_whole has been running for over 60 seconds
+test readers_during_concurrent_appends_get_no_error has been running for over 60 seconds
+test readers_during_concurrent_appends_get_no_error ... ok
+test concurrent_appends_keep_every_event_whole ... ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 175.44s
+
+     Running tests\symlink_support.rs (target\debug\deps\symlink_support-4e7dd9855e7f5612.exe)
+
+running 2 tests
+test a_directory_outside_a_repository_is_refused ... ok
+test core_symlinks_reports_the_repositorys_setting ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.58s
+
+     Running tests\sys_sampler.rs (target\debug\deps\sys_sampler-bfcd74929e31e211.exe)
+
+running 6 tests
+test memory_is_positive_and_consistent ... ok
+test missing_disk_path_is_an_error_not_zero ... ok
+test disk_for_temp_dir_is_positive ... ok
+test top_processes_are_bounded_and_ordered_by_rss_then_pid ... ok
+test cpu_is_a_percentage ... ok
+test sample_reads_every_enabled_resource_as_a_percentage ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.97s
+
+   Doc-tests mcao_core
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+===== exit code: 0 =====
