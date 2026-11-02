@@ -1,0 +1,1 @@
+error: assignment profile refused: target_branch is 'main' but the host pins 'release'; contradictory decision

@@ -1,0 +1,7 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous profile is not a known profile id",
+    "unresolved decision must be provisional high-risk"
+  ]
+}

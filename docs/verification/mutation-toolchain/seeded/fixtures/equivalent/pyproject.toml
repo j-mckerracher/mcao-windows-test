@@ -1,0 +1,8 @@
+[tool.mutmut]
+pytest_add_cli_args = ["-p", "dpes824_wrap"]
+source_paths = ["calc.py"]
+pytest_add_cli_args_test_selection = ["tests/"]
+use_git_change_detection = false
+process_isolation = "fork"
+timeout_multiplier = 3.0
+timeout_constant = 1.0

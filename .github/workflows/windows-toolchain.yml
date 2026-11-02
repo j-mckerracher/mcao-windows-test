@@ -1,0 +1,115 @@
+name: Windows toolchain qualification
+
+# Runs `mcao toolchain qualify` on a native Windows runner (DPES-921, AC2). The record is uploaded as
+# the windows-toolchain artifact under docs/windows-toolchain.json. A shell child of the qualify process
+# fails the job, a sampler that misses a known shell child fails the job, and a record that
+# `mcao toolchain check` refuses for the direct-PR delivery path fails the job.
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/windows-toolchain.yml"
+      - "Cargo.lock"
+      - "Cargo.toml"
+      - "rust-toolchain.toml"
+      - "crates/mcao-core/**"
+      - "crates/mcao-cli/**"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  qualify:
+    permissions:
+      contents: read
+    name: Qualify the governance toolchain on Windows
+    runs-on: windows-2022
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build mcao
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          cargo build --locked -p mcao-cli --bin mcao
+          if ($LASTEXITCODE -ne 0) { throw 'cargo build failed' }
+      # qualify must start only native executables with argv, so no cmd, PowerShell, or sh process may
+      # appear under it. The step samples the descendant process tree of the qualify process until it
+      # exits and fails on any shell child. Sampling can miss a child that exits between samples, so a
+      # clean run is evidence, not proof; the unit tests pin the argv-only starts. The positive control
+      # runs the same sampler over a known cmd.exe child first, so a sampler that sees nothing cannot
+      # pass the job.
+      - name: Qualify and observe the process tree
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $shells = @('cmd.exe', 'powershell.exe', 'pwsh.exe', 'sh.exe', 'bash.exe', 'wsl.exe', 'wslhost.exe')
+          function Invoke-SampledProcess {
+            param([string]$FilePath, [string[]]$ArgumentList)
+            $proc = Start-Process -FilePath $FilePath -ArgumentList $ArgumentList -NoNewWindow -PassThru
+            $tree = [System.Collections.Generic.HashSet[int]]::new()
+            [void]$tree.Add($proc.Id)
+            $observed = [System.Collections.Generic.SortedSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+            $samples = 0
+            try {
+              while (-not $proc.HasExited) {
+                $snapshot = @(Get-CimInstance -ClassName Win32_Process -Property ProcessId, ParentProcessId, Name)
+                $grew = $true
+                while ($grew) {
+                  $grew = $false
+                  foreach ($process in $snapshot) {
+                    if ($tree.Contains([int]$process.ParentProcessId) -and -not $tree.Contains([int]$process.ProcessId)) {
+                      [void]$tree.Add([int]$process.ProcessId)
+                      $grew = $true
+                    }
+                  }
+                }
+                foreach ($process in $snapshot) {
+                  if ($process.ProcessId -ne $proc.Id -and $tree.Contains([int]$process.ProcessId)) {
+                    [void]$observed.Add($process.Name)
+                  }
+                }
+                $samples++
+                Start-Sleep -Milliseconds 20
+              }
+            } finally {
+              # A sampling error must not leave the sampled process running after the step fails.
+              if (-not $proc.HasExited) { $proc.Kill() }
+            }
+            [pscustomobject]@{ ExitCode = $proc.ExitCode; Observed = $observed; Samples = $samples }
+          }
+          # The control is the outer cmd.exe, which starts a nested cmd.exe child, so the sampler must
+          # report that child.
+          $control = Invoke-SampledProcess -FilePath $env:ComSpec -ArgumentList @('/d', '/c', 'cmd.exe /d /c ping -n 2 127.0.0.1 > NUL')
+          if (-not $control.Observed.Contains('cmd.exe')) {
+            throw "positive control: the sampler did not see the cmd.exe child (observed: $(@($control.Observed) -join ', '))"
+          }
+          Write-Host "Positive control observed: $(@($control.Observed) -join ', ')"
+          $exe = Join-Path $env:GITHUB_WORKSPACE 'target\debug\mcao.exe'
+          $record = Join-Path $env:GITHUB_WORKSPACE 'docs\windows-toolchain.json'
+          # Start-Process joins ArgumentList without quoting, so the record path is quoted here.
+          $qualify = Invoke-SampledProcess -FilePath $exe -ArgumentList @('toolchain', 'qualify', '--output-json', '--output-file', ('"{0}"' -f $record))
+          Write-Host "Observed descendant processes over $($qualify.Samples) samples: $(@($qualify.Observed) -join ', ')"
+          $violations = @($qualify.Observed | Where-Object { $shells -contains $_ })
+          if ($violations.Count -gt 0) { throw "qualify started a shell child: $($violations -join ', ')" }
+          if ($qualify.ExitCode -ne 0) { throw "qualify exited with $($qualify.ExitCode)" }
+          if (-not (Test-Path -LiteralPath $record)) { throw 'qualify wrote no record' }
+      # A record that qualify wrote proves nothing about its verdicts. This refuses the record unless the
+      # tools the direct-PR delivery path requires are supported, so a slow or missing tool fails the job.
+      - name: Check the record for the direct-PR delivery path
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $exe = Join-Path $env:GITHUB_WORKSPACE 'target\debug\mcao.exe'
+          $record = Join-Path $env:GITHUB_WORKSPACE 'docs\windows-toolchain.json'
+          & $exe toolchain check --evidence $record --delivery-path direct-PR
+          if ($LASTEXITCODE -ne 0) { throw "toolchain check refused the record with exit $LASTEXITCODE" }
+      - name: Upload the qualification record
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: windows-toolchain-${{ github.run_id }}
+          path: docs/windows-toolchain.json
+          if-no-files-found: error

@@ -1,0 +1,32 @@
+{
+  "schema": "mcao.audit-envelope.v1",
+  "event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f90",
+  "seq": 0,
+  "ts": "2026-03-08T07:30:00.000Z",
+  "prev_hash": null,
+  "event": "task.dispatched",
+  "category": "lifecycle",
+  "outcome": "success",
+  "platform": "mcao",
+  "home_id": "5f1c2b3a-4d5e-4f60-8a71-92b3c4d5e6f7",
+  "day_key": "2026-03-08",
+  "session_id": "sess-1",
+  "task_id": "fix-login",
+  "agent": {
+    "role": "firstmate",
+    "harness": "claude",
+    "model": null
+  },
+  "actor": {
+    "type": "user",
+    "id": "hmac-sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+  },
+  "repo": "mc-innersource/motif-hve-multi-agent-orchestrator",
+  "pr": null,
+  "commit": null,
+  "user": {
+    "id": "hmac-sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+    "identity_source": "github_login",
+    "timezone": "America/Chicago"
+  }
+}

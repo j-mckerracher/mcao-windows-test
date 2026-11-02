@@ -1,0 +1,62 @@
+{
+  "status": "recorded",
+  "decision": {
+    "contract_version": 1,
+    "decision_id": "dpes-884/1",
+    "task_id": "dpes-884",
+    "assignment_intent": "port the prose line checks",
+    "expected_surfaces": [
+      "docs/guide.md"
+    ],
+    "pinned_policy_revision": "rev-1",
+    "profile": "standard",
+    "decision_stage": "final",
+    "classification_status": "resolved",
+    "risk_triggers": [],
+    "change_coverage": {
+      "complete": true,
+      "categories": [
+        "committed",
+        "tracked-working-tree",
+        "untracked",
+        "renamed",
+        "deleted"
+      ]
+    },
+    "reasons": [
+      "docs/guide.md: executable change in prose",
+      "default standard; small-low-risk not met: single_bounded_behavior_change, no_security_or_authorization_change, no_sensitive_data_change, no_destructive_operation, no_merge_delivery_authority_change, no_dispatch_lifecycle_worktree_or_proof_gate_change, no_public_contract_incompatibility, no_data_migration, no_unresolved_cross_component_impact, relevant_focused_verification_identified"
+    ],
+    "required_stages": [
+      "ground-scope",
+      "design",
+      "implement",
+      "focused-review",
+      "verify",
+      "change-reassessment",
+      "delivery-handoff"
+    ],
+    "evidence_obligations": {
+      "tests_required": true,
+      "independent_change_review_required": false
+    },
+    "target_branch": "DPES-751",
+    "comparison_base_commit": "77d732b073352fee96bcebe381faeab52c8a6cc3",
+    "evaluated_change_identity": "sha256:cc7d74310db33f1dfff731c1f9322a602b538dcdba3e5ce9e606dafe78821e16"
+  },
+  "transition": {
+    "previous_profile": null,
+    "effective_profile": "standard",
+    "escalated": false,
+    "newly_required_stages": [
+      "ground-scope",
+      "design",
+      "implement",
+      "focused-review",
+      "verify",
+      "change-reassessment",
+      "delivery-handoff"
+    ],
+    "evidence_invalidated": false
+  }
+}

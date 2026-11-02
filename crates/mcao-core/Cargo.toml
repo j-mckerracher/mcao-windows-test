@@ -1,0 +1,25 @@
+[package]
+name = "mcao-core"
+description = "PROPOSED (DPES-752 unconfirmed): shared evidence model and backend boundary for the mcao Rust slice."
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[dependencies]
+serde.workspace = true
+# Keep `arbitrary_precision` disabled: feature unification changes serde_json::Number storage
+# and equality/hash behavior across workspace consumers. Unsupported integer magnitudes remain
+# explicitly refused by canonical_json.
+serde_json = { workspace = true, features = ["float_roundtrip"] }
+sha2.workspace = true
+sysinfo.workspace = true
+
+[target.'cfg(unix)'.dependencies]
+# The macOS swap-usage sysctl in `resources/sys.rs` is the only user. The platform leakage guard
+# accepts only cfg(unix) and cfg(windows) gates, and this matches mcao-cli's libc declaration.
+libc = "0.2.191"
+
+[target.'cfg(windows)'.dependencies]
+# Wdk_System_Threading gives NtQueryInformationProcess, which reads a process's parent PID.
+# Win32_System_Registry and Win32_UI_WindowsAndMessaging back the user PATH editor and its broadcast.
+windows-sys = { workspace = true, features = ["Wdk_System_Threading", "Win32_Foundation", "Win32_System_Kernel", "Win32_System_Registry", "Win32_UI_WindowsAndMessaging"] }

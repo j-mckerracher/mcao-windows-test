@@ -1,0 +1,106 @@
+{
+  "schema": "fm-fleet-snapshot.v1",
+  "fm_home": "/fleet/alpha",
+  "generated": "2026-10-18T05:06:30Z",
+  "generated_epoch": null,
+  "backlog": {},
+  "contributions": {},
+  "main_inventory": {},
+  "scout_reports": [],
+  "secondmate_current": {
+    "registry": {
+      "present": true,
+      "available": true,
+      "complete": true,
+      "reasons": []
+    },
+    "records": [],
+    "total_registered": 0,
+    "total": 0,
+    "shown": 0,
+    "truncated": 0
+  },
+  "tasks": [
+    {
+      "id": "ship-x",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/ship-x",
+      "project": "alpha-proj",
+      "spawn_gen": "1",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Gen ship",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "ship-x"
+      },
+      "current_state": {
+        "state": "working",
+        "source": "pane",
+        "detail": null,
+        "raw": "working",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/ship-x"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/ship-x.status",
+          "present": true,
+          "kind": "status",
+          "last_event": null
+        }
+      },
+      "endpoint": {
+        "target": "tmux:ship-x",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    }
+  ]
+}

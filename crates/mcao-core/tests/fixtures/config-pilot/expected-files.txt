@@ -1,0 +1,9 @@
+setting backend = "herdr" [file backend]
+setting branch-prefix = "fm/" [file branch-prefix]
+setting claude-permission-mode = "auto" [file claude-permission-mode]
+setting crew-harness = "claude" [file crew-harness]
+setting developer-name = "Pilot Dev" [file developer-name]
+setting max-workers = "6" [default]
+unknown blob.bin = \x00\xff\n\x80
+unknown crew-dispatch.json = {\"rules\":[]}\n
+unknown notes.txt = line one\r\nline two

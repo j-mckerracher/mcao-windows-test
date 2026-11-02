@@ -1,0 +1,20 @@
+DPES-753 slice 753.H migration fixtures: provenance
+
+Inputs
+  The four real version 1 records under tests/fixtures/meta/ (see that directory's
+  provenance.txt) are the legacy inputs. They are not copied here.
+  crlf-bom-approval.v1.meta is written by hand, because no saved record has a byte order mark
+  and CRLF line endings, which a Windows editor adds when an operator edits a record. It carries
+  approval and proof keys (decision_keys twice, approval, proof_sha) and one key a reader does
+  not know (future_key, whose value contains =). Usernames are redacted as in the real records.
+
+Expectations
+  Each *.v2.meta is the frozen result of migrating the input of the same name with the posix
+  path style. They are built outside Rust, from the input bytes: the two lines
+  "format=2" and "path_style=posix" in front of the input, and for the CRLF record the same
+  lines with LF endings and no byte order mark. No expected value in tests/state_migrate.rs
+  is generated from Rust.
+
+Checks
+  Every *.v2.meta ends in LF only and starts with "format=2\npath_style=posix\n".
+  .gitattributes marks tests/fixtures/** as -text, so git does not rewrite these bytes.

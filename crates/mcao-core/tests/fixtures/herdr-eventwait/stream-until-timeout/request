@@ -1,0 +1,1 @@
+{"id": "fm-eventwait", "method": "events.subscribe", "params": {"subscriptions": [{"type": "pane.agent_status_changed", "pane_id": "1-1"}, {"type": "pane.agent_status_changed", "pane_id": "2-1"}]}}

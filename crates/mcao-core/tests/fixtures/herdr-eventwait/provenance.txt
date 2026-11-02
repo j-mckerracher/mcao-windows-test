@@ -1,0 +1,52 @@
+DPES-912 herdr-eventwait parity fixtures: provenance
+
+Each directory here is one recorded case of bin/backends/herdr-eventwait.py, the Python reference
+reader that `mcao herdr eventwait` must match. tests/herdr-eventwait.rs reads every case and
+checks the Rust output against the recorded stdout, exit status, and subscribe request. No
+expected value in that file is generated from Rust.
+
+Reference
+  file:      bin/backends/herdr-eventwait.py
+  commit:    976c13e, the pin this slice checks against
+  sha256:    de4dcc2e61e63694959e0848ee96920434a0becb9fa7d224d86f21836513e231
+  pin note:  976c13e is taken from the sibling fixtures' provenance (util-realpath,
+             util-awaiting). The DPES-864 item names no eventwait commit, so this pin is an
+             inference. The same file has the same sha256 at fd4f7d4, the base of this change,
+             so the recorded outputs hold for both.
+
+Recording
+  interpreter: Python 3.14.6, run as `python3 -I` (isolated mode, so no environment or
+               current-directory imports).
+  host:        macOS (darwin).
+  generator:   a developer-only script kept outside the repository. It refuses to run unless the
+               reference sha256 matches. For each case it starts a scripted fake control socket
+               in a short temporary directory, runs the reference with the case's arguments, and
+               writes the files below. Two independent runs produced byte-identical files.
+  stderr:      the reference's stderr was kept out of the repository. It is not part of the
+               contract, because the Rust messages differ.
+
+Case files
+  case.json  the scripted input, written by hand from the wire format in the reference header
+             (herdr 0.7.3, protocol 16). It holds the arguments after the script name ("{socket}"
+             stands for the socket path), the replies in order (a string is sent raw, any other
+             value as compact JSON), and the end mode: hold keeps the connection open until the
+             reference closes it, close ends after the replies, absent runs no server.
+  stdout     the reference's stdout bytes.
+  exit       the reference's exit status.
+  request    the one subscribe line the reference sent. Absent when it never connected.
+
+The replies were scripted, not captured from a live herdr session.
+
+Compared as
+  stdout and exit: exact. request: parsed JSON, because the reference spaces its JSON differently
+  from the compact form the client sends.
+
+Not covered (known divergences; no fixture asserts them)
+  - A non-empty JSON array or object in a status field. The reference prints Python's repr, for
+    example ['x'], while the Rust projection prints compact JSON. See wire.rs, field().
+  - A timeout with an underscore digit separator, such as 1_0. Python's float() accepts it and
+    returns 10.0, while parse_timeout rejects it.
+  - The connect bound (5 seconds). It is not reproduced here: on this host (macOS) a full listen
+    backlog refuses a connect rather than blocking it, so the fake server cannot trigger the
+    reference's connect timeout. The Rust bound is tested in src/herdr/eventwait.rs with an
+    injected connect.

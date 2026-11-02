@@ -1,0 +1,1 @@
+{"result": "rejected", "definition": "fleet_ledger_v1", "reason": "schema_invalid", "paths": ["/v"]}

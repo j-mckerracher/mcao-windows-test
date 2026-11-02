@@ -1,0 +1,287 @@
+name: rust-workspace-check
+
+on:
+  pull_request:
+    branches:
+      - DPES-751
+      - main
+    paths:
+      - "Cargo.*"
+      - "rust-toolchain.toml"
+      - "crates/**"
+      - ".github/workflows/rust-workspace-check.yml"
+      - ".github/scripts/rust-ci-redact-artifacts.ps1"
+
+permissions: {}
+
+jobs:
+  fmt:
+    permissions:
+      contents: read
+    name: fmt
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # Formatting is target-independent, so it runs once on Linux. cargo fmt takes no --locked flag.
+      # shell: bash runs with pipefail, so a failing cargo fmt fails this step through tee.
+      - name: Check formatting
+        shell: bash
+        run: cargo fmt --check 2>&1 | tee "${{ runner.temp }}/rust-ci-fmt.log"
+      # Failure only. Redacted copies of rust-ci-*.log and _MANIFEST.txt are the only uploaded files;
+      # the raw logs stay on the runner.
+      - name: Redact failure logs
+        id: redact
+        if: failure()
+        shell: pwsh
+        run: ./.github/scripts/rust-ci-redact-artifacts.ps1 -InputDir "${{ runner.temp }}" -OutDir "${{ runner.temp }}/rust-ci-artifacts"
+      - name: Upload redacted failure artifacts
+        if: ${{ failure() && steps.redact.outcome == 'success' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: rust-ci-ubuntu-latest-fmt-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/rust-ci-artifacts
+          retention-days: 7
+          if-no-files-found: error
+
+  check:
+    permissions:
+      contents: read
+    name: check (${{ matrix.target }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - os: macos-latest
+            target: aarch64-apple-darwin
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+    env:
+      # The pinned targets, written once. Every host checks all of them, not only its own triple.
+      PINNED_TARGETS: x86_64-unknown-linux-gnu aarch64-apple-darwin x86_64-pc-windows-msvc
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # rust-toolchain.toml pins the toolchain; rustup installs it on the first cargo call.
+      # rustup target add fails on an unavailable target, so a missing target fails the job and
+      # never skips the cross-compile proof.
+      # Windows legs run with bash, sh and wsl removed from PATH. Cargo and rustup live outside the
+      # removed entries, and the sanitized PATH is written to GITHUB_ENV for the steps that follow.
+      # The System32 entry holds the WSL launchers and leaves PATH whole, which drops cmd.exe by
+      # name; cmd.exe is restored through a symlink in a shim directory that holds only cmd.exe.
+      - name: Remove bash from PATH
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $launchers = 'bash.exe', 'sh.exe', 'wsl.exe'
+          $kept = @()
+          $removed = 0
+          foreach ($entry in @($env:PATH -split ';' | Where-Object { $_ })) {
+            $held = @($launchers | Where-Object { Test-Path -LiteralPath (Join-Path $entry $_) })
+            if ($held.Count -gt 0) {
+              $removed++
+              Write-Host "Removed PATH entry: $entry (holds $($held -join ', '))"
+            } else {
+              $kept += $entry
+            }
+          }
+          $shim = Join-Path $env:RUNNER_TEMP 'fm-shell-shim'
+          New-Item -ItemType Directory -Force -Path $shim | Out-Null
+          $cmdLink = Join-Path $shim 'cmd.exe'
+          Remove-Item -LiteralPath $cmdLink -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType SymbolicLink -Path $cmdLink -Target (Join-Path $env:SystemRoot 'System32\cmd.exe') | Out-Null
+          $kept += $shim
+          $newPath = $kept -join ';'
+          $env:PATH = $newPath
+          Add-Content -Path $env:GITHUB_ENV -Value "PATH=$newPath" -Encoding utf8
+          foreach ($name in 'bash', 'sh', 'wsl') {
+            if (Get-Command $name -ErrorAction SilentlyContinue) { throw "$name is still on PATH" }
+          }
+          if (-not (Get-Command cmd -ErrorAction SilentlyContinue)) { throw 'cmd is not reachable by name after bash removal' }
+          if (-not (Get-Command pwsh -ErrorAction SilentlyContinue)) { throw 'pwsh is not reachable by name after bash removal' }
+          Write-Host 'Shell resolution after removal:'
+          Get-Command pwsh, powershell, cmd -ErrorAction SilentlyContinue | Select-Object Name, Source | Format-Table -AutoSize | Out-String -Width 4096 | Write-Host
+          $cmdOut = (& cmd /c 'echo ok')
+          if ($LASTEXITCODE -ne 0 -or $cmdOut -ne 'ok') { throw "cmd /c echo ok failed with exit $LASTEXITCODE" }
+          Write-Host "Removed $removed PATH entries that hold a bash or WSL launcher; cmd stays reachable."
+      # The mcao-backend-unix tests drive a real tmux server. Ubuntu runners ship tmux; macOS
+      # runners may not, so install it there before the workspace tests run.
+      - name: Install tmux for the tmux integration tests
+        if: runner.os == 'macOS'
+        run: command -v tmux >/dev/null || brew install tmux
+      - name: Check every pinned target
+        if: runner.os != 'Windows'
+        shell: bash
+        run: |
+          set -euo pipefail
+          for target in $PINNED_TARGETS; do
+            { rustup target add "$target" && cargo check --workspace --locked --target "$target"; } 2>&1 | tee -a "${{ runner.temp }}/rust-ci-check.log"
+          done
+      - name: Check every pinned target on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $log = "${{ runner.temp }}/rust-ci-check.log"
+          foreach ($target in ($env:PINNED_TARGETS -split ' ')) {
+            rustup target add $target 2>&1 | Tee-Object -FilePath $log -Append
+            if ($LASTEXITCODE -ne 0) { throw "rustup target add $target failed" }
+            cargo check --workspace --locked --target $target 2>&1 | Tee-Object -FilePath $log -Append
+            if ($LASTEXITCODE -ne 0) { throw "cargo check failed for $target" }
+          }
+      # pwsh has no tee, and Windows legs have no bash on PATH, so each Windows log uses Tee-Object.
+      - name: Lint workspace on host
+        if: runner.os != 'Windows'
+        shell: bash
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings 2>&1 | tee "${{ runner.temp }}/rust-ci-clippy.log"
+      - name: Lint workspace on host on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings 2>&1 | Tee-Object -FilePath "${{ runner.temp }}/rust-ci-clippy.log"
+      - name: Test workspace on host
+        if: runner.os != 'Windows'
+        shell: bash
+        run: cargo test --workspace --locked 2>&1 | tee "${{ runner.temp }}/rust-ci-test.log"
+      - name: Test workspace on host on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: cargo test --workspace --locked 2>&1 | Tee-Object -FilePath "${{ runner.temp }}/rust-ci-test.log"
+      # Failure only. See the fmt job for why only the redacted copies are uploaded.
+      - name: Redact failure logs
+        id: redact
+        if: failure()
+        shell: pwsh
+        run: ./.github/scripts/rust-ci-redact-artifacts.ps1 -InputDir "${{ runner.temp }}" -OutDir "${{ runner.temp }}/rust-ci-artifacts"
+      - name: Upload redacted failure artifacts
+        if: ${{ failure() && steps.redact.outcome == 'success' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: rust-ci-${{ matrix.os }}-${{ matrix.target }}-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/rust-ci-artifacts
+          retention-days: 7
+          if-no-files-found: error
+
+  # Runs the lifecycle probe on a native Windows runner with every bash, sh, wsl, MSYS and Cygwin
+  # directory removed from PATH, then uploads the redacted evidence. The probe drives its own stub
+  # harness: no credential, subscription or pilot harness is involved.
+  probe-windows:
+    # checkout needs contents: read. Uploading an artifact needs no token scope.
+    permissions:
+      contents: read
+    name: probe (x86_64-pc-windows-msvc, bash-free PATH)
+    runs-on: windows-latest
+    timeout-minutes: 30
+    env:
+      PROBE_TARGET: x86_64-pc-windows-msvc
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build probe
+        shell: pwsh
+        run: cargo build -p mcao-probe --locked --target $env:PROBE_TARGET 2>&1 | Tee-Object -FilePath "${{ runner.temp }}/rust-ci-probe-build.log"
+      - name: Run probe with a bash-free PATH
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $out = Join-Path $env:RUNNER_TEMP 'probe-evidence'
+          New-Item -ItemType Directory -Force -Path $out | Out-Null
+
+          # Drop every PATH directory that holds a forbidden executable or looks like MSYS or Cygwin.
+          # System32 is dropped when it holds the WSL launchers; the probe is started by absolute
+          # path, and Windows still loads system DLLs from System32 without PATH.
+          $forbidden = 'bash.exe', 'sh.exe', 'wsl.exe'
+          $found = [System.Collections.Generic.SortedSet[string]]::new()
+          $kept = @()
+          $removed = 0
+          foreach ($dir in ($env:Path -split ';' | Where-Object { $_ })) {
+            $hits = @($forbidden | Where-Object { Test-Path -LiteralPath (Join-Path $dir $_) })
+            $unixlike = $dir -match '(?i)[\\/](msys64|msys2|cygwin|cygwin64)([\\/]|$)'
+            if ($hits.Count -gt 0 -or $unixlike) {
+              $removed++
+              foreach ($hit in $hits) { [void]$found.Add($hit) }
+            } else {
+              $kept += $dir
+            }
+          }
+          $env:Path = $kept -join ';'
+
+          # The proof records counts and executable names only, never directory paths.
+          $missing = [ordered]@{}
+          foreach ($name in 'bash', 'sh', 'wsl') {
+            $missing[$name] = $null -eq (Get-Command $name -ErrorAction SilentlyContinue)
+          }
+          $proof = [ordered]@{
+            removed_directories     = $removed
+            kept_directories        = $kept.Count
+            forbidden_found_on_path = @($found)
+            command_missing_after   = $missing
+          }
+          $proof | ConvertTo-Json -Depth 4 | Set-Content -Encoding utf8 (Join-Path $out 'bash-free-path.json')
+          if ($missing.Values -contains $false) { throw 'a forbidden shell is still on PATH' }
+
+          $probe = Join-Path $PWD "target\$env:PROBE_TARGET\debug\mcao-probe.exe"
+          $evidence = Join-Path $out 'evidence.json'
+          & $probe --backend native --harness stub --scenario cooperative --evidence-out $evidence 2>&1 | Tee-Object -FilePath "${{ runner.temp }}/rust-ci-probe-run.log" | Out-Null
+          if ($LASTEXITCODE -ne 0) { throw "mcao-probe exited $LASTEXITCODE" }
+
+          # A Windows backend with no terminal may demonstrate only what it observed. Anything else
+          # must be recorded as unsupported, never as demonstrated.
+          $expected = [ordered]@{
+            spawn       = 'demonstrated'
+            capture     = 'unsupported'
+            send_text   = 'unsupported'
+            interrupt   = 'unsupported'
+            agent_state = 'demonstrated'
+            reconnect   = 'unsupported'
+            cleanup     = 'demonstrated'
+          }
+          $records = @(Get-Content -Raw $evidence | ConvertFrom-Json)
+          if ($records.Count -ne $expected.Count) { throw "expected $($expected.Count) records, got $($records.Count)" }
+          $i = 0
+          foreach ($name in $expected.Keys) {
+            $record = $records[$i++]
+            if ($record.operation -ne $name -or $record.support -ne $expected[$name]) {
+              throw "operation $($record.operation): support $($record.support), expected $name $($expected[$name])"
+            }
+            if ($record.execution -ne 'native' -or $record.harness -ne 'stub' -or $record.backend -ne 'windows-job') {
+              throw "operation $($record.operation) is not native windows-job stub evidence"
+            }
+          }
+      # Failure only. See the fmt job for why only the redacted copies are uploaded.
+      - name: Redact failure logs
+        id: redact
+        if: failure()
+        shell: pwsh
+        run: ./.github/scripts/rust-ci-redact-artifacts.ps1 -InputDir "${{ runner.temp }}" -OutDir "${{ runner.temp }}/rust-ci-artifacts"
+      - name: Upload redacted failure artifacts
+        if: ${{ failure() && steps.redact.outcome == 'success' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: rust-ci-windows-latest-x86_64-pc-windows-msvc-probe-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/rust-ci-artifacts
+          retention-days: 7
+          if-no-files-found: error
+      # Probe evidence is uploaded on every run that is not cancelled, so it is redacted on every such run
+      # too. Only the redacted directory, with its _MANIFEST.txt, is uploaded.
+      - name: Redact probe evidence
+        id: redact-probe-evidence
+        if: ${{ !cancelled() }}
+        shell: pwsh
+        run: ./.github/scripts/rust-ci-redact-artifacts.ps1 -InputDir "${{ runner.temp }}/probe-evidence" -OutDir "${{ runner.temp }}/probe-evidence-redacted" -Include '*.json'
+      - name: Upload probe evidence
+        if: ${{ !cancelled() && steps.redact-probe-evidence.outcome == 'success' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: mcao-probe-evidence-x86_64-pc-windows-msvc-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/probe-evidence-redacted
+          retention-days: 7
+          if-no-files-found: error

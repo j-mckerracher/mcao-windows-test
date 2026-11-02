@@ -1,0 +1,341 @@
+# When Dependabot opens a dependency-update PR, ask GitHub Copilot to assess how the update
+# may affect this application and what changes it may need. If a maintainer later comments
+# `/apply-fixes`, create those application changes in a separate companion pull request.
+# The assessment is one sticky comment updated in place on each re-run.
+#
+# Assessment does not merge, approve, or modify the Dependabot PR. Remediation is separately
+# human-gated: it writes application changes to a companion branch and opens a companion PR,
+# but never merges, approves, reviews, or alters the Dependabot PR's own commits.
+#
+# No secret is normally needed. The Copilot CLI authenticates with the built-in
+# GITHUB_TOKEN through `copilot-requests: write`, and usage bills to the organization.
+# This requires the org policy "Allow use of Copilot CLI billed to the organization".
+# An optional personal-account fine-grained PAT fallback is shown below.
+#
+# The reusable workflow deliberately does not guess how to build the application. A build
+# job must use this repository's real toolchain and commands, then pass its log and JUnit
+# reports to the assessment as inert evidence. Run `/dependabot-app-context` after the
+# application has been created; it infers that job instead of assuming a language here.
+#
+# ─── NEW REPO FROM THE TEMPLATE? ──────────────────────────────────────────
+#   1. Run `/dependabot-app-context` after the app's manifests and CI exist. It writes
+#      .github/ai-app-context.md and configures build/test evidence plus remediation guards.
+#   2. Enable Actions to create pull requests and ensure companion-PR CI can target a
+#      dependabot/** base branch. See the remediation reference linked below.
+# ───────────────────────────────────────────────────────────────────────────────────
+#
+# Reusable workflow: mc-innersource/mc-ci-reusable-workflows# Full reference:
+#   https://github.com/mc-innersource/mc-ci-reusable-workflows/blob/main/docs/dependabot-ai-impact-assessment.md
+#   https://github.com/mc-innersource/mc-ci-reusable-workflows/blob/main/docs/dependabot-ai-remediation.md
+
+name: Dependabot AI
+
+on:
+  # `pull_request_target`, NOT `pull_request`. Dependabot-triggered `pull_request` runs get
+  # a fork-like read-only token that cannot comment or label.
+  #
+  # The privileged assessment job never EXECUTES anything from the PR branch -- it only
+  # reads text. If the setup skill adds a build job, that job executes PR-head content but
+  # has `contents: read`, no secrets, and no ability to comment, label, or push.
+  pull_request_target:
+    branches: [main]
+    types: [opened, synchronize, reopened]
+
+  # Human gate for the write path. Most bumps need no code changes, coding-agent runs cost
+  # more than assessments, and automatic remediation on `synchronize` would create a loop.
+  # `issue_comment` always uses this workflow from the default branch; the command will not
+  # work until the template setup is merged there.
+  issue_comment:
+    types: [created]
+
+# Declare permissions per job. This is important once a separate, unprivileged build job
+# is added: repository write access must stay confined to the assessment job.
+permissions: {}
+
+jobs:
+  # BUILD AND TEST EVIDENCE -- OPTIONAL, BUT STRONGLY RECOMMENDED
+  #
+  # `/dependabot-app-context` turns the scaffold below into a real job when it can infer a
+  # trustworthy build. The structure is generic; only the runner, toolchain setup, commands,
+  # and report paths vary by repository. Keeping it commented lets this template remain a
+  # valid static assessment before an application or even a language has been chosen.
+  #
+  # This job is the ONLY place PR-head content may execute. A dependency build can run
+  # repository scripts, package lifecycle hooks, compiler plugins, and downloaded code.
+  # Keep `contents: read`, pass no secrets, and do not use a persistent privileged runner.
+  # The assessment receives only the resulting text/XML artifact as untrusted data.
+  #
+  # build:
+  #   name: Build and test
+  #   if: >-
+  #     github.event_name == 'pull_request_target' &&
+  #     github.event.pull_request.user.login == 'dependabot[bot]'
+  #   runs-on: <infer from this repository's supported CI environment>
+  #   timeout-minutes: <use a finite limit appropriate to the repository's ordinary CI>
+  #   permissions:
+  #     contents: read
+  #   concurrency:
+  #     group: dependabot-ai-build-${{ github.event.pull_request.number }}
+  #     cancel-in-progress: true
+  #   outputs:
+  #     build-status: ${{ steps.build.outputs.status }}
+  #     build-command: ${{ steps.build.outputs.command }}
+  #     test-status: ${{ steps.test.outputs.status }}
+  #     baseline-status: ${{ steps.baseline.outputs.status }}
+  #   steps:
+  #     - name: Check out the PR head
+  #       uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+  #       with:
+  #         ref: ${{ github.event.pull_request.head.sha }}
+  #         fetch-depth: 0 # required for the optional base-commit comparison
+  #         persist-credentials: false
+  #
+  #     # Insert the repository's real toolchain setup here. Infer runtime versions,
+  #     # package caches, working directory, profiles, and wrappers from manifests and CI.
+  #
+  #     - name: Build
+  #       id: build
+  #       run: |
+  #         set -uo pipefail
+  #         cmd='<the repository-specific compile/build command>'
+  #         echo "command=${cmd}" >> "$GITHUB_OUTPUT"
+  #         bash -c "$cmd" > build.log 2>&1
+  #         rc=$?
+  #         tail -n 40 build.log
+  #         if [ "$rc" -eq 0 ]; then
+  #           echo "status=success" >> "$GITHUB_OUTPUT"
+  #         else
+  #           echo "status=failure" >> "$GITHUB_OUTPUT"
+  #           echo "::warning::Build failed (exit ${rc}). The assessment will report it."
+  #         fi
+  #         exit 0 # record the result; never suppress the assessment
+  #
+  #     - name: Test
+  #       id: test
+  #       if: steps.build.outputs.status == 'success'
+  #       run: |
+  #         set -uo pipefail
+  #         test_cmd='<the repository-specific test command, configured for JUnit XML>'
+  #         bash -c "$test_cmd" > test.log 2>&1
+  #         rc=$?
+  #         tail -n 40 test.log
+  #         { cat build.log; cat test.log; } > combined.log && mv combined.log build.log
+  #         if [ "$rc" -eq 0 ]; then
+  #           echo "status=passed" >> "$GITHUB_OUTPUT"
+  #         else
+  #           echo "status=failed" >> "$GITHUB_OUTPUT"
+  #           echo "::warning::Tests failed (exit ${rc}). The assessment will report it."
+  #         fi
+  #         exit 0
+  #
+  #     # Run only after a failed head build. Use the exact same toolchain and command;
+  #     # otherwise the comparison cannot attribute the failure to the dependency update.
+  #     - name: Build the base commit
+  #       id: baseline
+  #       if: steps.build.outputs.status == 'failure'
+  #       env:
+  #         BUILD_COMMAND: ${{ steps.build.outputs.command }}
+  #       run: |
+  #         set -uo pipefail
+  #         git worktree add --detach ../dependabot-ai-base \
+  #           "${{ github.event.pull_request.base.sha }}" || {
+  #             echo "status=not-run" >> "$GITHUB_OUTPUT"
+  #             exit 0
+  #           }
+  #         (cd ../dependabot-ai-base && bash -c "$BUILD_COMMAND") > baseline.log 2>&1
+  #         rc=$?
+  #         if [ "$rc" -eq 0 ]; then
+  #           echo "status=success" >> "$GITHUB_OUTPUT"
+  #         else
+  #           echo "status=failure" >> "$GITHUB_OUTPUT"
+  #         fi
+  #         exit 0
+  #
+  #     - name: Collect evidence
+  #       if: always()
+  #       run: |
+  #         set -uo pipefail
+  #         mkdir -p evidence/test-results
+  #         cp build.log evidence/ 2>/dev/null || echo "(no build log)" > evidence/build.log
+  #         # Copy this repository's JUnit XML paths beneath evidence/test-results/.
+  #         # Preserve subdirectories in a multi-module repo so duplicate names do not
+  #         # overwrite one another. Missing reports must not fail evidence collection.
+  #
+  #     - name: Upload evidence
+  #       if: always()
+  #       uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+  #       with:
+  #         name: build-evidence-${{ github.event.pull_request.number }}
+  #         path: evidence
+  #         retention-days: 7
+  #         if-no-files-found: warn
+
+  # Advisory only. Never merges, approves, or modifies the PR.
+  assess:
+    name: Assess
+    # When the build job is enabled, add `needs: build` and replace this one-line guard
+    # with the `always()` guard below. A red build is the most useful evidence and must not
+    # silently skip assessment.
+    # needs: build
+    # if: >-
+    #   always() &&
+    #   github.event_name == 'pull_request_target' &&
+    #   github.event.pull_request.user.login == 'dependabot[bot]'
+    if: >-
+      github.event_name == 'pull_request_target' &&
+      github.event.pull_request.user.login == 'dependabot[bot]'
+    permissions:
+      contents: read # read the manifest diff and application-context file
+      pull-requests: write # post the assessment comment and apply the risk label
+      issues: write # create the ai-risk:* label the first time it is used
+      copilot-requests: write # authorize Copilot inference on the built-in GITHUB_TOKEN
+    concurrency:
+      group: dependabot-ai-assess-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    # Pinned to a RELEASE commit SHA with its version comment. This gives an immutable ref plus
+    # Dependabot PRs when a new release ships. Never use
+    # `@main`; `@v1` accepts minor/prompt changes without review, which is especially risky
+    # if `fail-on-risk` becomes a required check. Resolve a release SHA as documented in:
+    # https://github.com/mc-innersource/mc-ci-reusable-workflows/blob/main/docs/versioning.md
+    uses: mc-innersource/mc-ci-reusable-workflows/.github/workflows/dependabot-ai-impact-assessment.yml@ed449b8ad620073467df187ec5b1b8d955888b20 # v2.0.1
+    with:
+      # Shared, versioned facts about the application. The setup skill replaces the
+      # placeholder in this file after inspecting the repository.
+      app-context-file: .github/ai-app-context.md
+
+      # `/dependabot-app-context` may add repository-specific `extra-instructions`,
+      # `usage-scan-paths`, and the build-* inputs here. Those values must be inferred
+      # from this app; fixed language or directory assumptions do not belong in a template.
+
+      # BUILD AND TEST EVIDENCE -- uncomment only together with the configured build job,
+      # its `needs: build`, and the `always()` assessment guard above.
+      # build-artifact: build-evidence-${{ github.event.pull_request.number }}
+      # build-status: ${{ needs.build.outputs.build-status }}
+      # build-command: ${{ needs.build.outputs.build-command }}
+      # baseline-status: ${{ needs.build.outputs.baseline-status }}
+      # test-status: ${{ needs.build.outputs.test-status }}
+      # fail-on-build-failure: false # optional compiler gate; independent of model risk
+
+      # Advisory only -- never block a PR on the model's verdict. Change to `high` once you
+      # trust the assessments and want it as a required check.
+      fail-on-risk: never
+      # Must match the comment prefix in the remediate job below. This makes the sticky
+      # assessment comment advertise the human-gated fix command when changes are needed.
+      remediation-command: /apply-fixes
+
+      # Optional. Defaults shown; uncomment only what this repository needs.
+      # model: auto
+      # copilot-cli-version: latest
+      # usage-scan-paths: '.'
+      # usage-scan-context: 2
+      # apply-risk-label: true
+      # label-prefix: ai-risk
+      # post-comment: true
+
+    # Only needed if the organization has not enabled Copilot CLI billing through the
+    # built-in token. The secret must be a fine-grained PAT owned by a personal account
+    # with account-level Copilot Requests permission; classic PATs are rejected.
+    # secrets:
+    #   copilot-token: ${{ secrets.COPILOT_TOKEN }}
+
+  # WRITE PATH -- creates or updates a companion branch and PR based on the Dependabot
+  # branch. The reusable workflow splits model generation (no write token) from mechanical
+  # patch verification/publication (write token, never executes the patch).
+  remediate:
+    name: Remediate
+    # All four clauses matter. This prevents comments on ordinary issues, human-authored
+    # PRs, unrelated comments, and the pull_request_target event from starting an agent.
+    # The reusable workflow independently verifies the commenter has write permission;
+    # keep that check enabled even though this caller guard also limits cost/blast radius.
+    if: >-
+      github.event_name == 'issue_comment' &&
+      github.event.issue.pull_request != null &&
+      startsWith(github.event.comment.body, '/apply-fixes') &&
+      github.event.issue.user.login == 'dependabot[bot]'
+    permissions:
+      contents: write # push the companion branch
+      pull-requests: write # open/update the companion PR and link it from Dependabot's PR
+      issues: write # acknowledge the command and optionally manage a pending label
+      copilot-requests: write # authorize Copilot inference on the built-in GITHUB_TOKEN
+    # Never cancel publication halfway through: that can leave a pushed branch with no PR.
+    concurrency:
+      group: dependabot-ai-remediate-${{ github.event.issue.number }}
+      cancel-in-progress: false
+    # Keep remediation on the same immutable RELEASE SHA as assessment. Pinning is especially
+    # important here because this workflow writes code and enforces patch guards.
+    uses: mc-innersource/mc-ci-reusable-workflows/.github/workflows/dependabot-ai-remediation.yml@ed449b8ad620073467df187ec5b1b8d955888b20 # v2.0.1
+    with:
+      pr-number: ${{ github.event.issue.number }}
+      app-context-file: .github/ai-app-context.md
+      # `/dependabot-app-context` replaces this generic minimum-change rule with additional
+      # repository-supported invariants when they can be inferred. Facts stay in the shared
+      # context file; instructions here constrain what the coding agent may change.
+      extra-instructions: |
+        Make the minimum application change needed for this dependency update.
+        Do not refactor unrelated code or change behavior that the update does not require.
+
+      # Safe defaults are enforced by the reusable workflow: manifests are read-only;
+      # lockfiles, CI workflows, Dependabot config, CODEOWNERS, and git metadata are denied.
+      # Add repository-specific protected paths only when evidence supports them.
+      # deny-paths: 'path/pattern/* contract-file'
+      allow-manifest-changes: false
+      require-write-permission: true
+      require-dependabot-actor: true
+      comment-on-dependabot-pr: true
+      # max-changed-files: 20
+      # max-patch-lines: 1000
+      # assessment-comment-marker: dependabot-ai-impact
+      # branch-prefix: ai-remediation
+      # pending-label: ''
+      # model: auto
+      # copilot-cli-version: latest
+      # app-client-id: ${{ vars.AI_REMEDIATION_APP_CLIENT_ID }}
+
+    # No secret is required. The built-in token opens companion-PR CI in an
+    # approval-required state. Configure an App or PAT only if the user deliberately wants
+    # CI to start without that maintainer approval click.
+    # secrets:
+    #   app-private-key: ${{ secrets.AI_REMEDIATION_APP_PRIVATE_KEY }}
+    #   write-token: ${{ secrets.AI_REMEDIATION_TOKEN }}
+    #   copilot-token: ${{ secrets.COPILOT_TOKEN }}
+
+  # Optional example of consuming reusable-workflow outputs. Keep disabled unless this
+  # repository has a real notification or policy action to take; a PR comment already
+  # covers the ordinary case.
+  # notify-on-high-risk:
+  #   needs: assess
+  #   if: needs.assess.outputs.risk == 'high'
+  #   runs-on: ubuntu-latest
+  #   permissions: {}
+  #   steps:
+  #     - name: Report high risk
+  #       env:
+  #         SUMMARY: ${{ needs.assess.outputs.verdict-summary }}
+  #         DEPENDENCIES: ${{ needs.assess.outputs.dependency-names }}
+  #         NEEDS_CHANGES: ${{ needs.assess.outputs.needs-app-changes }}
+  #       run: |
+  #         echo "High-risk dependency update: $DEPENDENCIES"
+  #         echo "Application changes needed: $NEEDS_CHANGES"
+  #         echo "$SUMMARY"
+
+  # Optional example of consuming remediation outputs. The reusable workflow already
+  # comments on the Dependabot PR, so enable this only for another downstream integration.
+  # report-remediation:
+  #   needs: remediate
+  #   if: always() && needs.remediate.result == 'success'
+  #   runs-on: ubuntu-latest
+  #   permissions: {}
+  #   steps:
+  #     - name: Report remediation result
+  #       env:
+  #         APPLIED: ${{ needs.remediate.outputs.patch-applied }}
+  #         COMPANION_PR: ${{ needs.remediate.outputs.companion-pr-url }}
+  #         FILES_CHANGED: ${{ needs.remediate.outputs.files-changed }}
+  #         SKIPPED: ${{ needs.remediate.outputs.skipped-count }}
+  #       run: |
+  #         if [ "$APPLIED" = "true" ]; then
+  #           echo "Companion PR: $COMPANION_PR"
+  #           echo "$FILES_CHANGED file(s) changed; $SKIPPED item(s) left undone."
+  #         else
+  #           echo "No companion PR was opened because the agent made no changes."
+  #         fi

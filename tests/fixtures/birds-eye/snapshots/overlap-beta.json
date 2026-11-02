@@ -1,0 +1,225 @@
+{
+  "schema": "fm-fleet-snapshot.v1",
+  "fm_home": "/fleet/beta",
+  "generated": "2026-10-18T05:06:30Z",
+  "generated_epoch": null,
+  "backlog": {},
+  "contributions": {},
+  "main_inventory": {},
+  "scout_reports": [],
+  "secondmate_current": {
+    "registry": {
+      "present": true,
+      "available": true,
+      "complete": true,
+      "reasons": []
+    },
+    "records": [
+      {
+        "id": "mate-shared",
+        "home": "/fleet/shared",
+        "host": null,
+        "remote": false,
+        "registered": true,
+        "spawn_gen": null,
+        "current": {
+          "state": "active_child_work",
+          "reason": null
+        },
+        "invalidity": null,
+        "reconcile_inventory": null,
+        "provenance": {
+          "selected": "structured-home",
+          "structured_home": "/fleet/shared",
+          "summary_source": "local-ledger",
+          "summary_valid": true,
+          "trust": "complete",
+          "parent_event_role": "historical-only"
+        },
+        "freshness": {
+          "status": "fresh",
+          "observed_at": "2026-10-18T05:06:30Z",
+          "age_seconds": 0
+        },
+        "active_children": [],
+        "decisions_open": [],
+        "holds": 0,
+        "queued": 0,
+        "landed": 0,
+        "endpoints": 0,
+        "counts": {},
+        "omitted": 0
+      }
+    ],
+    "total_registered": 1,
+    "total": 1,
+    "shown": 1,
+    "truncated": 0
+  },
+  "tasks": [
+    {
+      "id": "mate-shared",
+      "kind": "secondmate",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/mate-shared",
+      "project": null,
+      "spawn_gen": "1",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [
+        "beta-proj"
+      ],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "mate-shared",
+        "state": "in_flight",
+        "kind": "secondmate",
+        "id": "mate-shared"
+      },
+      "current_state": {
+        "state": "working",
+        "source": "pane",
+        "detail": null,
+        "raw": "working",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/mate-shared"
+        },
+        "home": {
+          "path": "/fleet/shared",
+          "present": true
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/mate-shared.status",
+          "present": true,
+          "kind": "status",
+          "last_event": null
+        }
+      },
+      "endpoint": {
+        "target": "tmux:mate-shared",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    },
+    {
+      "id": "ship-1",
+      "kind": "ship",
+      "harness": "claude",
+      "mode": "no-mistakes",
+      "yolo": "off",
+      "branch": "fm/ship-1",
+      "project": "beta-proj",
+      "spawn_gen": "1",
+      "backend": "tmux",
+      "remote": null,
+      "secondmate_projects": [],
+      "backlog": {
+        "done": null,
+        "hold_until": null,
+        "captain_actionable": false,
+        "hold_kind": null,
+        "hold_reason": null,
+        "hold_bucket": null,
+        "hold_age_days": null,
+        "blocked_by_ids": [],
+        "unresolved_blocker_ids": [],
+        "blocked_reason": null,
+        "title": "Same Name",
+        "state": "in_flight",
+        "kind": "ship",
+        "id": "ship-1"
+      },
+      "current_state": {
+        "state": "done",
+        "source": "pane",
+        "detail": null,
+        "raw": "done",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "hints": {
+        "blocked_event": false,
+        "last_event_text": null,
+        "open_decisions": [],
+        "pending_decision": false
+      },
+      "paths": {
+        "worktree": {
+          "present": true,
+          "path": "/fleet/wt/ship-1"
+        },
+        "home": {
+          "path": null,
+          "present": false
+        },
+        "report": {
+          "present": false,
+          "path": null
+        },
+        "status_log": {
+          "path": "/fleet/state/ship-1.status",
+          "present": true,
+          "kind": "status",
+          "last_event": null
+        }
+      },
+      "endpoint": {
+        "target": "tmux:ship-1",
+        "exists": true,
+        "agent_alive": true,
+        "status": "alive",
+        "observed_at": "2026-10-18T05:06:30Z",
+        "freshness": "fresh"
+      },
+      "execution": {
+        "requested_model": null,
+        "requested_effort": null
+      },
+      "pr": {
+        "url": null,
+        "source": null,
+        "head": null
+      },
+      "actions": []
+    }
+  ]
+}

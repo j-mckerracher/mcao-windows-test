@@ -1,0 +1,7 @@
+- Profile `high-risk`, decision stage `provisional`, classification `resolved`, decision `T-1/1`.
+- Policy revision `motif-assignment-profile-r2`; target branch `main`; comparison base `0123456789abcdef0123456789abcdef01234567`.
+- Required stages, in order: ground-scope, design, design-critique, implement, independent-change-review, risk-verify, change-reassessment, delivery-handoff.
+- Tests: required by this profile; run the tests that cover your change.
+- Independent change review: required; the selected delivery path supplies it, with no extra reviewer.
+- Risk triggers: dispatch-lifecycle-worktree-delivery-merge-or-proof-gate-authority.
+- Reasons: spawn lifecycle and relaunch restoration change.

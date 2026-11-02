@@ -1,0 +1,190 @@
+# Gate on catalog.yml being filled in and well-formed before it reaches Port.io.
+#
+# Port ingests catalog.yml from the default branch and reports almost nothing back: an
+# unknown property is dropped silently, and a `<TODO>` left in a string field is accepted
+# as a legitimate value. That combination means a broken catalog entry looks exactly like
+# a working one from inside GitHub. This workflow is where that feedback has to come from.
+#
+# It checks parsed VALUES, not raw text. A naive `grep '<TODO>' catalog.yml` matches the
+# explanatory comments in that file's own header and so fails even when every value is
+# filled in -- which is why the placeholder scan below walks the loaded YAML instead.
+#
+# Opting out: delete catalog.yml. This workflow passes when the file is absent, so a repo
+# that does not belong in the software catalog is not forced to carry a stub for it.
+#
+# Deliberately no `paths:` filter. A path-filtered workflow reports "skipped" rather than
+# "success", and a required check that never reports blocks the PR permanently. Running on
+# every PR costs a few seconds and keeps the check honest as a required status.
+
+name: Catalog
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  # Also guard the branch Port actually reads. A direct push to main that breaks the file
+  # would otherwise reach the catalog with no PR to have caught it.
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: catalog-validate-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate catalog.yml
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Look for catalog.yml
+        id: probe
+        run: |
+          set -euo pipefail
+          if [ -f catalog.yml ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "No catalog.yml in this repository -- nothing to validate." \
+              >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      # PyYAML is present on the GitHub-hosted Ubuntu images, but installing it when it is
+      # missing costs a second and removes a dependency on the runner image's contents.
+      - name: Ensure a YAML parser
+        if: steps.probe.outputs.present == 'true'
+        run: |
+          set -euo pipefail
+          python3 -c 'import yaml' 2>/dev/null \
+            || pip install --quiet --disable-pip-version-check pyyaml
+
+      - name: Validate
+        if: steps.probe.outputs.present == 'true'
+        env:
+          # Passed in rather than read from the context inside the script, so the script
+          # stays runnable locally: REPO_NAME=my-repo python3 - < the-script
+          REPO_NAME: ${{ github.event.repository.name }}
+        run: |
+          set -euo pipefail
+          python3 <<'PY'
+          import os
+          import sys
+
+          import yaml
+
+          PLACEHOLDER = "<TODO>"
+          PATH = "catalog.yml"
+          REQUIRED = ("identifier", "title", "blueprint")
+
+          errors, warnings = [], []
+
+          # ── Parse ────────────────────────────────────────────────────────────────────
+          # A malformed file is the one failure Port cannot work around, so stop here.
+          with open(PATH, encoding="utf-8") as handle:
+              raw = handle.read()
+          try:
+              doc = yaml.safe_load(raw)
+          except yaml.YAMLError as exc:
+              print(f"::error file={PATH}::catalog.yml is not valid YAML: {exc}")
+              sys.exit(1)
+
+          if doc is None:
+              print(f"::error file={PATH}::catalog.yml is empty.")
+              sys.exit(1)
+
+          # Port accepts either a single entity mapping or a list of them.
+          entities = doc if isinstance(doc, list) else [doc]
+
+          # ── Unfilled placeholders ────────────────────────────────────────────────────
+          # Walk values at any depth so nested keys inside serviceDetails are covered too.
+          def find_placeholders(node, trail):
+              if isinstance(node, dict):
+                  for key, value in node.items():
+                      yield from find_placeholders(value, trail + [str(key)])
+              elif isinstance(node, list):
+                  for index, value in enumerate(node):
+                      yield from find_placeholders(value, trail + [f"[{index}]"])
+              elif isinstance(node, str) and PLACEHOLDER in node:
+                  yield ".".join(trail) or "(root)"
+
+          unfilled = list(find_placeholders(doc, []))
+
+          # Line numbers for the annotations. Full-line comments are excluded because the
+          # header of catalog.yml documents the placeholder in prose.
+          lines = {}
+          for number, text in enumerate(raw.splitlines(), start=1):
+              if PLACEHOLDER in text and not text.lstrip().startswith("#"):
+                  lines[number] = text.strip()
+
+          for number, text in sorted(lines.items()):
+              print(f"::error file={PATH},line={number}::Unfilled placeholder: {text}")
+
+          if unfilled:
+              errors.append(
+                  f"{len(unfilled)} unfilled placeholder(s): " + ", ".join(sorted(unfilled))
+              )
+
+          # ── Required keys ────────────────────────────────────────────────────────────
+          for position, entity in enumerate(entities):
+              label = f"entity[{position}]" if len(entities) > 1 else "catalog.yml"
+              if not isinstance(entity, dict):
+                  errors.append(f"{label}: expected a mapping, found {type(entity).__name__}.")
+                  continue
+              for key in REQUIRED:
+                  if not entity.get(key):
+                      errors.append(f"{label}: missing required key `{key}`.")
+
+          # ── identifier vs repository name ────────────────────────────────────────────
+          # Port's GitHub integration auto-discovers one service entity per repo, keyed by
+          # repo name. A mismatch creates a second, half-empty entity beside it rather than
+          # enriching the real one. A warning, not an error: a repo legitimately may
+          # describe an entity that is not itself. Promote to errors.append() to enforce.
+          repo = os.environ.get("REPO_NAME", "")
+          for entity in entities:
+              if not isinstance(entity, dict):
+                  continue
+              identifier = entity.get("identifier")
+              if (
+                  repo
+                  and entity.get("blueprint") == "service"
+                  and isinstance(identifier, str)
+                  and PLACEHOLDER not in identifier
+                  and identifier != repo
+              ):
+                  warnings.append(
+                      f"identifier `{identifier}` does not match the repository name "
+                      f"`{repo}`. If this entity is meant to be this repository's service, "
+                      f"the mismatch creates a duplicate catalog entity."
+                  )
+
+          # ── Report ───────────────────────────────────────────────────────────────────
+          for warning in warnings:
+              print(f"::warning file={PATH}::{warning}")
+
+          summary = [f"## catalog.yml{os.linesep}"]
+          if errors:
+              summary.append(f"**{len(errors)} problem(s) found.**{os.linesep}")
+              summary.extend(f"- {message}" for message in errors)
+          else:
+              summary.append(f"Valid, and every value is filled in.{os.linesep}")
+          if warnings:
+              summary.append(f"{os.linesep}### Warnings{os.linesep}")
+              summary.extend(f"- {message}" for message in warnings)
+
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as handle:
+              handle.write(os.linesep.join(summary) + os.linesep)
+
+          for message in errors:
+              print(f"::error file={PATH}::{message}")
+
+          sys.exit(1 if errors else 0)
+          PY

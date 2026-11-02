@@ -1,0 +1,16 @@
+{
+  "schema": "fm-birds-eye-view.v1",
+  "generated": "2026-10-19T00:00:00Z",
+  "roots": [
+    {"root_id": "home", "home_path": "__HOME__"}
+  ],
+  "entities": [
+    {
+      "key": "home:home:task-1",
+      "kind": "worker",
+      "task_id": "task-1",
+      "spawn_gen": "gen-1",
+      "observation": {"root_id": "home"}
+    }
+  ]
+}

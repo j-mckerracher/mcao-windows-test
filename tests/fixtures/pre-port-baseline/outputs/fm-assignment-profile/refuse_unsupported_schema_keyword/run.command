@@ -1,0 +1,1 @@
+python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root_bad_schema --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unsupported_schema_keyword/record.json --task T-1

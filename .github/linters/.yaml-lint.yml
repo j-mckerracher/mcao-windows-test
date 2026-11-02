@@ -1,0 +1,18 @@
+---
+extends: default
+
+rules:
+  # Prose-heavy workflow comments deliberately use the repository's 100-column convention.
+  line-length: disable
+  # GitHub and Copier both accept documents without an explicit marker.
+  document-start: disable
+  # GitHub's recommended deny-by-default spelling is `permissions: {}`.
+  braces:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+  # Long explanatory comments align with the surrounding workflow structure, not YAML values.
+  comments: disable
+  comments-indentation: disable
+  # `on` is a GitHub Actions key, not a YAML 1.1 boolean.
+  truthy:
+    check-keys: false

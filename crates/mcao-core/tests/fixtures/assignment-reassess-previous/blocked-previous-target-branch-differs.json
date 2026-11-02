@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous target_branch differs from the host-pinned target_branch"
+  ]
+}

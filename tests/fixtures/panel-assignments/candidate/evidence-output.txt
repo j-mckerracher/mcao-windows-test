@@ -1,0 +1,22 @@
+=== output 1 of 7 ===
+exit 0
+=== output 2 of 7 ===
+resolved	placeholder-model-a	unknown	true	true	unknown	-
+exit 0
+=== output 3 of 7 ===
+writer	writer	candidate	-	placeholder-model-a	placeholder-model-a	missing	unknown	unknown	-	-	-
+reviewer	reviewer	judge	writer	placeholder-model-b	placeholder-model-b	missing	unknown	unknown	-	-	-
+exit 0
+=== output 4 of 7 ===
+error: fm-panel-resolve: <empty-request-file> has no seat requests
+exit 1
+=== output 5 of 7 ===
+exit 0
+=== output 6 of 7 ===
+writer	writer	candidate	-	placeholder-model-a	unresolved	missing	unknown	unknown	-	nested capability unavailable for model placeholder-model-a: nested=true available=false	-
+reviewer	reviewer	judge	writer	placeholder-model-b	unresolved	missing	unknown	unknown	-	nested capability unavailable for model placeholder-model-b: nested=true available=false	-
+exit 0
+=== output 7 of 7 ===
+ok - candidate panel-assignment fixtures parse through the existing consumers and seat exactly the selected roles
+FM_TEST_SUMMARY total=1 failed=0 skipped_gate=0
+exit 0

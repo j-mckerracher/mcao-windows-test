@@ -1,0 +1,7 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous decision_stage must be provisional or final",
+    "unresolved decision must be provisional high-risk"
+  ]
+}

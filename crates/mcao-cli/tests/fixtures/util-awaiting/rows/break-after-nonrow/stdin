@@ -1,0 +1,6 @@
+preamble line
+  b0,queued,ship,sample,t,captain,-
+tasks[2]{id,state,kind,repo,title,hold_kind,hold_until}:
+  b1,queued,ship,sample,t,captain,-
+note: break here
+  b2,queued,ship,sample,t,captain,-

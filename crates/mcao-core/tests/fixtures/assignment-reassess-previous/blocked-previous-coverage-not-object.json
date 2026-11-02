@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous change_coverage must be {complete, categories} with known categories"
+  ]
+}

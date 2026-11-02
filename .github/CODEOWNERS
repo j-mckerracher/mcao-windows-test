@@ -1,0 +1,7 @@
+# Default owners for everything in this repo, from the New Repository Request.
+# Later matching rules override earlier ones, so keep this rule first and add narrower
+# per-path rules below it.
+#
+# Keep this consistent with catalog.yml's `assignment_group`: if the code owner and the
+# group an incident routes to disagree, one of them is a lie.
+* @mc-innersource/mc-innersource-admin

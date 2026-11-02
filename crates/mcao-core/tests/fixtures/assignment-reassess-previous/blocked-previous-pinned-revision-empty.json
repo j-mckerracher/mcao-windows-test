@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous pinned_policy_revision must be a non-empty string"
+  ]
+}

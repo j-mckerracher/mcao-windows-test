@@ -1,0 +1,11 @@
+---
+default: true
+
+# Prose and reference tables follow the repository's 100-column convention rather than 80 columns.
+MD013: false
+
+# Some copied context files intentionally begin with instructions rather than a document heading.
+MD041: false
+
+# Existing compact tables are valid CommonMark and more readable in these short reference files.
+MD060: false

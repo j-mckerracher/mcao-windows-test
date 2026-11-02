@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "categories": [
+    "committed",
+    "tracked-working-tree",
+    "untracked",
+    "renamed",
+    "deleted"
+  ],
+  "gaps": [],
+  "base_ok": true,
+  "identity": "sha256:30d77da4de0ae6eceb11c4f1cf63dd1bec254b34c1cf57288ef19f039b5469d1",
+  "paths": []
+}

@@ -1,0 +1,11 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "request has unknown keys: extra_key",
+    "task_id must be a non-empty string without '/'",
+    "previous decision_id must be <task_id>/<sequence> for the request task_id",
+    "previous task_id differs from the request task_id",
+    "previous profile is not a known profile id",
+    "unresolved decision must be provisional high-risk"
+  ]
+}

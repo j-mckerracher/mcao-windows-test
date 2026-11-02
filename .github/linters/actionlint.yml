@@ -1,0 +1,6 @@
+---
+# GitHub supports this permission, but actionlint 1.7.12 has not added it to its schema yet.
+paths:
+  .github/workflows/dependabot-ai-impact.yml:
+    ignore:
+      - 'unknown permission scope "copilot-requests"'

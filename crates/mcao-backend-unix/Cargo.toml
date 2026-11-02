@@ -1,0 +1,13 @@
+[package]
+name = "mcao-backend-unix"
+description = "PROPOSED (DPES-752 unconfirmed): Unix tmux pane capture, Herdr agent state, lsof holder probe, and backend selector."
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[dependencies]
+mcao-core = { path = "../mcao-core" }
+
+[target.'cfg(unix)'.dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }

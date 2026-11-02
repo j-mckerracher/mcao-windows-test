@@ -1,0 +1,214 @@
+command -p ls	2	ls	command	0	0	-
+command -v ls	2	ls	command	0	0	-
+command -V ls	2	ls	command	0	0	-
+env -0 ls	2	ls	env	0	0	-
+env -i ls	2	ls	env	0	0	-
+env -P ARG ls	3	ls	env	0	0	-
+env -PARG ls	2	ls	env	0	0	-
+env -v ls	2	ls	env	0	0	-
+env -a ARG ls	3	ls	env	0	0	-
+env -aARG ls	2	ls	env	0	0	-
+env -C ARG ls	3	ls	env	0	0	-
+env -CARG ls	2	ls	env	0	0	-
+env -S ARG ls	3	ls	env	0	0	ARG
+env -SARG ls	2	ls	env	0	0	ARG
+env -u ARG ls	3	ls	env	0	0	-
+env -uARG ls	2	ls	env	0	0	-
+exec -c ls	2	ls	exec	0	0	-
+exec -l ls	2	ls	exec	0	0	-
+exec -a ARG ls	3	ls	exec	0	0	-
+exec -aARG ls	2	ls	exec	0	0	-
+sudo -A ls	2	ls	sudo	0	0	-
+sudo -B ls	2	ls	sudo	0	0	-
+sudo -b ls	2	ls	sudo	0	0	-
+sudo -E ls	2	ls	sudo	0	0	-
+sudo -e ls	2	ls	sudo	0	0	-
+sudo -H ls	2	ls	sudo	0	0	-
+sudo -i ls	2	ls	sudo	0	0	-
+sudo -K ls	2	ls	sudo	0	0	-
+sudo -k ls	2	ls	sudo	0	0	-
+sudo -l ls	2	ls	sudo	0	0	-
+sudo -N ls	2	ls	sudo	0	0	-
+sudo -n ls	2	ls	sudo	0	0	-
+sudo -P ls	2	ls	sudo	0	0	-
+sudo -S ls	2	ls	sudo	0	0	-
+sudo -s ls	2	ls	sudo	0	0	-
+sudo -v ls	2	ls	sudo	0	0	-
+sudo -V ls	2	ls	sudo	0	0	-
+sudo -C ARG ls	3	ls	sudo	0	0	-
+sudo -CARG ls	2	ls	sudo	0	0	-
+sudo -D ARG ls	3	ls	sudo	0	0	-
+sudo -DARG ls	2	ls	sudo	0	0	-
+sudo -g ARG ls	3	ls	sudo	0	0	-
+sudo -gARG ls	2	ls	sudo	0	0	-
+sudo -h ARG ls	3	ls	sudo	0	0	-
+sudo -hARG ls	2	ls	sudo	0	0	-
+sudo -p ARG ls	3	ls	sudo	0	0	-
+sudo -pARG ls	2	ls	sudo	0	0	-
+sudo -r ARG ls	3	ls	sudo	0	0	-
+sudo -rARG ls	2	ls	sudo	0	0	-
+sudo -R ARG ls	3	ls	sudo	0	0	-
+sudo -RARG ls	2	ls	sudo	0	0	-
+sudo -t ARG ls	3	ls	sudo	0	0	-
+sudo -tARG ls	2	ls	sudo	0	0	-
+sudo -T ARG ls	3	ls	sudo	0	0	-
+sudo -TARG ls	2	ls	sudo	0	0	-
+sudo -u ARG ls	3	ls	sudo	0	0	-
+sudo -uARG ls	2	ls	sudo	0	0	-
+sudo -U ARG ls	3	ls	sudo	0	0	-
+sudo -UARG ls	2	ls	sudo	0	0	-
+timeout -f 5 ls	3	ls	timeout	0	0	-
+timeout -p 5 ls	3	ls	timeout	0	0	-
+timeout -v 5 ls	3	ls	timeout	0	0	-
+timeout -k ARG 5 ls	4	ls	timeout	0	0	-
+timeout -kARG 5 ls	3	ls	timeout	0	0	-
+timeout -s ARG 5 ls	4	ls	timeout	0	0	-
+timeout -sARG 5 ls	3	ls	timeout	0	0	-
+command --help ls	2	ls	command	0	0	-
+command --version ls	2	ls	command	0	0	-
+env --ignore-environment ls	2	ls	env	0	0	-
+env --null ls	2	ls	env	0	0	-
+env --help ls	2	ls	env	0	0	-
+env --version ls	2	ls	env	0	0	-
+env --argv0 ARG ls	3	ls	env	0	0	-
+env --argv0=ARG ls	2	ls	env	0	0	-
+env --block-signal ARG ls	3	ls	env	0	0	-
+env --block-signal=ARG ls	2	ls	env	0	0	-
+env --chdir ARG ls	3	ls	env	0	0	-
+env --chdir=ARG ls	2	ls	env	0	0	-
+env --default-signal ARG ls	3	ls	env	0	0	-
+env --default-signal=ARG ls	2	ls	env	0	0	-
+env --ignore-signal ARG ls	3	ls	env	0	0	-
+env --ignore-signal=ARG ls	2	ls	env	0	0	-
+env --split-string ARG ls	3	ls	env	0	0	ARG
+env --split-string=ARG ls	2	ls	env	0	0	ARG
+env --unset ARG ls	3	ls	env	0	0	-
+env --unset=ARG ls	2	ls	env	0	0	-
+nohup --help ls	2	ls	nohup	0	0	-
+nohup --version ls	2	ls	nohup	0	0	-
+sudo --askpass ls	2	ls	sudo	0	0	-
+sudo --background ls	2	ls	sudo	0	0	-
+sudo --bell ls	2	ls	sudo	0	0	-
+sudo --edit ls	2	ls	sudo	0	0	-
+sudo --help ls	2	ls	sudo	0	0	-
+sudo --login ls	2	ls	sudo	0	0	-
+sudo --non-interactive ls	2	ls	sudo	0	0	-
+sudo --preserve-env ls	2	ls	sudo	0	0	-
+sudo --preserve-groups ls	2	ls	sudo	0	0	-
+sudo --remove-timestamp ls	2	ls	sudo	0	0	-
+sudo --reset-timestamp ls	2	ls	sudo	0	0	-
+sudo --set-home ls	2	ls	sudo	0	0	-
+sudo --shell ls	2	ls	sudo	0	0	-
+sudo --stdin ls	2	ls	sudo	0	0	-
+sudo --validate ls	2	ls	sudo	0	0	-
+sudo --version ls	2	ls	sudo	0	0	-
+sudo --chdir ARG ls	3	ls	sudo	0	0	-
+sudo --chdir=ARG ls	2	ls	sudo	0	0	-
+sudo --chroot ARG ls	3	ls	sudo	0	0	-
+sudo --chroot=ARG ls	2	ls	sudo	0	0	-
+sudo --close-from ARG ls	3	ls	sudo	0	0	-
+sudo --close-from=ARG ls	2	ls	sudo	0	0	-
+sudo --command-timeout ARG ls	3	ls	sudo	0	0	-
+sudo --command-timeout=ARG ls	2	ls	sudo	0	0	-
+sudo --group ARG ls	3	ls	sudo	0	0	-
+sudo --group=ARG ls	2	ls	sudo	0	0	-
+sudo --host ARG ls	3	ls	sudo	0	0	-
+sudo --host=ARG ls	2	ls	sudo	0	0	-
+sudo --other-user ARG ls	3	ls	sudo	0	0	-
+sudo --other-user=ARG ls	2	ls	sudo	0	0	-
+sudo --prompt ARG ls	3	ls	sudo	0	0	-
+sudo --prompt=ARG ls	2	ls	sudo	0	0	-
+sudo --role ARG ls	3	ls	sudo	0	0	-
+sudo --role=ARG ls	2	ls	sudo	0	0	-
+sudo --type ARG ls	3	ls	sudo	0	0	-
+sudo --type=ARG ls	2	ls	sudo	0	0	-
+sudo --user ARG ls	3	ls	sudo	0	0	-
+sudo --user=ARG ls	2	ls	sudo	0	0	-
+timeout --foreground 5 ls	3	ls	timeout	0	0	-
+timeout --preserve-status 5 ls	3	ls	timeout	0	0	-
+timeout --verbose 5 ls	3	ls	timeout	0	0	-
+timeout --help 5 ls	3	ls	timeout	0	0	-
+timeout --version 5 ls	3	ls	timeout	0	0	-
+timeout --kill-after ARG 5 ls	4	ls	timeout	0	0	-
+timeout --kill-after=ARG 5 ls	3	ls	timeout	0	0	-
+timeout --signal ARG 5 ls	4	ls	timeout	0	0	-
+timeout --signal=ARG 5 ls	3	ls	timeout	0	0	-
+nice ls	0	nice	-	0	0	-
+nice -n 5 ls	0	nice	-	0	0	-
+nice -n 5 bin/fm-watch-arm.sh	0	nice	-	0	0	-
+ionice -c 3 ls	0	ionice	-	0	0	-
+setsid ls	0	setsid	-	0	0	-
+stdbuf -oL ls	0	stdbuf	-	0	0	-
+caffeinate -i ls	0	caffeinate	-	0	0	-
+doas -u root ls	0	doas	-	0	0	-
+chroot / ls	0	chroot	-	0	0	-
+xargs -I {} ls	3	ls	xargs	0	0	-
+xargs ls	1	ls	xargs	0	0	-
+builtin exec ls	0	builtin	-	0	0	-
+builtin ls	0	builtin	-	0	0	-
+./builtin cd projects/foo	0	./builtin	-	0	0	-
+./nice ls	0	./nice	-	0	0	-
+/usr/bin/nice -n 5 ls	0	/usr/bin/nice	-	0	0	-
+watch -n 1 ls	0	watch	-	0	0	-
+flock /tmp/lock ls	0	flock	-	0	0	-
+taskset 1 ls	0	taskset	-	0	0	-
+arch -x86_64 ls	0	arch	-	0	0	-
+env ls	1	ls	env	0	0	-
+env -i ls	2	ls	env	0	0	-
+env -	2	-	env	0	0	-
+env - ls	2	ls	env	0	0	-
+env -i - ls	3	ls	env	0	0	-
+env A=1 - ls	2	-	env	0	1	-
+env A=1 -u B ls	2	-u	env	0	1	-
+env -i A=1 -u B ls	3	-u	env	0	1	-
+env A=1 -x B=2 ls	2	-x	env	0	1	-
+env -P /tmp ls	3	ls	env	0	0	-
+env -P/tmp ls	2	ls	env	0	0	-
+env --unset X ls	3	ls	env	0	0	-
+env --unset=X ls	2	ls	env	0	0	-
+env --unset ls	3	-	env	0	0	-
+env --unknown ls	1	--unknown	env	0	1	-
+env -- --unset ls	2	--unset	env	0	1	-
+env -S 'cd x' ls	3	x'	env	0	0	'cd
+env --split-string 'cd x' ls	3	x'	env	0	0	'cd
+env -Sls ls	2	ls	env	0	0	ls
+sudo -- ls	2	ls	sudo	0	0	-
+sudo -- -u ls	2	-u	sudo	0	0	-
+command -v ls	2	ls	command	0	0	-
+command -p -- ls	3	ls	command	0	0	-
+exec -a name ls	3	ls	exec	0	0	-
+nohup nohup ls	2	ls	nohup,nohup	0	0	-
+timeout -k 5 10 ls	4	ls	timeout	0	0	-
+gtimeout 5 ls	2	ls	gtimeout	0	0	-
+timeout 5	2	-	timeout	0	1	-
+timeout -v	2	-	timeout	0	1	-
+FOO=1 BAR=2 ls	2	ls	-	2	0	-
+FOO=1 nice ls	1	nice	-	1	0	-
+FOO=1 env -i A=1 ls	4	ls	env	1	0	-
+echo bin/fm-watch-arm.sh	0	echo	-	0	0	-
+printf %s bin/fm-watch-arm.sh	0	printf	-	0	0	-
+tmux send-keys -t x bin/fm-watch-arm.sh	0	tmux	-	0	0	-
+grep -r fm-watch docs	0	grep	-	0	0	-
+cd projects/foo	0	cd	-	0	0	-
+cd	0	cd	-	0	0	-
+xargs -I {} bin/fm-watch.sh	3	bin/fm-watch.sh	xargs	0	0	-
+xargs -0 -- bin/fm-watch-arm.sh	3	bin/fm-watch-arm.sh	xargs	0	0	-
+xargs -n 1 -P 2 cmd	5	cmd	xargs	0	0	-
+xargs --bogus cmd	1	--bogus	xargs	0	1	-
+xargs --arg-file=x cmd	2	cmd	xargs	0	0	-
+env -P /tmp bin/fm-watch.sh	3	bin/fm-watch.sh	env	0	0	-
+env -i A=1 -u B cmd	3	-u	env	0	1	-
+env A=1 -x B=2 cmd	2	-x	env	0	1	-
+env - bin/fm-watch.sh	2	bin/fm-watch.sh	env	0	0	-
+env --unset X bin/fm-watch.sh	3	bin/fm-watch.sh	env	0	0	-
+env --chdir=/tmp cmd	2	cmd	env	0	0	-
+timeout -k 1 5 bin/fm-watch.sh	4	bin/fm-watch.sh	timeout	0	0	-
+chrt 10 bin/fm-watch.sh	0	chrt	-	0	0	-
+setarch x86_64 bin/fm-watch.sh	0	setarch	-	0	0	-
+unbuffer bin/fm-watch.sh	0	unbuffer	-	0	0	-
+builtin exec bin/fm-watch.sh	0	builtin	-	0	0	-
+xargs --arg-f names.txt -I{} {}	4	{}	xargs	0	0	-
+xargs --arg-f=names.txt -I{} {}	3	{}	xargs	0	0	-
+xargs --no-run-if-em -I{} {}	3	{}	xargs	0	0	-
+xargs --max 2 wc -l	1	--max	xargs	0	1	-
+xargs --max-c 10 printf %s	3	printf	xargs	0	0	-

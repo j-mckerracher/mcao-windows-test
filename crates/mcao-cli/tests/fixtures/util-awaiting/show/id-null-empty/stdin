@@ -1,0 +1,16 @@
+task:
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: -
+  hold_kind: captain
+  hold_until: "-"
+  kind: ship
+  repo: sample
+  priority: "-"
+  created: 2026-10-23
+  closed: "-"
+  deps: none
+  links: none
+  body: ""

@@ -1,0 +1,209 @@
+command -p ls
+command -v ls
+command -V ls
+env -0 ls
+env -i ls
+env -P ARG ls
+env -PARG ls
+env -v ls
+env -a ARG ls
+env -aARG ls
+env -C ARG ls
+env -CARG ls
+env -S ARG ls
+env -SARG ls
+env -u ARG ls
+env -uARG ls
+exec -c ls
+exec -l ls
+exec -a ARG ls
+exec -aARG ls
+sudo -A ls
+sudo -B ls
+sudo -b ls
+sudo -E ls
+sudo -e ls
+sudo -H ls
+sudo -i ls
+sudo -K ls
+sudo -k ls
+sudo -l ls
+sudo -N ls
+sudo -n ls
+sudo -P ls
+sudo -S ls
+sudo -s ls
+sudo -v ls
+sudo -V ls
+sudo -C ARG ls
+sudo -CARG ls
+sudo -D ARG ls
+sudo -DARG ls
+sudo -g ARG ls
+sudo -gARG ls
+sudo -h ARG ls
+sudo -hARG ls
+sudo -p ARG ls
+sudo -pARG ls
+sudo -r ARG ls
+sudo -rARG ls
+sudo -R ARG ls
+sudo -RARG ls
+sudo -t ARG ls
+sudo -tARG ls
+sudo -T ARG ls
+sudo -TARG ls
+sudo -u ARG ls
+sudo -uARG ls
+sudo -U ARG ls
+sudo -UARG ls
+timeout -f 5 ls
+timeout -p 5 ls
+timeout -v 5 ls
+timeout -k ARG 5 ls
+timeout -kARG 5 ls
+timeout -s ARG 5 ls
+timeout -sARG 5 ls
+command --help ls
+command --version ls
+env --ignore-environment ls
+env --null ls
+env --help ls
+env --version ls
+env --argv0 ARG ls
+env --argv0=ARG ls
+env --block-signal ARG ls
+env --block-signal=ARG ls
+env --chdir ARG ls
+env --chdir=ARG ls
+env --default-signal ARG ls
+env --default-signal=ARG ls
+env --ignore-signal ARG ls
+env --ignore-signal=ARG ls
+env --split-string ARG ls
+env --split-string=ARG ls
+env --unset ARG ls
+env --unset=ARG ls
+nohup --help ls
+nohup --version ls
+sudo --askpass ls
+sudo --background ls
+sudo --bell ls
+sudo --edit ls
+sudo --help ls
+sudo --login ls
+sudo --non-interactive ls
+sudo --preserve-env ls
+sudo --preserve-groups ls
+sudo --remove-timestamp ls
+sudo --reset-timestamp ls
+sudo --set-home ls
+sudo --shell ls
+sudo --stdin ls
+sudo --validate ls
+sudo --version ls
+sudo --chdir ARG ls
+sudo --chdir=ARG ls
+sudo --chroot ARG ls
+sudo --chroot=ARG ls
+sudo --close-from ARG ls
+sudo --close-from=ARG ls
+sudo --command-timeout ARG ls
+sudo --command-timeout=ARG ls
+sudo --group ARG ls
+sudo --group=ARG ls
+sudo --host ARG ls
+sudo --host=ARG ls
+sudo --other-user ARG ls
+sudo --other-user=ARG ls
+sudo --prompt ARG ls
+sudo --prompt=ARG ls
+sudo --role ARG ls
+sudo --role=ARG ls
+sudo --type ARG ls
+sudo --type=ARG ls
+sudo --user ARG ls
+sudo --user=ARG ls
+timeout --foreground 5 ls
+timeout --preserve-status 5 ls
+timeout --verbose 5 ls
+timeout --help 5 ls
+timeout --version 5 ls
+timeout --kill-after ARG 5 ls
+timeout --kill-after=ARG 5 ls
+timeout --signal ARG 5 ls
+timeout --signal=ARG 5 ls
+nice ls
+nice -n 5 ls
+nice -n 5 bin/fm-watch-arm.sh
+ionice -c 3 ls
+setsid ls
+stdbuf -oL ls
+caffeinate -i ls
+doas -u root ls
+chroot / ls
+xargs -I {} ls
+xargs ls
+builtin exec ls
+builtin ls
+./builtin cd projects/foo
+./nice ls
+/usr/bin/nice -n 5 ls
+watch -n 1 ls
+flock /tmp/lock ls
+taskset 1 ls
+arch -x86_64 ls
+env ls
+env -i ls
+env -
+env - ls
+env -i - ls
+env A=1 - ls
+env A=1 -u B ls
+env -i A=1 -u B ls
+env A=1 -x B=2 ls
+env -P /tmp ls
+env -P/tmp ls
+env --unset X ls
+env --unset=X ls
+env --unset ls
+env --unknown ls
+env -- --unset ls
+env -S 'cd x' ls
+env --split-string 'cd x' ls
+env -Sls ls
+sudo -- ls
+sudo -- -u ls
+command -v ls
+command -p -- ls
+exec -a name ls
+nohup nohup ls
+timeout -k 5 10 ls
+gtimeout 5 ls
+timeout 5
+timeout -v
+FOO=1 BAR=2 ls
+FOO=1 nice ls
+FOO=1 env -i A=1 ls
+echo bin/fm-watch-arm.sh
+printf %s bin/fm-watch-arm.sh
+tmux send-keys -t x bin/fm-watch-arm.sh
+grep -r fm-watch docs
+cd projects/foo
+cd
+xargs -I {} bin/fm-watch.sh
+xargs -0 -- bin/fm-watch-arm.sh
+xargs -n 1 -P 2 cmd
+xargs --bogus cmd
+xargs --arg-file=x cmd
+env -P /tmp bin/fm-watch.sh
+env -i A=1 -u B cmd
+env A=1 -x B=2 cmd
+env - bin/fm-watch.sh
+env --unset X bin/fm-watch.sh
+env --chdir=/tmp cmd
+timeout -k 1 5 bin/fm-watch.sh
+chrt 10 bin/fm-watch.sh
+setarch x86_64 bin/fm-watch.sh
+unbuffer bin/fm-watch.sh
+builtin exec bin/fm-watch.sh

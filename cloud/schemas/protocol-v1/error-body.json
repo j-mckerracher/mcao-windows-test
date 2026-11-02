@@ -1,0 +1,71 @@
+{
+  "$defs": {
+    "ErrorCode": {
+      "enum": [
+        "invalid_request",
+        "unsupported_version",
+        "unknown_field",
+        "client_controlled_field",
+        "blocking_field",
+        "not_allowed",
+        "not_found",
+        "digest_mismatch",
+        "request_digest_conflict",
+        "idempotency_expired",
+        "illegal_transition",
+        "terminal_state",
+        "version_conflict",
+        "stale_attempt",
+        "sequence_regressed",
+        "retry_not_allowed",
+        "deadline_exceeded",
+        "source_mismatch",
+        "upload_mismatch",
+        "checksum_mismatch",
+        "bootstrap_mismatch",
+        "result_fenced",
+        "result_not_ready",
+        "cursor_invalid",
+        "cursor_version_unsupported",
+        "queue_full",
+        "admissions_paused"
+      ],
+      "title": "ErrorCode",
+      "type": "string"
+    },
+    "ErrorDetail": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/ErrorCode"
+        },
+        "detail": {
+          "additionalProperties": true,
+          "title": "Detail",
+          "type": "object"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ErrorDetail",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "error": {
+      "$ref": "#/$defs/ErrorDetail"
+    }
+  },
+  "required": [
+    "error"
+  ],
+  "title": "ErrorBody",
+  "type": "object"
+}

@@ -1,0 +1,30 @@
+# Validates pull request metadata against organizational requirements.
+#
+# PR title, linked Jira work item, and required labels are checked by the reusable
+# workflow in mc-ci-reusable-workflows. Implementation details live there; this caller
+# pins the release SHA so updates are reviewable and applications cannot edit the rules.
+#
+# This file is shipped from mayo-innersource-template to all generated repositories via
+# Copier (as pr-validate.yml.jinja). To update the pinned release, change the SHA here
+# and in the template's own pr-validate.yml, then cut a new template release.
+#
+# labeled and unlabeled triggers are intentional: re-runs immediately when the
+# pr-review/work-item-exempt label is toggled, without waiting for a new push.
+name: PR Validate
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened, labeled, unlabeled]
+
+permissions: {}
+
+concurrency:
+  group: pr-validate-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pr-validate:
+    permissions:
+      pull-requests: read
+      contents: read
+    uses: mc-innersource/mc-ci-reusable-workflows/.github/workflows/pr-validate.yml@ed449b8ad620073467df187ec5b1b8d955888b20 # v2.0.1

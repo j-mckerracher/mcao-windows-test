@@ -1,0 +1,1 @@
+python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_contract_version_two/record.json --task T-1

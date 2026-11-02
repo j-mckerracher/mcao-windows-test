@@ -1,0 +1,1 @@
+error: assignment profile refused: pinned_policy_revision 'motif-assignment-profile-r9' is not in the approved revision registry; routing is blocked and no replacement profile is created

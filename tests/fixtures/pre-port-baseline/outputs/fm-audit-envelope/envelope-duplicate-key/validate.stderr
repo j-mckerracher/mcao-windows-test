@@ -1,0 +1,2 @@
+fm-audit-envelope: input contains a duplicate object key
+usage: fm-audit-envelope.py validate [--definition envelope|fleet_ledger_v1] PATH|-

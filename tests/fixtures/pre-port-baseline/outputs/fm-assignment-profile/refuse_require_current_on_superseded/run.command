@@ -1,0 +1,1 @@
+python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_require_current_on_superseded/record.json --task T-1 --target-branch main --base-commit 0123456789abcdef0123456789abcdef01234567 --require-current

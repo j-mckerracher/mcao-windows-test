@@ -1,0 +1,217 @@
+{
+  "$defs": {
+    "BootstrapSource": {
+      "additionalProperties": false,
+      "description": "The uploaded source the worker must verify. base_sha is the claimed commit its bundle tip must be.\n\nIt is part of the source model, so the projection the receipt and bootstrap share covers it\n(DPES-811 AC3).",
+      "properties": {
+        "base_sha": {
+          "pattern": "^[0-9a-f]{40}$",
+          "title": "Base Sha",
+          "type": "string"
+        },
+        "generation": {
+          "minimum": 1,
+          "title": "Generation",
+          "type": "integer"
+        },
+        "object_name": {
+          "title": "Object Name",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 536870912,
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "object_name",
+        "generation",
+        "sha256",
+        "size_bytes",
+        "base_sha"
+      ],
+      "title": "BootstrapSource",
+      "type": "object"
+    },
+    "RunState": {
+      "enum": [
+        "awaiting_upload",
+        "queued",
+        "dispatching",
+        "starting",
+        "running",
+        "collecting",
+        "reconciling",
+        "cancel_requested",
+        "succeeded",
+        "failed",
+        "timed_out",
+        "cancelled"
+      ],
+      "title": "RunState",
+      "type": "string"
+    },
+    "ToolCompatibility": {
+      "additionalProperties": false,
+      "description": "Server-selected pinned tuple. The client names a profile id; the server resolves this.",
+      "properties": {
+        "image_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Image Digest",
+          "type": "string"
+        },
+        "instruction_digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Instruction Digest",
+          "type": "string"
+        },
+        "profile_id": {
+          "pattern": "^[a-z][a-z0-9-]{1,62}$",
+          "title": "Profile Id",
+          "type": "string"
+        },
+        "toolchain_manifest_digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Toolchain Manifest Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "image_digest",
+        "profile_id",
+        "toolchain_manifest_digest",
+        "instruction_digest"
+      ],
+      "title": "ToolCompatibility",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Returned by start. Its projection is the identity the worker bootstrap must reproduce.",
+  "properties": {
+    "attempt": {
+      "minimum": 1,
+      "title": "Attempt",
+      "type": "integer",
+      "x-origin": "controller-assigned"
+    },
+    "compatibility": {
+      "$ref": "#/$defs/ToolCompatibility",
+      "x-origin": "server-derived"
+    },
+    "deadline_at": {
+      "format": "date-time",
+      "title": "Deadline At",
+      "type": "string",
+      "x-origin": "server-derived"
+    },
+    "manifest_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Manifest Digest",
+      "type": "string",
+      "x-origin": "server-derived"
+    },
+    "max_runtime_seconds": {
+      "maximum": 7200,
+      "minimum": 60,
+      "title": "Max Runtime Seconds",
+      "type": "integer",
+      "x-origin": "server-derived"
+    },
+    "projection_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Projection Digest",
+      "type": "string",
+      "x-origin": "server-derived"
+    },
+    "protocol_version": {
+      "const": "v1",
+      "title": "Protocol Version",
+      "type": "string",
+      "x-origin": "server-derived"
+    },
+    "run_id": {
+      "pattern": "^run_[0-9a-f]{32}$",
+      "title": "Run Id",
+      "type": "string",
+      "x-origin": "controller-assigned"
+    },
+    "source": {
+      "$ref": "#/$defs/BootstrapSource",
+      "x-origin": "server-derived"
+    },
+    "state": {
+      "$ref": "#/$defs/RunState",
+      "x-origin": "server-derived"
+    },
+    "version": {
+      "minimum": 0,
+      "title": "Version",
+      "type": "integer",
+      "x-origin": "server-derived"
+    }
+  },
+  "required": [
+    "protocol_version",
+    "run_id",
+    "state",
+    "version",
+    "attempt",
+    "manifest_digest",
+    "source",
+    "compatibility",
+    "deadline_at",
+    "max_runtime_seconds",
+    "projection_digest"
+  ],
+  "title": "AcceptedReceipt",
+  "type": "object",
+  "x-forbidden-inputs": [
+    "access_token",
+    "actor",
+    "argv",
+    "attempt_number",
+    "body",
+    "claim",
+    "claim_nonce",
+    "command",
+    "container_image",
+    "control",
+    "credential",
+    "credentials",
+    "download_url",
+    "env",
+    "environment",
+    "fence_token",
+    "id_token",
+    "image",
+    "image_digest",
+    "image_ref",
+    "local_path",
+    "owner",
+    "owner_id",
+    "path",
+    "principal",
+    "runtime_identity",
+    "secret",
+    "secret_name",
+    "secret_ref",
+    "secrets",
+    "server_id",
+    "service_account",
+    "service_account_email",
+    "signed_url",
+    "source_bytes",
+    "source_content",
+    "token",
+    "upload_url",
+    "url"
+  ]
+}

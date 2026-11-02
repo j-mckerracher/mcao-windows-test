@@ -1,0 +1,42 @@
+{
+  "assignment_intent": "Exercise the launch behavior under test",
+  "change_coverage": {
+    "categories": [
+      "committed",
+      "tracked-working-tree",
+      "untracked",
+      "renamed",
+      "deleted"
+    ],
+    "complete": true
+  },
+  "classification_status": "resolved",
+  "comparison_base_commit": "0123456789abcdef0123456789abcdef01234567",
+  "contract_version": 1,
+  "decision_id": "T-1/1",
+  "decision_stage": "final",
+  "evaluated_change_identity": "sha256:0",
+  "evidence_obligations": {
+    "independent_change_review_required": false,
+    "tests_required": false
+  },
+  "expected_surfaces": [
+    "bin/fm-spawn.sh"
+  ],
+  "pinned_policy_revision": "motif-assignment-profile-r2",
+  "profile": "documentation-only",
+  "reasons": [
+    "spawn lifecycle and relaunch restoration change"
+  ],
+  "required_stages": [
+    "ground-scope",
+    "implement",
+    "focused-review",
+    "verify",
+    "change-reassessment",
+    "delivery-handoff"
+  ],
+  "risk_triggers": [],
+  "target_branch": "main",
+  "task_id": "T-1"
+}

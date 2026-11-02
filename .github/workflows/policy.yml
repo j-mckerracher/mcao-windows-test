@@ -1,0 +1,26 @@
+name: Repository policy
+
+# Policy implementation stays in mc-ci-reusable-workflows. This caller is deliberately small:
+# updates to the pinned release are reviewable, while applications cannot edit the Rego controls.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: policy-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+# Opt in to one default-branch findings issue. To opt out, use repository-policy.yml
+# and remove issues: write.
+jobs:
+  policy:
+    name: Repository policy
+    permissions:
+      contents: read
+      issues: write
+    uses: mc-innersource/mc-ci-reusable-workflows/.github/workflows/repository-policy-with-issues.yml@ed449b8ad620073467df187ec5b1b8d955888b20 # v2.0.1

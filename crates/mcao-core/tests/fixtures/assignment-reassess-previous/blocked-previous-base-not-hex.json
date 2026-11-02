@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous comparison_base_commit must be a 40-hex commit"
+  ]
+}

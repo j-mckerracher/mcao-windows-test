@@ -1,0 +1,22 @@
+{
+  "attempt": 1,
+  "claim_id": "claim_0123456789abcdef0123456789abcdef",
+  "compatibility": {
+    "image_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "instruction_digest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "profile_id": "pi-standard",
+    "toolchain_manifest_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "deadline_at": "2026-10-21T12:10:00Z",
+  "fence": 1,
+  "max_runtime_seconds": 600,
+  "protocol_version": "v1",
+  "run_id": "run_0123456789abcdef0123456789abcdef",
+  "source": {
+    "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "generation": 1,
+    "object_name": "runs/run_0123456789abcdef0123456789abcdef/input/source.tar",
+    "sha256": "7966866f7090c5ffe1be06b59458835081566feec2b3d5774d0180d90211c583",
+    "size_bytes": 1600
+  }
+}

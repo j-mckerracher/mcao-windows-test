@@ -1,0 +1,65 @@
+{
+  "status": "recorded",
+  "decision": {
+    "contract_version": 1,
+    "decision_id": "dpes-884/1",
+    "task_id": "dpes-884",
+    "assignment_intent": "port the prose line checks",
+    "expected_surfaces": [
+      "docs/guide.md"
+    ],
+    "pinned_policy_revision": "rev-1",
+    "profile": "high-risk",
+    "decision_stage": "final",
+    "classification_status": "resolved",
+    "risk_triggers": [
+      "breaking-public-contract"
+    ],
+    "change_coverage": {
+      "complete": true,
+      "categories": [
+        "committed",
+        "tracked-working-tree",
+        "untracked",
+        "renamed",
+        "deleted"
+      ]
+    },
+    "reasons": [
+      "risk trigger: breaking-public-contract"
+    ],
+    "required_stages": [
+      "ground-scope",
+      "design",
+      "design-critique",
+      "implement",
+      "independent-change-review",
+      "risk-verify",
+      "change-reassessment",
+      "delivery-handoff"
+    ],
+    "evidence_obligations": {
+      "tests_required": true,
+      "independent_change_review_required": true
+    },
+    "target_branch": "DPES-751",
+    "comparison_base_commit": "746df261cf5e20dc09150c2ba2d5c123046edad5",
+    "evaluated_change_identity": "sha256:436e76104f67f0f03b93e2a443859e42c24fa02fa29c5337f0c829606e6b5211"
+  },
+  "transition": {
+    "previous_profile": null,
+    "effective_profile": "high-risk",
+    "escalated": false,
+    "newly_required_stages": [
+      "ground-scope",
+      "design",
+      "design-critique",
+      "implement",
+      "independent-change-review",
+      "risk-verify",
+      "change-reassessment",
+      "delivery-handoff"
+    ],
+    "evidence_invalidated": false
+  }
+}

@@ -1,0 +1,19 @@
+---
+rules:
+  dangerous-triggers:
+    # These workflows intentionally use pull_request_target without checking out pull-request code.
+    ignore:
+      - dependabot-ai-impact.yml:33
+  adhoc-packages:
+    # CI workflows intentionally install global npm tools (tasks-axi, pi-coding-agent) as one-off
+    # dependencies without a package-lock.json, since they are build-time CLI utilities, not
+    # application dependencies. This is the standard pattern for ephemeral CI tool provisioning.
+    ignore:
+      - ci.yml:130   # tasks-axi installation
+      - ci.yml:135   # pi-coding-agent installation
+      - ci.yml:178   # tasks-axi installation
+      - ci.yml:183   # pi-coding-agent installation
+      - ci.yml:244   # tasks-axi installation
+      - ci.yml:252   # pi-coding-agent installation
+      - ci.yml:276   # pinned claude-code CLI for the live setup guard
+      - ci.yml:511   # tasks-axi installation

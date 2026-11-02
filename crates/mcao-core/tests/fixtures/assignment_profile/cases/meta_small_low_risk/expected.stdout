@@ -1,0 +1,7 @@
+profile_decision_id=T-1/1
+profile_policy_revision=motif-assignment-profile-r2
+profile_name=small-low-risk
+profile_decision_stage=final
+profile_classification_status=resolved
+profile_target_branch=main
+profile_comparison_base_commit=0123456789abcdef0123456789abcdef01234567

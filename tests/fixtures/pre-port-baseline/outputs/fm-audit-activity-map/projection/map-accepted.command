@@ -1,0 +1,1 @@
+python3 -I -B -X utf8 <reference>/bin/fm-audit-activity-map.py map --config <out>/outputs/fm-audit-activity-map/projection/inputs/sanitize-config.json <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-accepted.json

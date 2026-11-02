@@ -1,0 +1,130 @@
+name: Cloud images
+
+# Builds the controller, worker and signer images by digest-pinned Dockerfiles, scans and attests them
+# on the way to the nonprod Artifact Registry, then reads all three pushed digests back and gates them
+# on the registry scan state. Nothing here deploys: rollout is a separate, digest-addressed step
+# (cloud/docs/release-and-rollback.md).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "cloud/**"
+      - ".github/workflows/cloud-*.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  artifact-metadata: write
+  attestations: write
+  contents: read
+  id-token: write
+  packages: write
+
+concurrency:
+  group: cloud-images-${{ github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  build-controller:
+    if: github.event_name != 'pull_request'
+    uses: mclm-dps/reusable-workflow-build-image/.github/workflows/build-image.yml@bab88aea9cbd42773ccfeb888a6825b9c729312c # v1
+    secrets: inherit
+    with:
+      tags: ghcr.io/mc-innersource/motif-hve-multi-agent-orchestrator/mao-controller:${{ github.sha }}
+      file: cloud/Dockerfile.controller
+      environment: nonprod
+      disable_container_scanning_results: 'false'
+      installPrismaDefender: false
+      prisma-defender-folder: /tmp
+
+  build-worker:
+    if: github.event_name != 'pull_request'
+    uses: mclm-dps/reusable-workflow-build-image/.github/workflows/build-image.yml@bab88aea9cbd42773ccfeb888a6825b9c729312c # v1
+    secrets: inherit
+    with:
+      tags: ghcr.io/mc-innersource/motif-hve-multi-agent-orchestrator/mao-worker:${{ github.sha }}
+      file: cloud/Dockerfile
+      environment: nonprod
+      disable_container_scanning_results: 'false'
+      installPrismaDefender: false
+      prisma-defender-folder: /tmp
+
+  build-signer:
+    if: github.event_name != 'pull_request'
+    uses: mclm-dps/reusable-workflow-build-image/.github/workflows/build-image.yml@bab88aea9cbd42773ccfeb888a6825b9c729312c # v1
+    secrets: inherit
+    with:
+      tags: ghcr.io/mc-innersource/motif-hve-multi-agent-orchestrator/mao-signer:${{ github.sha }}
+      file: cloud/Dockerfile.signer
+      environment: nonprod
+      disable_container_scanning_results: 'false'
+      installPrismaDefender: false
+      prisma-defender-folder: /tmp
+
+  push-controller:
+    needs: build-controller
+    if: github.event_name != 'pull_request'
+    uses: mclm-dps/reusable-workflow-push-gcr-image/.github/workflows/push-gcr-image.yml@b56e3b7dec2f90c9de0b35fec9b68c232b6e63c8 # v1
+    secrets: inherit
+    with:
+      environment: nonprod
+      gcp-auth-method: credentials_json_impersonation
+      gcr_project_id: dpe-platform-d
+      image_src: ghcr.io/mc-innersource/motif-hve-multi-agent-orchestrator/mao-controller:${{ github.sha }}
+      image_dest: us-central1-docker.pkg.dev/dpe-platform-d/artifact-repository/mao-controller:${{ github.sha }}
+      impersonation-account: gsa5-caf-mgmt@dpe-platform-d.iam.gserviceaccount.com
+      disable_container_scanning_results: 'false'
+      alert_on_critical_high_only: 'true'
+      gcloud_skip_install: 'true'
+      generate_sbom: true
+      generate_attestation: true
+
+  push-worker:
+    needs: build-worker
+    if: github.event_name != 'pull_request'
+    uses: mclm-dps/reusable-workflow-push-gcr-image/.github/workflows/push-gcr-image.yml@b56e3b7dec2f90c9de0b35fec9b68c232b6e63c8 # v1
+    secrets: inherit
+    with:
+      environment: nonprod
+      gcp-auth-method: credentials_json_impersonation
+      gcr_project_id: dpe-platform-d
+      image_src: ghcr.io/mc-innersource/motif-hve-multi-agent-orchestrator/mao-worker:${{ github.sha }}
+      image_dest: us-central1-docker.pkg.dev/dpe-platform-d/artifact-repository/mao-worker:${{ github.sha }}
+      impersonation-account: gsa5-caf-mgmt@dpe-platform-d.iam.gserviceaccount.com
+      disable_container_scanning_results: 'false'
+      alert_on_critical_high_only: 'true'
+      gcloud_skip_install: 'true'
+      generate_sbom: true
+      generate_attestation: true
+
+  push-signer:
+    needs: build-signer
+    if: github.event_name != 'pull_request'
+    uses: mclm-dps/reusable-workflow-push-gcr-image/.github/workflows/push-gcr-image.yml@b56e3b7dec2f90c9de0b35fec9b68c232b6e63c8 # v1
+    secrets: inherit
+    with:
+      environment: nonprod
+      gcp-auth-method: credentials_json_impersonation
+      gcr_project_id: dpe-platform-d
+      image_src: ghcr.io/mc-innersource/motif-hve-multi-agent-orchestrator/mao-signer:${{ github.sha }}
+      image_dest: us-central1-docker.pkg.dev/dpe-platform-d/artifact-repository/mao-signer:${{ github.sha }}
+      impersonation-account: gsa5-caf-mgmt@dpe-platform-d.iam.gserviceaccount.com
+      disable_container_scanning_results: 'false'
+      alert_on_critical_high_only: 'true'
+      gcloud_skip_install: 'true'
+      generate_sbom: true
+      generate_attestation: true
+
+  # The push workflows expose no digest output, so the pushed digests are read back here, and the
+  # scan state the registry reports for each is gated and recorded.
+  record-digests:
+    needs: [push-controller, push-worker, push-signer]
+    if: github.event_name != 'pull_request'
+    uses: ./.github/workflows/cloud-record-digests.yml
+    secrets: inherit
+    with:
+      environment: nonprod
+      controller_image: us-central1-docker.pkg.dev/dpe-platform-d/artifact-repository/mao-controller:${{ github.sha }}
+      worker_image: us-central1-docker.pkg.dev/dpe-platform-d/artifact-repository/mao-worker:${{ github.sha }}
+      signer_image: us-central1-docker.pkg.dev/dpe-platform-d/artifact-repository/mao-signer:${{ github.sha }}

@@ -1,0 +1,14 @@
+# Records which version of the organization template this repository was generated from, and the
+# answers it was generated with. Copier reads it to run `copier update`, which pulls later template
+# improvements into this repository. Deleting it makes that impossible.
+#
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: v1.3.0
+_src_path: https://github.com/mc-innersource/mayo-innersource-template.git
+configured: false
+github_org: mc-innersource
+project_description: 'Run several AI coding agents in parallel from a single orchestrator:
+    each worker takes a task in its own git worktree, and every pull request comes
+    with a locally generated proof of verification. Built on firstmate, with Claude
+    Code, Codex, and GitHub Copilot CLI as workers.'
+repo_name: motif-multi-agent-orchestrator

@@ -1,0 +1,13 @@
+{
+  "run_id": "lane-ünï-1",
+  "selection": "lane=portable-parallel-1 \u00e9 \ud83d\ude00",
+  "started_at": "2026-07-22T00:00:00Z",
+  "finished_at": "2026-07-22T00:01:00Z",
+  "summary": {"total": 3, "failed": 1, "skipped_gate": 1, "duration_ms": 1500},
+  "scripts": [
+    {"path": "tests/z.test.sh", "family": "afk", "duration_ms": 900, "exit": 0, "gate_skip": false, "lane_run_id": "stale"},
+    {"path": "tests/a.test.sh", "family": "afk", "duration_ms": 900, "exit": 1, "gate_skip": true, "gate_skip_reason": "x"},
+    {"path": "tests/b-ü.test.sh", "family": "herdr", "duration_ms": 1500, "exit": 0, "gate_skip": false}
+  ],
+  "families": []
+}

@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous reasons must be a non-empty list of strings"
+  ]
+}

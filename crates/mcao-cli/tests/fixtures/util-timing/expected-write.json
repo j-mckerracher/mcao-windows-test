@@ -1,0 +1,85 @@
+{
+  "families": [
+    {
+      "count": 3,
+      "duration_ms": 1500,
+      "failed": 0,
+      "name": "afk"
+    },
+    {
+      "count": 2,
+      "duration_ms": 1200,
+      "failed": 0,
+      "name": "pure-contract-unit"
+    },
+    {
+      "count": 2,
+      "duration_ms": 7,
+      "failed": 1,
+      "name": "herdr-ci"
+    },
+    {
+      "count": 1,
+      "duration_ms": 0,
+      "failed": 0,
+      "name": "family-\u00fcn\u00ef"
+    }
+  ],
+  "finished_at": "2026-07-22T00:01:00Z",
+  "run_id": "run-\u00fc",
+  "scripts": [
+    {
+      "duration_ms": 1200,
+      "exit": 0,
+      "expected_gate_skip": "false",
+      "family": "pure-contract-unit",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-alpha.test.sh"
+    },
+    {
+      "duration_ms": 0,
+      "exit": 0,
+      "expected_gate_skip": "true",
+      "family": "afk",
+      "gate_skip": true,
+      "gate_skip_reason": "no-tmux",
+      "path": "tests/fm-beta.test.sh"
+    },
+    {
+      "duration_ms": 45000,
+      "exit": 1,
+      "expected_gate_skip": "false",
+      "family": "afk",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-gamma-\u00fcn\u00efcode-\ud83d\ude00.test.sh"
+    },
+    {
+      "duration_ms": 1200,
+      "exit": 0,
+      "expected_gate_skip": "false",
+      "family": "herdr-ci",
+      "gate_skip": false,
+      "gate_skip_reason": "",
+      "path": "tests/fm-delta.test.sh"
+    },
+    {
+      "duration_ms": 7,
+      "exit": 0,
+      "expected_gate_skip": "false",
+      "family": "herdr-ci",
+      "gate_skip": false,
+      "gate_skip_reason": "reason with \"quotes\" and /slash",
+      "path": "tests/fm-epsilon\\del.test.sh"
+    }
+  ],
+  "selection": "selection \u00fc",
+  "started_at": "2026-07-22T00:00:00Z",
+  "summary": {
+    "duration_ms": 1234,
+    "failed": 1,
+    "skipped_gate": 2,
+    "total": 5
+  }
+}

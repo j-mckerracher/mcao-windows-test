@@ -1,0 +1,36 @@
+# Non-root controller image for the MCAO cloud service (DPES-819 AC2).
+#
+# Same Alpine 3.24.2 index digest as the worker. This image carries only the broker module and its
+# hash-locked controller dependencies: no worker agent runtime or sandbox tooling. Nothing is fetched at
+# container start, and the image holds no credentials. GCP access comes from the service account's
+# metadata-server token at runtime.
+#
+# Built from the repository root as context, so every source path starts with cloud/.
+# cloud/requirements/controller.txt is exported from cloud/uv.lock, and CI fails on any drift.
+FROM alpine:3.24.2@sha256:294b683cb724975bec92580e1e685676bd4b50bda910ddb8c51d4cabeaec77e6
+
+# PATH keeps Alpine's default directories after the venv bin dir. apk is installed in /sbin, so
+# dropping the sbin directories makes every RUN fail with "apk: not found".
+ENV LANG=C.UTF-8 \
+    PATH=/opt/mao-cloud/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONPATH=/opt/mao-cloud/src \
+    PYTHONUNBUFFERED=1
+
+RUN apk upgrade --no-cache
+
+RUN apk add --no-cache python3 \
+ && python3 -c 'import sys; assert sys.version_info >= (3, 12), sys.version' \
+ && python3 -m venv /opt/mao-cloud/venv
+
+RUN addgroup -g 10002 -S controller \
+ && adduser -S -D -H -h /nonexistent -u 10002 -G controller controller
+
+COPY --chown=root:root --chmod=0444 cloud/requirements/controller.txt /opt/mao-cloud/requirements/controller.txt
+RUN /opt/mao-cloud/venv/bin/pip install --no-cache-dir --require-hashes --no-deps -r /opt/mao-cloud/requirements/controller.txt
+
+COPY --chown=root:root --chmod=0555 cloud/src/mao_cloud /opt/mao-cloud/src/mao_cloud
+
+USER 10002:10002
+
+ENTRYPOINT ["python3", "-m", "mao_cloud.serve"]

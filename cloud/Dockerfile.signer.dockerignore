@@ -1,0 +1,10 @@
+# Build-context allowlist for the signer image (DPES-899).
+# The reusable build workflow sends the repository root as context. Exclude everything first, then
+# re-include only what cloud/Dockerfile.signer copies. Later rules win, so the bytecode and env
+# exclusions come after the allow rules.
+**
+!cloud/src/mao_cloud/**
+!cloud/requirements/controller.txt
+**/__pycache__
+**/*.pyc
+**/.env*

@@ -1,0 +1,210 @@
+{
+  "$defs": {
+    "LogEntry": {
+      "additionalProperties": false,
+      "description": "One log object holds exactly one entry; its seq must equal the object's seq.\n\nLines are redacted at the model boundary, so storage never holds secrets.",
+      "properties": {
+        "lines": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 500,
+          "title": "Lines",
+          "type": "array"
+        },
+        "protocol_version": {
+          "const": "v1",
+          "title": "Protocol Version",
+          "type": "string"
+        },
+        "seq": {
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "protocol_version",
+        "seq",
+        "lines"
+      ],
+      "title": "LogEntry",
+      "type": "object",
+      "x-forbidden-inputs": [
+        "access_token",
+        "actor",
+        "argv",
+        "attempt_number",
+        "body",
+        "claim",
+        "claim_nonce",
+        "command",
+        "container_image",
+        "control",
+        "credential",
+        "credentials",
+        "download_url",
+        "env",
+        "environment",
+        "fence_token",
+        "id_token",
+        "image",
+        "image_digest",
+        "image_ref",
+        "local_path",
+        "owner",
+        "owner_id",
+        "path",
+        "principal",
+        "runtime_identity",
+        "secret",
+        "secret_name",
+        "secret_ref",
+        "secrets",
+        "server_id",
+        "service_account",
+        "service_account_email",
+        "signed_url",
+        "source_bytes",
+        "source_content",
+        "token",
+        "upload_url",
+        "url"
+      ]
+    },
+    "RunState": {
+      "enum": [
+        "awaiting_upload",
+        "queued",
+        "dispatching",
+        "starting",
+        "running",
+        "collecting",
+        "reconciling",
+        "cancel_requested",
+        "succeeded",
+        "failed",
+        "timed_out",
+        "cancelled"
+      ],
+      "title": "RunState",
+      "type": "string"
+    },
+    "SeqGap": {
+      "additionalProperties": false,
+      "properties": {
+        "from_seq": {
+          "minimum": 1,
+          "title": "From Seq",
+          "type": "integer"
+        },
+        "to_seq": {
+          "minimum": 1,
+          "title": "To Seq",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "from_seq",
+        "to_seq"
+      ],
+      "title": "SeqGap",
+      "type": "object"
+    },
+    "Snapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "attempt": {
+          "minimum": 1,
+          "title": "Attempt",
+          "type": "integer"
+        },
+        "server_time": {
+          "format": "date-time",
+          "title": "Server Time",
+          "type": "string"
+        },
+        "state": {
+          "$ref": "#/$defs/RunState"
+        },
+        "version": {
+          "minimum": 0,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "state",
+        "version",
+        "attempt",
+        "server_time"
+      ],
+      "title": "Snapshot",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "attempt": {
+      "minimum": 1,
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/LogEntry"
+      },
+      "title": "Entries",
+      "type": "array"
+    },
+    "gap": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/SeqGap"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "next_cursor": {
+      "title": "Next Cursor",
+      "type": "string"
+    },
+    "retained_from": {
+      "minimum": 1,
+      "title": "Retained From",
+      "type": "integer"
+    },
+    "run_id": {
+      "pattern": "^run_[0-9a-f]{32}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "snapshot": {
+      "$ref": "#/$defs/Snapshot"
+    },
+    "trimmed": {
+      "title": "Trimmed",
+      "type": "boolean"
+    },
+    "watermark": {
+      "minimum": 0,
+      "title": "Watermark",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "run_id",
+    "attempt",
+    "entries",
+    "next_cursor",
+    "watermark",
+    "retained_from",
+    "trimmed",
+    "snapshot"
+  ],
+  "title": "LogPage",
+  "type": "object"
+}

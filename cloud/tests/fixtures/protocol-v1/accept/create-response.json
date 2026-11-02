@@ -1,0 +1,26 @@
+{
+  "run": {
+    "attempt": 1,
+    "deadline_at": "2026-10-21T12:10:00Z",
+    "failure": null,
+    "freshness": "stale",
+    "last_seen_at": null,
+    "max_attempts": 3,
+    "owner_id": "owner-a",
+    "run_id": "run_0123456789abcdef0123456789abcdef",
+    "server_time": "2026-10-21T12:00:00Z",
+    "state": "awaiting_upload",
+    "version": 0
+  },
+  "upload": {
+    "expires_at": "2026-10-21T12:10:00Z",
+    "headers": {
+      "content-type": "application/x-tar",
+      "x-goog-if-generation-match": "0",
+      "x-goog-meta-sha256": "7966866f7090c5ffe1be06b59458835081566feec2b3d5774d0180d90211c583"
+    },
+    "method": "PUT",
+    "object_name": "runs/run_0123456789abcdef0123456789abcdef/input/source.tar",
+    "url": "https://storage.invalid/runs/run_0123456789abcdef0123456789abcdef/input/source.tar?expires=1792584600"
+  }
+}

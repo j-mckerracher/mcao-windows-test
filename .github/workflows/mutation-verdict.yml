@@ -1,0 +1,106 @@
+# Report-only mutation verdict for each pull request head. The run job measures the
+# changed production scripts with the mutation runner and always finishes. The
+# verdict is the Mutation verdict check, which the last step posts: success only when
+# every changed path is verified, and neutral otherwise. It never posts failure, and
+# GitHub, bin/fm-pr-merge.sh, and branch protection all treat neutral as non-blocking.
+# A check that never reports is missing, so the verdict step also runs on cancellation.
+name: Mutation Verdict
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+permissions: {}
+
+concurrency:
+  group: mutation-verdict-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  mutation-verdict-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    permissions:
+      contents: read
+      checks: write
+    steps:
+      - name: Check out the pull request head
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Classify the changed paths
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -u
+          mut="$RUNNER_TEMP/mutation"
+          mkdir -p "$mut"
+          git diff --name-only --diff-filter=ACMRT "$BASE_SHA...$HEAD_SHA" >"$mut/paths"
+          # The classifier exits 1 when a changed path matches no surface class, and it prints
+          # no row for that path. The exit status is not needed here: the verdict reads the
+          # changed-path list and names every path that has no classifier row.
+          bin/fm-mutation-classify.sh <"$mut/paths" >"$mut/classified" 2>"$mut/classify.err" || true
+
+      - name: Run the mutation runner on the classified paths
+        run: |
+          set -u
+          mut="$RUNNER_TEMP/mutation"
+          # A refused run leaves no record, and the verdict reports that as not verified.
+          bin/fm-mutation-run.sh --root . <"$mut/classified" >"$mut/record" 2>"$mut/run.err" || true
+
+      - name: Post the verdict
+        if: ${{ always() }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -u
+          mut="$RUNNER_TEMP/mutation"
+          mkdir -p "$mut"
+          verdict=$(bin/fm-mutation-verdict.sh "$mut/paths" "$mut/classified" "$mut/record" 2>"$mut/verdict.err") &&
+            conclusion=success || conclusion=neutral
+          summary=$verdict
+          if [ -s "$mut/verdict.err" ]; then
+            summary="$verdict"$'\n\n'"$(cat "$mut/verdict.err")"
+          fi
+          if [ "$conclusion" = neutral ]; then
+            echo "::warning title=Mutation verdict not verified::${summary//$'\n'/%0A}"
+          fi
+          {
+            echo "## Mutation verdict (report only)"
+            echo
+            echo "$summary"
+            echo
+            echo "This check never blocks a merge. A neutral result means the changed paths were not fully measured."
+            echo
+            echo "### Evidence record (first 200 lines)"
+            echo
+            echo '```'
+            head -n 200 "$mut/record" 2>/dev/null || true
+            echo '```'
+          } >>"$GITHUB_STEP_SUMMARY"
+          gh api --method POST "repos/$GITHUB_REPOSITORY/check-runs" \
+            -f name="Mutation verdict" \
+            -f head_sha="$HEAD_SHA" \
+            -f status=completed \
+            -f conclusion="$conclusion" \
+            -f "output[title]=Mutation verdict" \
+            -f "output[summary]=$summary"
+
+      - name: Upload the mutation record
+        if: ${{ always() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: mutation-record-${{ github.event.pull_request.head.sha }}
+          path: |
+            ${{ runner.temp }}/mutation/paths
+            ${{ runner.temp }}/mutation/classified
+            ${{ runner.temp }}/mutation/classify.err
+            ${{ runner.temp }}/mutation/record
+            ${{ runner.temp }}/mutation/run.err
+            ${{ runner.temp }}/mutation/verdict.err
+          if-no-files-found: warn

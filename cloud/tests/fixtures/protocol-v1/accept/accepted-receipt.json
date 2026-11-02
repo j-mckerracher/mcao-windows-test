@@ -1,0 +1,24 @@
+{
+  "attempt": 1,
+  "compatibility": {
+    "image_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "instruction_digest": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "profile_id": "pi-standard",
+    "toolchain_manifest_digest": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+  },
+  "deadline_at": "2026-10-21T12:10:00Z",
+  "manifest_digest": "d605514710ef7358fd0b2cc85fee7b3804ea397fd8363f557c53cf406a1e832a",
+  "max_runtime_seconds": 600,
+  "projection_digest": "399bcbd6a6496805d7315ce1ad4f561badcb88cda6a2a07ccf84c625747c058d",
+  "protocol_version": "v1",
+  "run_id": "run_0123456789abcdef0123456789abcdef",
+  "source": {
+    "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "generation": 1,
+    "object_name": "runs/run_0123456789abcdef0123456789abcdef/input/source.tar",
+    "sha256": "7966866f7090c5ffe1be06b59458835081566feec2b3d5774d0180d90211c583",
+    "size_bytes": 1600
+  },
+  "state": "queued",
+  "version": 1
+}

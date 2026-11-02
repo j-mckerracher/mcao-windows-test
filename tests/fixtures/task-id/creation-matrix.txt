@@ -1,0 +1,46 @@
+# Cross-implementation task id matrix (DPES-970).
+# Row format: <creation verdict> <reader verdict> <id>. Verdicts are accept or reject.
+# The id is the rest of the line, and <empty> stands for the empty id.
+# bin/fm-pr-lib.sh (fm_task_id_creation_valid, fm_pr_task_id_valid) and
+# crates/mcao-core (TaskId::parse_for_creation, TaskId::parse) both read this file.
+accept accept a
+accept accept 0
+accept accept abc-123
+accept accept dpes-889-state-encoding
+accept accept -task
+accept accept task--a
+accept accept task_a
+reject accept Task_A
+reject accept DPES-901
+accept accept console
+accept accept com10
+accept accept lpt
+accept accept nul-1
+accept accept auxiliary
+accept accept aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+reject accept AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+reject accept aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+reject accept AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+reject accept x.y
+reject accept a.
+reject reject .a
+reject reject ..
+reject reject .
+reject reject <empty>
+reject reject  a
+reject reject a/b
+reject reject a\b
+reject reject a:b
+reject reject a b
+reject reject a=b
+reject reject café
+reject accept con
+reject accept CON
+reject accept Nul
+reject accept prn
+reject accept aux
+accept accept com0
+reject accept COM1
+accept accept lpt0
+reject accept LPT9
+reject accept con.txt

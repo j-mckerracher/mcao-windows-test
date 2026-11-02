@@ -1,0 +1,7 @@
+count: 2
+tasks[2]{id,state,kind,repo,title,hold_kind,hold_until}:
+  plain-one,queued,ship,sample,Ordinary queued work,"-","-"
+  plain-two,queued,ship,sample,More work,"-","-"
+help[2]:
+  - Run `tasks-axi show <id>` for full notes on a task
+  - Run `tasks-axi ready` to see unblocked queued work

@@ -1,0 +1,116 @@
+{
+  "kind": "aggregate",
+  "lanes": [
+    {
+      "finished_at": "2026-07-22T00:01:00Z",
+      "path": "a.json",
+      "run_id": "lane-\u00fcn\u00ef-1",
+      "selection": "lane=portable-parallel-1 \u00e9 \ud83d\ude00",
+      "started_at": "2026-07-22T00:00:00Z",
+      "summary": {
+        "duration_ms": 1500,
+        "failed": 1,
+        "skipped_gate": 1,
+        "total": 3
+      }
+    },
+    {
+      "finished_at": "2026-07-22T00:02:00Z",
+      "path": "b.json",
+      "run_id": "lane-2",
+      "selection": null,
+      "started_at": "2026-07-22T00:00:00Z",
+      "summary": {
+        "duration_ms": 2000,
+        "failed": 0,
+        "skipped_gate": 0,
+        "total": 2
+      }
+    }
+  ],
+  "scripts": [
+    {
+      "duration_ms": 1500,
+      "exit": 0,
+      "family": "herdr",
+      "gate_skip": false,
+      "lane_run_id": "lane-\u00fcn\u00ef-1",
+      "lane_selection": "lane=portable-parallel-1 \u00e9 \ud83d\ude00",
+      "path": "tests/b-\u00fc.test.sh"
+    },
+    {
+      "duration_ms": 900,
+      "exit": 1,
+      "family": "afk",
+      "gate_skip": true,
+      "gate_skip_reason": "x",
+      "lane_run_id": "lane-\u00fcn\u00ef-1",
+      "lane_selection": "lane=portable-parallel-1 \u00e9 \ud83d\ude00",
+      "path": "tests/a.test.sh"
+    },
+    {
+      "duration_ms": 900,
+      "exit": 0,
+      "family": "afk",
+      "gate_skip": false,
+      "lane_run_id": "lane-\u00fcn\u00ef-1",
+      "lane_selection": "lane=portable-parallel-1 \u00e9 \ud83d\ude00",
+      "path": "tests/z.test.sh"
+    },
+    {
+      "duration_ms": 500,
+      "exit": 0,
+      "family": "afk",
+      "gate_skip": false,
+      "lane_run_id": "lane-2",
+      "lane_selection": null,
+      "path": "tests/c.test.sh"
+    }
+  ],
+  "slowest": [
+    {
+      "duration_ms": 1500,
+      "exit": 0,
+      "family": "herdr",
+      "gate_skip": false,
+      "lane_run_id": "lane-\u00fcn\u00ef-1",
+      "lane_selection": "lane=portable-parallel-1 \u00e9 \ud83d\ude00",
+      "path": "tests/b-\u00fc.test.sh"
+    },
+    {
+      "duration_ms": 900,
+      "exit": 1,
+      "family": "afk",
+      "gate_skip": true,
+      "gate_skip_reason": "x",
+      "lane_run_id": "lane-\u00fcn\u00ef-1",
+      "lane_selection": "lane=portable-parallel-1 \u00e9 \ud83d\ude00",
+      "path": "tests/a.test.sh"
+    },
+    {
+      "duration_ms": 900,
+      "exit": 0,
+      "family": "afk",
+      "gate_skip": false,
+      "lane_run_id": "lane-\u00fcn\u00ef-1",
+      "lane_selection": "lane=portable-parallel-1 \u00e9 \ud83d\ude00",
+      "path": "tests/z.test.sh"
+    },
+    {
+      "duration_ms": 500,
+      "exit": 0,
+      "family": "afk",
+      "gate_skip": false,
+      "lane_run_id": "lane-2",
+      "lane_selection": null,
+      "path": "tests/c.test.sh"
+    }
+  ],
+  "summary": {
+    "critical_path_duration_ms": 2000,
+    "failed": 1,
+    "lanes": 2,
+    "skipped_gate": 1,
+    "total": 5
+  }
+}

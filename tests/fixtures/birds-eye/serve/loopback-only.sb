@@ -1,0 +1,11 @@
+(version 1)
+; Network-isolation profile for the bird's-eye live-service and snapshot proof (DPES-798, AC-19/AC-20, T12).
+; Everything except the network is allowed. Outbound network is denied by default, and only
+; loopback addresses and local UNIX sockets are allowed. A bare deny of network-outbound is
+; the control that holds; a deny that names remote "*:*" does not hold on this platform.
+(allow default)
+(deny network-outbound)
+(allow network-outbound (remote ip "localhost:*"))
+(allow network-outbound (remote unix-socket))
+(allow network-bind (local ip "localhost:*"))
+(allow network-inbound (local ip "localhost:*"))

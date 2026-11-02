@@ -1,0 +1,7 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "assignment_intent must be a non-empty string",
+    "previous assignment_intent differs from the request"
+  ]
+}

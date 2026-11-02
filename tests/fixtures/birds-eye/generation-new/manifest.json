@@ -1,0 +1,11 @@
+{
+  "configured": [
+    "/fleet/alpha"
+  ],
+  "homes": {
+    "/fleet/alpha": {
+      "file": "../snapshots/gen-2.json",
+      "exit": 0
+    }
+  }
+}

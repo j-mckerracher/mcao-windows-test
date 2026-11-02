@@ -1,0 +1,18 @@
+task:
+  id: body-dep
+  title: Dep wait
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: waiting
+  hold_kind: captain
+  hold_until: "-"
+  kind: ship
+  repo: sample
+  priority: "-"
+  created: 2026-10-23
+  closed: "-"
+  deps: none
+  links: none
+  body: "Captain hold set: 2026-10-23\nCaptain hold class: dependency-wait"

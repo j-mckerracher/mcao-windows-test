@@ -1,0 +1,27 @@
+{
+  "complete": true,
+  "categories": [
+    "committed",
+    "tracked-working-tree",
+    "untracked",
+    "renamed",
+    "deleted"
+  ],
+  "gaps": [],
+  "base_ok": true,
+  "identity": "sha256:a331815277f8b3a04099f9ba915e5fff8c501a7183778973c4d68118ed12ba01",
+  "paths": [
+    {
+      "path": "README.md",
+      "in_base": true,
+      "in_worktree": true,
+      "kind": "file"
+    },
+    {
+      "path": "docs/new.md",
+      "in_base": false,
+      "in_worktree": true,
+      "kind": "file"
+    }
+  ]
+}

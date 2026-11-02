@@ -1,0 +1,7 @@
+needs-decision [key=pending-reply-r1]: missed watch
+resolved [key=pending-reply-r1]: plain close without namespace
+resolved [key=pending-reply-r1]: pending-reply-missed: namespaced close
+needs-decision [key=pending-reply-r2]: pending-reply-recovery: opened by namespace
+resolved [key=pending-reply-r2]: plain close, not namespaced
+needs-decision [key=pending-reply-r3]: plain open not allowed
+needs-decision [key=ordinary]: unrelated

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<string>", line 26, in <module>
+    text = sys.stdin.read()
+  File "<frozen codecs>", line 325, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode bytes in position 33-35: invalid continuation byte

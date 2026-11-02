@@ -1,0 +1,99 @@
+---
+name: Lint
+
+# This workflow is rendered into generated repositories. The language-specific validator follows
+# the primary language selected in the repository request; the shared validators cover repository
+# configuration and security-sensitive files in every generated repository.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: lint-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  exception:
+    name: Hotfix exception
+    permissions:
+      contents: read
+    # The central Rego decision is shared by every generated CI workflow. A maintainer label alone
+    # is insufficient: the branch, target, incident/change, reason, and expiry must all validate.
+    uses: mc-innersource/mc-ci-reusable-workflows/.github/workflows/ci-hotfix-exception.yml@ed449b8ad620073467df187ec5b1b8d955888b20 # v2.0.1
+
+  lint:
+    name: Lint repository
+    needs: exception
+    if: needs.exception.outputs.approved != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      # zizmor's online ref audit cannot inspect a private repository with this repository's token.
+      # Enforce the important invariant locally instead: each known reusable workflow reference is
+      # an immutable full commit SHA, and all references resolve to the same reviewed release.
+      - name: Validate reusable workflow refs
+        shell: bash
+        run: |
+
+          set -euo pipefail
+          workflow_dir=.github/workflows
+          refs="$(
+            sed -nE \
+              's|^[[:space:]]*uses: mc-innersource/mc-ci-reusable-workflows/[^@]+@([^[:space:]#]+).*$|\1|p' \
+              "$workflow_dir"/*.yml "$workflow_dir"/*.yaml 2>/dev/null || true
+          )"
+          ref_count="$(printf '%s\n' "$refs" | sed '/^$/d' | wc -l | tr -d ' ')"
+
+          if [[ "$ref_count" -ne 5 ]]; then
+            echo "::error file=$workflow_dir::Expected the two Dependabot AI, policy, hotfix-exception, and PR-validation reusable-workflow refs."
+            exit 1
+          fi
+
+          while IFS= read -r ref; do
+            if [[ ! "$ref" =~ ^[0-9a-f]{40}$ ]]; then
+              echo "::error file=$workflow_dir::Reusable workflows must use a full commit SHA, not @$ref."
+              exit 1
+            fi
+          done <<< "$refs"
+
+          unique_ref_count="$(printf '%s\n' "$refs" | sed '/^$/d' | sort -u | wc -l | tr -d ' ')"
+          if [[ "$unique_ref_count" -ne 1 ]]; then
+            echo "::error file=$workflow_dir::All mc-ci-reusable-workflows calls must use the same released commit SHA."
+            exit 1
+          fi
+
+
+      - name: Super-linter
+        uses: super-linter/super-linter/slim@2da136927bd4a73596db63044b504547c62cb854 # v9.0.0
+        env:
+          # Keeping GITHUB_TOKEN out prevents zizmor from enabling online audits that cannot access
+          # private cross-repository workflow dependencies. All configured validators run locally.
+          DEFAULT_BRANCH: main
+          LINTER_RULES_PATH: .github/linters
+          VALIDATE_ALL_CODEBASE: true
+          MULTI_STATUS: false
+          ENABLE_GITHUB_PULL_REQUEST_SUMMARY_COMMENT: false
+          SAVE_SUPER_LINTER_SUMMARY: true
+          SUPPRESS_OUTPUT_ON_SUCCESS: true
+
+          # An explicit list keeps unrelated file types from unexpectedly enabling new linters.
+          VALIDATE_GITHUB_ACTIONS: true
+          VALIDATE_GITHUB_ACTIONS_ZIZMOR: true
+          VALIDATE_GITLEAKS: true
+          VALIDATE_GIT_MERGE_CONFLICT_MARKERS: true
+          VALIDATE_MARKDOWN: true
+          VALIDATE_YAML: true
+          YAML_ERROR_ON_WARNING: true

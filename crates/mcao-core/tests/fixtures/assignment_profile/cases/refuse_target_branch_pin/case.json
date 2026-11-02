@@ -1,0 +1,8 @@
+{
+  "code_root": "code_root",
+  "command": "validate",
+  "pins": {
+    "target_branch": "release",
+    "task": "T-1"
+  }
+}

@@ -1,0 +1,10 @@
+format=2
+path_style=windows
+backend=windows
+kind=ship
+home=C:\Users\REDACTED\mcao\home
+worktree=\\server\share\work\t1
+managed_worktree=\\?\C:\work\t1
+project=C:\work\proj
+harness=claude
+future_key=read and ignored by this reader

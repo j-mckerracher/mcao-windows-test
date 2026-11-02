@@ -1,0 +1,33 @@
+{
+  "schema": "assignment-profile-revisions.v1",
+  "current": "motif-assignment-profile-r2",
+  "revisions": [
+    {
+      "id": "motif-assignment-profile-r0",
+      "contract_version": 1,
+      "status": "revoked",
+      "files": {
+        "docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245"
+      }
+    },
+    {
+      "id": "motif-assignment-profile-r1",
+      "contract_version": 1,
+      "status": "approved",
+      "files": {
+        "docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "docs/assignment-profile-policy.md": "d44d5651d64eda3103940d29bc1634c90349fe8e177d500422845357c8119eed"
+      }
+    },
+    {
+      "id": "motif-assignment-profile-r2",
+      "contract_version": 1,
+      "status": "approved",
+      "files": {
+        "docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245"
+      }
+    }
+  ]
+}

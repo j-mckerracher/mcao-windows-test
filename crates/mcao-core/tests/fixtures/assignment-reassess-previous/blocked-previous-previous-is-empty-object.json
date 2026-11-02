@@ -1,0 +1,20 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous is missing keys: assignment_intent, change_coverage, classification_status, comparison_base_commit, contract_version, decision_id, decision_stage, evidence_obligations, expected_surfaces, pinned_policy_revision, profile, reasons, required_stages, risk_triggers, target_branch, task_id",
+    "previous contract_version must be 1",
+    "previous decision_id must be <task_id>/<sequence> for the request task_id",
+    "previous task_id differs from the request task_id",
+    "previous assignment_intent differs from the request",
+    "previous expected_surfaces differ from the request",
+    "previous target_branch differs from the host-pinned target_branch",
+    "previous pinned_policy_revision must be a non-empty string",
+    "previous comparison_base_commit must be a 40-hex commit",
+    "previous profile is not a known profile id",
+    "previous decision_stage must be provisional or final",
+    "previous classification_status must be resolved or unresolved",
+    "previous risk_triggers must be a unique list of known trigger names",
+    "previous change_coverage must be {complete, categories} with known categories",
+    "previous reasons must be a non-empty list of strings"
+  ]
+}

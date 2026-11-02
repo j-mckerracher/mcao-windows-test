@@ -1,0 +1,10 @@
+{
+  "code_root": "code_root",
+  "command": "validate",
+  "pins": {
+    "base_commit": "0123456789abcdef0123456789abcdef01234567",
+    "require_current": true,
+    "target_branch": "main",
+    "task": "T-1"
+  }
+}

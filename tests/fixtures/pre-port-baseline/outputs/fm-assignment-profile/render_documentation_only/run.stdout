@@ -1,0 +1,7 @@
+- Profile `documentation-only`, decision stage `final`, classification `resolved`, decision `T-1/1`.
+- Policy revision `motif-assignment-profile-r2`; target branch `main`; comparison base `0123456789abcdef0123456789abcdef01234567`.
+- Required stages, in order: ground-scope, implement, focused-review, verify, change-reassessment, delivery-handoff.
+- Tests: this profile requires zero tests executed; run only the applicable non-test checks, and do not run or add tests to satisfy it.
+- Independent change review: not required by this profile.
+- Reasons: spawn lifecycle and relaunch restoration change.
+- Evaluated change identity: `sha256:0`.

@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "audit-envelope.v1.schema.json",
+  "title": "mcao audit envelope v1",
+  "description": "Machine-readable form of the MCAO audit envelope v1 contract. docs/audit-envelope.md owns the prose contract, and bin/fm-audit-envelope.py's header owns validator mechanics.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "event_id",
+    "seq",
+    "ts",
+    "prev_hash",
+    "event",
+    "category",
+    "outcome",
+    "platform",
+    "home_id",
+    "day_key",
+    "session_id",
+    "agent",
+    "actor",
+    "repo",
+    "pr",
+    "commit",
+    "user"
+  ],
+  "properties": {
+    "schema": {
+      "const": "mcao.audit-envelope.v1"
+    },
+    "event_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "seq": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "ts": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$"
+    },
+    "prev_hash": {
+      "type": ["string", "null"],
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "event": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)+$"
+    },
+    "category": {
+      "enum": ["lifecycle", "delivery", "status", "supervision", "identity"]
+    },
+    "outcome": {
+      "enum": ["success", "failure", "rejected", "not_applicable"]
+    },
+    "platform": {
+      "const": "mcao"
+    },
+    "home_id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "day_key": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["role", "harness", "model"],
+      "properties": {
+        "role": {
+          "enum": ["firstmate", "secondmate", "ship", "scout"]
+        },
+        "harness": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      }
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "id"],
+      "properties": {
+        "type": {
+          "enum": ["user", "agent", "system"]
+        },
+        "id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "repo": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "pr": {
+      "type": ["string", "null"],
+      "pattern": "^https://[^ \\n]+$"
+    },
+    "commit": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "user": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "identity_source", "timezone"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^hmac-sha256:[0-9a-f]{64}$"
+        },
+        "identity_source": {
+          "enum": ["github_login", "git_email", "local_account"]
+        },
+        "timezone": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  },
+  "$defs": {
+    "fleet_ledger_v1_record": {
+      "description": "Frozen compatibility snapshot of the base members that fleet-ledger v1 readers rely on. docs/fleet-ledger.md still owns the record contract; this definition is not an envelope.",
+      "type": "object",
+      "required": ["v", "ts", "event", "task"],
+      "properties": {
+        "v": {
+          "const": 1
+        },
+        "ts": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "event": {
+          "type": "string",
+          "minLength": 1
+        },
+        "task": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

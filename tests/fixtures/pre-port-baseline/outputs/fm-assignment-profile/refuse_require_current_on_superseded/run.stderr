@@ -1,0 +1,1 @@
+error: assignment profile refused: pinned_policy_revision 'motif-assignment-profile-r1' is not the host-selected current revision 'motif-assignment-profile-r2'; new launches must pin the current revision

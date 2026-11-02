@@ -1,0 +1,31 @@
+{
+  "assignment": {
+    "task_id": "DPES-805",
+    "workflow_correlation": "wf-805"
+  },
+  "budget": {
+    "max_runtime_seconds": 600
+  },
+  "canonical_digest": "d605514710ef7358fd0b2cc85fee7b3804ea397fd8363f557c53cf406a1e832a",
+  "capacity": "standard",
+  "harness": "pi",
+  "model": "gemini-3.8-flash",
+  "protocol_version": "v9",
+  "request_uuid": "01a15e55-2200-7000-8000-000000000805",
+  "source": {
+    "base_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "config_digest": "3333333333333333333333333333333333333333333333333333333333333333",
+    "source_digest": "1111111111111111111111111111111111111111111111111111111111111111",
+    "task_digest": "2222222222222222222222222222222222222222222222222222222222222222"
+  },
+  "source_upload": {
+    "media_type": "application/x-tar",
+    "sha256": "7966866f7090c5ffe1be06b59458835081566feec2b3d5774d0180d90211c583",
+    "size_bytes": 1600
+  },
+  "target": {
+    "id": "cloud-pilot"
+  },
+  "thinking": "medium",
+  "toolchain_profile": "pi-standard"
+}

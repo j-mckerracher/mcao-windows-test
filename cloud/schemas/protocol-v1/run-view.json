@@ -1,0 +1,162 @@
+{
+  "$defs": {
+    "FailureCode": {
+      "enum": [
+        "upload_expired",
+        "queued_expired",
+        "deadline_exceeded",
+        "startup_timeout",
+        "heartbeat_lost",
+        "launch_uncertain",
+        "worker_failed",
+        "owner_cancelled",
+        "checksum_mismatch",
+        "missing_result"
+      ],
+      "title": "FailureCode",
+      "type": "string"
+    },
+    "Freshness": {
+      "enum": [
+        "fresh",
+        "stale",
+        "clock_anomaly"
+      ],
+      "title": "Freshness",
+      "type": "string"
+    },
+    "RunState": {
+      "enum": [
+        "awaiting_upload",
+        "queued",
+        "dispatching",
+        "starting",
+        "running",
+        "collecting",
+        "reconciling",
+        "cancel_requested",
+        "succeeded",
+        "failed",
+        "timed_out",
+        "cancelled"
+      ],
+      "title": "RunState",
+      "type": "string"
+    },
+    "TypedFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/FailureCode"
+        },
+        "message": {
+          "default": "",
+          "maxLength": 512,
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "retryable"
+      ],
+      "title": "TypedFailure",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "attempt": {
+      "minimum": 1,
+      "title": "Attempt",
+      "type": "integer",
+      "x-origin": "server-derived"
+    },
+    "deadline_at": {
+      "format": "date-time",
+      "title": "Deadline At",
+      "type": "string",
+      "x-origin": "server-derived"
+    },
+    "failure": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TypedFailure"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "x-origin": "server-derived"
+    },
+    "freshness": {
+      "$ref": "#/$defs/Freshness",
+      "x-origin": "server-derived"
+    },
+    "last_seen_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Last Seen At",
+      "x-origin": "server-derived"
+    },
+    "max_attempts": {
+      "minimum": 1,
+      "title": "Max Attempts",
+      "type": "integer",
+      "x-origin": "server-derived"
+    },
+    "owner_id": {
+      "title": "Owner Id",
+      "type": "string",
+      "x-origin": "server-derived"
+    },
+    "run_id": {
+      "pattern": "^run_[0-9a-f]{32}$",
+      "title": "Run Id",
+      "type": "string",
+      "x-origin": "server-derived"
+    },
+    "server_time": {
+      "format": "date-time",
+      "title": "Server Time",
+      "type": "string",
+      "x-origin": "server-derived"
+    },
+    "state": {
+      "$ref": "#/$defs/RunState",
+      "x-origin": "server-derived"
+    },
+    "version": {
+      "minimum": 0,
+      "title": "Version",
+      "type": "integer",
+      "x-origin": "server-derived"
+    }
+  },
+  "required": [
+    "run_id",
+    "owner_id",
+    "state",
+    "version",
+    "attempt",
+    "max_attempts",
+    "deadline_at",
+    "server_time",
+    "freshness"
+  ],
+  "title": "RunView",
+  "type": "object"
+}

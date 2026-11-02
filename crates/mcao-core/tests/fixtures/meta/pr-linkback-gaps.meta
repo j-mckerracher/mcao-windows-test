@@ -1,0 +1,14 @@
+window=firstmate:fm-pr-linkback-gaps
+endpoint_task_id=pr-linkback-gaps
+worktree=/Users/REDACTED/.treehouse/motif-multi-agent-orchestrator-b32c3a/2/motif-multi-agent-orchestrator
+project=/Users/REDACTED/agent-tools/firstmate-pstack/projects/motif-multi-agent-orchestrator
+harness=claude
+kind=ship
+mode=direct-PR
+yolo=off
+branch=fix/DPES-773_pr-linkback-gaps
+tasktmp=/tmp/fm-pr-linkback-gaps
+model=claude-haiku-5-5
+effort=xhigh
+busy_gen=g1792101960.42587.14718
+spawn_gen=s1792101961.34899.26913

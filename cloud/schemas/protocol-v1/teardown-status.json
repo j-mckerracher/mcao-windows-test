@@ -1,0 +1,84 @@
+{
+  "$defs": {
+    "CleanupOutcome": {
+      "enum": [
+        "eligible",
+        "fenced",
+        "running",
+        "incomplete",
+        "complete",
+        "retained-exception",
+        "expired",
+        "unavailable"
+      ],
+      "title": "CleanupOutcome",
+      "type": "string"
+    },
+    "RunState": {
+      "enum": [
+        "awaiting_upload",
+        "queued",
+        "dispatching",
+        "starting",
+        "running",
+        "collecting",
+        "reconciling",
+        "cancel_requested",
+        "succeeded",
+        "failed",
+        "timed_out",
+        "cancelled"
+      ],
+      "title": "RunState",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Separates normal terminal execution from durable data still pending deletion.",
+  "properties": {
+    "data_cleanup": {
+      "$ref": "#/$defs/CleanupOutcome"
+    },
+    "execution_state": {
+      "$ref": "#/$defs/RunState"
+    },
+    "fresh_run_implied": {
+      "const": false,
+      "default": false,
+      "title": "Fresh Run Implied",
+      "type": "boolean"
+    },
+    "pending_deletion": {
+      "title": "Pending Deletion",
+      "type": "boolean"
+    },
+    "preserved_records": {
+      "default": [
+        "idempotency_record",
+        "audit_record"
+      ],
+      "items": {
+        "enum": [
+          "idempotency_record",
+          "audit_record"
+        ],
+        "type": "string"
+      },
+      "title": "Preserved Records",
+      "type": "array"
+    },
+    "run_id": {
+      "pattern": "^run_[0-9a-f]{32}$",
+      "title": "Run Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "run_id",
+    "execution_state",
+    "data_cleanup",
+    "pending_deletion"
+  ],
+  "title": "TeardownStatus",
+  "type": "object"
+}

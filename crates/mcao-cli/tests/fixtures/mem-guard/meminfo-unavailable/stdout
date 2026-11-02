@@ -1,0 +1,22 @@
+{
+  "name": "fm-jev-mem-guard",
+  "checked_at": "2026-10-24T16:31:10Z",
+  "status": "UNKNOWN",
+  "recommendation": "/proc/meminfo is unreadable or incomplete on this host; the verdict is withheld rather than fabricated.",
+  "reason": "meminfo-unavailable",
+  "summary": {
+    "mem_total_gb": null,
+    "mem_available_gb": null,
+    "mem_used_pct": null,
+    "swap_total_gb": null,
+    "swap_used_gb": null,
+    "swap_used_pct": null
+  },
+  "top_processes": [
+    {
+      "pid": 7,
+      "comm": "python3",
+      "rss_mb": 19.7
+    }
+  ]
+}

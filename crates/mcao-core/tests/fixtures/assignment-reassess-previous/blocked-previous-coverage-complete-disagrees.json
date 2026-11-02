@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous change_coverage.complete disagrees with its categories"
+  ]
+}

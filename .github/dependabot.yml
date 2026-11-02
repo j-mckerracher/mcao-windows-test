@@ -1,0 +1,32 @@
+# Dependabot configuration.
+#
+# Each PR Dependabot opens here is picked up by .github/workflows/dependabot-ai-impact.yml, which
+# asks GitHub Copilot to assess the update's impact on this application. That assessment is
+# advisory -- nothing here enables auto-merge.
+#
+# Generated from the organization template. Which ecosystems appear below was decided by the
+# `language` and `extra_ecosystems` answers on the New Repository Request; add another by editing
+# this file directly, or by changing the template and running `copier update`.
+
+version: 2
+
+updates:
+  # --- GitHub Actions (applies to every repo) ---
+  # Keeps the action SHAs in .github/workflows current. Dependabot rewrites the pinned SHA and its
+  # trailing `# vX.Y.Z` comment together, which is what makes SHA pinning maintainable rather than
+  # something that silently rots.
+  #
+  # Never conditional. An empty `updates:` list is a hard Dependabot config error, so this block is
+  # what guarantees the list is non-empty when `language` is `other` and no extras were chosen.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:17"
+      timezone: America/Chicago
+    # Version updates wait long enough for obvious bad releases to surface; security updates do not.
+    cooldown:
+      default-days: 7
+    open-pull-requests-limit: 5
+    labels: [dependencies, github-actions]

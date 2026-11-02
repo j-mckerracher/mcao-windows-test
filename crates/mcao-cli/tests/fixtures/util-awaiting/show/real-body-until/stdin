@@ -1,0 +1,18 @@
+task:
+  id: body-until
+  title: Until hold
+  state: queued
+  blocked: no
+  blocked_by: none
+  held: yes
+  hold_reason: until date
+  hold_kind: captain
+  hold_until: 2026-12-01
+  kind: ship
+  repo: sample
+  priority: "-"
+  created: 2026-10-23
+  closed: "-"
+  deps: none
+  links: none
+  body: ""

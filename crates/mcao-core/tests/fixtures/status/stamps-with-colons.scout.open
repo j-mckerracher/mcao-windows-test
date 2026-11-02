@@ -1,0 +1,2 @@
+default	needs-decision	bare after stamp
+b	needs-decision	stamp before key

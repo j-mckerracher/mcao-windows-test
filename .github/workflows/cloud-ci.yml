@@ -1,0 +1,119 @@
+name: Cloud CI
+
+on:
+  pull_request:
+    paths:
+      - "cloud/**"
+      - ".github/workflows/cloud-*.yml"
+  push:
+    branches: [main]
+    paths:
+      - "cloud/**"
+      - ".github/workflows/cloud-*.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloud-ci-${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  python:
+    name: Python suite and controller requirements drift
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: "0.11.1"
+      - name: Sync the locked environment
+        working-directory: cloud
+        run: uv sync --locked --all-extras
+      - name: Run the test suite
+        working-directory: cloud
+        run: uv run --frozen pytest
+      - name: Check the controller requirements against the lock
+        working-directory: cloud
+        run: |
+          set -eu
+          uv export --frozen --no-dev --extra controller --no-emit-project --no-annotate --no-header > "$RUNNER_TEMP/controller.txt"
+          diff -u requirements/controller.txt "$RUNNER_TEMP/controller.txt"
+
+  workflows:
+    name: Lint GitHub workflows
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install pinned actionlint
+        run: |
+          set -eu
+          bin/fm-install-actionlint.sh "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Lint workflows
+        run: bin/fm-lint-workflows.sh
+
+  images:
+    name: Build and smoke-test all three images without pushing
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build the controller image
+        run: docker build --platform linux/amd64 -f cloud/Dockerfile.controller -t mao-controller:ci .
+      - name: Smoke-test the controller image
+        run: |
+          docker run --rm --network none --entrypoint /bin/sh mao-controller:ci -ec '
+            test "$(id -u)" = 10002
+            command -v apk
+            command -v python3
+            python3 -c "import mao_cloud.serve"
+            for command in node npm pi; do
+              if command -v "$command"; then
+                echo "Unexpected controller command: $command" >&2
+                exit 1
+              fi
+            done
+          '
+      - name: Build the worker image
+        run: docker build --platform linux/amd64 -f cloud/Dockerfile -t mao-worker:ci .
+      - name: Smoke-test the worker image
+        run: |
+          docker run --rm --network none --entrypoint /bin/sh mao-worker:ci -ec '
+            test "$(id -u)" = 10001
+            command -v apk
+            command -v git
+            command -v node
+            command -v pi
+            if command -v npm; then
+              echo "npm remains installed in the worker image" >&2
+              exit 1
+            fi
+            pi --version
+            node /opt/pi/check-undici.js /opt/pi 8.12.2
+          '
+      - name: Build the signer image
+        run: docker build --platform linux/amd64 -f cloud/Dockerfile.signer -t mao-signer:ci .
+      - name: Smoke-test the signer image
+        run: |
+          docker run --rm --network none --entrypoint /bin/sh mao-signer:ci -ec '
+            test "$(id -u)" = 10003
+            command -v apk
+            command -v python3
+            python3 -c "import mao_cloud.signer_serve"
+            for command in node npm pi; do
+              if command -v "$command"; then
+                echo "Unexpected signer command: $command" >&2
+                exit 1
+              fi
+            done
+          '

@@ -1,0 +1,95 @@
+name: Cloud record digests
+
+# Reads the digests of the images just pushed to Artifact Registry, gates the set on the scan state the
+# registry reports, and records digests and scan state in the job summary. Callers pass exact image
+# references. Recording a digest does not change the compatibility matrix, which only a reviewed change
+# may extend (cloud/release/compatibility-matrix.json).
+#
+# The gate is cloud/src/mao_cloud/release_evidence.py. It blocks a set whose scan did not finish, that
+# lists a Critical or High finding, or whose images share a digest. The push workflows expose no digest,
+# so this job cannot compare against a pinned digest: each digest it checks is the one its own read
+# returned. The operator's pin check runs the same module against the digests it was asked for. Build
+# attestations are not read here.
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      controller_image:
+        required: true
+        type: string
+      worker_image:
+        required: true
+        type: string
+      signer_image:
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  record:
+    name: Read, gate and record pushed digests
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    timeout-minutes: 10
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3.0.0
+        with:
+          credentials_json: ${{ secrets.GS2_IMPERSONATION_ACCOUNT_SECRET }}
+      - name: Read the pushed images from Artifact Registry
+        env:
+          CONTROLLER_IMAGE: ${{ inputs.controller_image }}
+          WORKER_IMAGE: ${{ inputs.worker_image }}
+          SIGNER_IMAGE: ${{ inputs.signer_image }}
+        run: |
+          set -eu
+          gcloud config set auth/impersonate_service_account gsa5-caf-mgmt@dpe-platform-d.iam.gserviceaccount.com
+          describe() {
+            gcloud artifacts docker images describe "$2" --show-all-metadata --format=json > "$RUNNER_TEMP/$1.json"
+            # gcloud can print raw control characters that jq refuses; rewrite the response as strict JSON once.
+            PYTHONPATH=cloud/src python3 -m mao_cloud.describe_normalize "$RUNNER_TEMP/$1.json"
+          }
+          describe controller "$CONTROLLER_IMAGE"
+          describe worker "$WORKER_IMAGE"
+          describe signer "$SIGNER_IMAGE"
+          for role in controller worker signer; do
+            digest="$(jq -r '.image_summary.digest' "$RUNNER_TEMP/$role.json")"
+            if ! printf '%s\n' "$digest" | grep -Eq '^sha256:[0-9a-f]{64}$'; then
+              echo "no sha256 digest read back for $role" >&2
+              exit 1
+            fi
+          done
+      - name: Gate the digest set on the registry scan state and record it
+        run: |
+          set -eu
+          digest() {
+            jq -r '.image_summary.digest' "$RUNNER_TEMP/$1.json"
+          }
+          gate=0
+          PYTHONPATH=cloud/src python3 -m mao_cloud.release_evidence \
+            --controller-describe "$RUNNER_TEMP/controller.json" --controller-digest "$(digest controller)" \
+            --worker-describe "$RUNNER_TEMP/worker.json" --worker-digest "$(digest worker)" \
+            --signer-describe "$RUNNER_TEMP/signer.json" --signer-digest "$(digest signer)" \
+            > "$RUNNER_TEMP/evidence.json" || gate=$?
+          {
+            echo "### Pushed images"
+            echo
+            jq -r '
+              "| Image | Digest | Scan status | Last scan | Critical | High |",
+              "| --- | --- | --- | --- | --- | --- |",
+              (.controller, .worker, .signer | "| \(.name) | \(.digest) | \(.scan_status) | \(.last_scan_time) | \(.critical) | \(.high) |"),
+              "",
+              "Attestation: \(.attestation)",
+              (.blockers[] | "Blocked: \(.)")
+            ' "$RUNNER_TEMP/evidence.json"
+          } >> "$GITHUB_STEP_SUMMARY"
+          exit "$gate"

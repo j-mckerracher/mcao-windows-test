@@ -1,0 +1,7 @@
+{
+  "code_root": "code_root",
+  "command": "meta",
+  "pins": {
+    "task": "T-1"
+  }
+}

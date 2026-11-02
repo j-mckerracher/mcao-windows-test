@@ -1,0 +1,10 @@
+format=2
+path_style=posix
+window=firstmate:fm-DPES-901
+worktree=/Users/REDACTED/agent-tools/firstmate-pstack/data/dpes-845-birds-eye-model/ac01-home/wt/DPES-901
+project=alpha
+harness=claude
+kind=ship
+mode=direct-PR
+yolo=off
+spawn_gen=1

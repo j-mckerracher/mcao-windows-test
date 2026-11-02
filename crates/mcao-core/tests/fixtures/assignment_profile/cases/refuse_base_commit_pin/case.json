@@ -1,0 +1,8 @@
+{
+  "code_root": "code_root",
+  "command": "validate",
+  "pins": {
+    "base_commit": "fedcba9876543210fedcba9876543210fedcba98",
+    "task": "T-1"
+  }
+}

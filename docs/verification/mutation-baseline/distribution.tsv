@@ -1,0 +1,88 @@
+surface	measure	unit	min	median	max	max_over_median	stable
+bin/fm-capability-schema.sh	error	count	12	12	12	1.000	yes
+bin/fm-capability-schema.sh	killed	count	120	120	120	1.000	yes
+bin/fm-capability-schema.sh	mutants_total	count	175	175	175	1.000	yes
+bin/fm-capability-schema.sh	survived	count	43	43	43	1.000	yes
+bin/fm-capability-schema.sh	timeout	count	0	0	0	n/a (median 0)	yes
+bin/fm-check-unregister.sh	error	count	3	3	3	1.000	yes
+bin/fm-check-unregister.sh	killed	count	25	25	25	1.000	yes
+bin/fm-check-unregister.sh	mutants_total	count	42	42	42	1.000	yes
+bin/fm-check-unregister.sh	survived	count	14	14	14	1.000	yes
+bin/fm-check-unregister.sh	timeout	count	0	0	0	n/a (median 0)	yes
+bin/fm-ensure-agents-md.sh	error	count	32	32	32	1.000	yes
+bin/fm-ensure-agents-md.sh	killed	count	67	67	67	1.000	yes
+bin/fm-ensure-agents-md.sh	mutants_total	count	161	161	161	1.000	yes
+bin/fm-ensure-agents-md.sh	survived	count	62	62	62	1.000	yes
+bin/fm-ensure-agents-md.sh	timeout	count	0	0	0	n/a (median 0)	yes
+bin/fm-forge-detect.sh	error	count	5	5	5	1.000	yes
+bin/fm-forge-detect.sh	killed	count	19	19	19	1.000	yes
+bin/fm-forge-detect.sh	mutants_total	count	29	29	29	1.000	yes
+bin/fm-forge-detect.sh	survived	count	5	5	5	1.000	yes
+bin/fm-forge-detect.sh	timeout	count	0	0	0	n/a (median 0)	yes
+bin/fm-mutation-verdict.sh	error	count	13	13	13	1.000	yes
+bin/fm-mutation-verdict.sh	killed	count	99	99	99	1.000	yes
+bin/fm-mutation-verdict.sh	mutants_total	count	132	132	132	1.000	yes
+bin/fm-mutation-verdict.sh	survived	count	20	20	20	1.000	yes
+bin/fm-mutation-verdict.sh	timeout	count	0	0	0	n/a (median 0)	yes
+bin/fm-operational-input.sh	error	count	45	45	45	1.000	yes
+bin/fm-operational-input.sh	killed	count	197	197	197	1.000	yes
+bin/fm-operational-input.sh	mutants_total	count	359	359	359	1.000	yes
+bin/fm-operational-input.sh	survived	count	117	117	117	1.000	yes
+bin/fm-operational-input.sh	timeout	count	0	0	0	n/a (median 0)	yes
+bin/fm-panel-report.sh	error	count	37	37	37	1.000	yes
+bin/fm-panel-report.sh	killed	count	129	129	129	1.000	yes
+bin/fm-panel-report.sh	mutants_total	count	200	200	200	1.000	yes
+bin/fm-panel-report.sh	survived	count	33	33	33	1.000	yes
+bin/fm-panel-report.sh	timeout	count	1	1	1	1.000	yes
+bin/fm-remote-delta-read.sh	error	count	21	21	21	1.000	yes
+bin/fm-remote-delta-read.sh	killed	count	98	98	98	1.000	yes
+bin/fm-remote-delta-read.sh	mutants_total	count	185	185	185	1.000	yes
+bin/fm-remote-delta-read.sh	survived	count	65	65	65	1.000	yes
+bin/fm-remote-delta-read.sh	timeout	count	1	1	1	1.000	yes
+bin/fm-remote-entrypoint.sh	error	count	24	24	24	1.000	yes
+bin/fm-remote-entrypoint.sh	killed	count	8	8	8	1.000	yes
+bin/fm-remote-entrypoint.sh	mutants_total	count	159	159	159	1.000	yes
+bin/fm-remote-entrypoint.sh	survived	count	127	127	127	1.000	yes
+bin/fm-remote-entrypoint.sh	timeout	count	0	0	0	n/a (median 0)	yes
+bin/fm-resolve-toggles.sh	error	count	8	8	8	1.000	yes
+bin/fm-resolve-toggles.sh	killed	count	60	60	60	1.000	yes
+bin/fm-resolve-toggles.sh	mutants_total	count	78	78	78	1.000	yes
+bin/fm-resolve-toggles.sh	survived	count	10	10	10	1.000	yes
+bin/fm-resolve-toggles.sh	timeout	count	0	0	0	n/a (median 0)	yes
+bin/fm-secondmate-parent-migrate.sh	error	count	36	36	36	1.000	yes
+bin/fm-secondmate-parent-migrate.sh	killed	count	144	144	144	1.000	yes
+bin/fm-secondmate-parent-migrate.sh	mutants_total	count	275	275	275	1.000	yes
+bin/fm-secondmate-parent-migrate.sh	survived	count	89	89	89	1.000	yes
+bin/fm-secondmate-parent-migrate.sh	timeout	count	6	6	6	1.000	yes
+bin/fm-supervision-instructions.sh	error	count	51	51	51	1.000	yes
+bin/fm-supervision-instructions.sh	killed	count	92	92	92	1.000	yes
+bin/fm-supervision-instructions.sh	mutants_total	count	191	191	191	1.000	yes
+bin/fm-supervision-instructions.sh	survived	count	41	41	41	1.000	yes
+bin/fm-supervision-instructions.sh	timeout	count	7	7	7	1.000	yes
+bin/fm-trace-context-lib.sh	error	count	16	16	16	1.000	yes
+bin/fm-trace-context-lib.sh	killed	count	61	61	61	1.000	yes
+bin/fm-trace-context-lib.sh	mutants_total	count	117	117	117	1.000	yes
+bin/fm-trace-context-lib.sh	survived	count	40	40	40	1.000	yes
+bin/fm-trace-context-lib.sh	timeout	count	0	0	0	n/a (median 0)	yes
+bin/fm-transition-lib.sh	error	count	6	6	6	1.000	yes
+bin/fm-transition-lib.sh	killed	count	15	15	15	1.000	yes
+bin/fm-transition-lib.sh	mutants_total	count	23	23	23	1.000	yes
+bin/fm-transition-lib.sh	survived	count	2	2	2	1.000	yes
+bin/fm-transition-lib.sh	timeout	count	0	0	0	n/a (median 0)	yes
+fast-oracle-14	container_cpu_s_approx	s	6961.00	7078.00	7982.00	1.128	yes
+fast-oracle-14	container_peak_mem_MiB	MiB	277.40	386.80	402.40	1.040	yes
+fast-oracle-14	error	count	309	309	309	1.000	yes
+fast-oracle-14	excluded	count	0	0	0	n/a (median 0)	yes
+fast-oracle-14	host_max_rss_MiB	MiB	44.90	45.10	45.20	1.002	yes
+fast-oracle-14	host_real_s	s	7486.78	7575.92	8587.79	1.134	yes
+fast-oracle-14	host_sys_s	s	14.36	19.28	19.53	1.013	yes
+fast-oracle-14	host_user_s	s	5.74	8.91	8.99	1.009	yes
+fast-oracle-14	invalid_mutants	count	309	309	309	1.000	yes
+fast-oracle-14	killed	count	1134	1134	1134	1.000	yes
+fast-oracle-14	mutants_total	count	2126	2126	2126	1.000	yes
+fast-oracle-14	seeded_named_killed	count	4	4	4	1.000	yes
+fast-oracle-14	survived	count	668	668	668	1.000	yes
+fast-oracle-14	timeout	count	15	15	15	1.000	yes
+fast-oracle-14	unresolved	count	0	0	0	n/a (median 0)	yes
+fast-oracle-14	valid_run	flag	1	1	1	1.000	yes
+fast-oracle-14	wall_s	s	7487.00	7576.00	8587.00	1.133	yes

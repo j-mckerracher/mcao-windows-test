@@ -1,0 +1,452 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "assignment-profile-decision.v1.schema.json",
+  "title": "mcao assignment profile decision v1",
+  "description": "Machine-readable shape of the assignment profile decision contract v1. docs/assignment-profile-policy.md owns the policy, the host and consumer checks, and every rule this schema cannot express.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "decision_id",
+    "task_id",
+    "assignment_intent",
+    "expected_surfaces",
+    "pinned_policy_revision",
+    "profile",
+    "decision_stage",
+    "classification_status",
+    "risk_triggers",
+    "change_coverage",
+    "reasons",
+    "required_stages",
+    "evidence_obligations",
+    "target_branch",
+    "comparison_base_commit"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": 1
+    },
+    "decision_id": {
+      "type": "string",
+      "pattern": "^[^/]+/[1-9][0-9]*$"
+    },
+    "task_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assignment_intent": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expected_surfaces": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "pinned_policy_revision": {
+      "type": "string",
+      "minLength": 1
+    },
+    "profile": {
+      "enum": [
+        "documentation-only",
+        "small-low-risk",
+        "standard",
+        "high-risk"
+      ]
+    },
+    "decision_stage": {
+      "enum": [
+        "provisional",
+        "final"
+      ]
+    },
+    "classification_status": {
+      "enum": [
+        "resolved",
+        "unresolved"
+      ]
+    },
+    "risk_triggers": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "security-authorization-secrets-or-sensitive-data",
+          "destructive-operation-or-data-migration",
+          "dispatch-lifecycle-worktree-delivery-merge-or-proof-gate-authority",
+          "breaking-public-contract",
+          "cross-component-shared-state-concurrency-or-recovery",
+          "broad-change-needing-coordinated-design-and-verification"
+        ]
+      }
+    },
+    "change_coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "complete",
+        "categories"
+      ],
+      "properties": {
+        "complete": {
+          "type": "boolean"
+        },
+        "categories": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "committed",
+              "tracked-working-tree",
+              "untracked",
+              "renamed",
+              "deleted"
+            ]
+          }
+        }
+      }
+    },
+    "reasons": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "required_stages": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "ground-scope",
+          "short-plan",
+          "design",
+          "design-critique",
+          "implement",
+          "focused-review",
+          "verify",
+          "independent-change-review",
+          "risk-verify",
+          "change-reassessment",
+          "delivery-handoff"
+        ]
+      }
+    },
+    "evidence_obligations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tests_required",
+        "independent_change_review_required"
+      ],
+      "properties": {
+        "tests_required": {
+          "type": "boolean"
+        },
+        "independent_change_review_required": {
+          "type": "boolean"
+        }
+      }
+    },
+    "target_branch": {
+      "type": "string",
+      "minLength": 1
+    },
+    "comparison_base_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "evaluated_change_identity": {
+      "type": "string",
+      "minLength": 1
+    },
+    "supersedes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision_id",
+        "escalation_reasons"
+      ],
+      "properties": {
+        "decision_id": {
+          "$ref": "#/properties/decision_id"
+        },
+        "escalation_reasons": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "profile"
+        ],
+        "properties": {
+          "profile": {
+            "const": "documentation-only"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "required_stages": {
+            "const": [
+              "ground-scope",
+              "implement",
+              "focused-review",
+              "verify",
+              "change-reassessment",
+              "delivery-handoff"
+            ]
+          },
+          "evidence_obligations": {
+            "properties": {
+              "tests_required": {
+                "const": false
+              },
+              "independent_change_review_required": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "profile"
+        ],
+        "properties": {
+          "profile": {
+            "const": "small-low-risk"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "required_stages": {
+            "const": [
+              "ground-scope",
+              "short-plan",
+              "implement",
+              "focused-review",
+              "verify",
+              "change-reassessment",
+              "delivery-handoff"
+            ]
+          },
+          "evidence_obligations": {
+            "properties": {
+              "independent_change_review_required": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "profile"
+        ],
+        "properties": {
+          "profile": {
+            "const": "standard"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "required_stages": {
+            "const": [
+              "ground-scope",
+              "design",
+              "implement",
+              "focused-review",
+              "verify",
+              "change-reassessment",
+              "delivery-handoff"
+            ]
+          },
+          "evidence_obligations": {
+            "properties": {
+              "independent_change_review_required": {
+                "const": false
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "profile"
+        ],
+        "properties": {
+          "profile": {
+            "const": "high-risk"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "required_stages": {
+            "const": [
+              "ground-scope",
+              "design",
+              "design-critique",
+              "implement",
+              "independent-change-review",
+              "risk-verify",
+              "change-reassessment",
+              "delivery-handoff"
+            ]
+          },
+          "evidence_obligations": {
+            "properties": {
+              "independent_change_review_required": {
+                "const": true
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "decision_stage"
+        ],
+        "properties": {
+          "decision_stage": {
+            "const": "final"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "evaluated_change_identity"
+        ],
+        "properties": {
+          "classification_status": {
+            "const": "resolved"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "classification_status"
+        ],
+        "properties": {
+          "classification_status": {
+            "const": "unresolved"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "decision_stage": {
+            "const": "provisional"
+          },
+          "profile": {
+            "const": "high-risk"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "risk_triggers"
+        ],
+        "properties": {
+          "risk_triggers": {
+            "minItems": 1
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "profile": {
+            "const": "high-risk"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "change_coverage"
+        ],
+        "properties": {
+          "change_coverage": {
+            "required": [
+              "complete"
+            ],
+            "properties": {
+              "complete": {
+                "const": false
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "classification_status": {
+            "const": "unresolved"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "required": [
+          "change_coverage"
+        ],
+        "properties": {
+          "change_coverage": {
+            "required": [
+              "complete"
+            ],
+            "properties": {
+              "complete": {
+                "const": true
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "change_coverage": {
+            "properties": {
+              "categories": {
+                "minItems": 5
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
+  "format": "uuid"
+}

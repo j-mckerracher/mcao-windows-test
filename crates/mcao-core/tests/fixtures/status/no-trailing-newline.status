@@ -1,0 +1,4 @@
+needs-decision [key=q]
+needs-decision [key=a]: opened
+resolved [key=a]: closes a
+needs-decision [key=z]: last line has no newline

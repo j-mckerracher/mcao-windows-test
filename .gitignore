@@ -1,0 +1,24 @@
+.claude/plans/
+.npmrc
+# from firstmate
+projects/
+/state/
+data/
+scratchpad*
+.no-mistakes/
+.lavish/
+.fm-secondmate-home
+.fm-secondmate-parent
+.DS_Store
+__pycache__/
+*.pyc
+.env
+/config/
+
+.tools/
+
+# keep skills tracked even where a global gitignore excludes .agents/
+!.agents/
+
+# Rust workspace build output
+/target/

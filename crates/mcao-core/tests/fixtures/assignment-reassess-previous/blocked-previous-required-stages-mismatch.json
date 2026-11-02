@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous required_stages do not match its profile"
+  ]
+}

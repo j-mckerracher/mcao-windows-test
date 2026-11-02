@@ -1,0 +1,270 @@
+{
+  "$defs": {
+    "Assignment": {
+      "additionalProperties": false,
+      "properties": {
+        "task_id": {
+          "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,127}$",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "workflow_correlation": {
+          "pattern": "^[A-Za-z0-9_.:/-]{1,128}$",
+          "title": "Workflow Correlation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "task_id",
+        "workflow_correlation"
+      ],
+      "title": "Assignment",
+      "type": "object"
+    },
+    "Budget": {
+      "additionalProperties": false,
+      "properties": {
+        "max_runtime_seconds": {
+          "maximum": 7200,
+          "minimum": 60,
+          "title": "Max Runtime Seconds",
+          "type": "integer"
+        },
+        "restart_budget": {
+          "default": null,
+          "title": "Restart Budget",
+          "type": "null",
+          "x-blocking": [
+            "DPES-870"
+          ]
+        }
+      },
+      "required": [
+        "max_runtime_seconds"
+      ],
+      "title": "Budget",
+      "type": "object"
+    },
+    "CloudTarget": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "pattern": "^[a-z][a-z0-9-]{2,62}$",
+          "title": "Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "CloudTarget",
+      "type": "object"
+    },
+    "SourceBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "base_sha": {
+          "pattern": "^[0-9a-f]{40}$",
+          "title": "Base Sha",
+          "type": "string"
+        },
+        "config_digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Config Digest",
+          "type": "string"
+        },
+        "source_digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Source Digest",
+          "type": "string"
+        },
+        "task_digest": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Task Digest",
+          "type": "string"
+        }
+      },
+      "required": [
+        "base_sha",
+        "source_digest",
+        "task_digest",
+        "config_digest"
+      ],
+      "title": "SourceBinding",
+      "type": "object"
+    },
+    "SourceUpload": {
+      "additionalProperties": false,
+      "description": "The client's declared intent to upload immutable source bytes.",
+      "properties": {
+        "media_type": {
+          "const": "application/x-tar",
+          "title": "Media Type",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "maximum": 536870912,
+          "minimum": 1,
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "size_bytes",
+        "sha256",
+        "media_type"
+      ],
+      "title": "SourceUpload",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "assignment": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/Assignment"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "x-origin": "client-manifest"
+    },
+    "budget": {
+      "$ref": "#/$defs/Budget",
+      "x-origin": "client-manifest"
+    },
+    "canonical_digest": {
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Canonical Digest",
+      "type": "string",
+      "x-origin": "client-manifest"
+    },
+    "capacity": {
+      "const": "standard",
+      "title": "Capacity",
+      "type": "string",
+      "x-origin": "client-manifest"
+    },
+    "harness": {
+      "const": "pi",
+      "title": "Harness",
+      "type": "string",
+      "x-origin": "client-manifest"
+    },
+    "model": {
+      "const": "gemini-3.8-flash",
+      "title": "Model",
+      "type": "string",
+      "x-origin": "client-manifest"
+    },
+    "protocol_version": {
+      "const": "v1",
+      "title": "Protocol Version",
+      "type": "string",
+      "x-origin": "client-manifest"
+    },
+    "request_uuid": {
+      "format": "uuid",
+      "title": "Request Uuid",
+      "type": "string",
+      "x-origin": "client-manifest"
+    },
+    "source": {
+      "$ref": "#/$defs/SourceBinding",
+      "x-origin": "client-manifest"
+    },
+    "source_upload": {
+      "$ref": "#/$defs/SourceUpload",
+      "x-origin": "client-manifest"
+    },
+    "target": {
+      "$ref": "#/$defs/CloudTarget",
+      "x-origin": "client-manifest"
+    },
+    "thinking": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "Thinking",
+      "type": "string",
+      "x-origin": "client-manifest"
+    },
+    "toolchain_profile": {
+      "pattern": "^[a-z][a-z0-9-]{1,62}$",
+      "title": "Toolchain Profile",
+      "type": "string",
+      "x-origin": "client-manifest"
+    }
+  },
+  "required": [
+    "protocol_version",
+    "request_uuid",
+    "harness",
+    "model",
+    "thinking",
+    "toolchain_profile",
+    "target",
+    "source",
+    "source_upload",
+    "budget",
+    "capacity",
+    "canonical_digest"
+  ],
+  "title": "CreateRunRequest",
+  "type": "object",
+  "x-forbidden-inputs": [
+    "access_token",
+    "actor",
+    "argv",
+    "attempt",
+    "attempt_number",
+    "body",
+    "claim",
+    "claim_id",
+    "claim_nonce",
+    "command",
+    "container_image",
+    "control",
+    "credential",
+    "credentials",
+    "download_url",
+    "env",
+    "environment",
+    "fence",
+    "fence_token",
+    "id_token",
+    "image",
+    "image_digest",
+    "image_ref",
+    "local_path",
+    "owner",
+    "owner_id",
+    "path",
+    "principal",
+    "run_id",
+    "runtime_identity",
+    "secret",
+    "secret_name",
+    "secret_ref",
+    "secrets",
+    "server_id",
+    "service_account",
+    "service_account_email",
+    "signed_url",
+    "source_bytes",
+    "source_content",
+    "token",
+    "upload_url",
+    "url"
+  ]
+}

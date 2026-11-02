@@ -1,0 +1,15 @@
+count: 10
+tasks[10]{id,state,kind,repo,title,hold_kind,hold_until}:
+  held-plain,queued,ship,sample,Plain captain decision,captain,"-"
+  held-b64,queued,ship,sample,Base64 reason item,captain,"-"
+  plain-queued,queued,ship,sample,Not held,"-","-"
+  held-dep,queued,ship,sample,Dependency wait,captain,"-"
+  body-dated,queued,ship,sample,Dated hold,captain,"-"
+  body-iso,queued,ship,sample,ISO hold,captain,"-"
+  body-dep,queued,ship,sample,Dep wait,captain,"-"
+  body-answered,queued,ship,sample,Answered,captain,"-"
+  body-until,queued,ship,sample,Until hold,captain,2026-12-01
+  held-done,done,ship,sample,Done captain item,captain,"-"
+help[2]:
+  - Run `tasks-axi show <id>` for full notes on a task
+  - Run `tasks-axi ready` to see unblocked queued work

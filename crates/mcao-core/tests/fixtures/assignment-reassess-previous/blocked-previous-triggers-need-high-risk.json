@@ -1,0 +1,8 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous risk_triggers require profile high-risk",
+    "previous required_stages do not match its profile",
+    "previous evidence_obligations do not match its profile"
+  ]
+}

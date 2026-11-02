@@ -1,0 +1,22 @@
+{
+  "name": "fm-jev-mem-guard",
+  "checked_at": "2026-10-24T16:31:07Z",
+  "status": "WARNING",
+  "recommendation": "Memory or swap utilization is above a warning threshold but below a critical one; degraded but explained, see the top RSS processes.",
+  "reason": null,
+  "summary": {
+    "mem_total_gb": 0.01,
+    "mem_available_gb": 0.0,
+    "mem_used_pct": 90.0,
+    "swap_total_gb": 0.0,
+    "swap_used_gb": 0.0,
+    "swap_used_pct": 0.0
+  },
+  "top_processes": [
+    {
+      "pid": 7,
+      "comm": "python3",
+      "rss_mb": 19.8
+    }
+  ]
+}

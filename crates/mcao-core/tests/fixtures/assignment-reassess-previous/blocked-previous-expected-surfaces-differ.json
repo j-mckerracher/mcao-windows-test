@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous expected_surfaces differ from the request"
+  ]
+}

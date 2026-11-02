@@ -1,0 +1,22 @@
+{
+  "name": "fm-jev-mem-guard",
+  "checked_at": "2026-10-24T16:31:09Z",
+  "status": "CRITICAL",
+  "recommendation": "Memory or swap utilization is at or above a critical threshold; this host condition can explain worker silence while it holds.",
+  "reason": null,
+  "summary": {
+    "mem_total_gb": 0.95,
+    "mem_available_gb": 0.86,
+    "mem_used_pct": 10.0,
+    "swap_total_gb": 0.95,
+    "swap_used_gb": 0.93,
+    "swap_used_pct": 97.0
+  },
+  "top_processes": [
+    {
+      "pid": 7,
+      "comm": "python3",
+      "rss_mb": 19.7
+    }
+  ]
+}

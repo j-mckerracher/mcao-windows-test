@@ -1,0 +1,1 @@
+{"result": "rejected", "definition": "envelope", "reason": "schema_invalid", "paths": ["/actor/id"]}

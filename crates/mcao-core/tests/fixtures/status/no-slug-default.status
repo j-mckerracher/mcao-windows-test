@@ -1,0 +1,5 @@
+blocked: waiting on credentials
+working: unrelated progress
+needs-decision: which api shape
+resolved: chose the second shape
+blocked: second wait

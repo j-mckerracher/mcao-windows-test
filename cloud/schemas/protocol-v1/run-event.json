@@ -1,0 +1,107 @@
+{
+  "$defs": {
+    "EventKind": {
+      "enum": [
+        "admitted",
+        "upload_verified",
+        "dispatched",
+        "state_changed",
+        "status_recorded",
+        "result_accepted",
+        "result_fenced",
+        "cancel_requested",
+        "retry_admitted",
+        "reconcile_applied"
+      ],
+      "title": "EventKind",
+      "type": "string"
+    },
+    "RunState": {
+      "enum": [
+        "awaiting_upload",
+        "queued",
+        "dispatching",
+        "starting",
+        "running",
+        "collecting",
+        "reconciling",
+        "cancel_requested",
+        "succeeded",
+        "failed",
+        "timed_out",
+        "cancelled"
+      ],
+      "title": "RunState",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "enum": [
+        "broker",
+        "runner",
+        "sweeper",
+        "owner",
+        "operator"
+      ],
+      "title": "Actor",
+      "type": "string"
+    },
+    "at": {
+      "format": "date-time",
+      "title": "At",
+      "type": "string"
+    },
+    "attempt": {
+      "minimum": 1,
+      "title": "Attempt",
+      "type": "integer"
+    },
+    "from_state": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RunState"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "kind": {
+      "$ref": "#/$defs/EventKind"
+    },
+    "run_id": {
+      "pattern": "^run_[0-9a-f]{32}$",
+      "title": "Run Id",
+      "type": "string"
+    },
+    "seq": {
+      "minimum": 1,
+      "title": "Seq",
+      "type": "integer"
+    },
+    "to_state": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/RunState"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    }
+  },
+  "required": [
+    "run_id",
+    "seq",
+    "kind",
+    "attempt",
+    "at",
+    "actor"
+  ],
+  "title": "RunEvent",
+  "type": "object"
+}

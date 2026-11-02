@@ -1,0 +1,4 @@
+tasks[3]{id,state,kind,repo,title,hold_kind,hold_until}:
+  ok1,queued,ship,sample,t,captain,-
+  "\ud800x",queued,ship,sample,t,captain,-
+  ok2,queued,ship,sample,t,captain,-

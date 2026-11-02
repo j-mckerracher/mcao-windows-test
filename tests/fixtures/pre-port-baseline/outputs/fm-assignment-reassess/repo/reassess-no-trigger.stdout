@@ -1,0 +1,67 @@
+{
+  "status": "recorded",
+  "decision": {
+    "contract_version": 1,
+    "decision_id": "dpes-765-demo/1",
+    "task_id": "dpes-765-demo",
+    "assignment_intent": "Reassess the profile from the actual change set.",
+    "expected_surfaces": [
+      "README.md",
+      "docs/guide.md",
+      "bin/tool.sh"
+    ],
+    "pinned_policy_revision": "rev-test-1",
+    "profile": "high-risk",
+    "decision_stage": "provisional",
+    "classification_status": "unresolved",
+    "risk_triggers": [],
+    "change_coverage": {
+      "complete": true,
+      "categories": [
+        "committed",
+        "tracked-working-tree",
+        "untracked",
+        "renamed",
+        "deleted"
+      ]
+    },
+    "reasons": [
+      "unknown path: README.md",
+      "unknown path: docs/new.md",
+      "policy inventory is unavailable at the comparison base"
+    ],
+    "required_stages": [
+      "ground-scope",
+      "design",
+      "design-critique",
+      "implement",
+      "independent-change-review",
+      "risk-verify",
+      "change-reassessment",
+      "delivery-handoff"
+    ],
+    "evidence_obligations": {
+      "tests_required": true,
+      "independent_change_review_required": true
+    },
+    "target_branch": "main",
+    "comparison_base_commit": "fbe5fcadd1c8862194ac9156e06e78c9fe10adbc",
+    "evaluated_change_identity": "sha256:a331815277f8b3a04099f9ba915e5fff8c501a7183778973c4d68118ed12ba01"
+  },
+  "transition": {
+    "previous_profile": null,
+    "effective_profile": "high-risk",
+    "escalated": false,
+    "newly_required_stages": [
+      "ground-scope",
+      "design",
+      "design-critique",
+      "implement",
+      "independent-change-review",
+      "risk-verify",
+      "change-reassessment",
+      "delivery-handoff"
+    ],
+    "evidence_invalidated": false
+  }
+}

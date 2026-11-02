@@ -1,0 +1,68 @@
+{
+  "status": "recorded",
+  "decision": {
+    "contract_version": 1,
+    "decision_id": "dpes-884/2",
+    "task_id": "dpes-884",
+    "assignment_intent": "port the previous record",
+    "expected_surfaces": [
+      "docs/guide.md",
+      "scripts/x.sh"
+    ],
+    "pinned_policy_revision": "rev-1",
+    "profile": "high-risk",
+    "decision_stage": "final",
+    "classification_status": "resolved",
+    "risk_triggers": [],
+    "change_coverage": {
+      "complete": true,
+      "categories": [
+        "committed",
+        "tracked-working-tree",
+        "untracked",
+        "renamed",
+        "deleted"
+      ]
+    },
+    "reasons": [
+      "no changed paths were collected",
+      "scripts/x.sh: code change",
+      "all small-low-risk conditions attested for a single bounded change",
+      "decision is now final and resolved",
+      "change identity changed",
+      "comparison base changed"
+    ],
+    "required_stages": [
+      "ground-scope",
+      "design",
+      "design-critique",
+      "implement",
+      "independent-change-review",
+      "risk-verify",
+      "change-reassessment",
+      "delivery-handoff"
+    ],
+    "evidence_obligations": {
+      "tests_required": true,
+      "independent_change_review_required": true
+    },
+    "target_branch": "DPES-751",
+    "comparison_base_commit": "f64da1051a4f626883a979e53f89fd1302340253",
+    "evaluated_change_identity": "sha256:b80f96e96f49507712b1aa2acb457946ca2f44371563408ba65fec6f95a90926",
+    "supersedes": {
+      "decision_id": "dpes-884/1",
+      "escalation_reasons": [
+        "decision is now final and resolved",
+        "change identity changed",
+        "comparison base changed"
+      ]
+    }
+  },
+  "transition": {
+    "previous_profile": "high-risk",
+    "effective_profile": "high-risk",
+    "escalated": false,
+    "newly_required_stages": [],
+    "evidence_invalidated": true
+  }
+}

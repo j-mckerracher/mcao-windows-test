@@ -1,0 +1,92 @@
+DPES-753 slice 753.D status fixtures: provenance
+
+Source
+  Each *.status file is a hand-written input of fixed text, chosen to cover one rule of the
+  shell open-decision fold. No input is copied from a live status log. Each *.<kind>.open
+  file is the exact stdout of bin/fm-classify-lib.sh's status_open_decisions for that
+  input and kind. Nothing in these files, and no expected value in the Rust tests, is
+  computed by Rust.
+
+Generation
+  gen-status-fixtures.sh <worktree-root> [<bash-binary>] regenerates every file here. It is
+  kept outside the repository, in the firstmate task data directory, so the repository
+  carries no shell tooling. Generation sources bin/fm-classify-lib.sh and captures stdout
+  byte for byte; a command substitution is never used to write an expected file.
+
+Classifier
+  file:    bin/fm-classify-lib.sh
+  sha256:  9613809694c5682fa25756c4dccee4622e4b7ca77b9b303fe4dc557cd461b901
+  commit:  0447ea222c9f8e327a98175ab3b10f2b5b5d38f6 (last commit touching the classifier)
+  worktree HEAD at generation: 8afdb8179d389fca6732bedc46a02e6155280d8c
+  shell:   GNU bash, version 5.3.20(1)-release (aarch64-apple-darwin25.6.0)
+
+Kinds
+  Each case runs with kind ship, scout, secondmate, and unknown. Kind decides whether a
+  ship or scout done: or failed: line clears the open set; secondmate and unknown ignore it.
+
+Checks
+  Expected files hold the classifier's exact bytes. A non-empty expected file has no
+  trailing newline, because status_open_decisions returns through a command substitution.
+  An empty expected file means no decision is open.
+
+Files
+  bad-slug-and-prose.status  sha256:eb121fdb25b9b2aec32cca753b09371c769070f9ac20986faca1185ca5cc1a8a
+  corr-ids.status  sha256:b9758b97d84f98be086e769db26cd48c41d3bce811c82c9570fde077d9fc6805
+  done-clears.status  sha256:eb4ecda7b9547d238722bb8434aa889ad21cebfeb1a89e957957bc6c3342b79d
+  empty.status  sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  held-closes.status  sha256:c8b8e7c3edef2a4aabfac96022a7ea92a9dcd27c012f68134d559d95e4a6bc53
+  no-slug-default.status  sha256:afcd2ecaaab7e92e578023b8806a5665e063ca5ff980400310db6f071e55a3ce
+  no-trailing-newline.status  sha256:a068197b7e2954306627d7ef2ce9b2860206675028d046e6a4401bf322f8dd0d
+  note-head-slug.status  sha256:62d0516124f3e02401b229d475d0866458005363cda854ffcf9ded49746a9e0c
+  reserved-pending-reply.status  sha256:79545392b6a420601a641fd1aba21f09899b9f0d1a9d09c641c8dfc68c1e6a1e
+  slug-resolve.status  sha256:9c3db8bad15244e0bdb8a0537977eed29356b31ff92da6c6d7314e8f76fe098c
+  stamps-with-colons.status  sha256:49ccb0be4c8337123835650357b867eca67160fbd090e5254edb3809b536e409
+  verbs-and-guards.status  sha256:2330309c4ec2604c93aad306d12c7666c098e118d97e4c85a7412977098c254d
+  bad-slug-and-prose.scout.open  sha256:73b023507da8aa50e4b9dd943fe0bc01bd97a957a129660f910c557300d9fc9d
+  bad-slug-and-prose.secondmate.open  sha256:73b023507da8aa50e4b9dd943fe0bc01bd97a957a129660f910c557300d9fc9d
+  bad-slug-and-prose.ship.open  sha256:73b023507da8aa50e4b9dd943fe0bc01bd97a957a129660f910c557300d9fc9d
+  bad-slug-and-prose.unknown.open  sha256:73b023507da8aa50e4b9dd943fe0bc01bd97a957a129660f910c557300d9fc9d
+  corr-ids.scout.open  sha256:9f6e5a618676b53338bcdfa082a08e72a57043a6e8c577ef2798f0f37e662a4e
+  corr-ids.secondmate.open  sha256:9f6e5a618676b53338bcdfa082a08e72a57043a6e8c577ef2798f0f37e662a4e
+  corr-ids.ship.open  sha256:9f6e5a618676b53338bcdfa082a08e72a57043a6e8c577ef2798f0f37e662a4e
+  corr-ids.unknown.open  sha256:9f6e5a618676b53338bcdfa082a08e72a57043a6e8c577ef2798f0f37e662a4e
+  done-clears.scout.open  sha256:25190e9a91a4941b50706e3caf9ccddf79fc444039323b8f5796390896ac266b
+  done-clears.secondmate.open  sha256:6f93944e3b88cbb405a4034b719994fffba83421d845f856f15b287718cbe2cd
+  done-clears.ship.open  sha256:25190e9a91a4941b50706e3caf9ccddf79fc444039323b8f5796390896ac266b
+  done-clears.unknown.open  sha256:6f93944e3b88cbb405a4034b719994fffba83421d845f856f15b287718cbe2cd
+  empty.scout.open  sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  empty.secondmate.open  sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  empty.ship.open  sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  empty.unknown.open  sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  held-closes.scout.open  sha256:ee0e8eca07ff846ef9cb2a1aec330a3a7e0b133b67f57460330eba680205b3b3
+  held-closes.secondmate.open  sha256:ee0e8eca07ff846ef9cb2a1aec330a3a7e0b133b67f57460330eba680205b3b3
+  held-closes.ship.open  sha256:ee0e8eca07ff846ef9cb2a1aec330a3a7e0b133b67f57460330eba680205b3b3
+  held-closes.unknown.open  sha256:ee0e8eca07ff846ef9cb2a1aec330a3a7e0b133b67f57460330eba680205b3b3
+  no-slug-default.scout.open  sha256:3297bc3a215db858157394deed69a37857ed8476d18daeea792df67267a04018
+  no-slug-default.secondmate.open  sha256:3297bc3a215db858157394deed69a37857ed8476d18daeea792df67267a04018
+  no-slug-default.ship.open  sha256:3297bc3a215db858157394deed69a37857ed8476d18daeea792df67267a04018
+  no-slug-default.unknown.open  sha256:3297bc3a215db858157394deed69a37857ed8476d18daeea792df67267a04018
+  no-trailing-newline.scout.open  sha256:007670085b6a2e81c69be2ff936c2ec6b003b48db1d14a882466e720c1ae8ab7
+  no-trailing-newline.secondmate.open  sha256:007670085b6a2e81c69be2ff936c2ec6b003b48db1d14a882466e720c1ae8ab7
+  no-trailing-newline.ship.open  sha256:007670085b6a2e81c69be2ff936c2ec6b003b48db1d14a882466e720c1ae8ab7
+  no-trailing-newline.unknown.open  sha256:007670085b6a2e81c69be2ff936c2ec6b003b48db1d14a882466e720c1ae8ab7
+  note-head-slug.scout.open  sha256:41dc4b900f7b7cab7350ff496cfa44f74dbbeabcd18f11c7048e283336e3312c
+  note-head-slug.secondmate.open  sha256:41dc4b900f7b7cab7350ff496cfa44f74dbbeabcd18f11c7048e283336e3312c
+  note-head-slug.ship.open  sha256:41dc4b900f7b7cab7350ff496cfa44f74dbbeabcd18f11c7048e283336e3312c
+  note-head-slug.unknown.open  sha256:41dc4b900f7b7cab7350ff496cfa44f74dbbeabcd18f11c7048e283336e3312c
+  reserved-pending-reply.scout.open  sha256:c718fec63cbd9f0489123dc5315336828e2c8750992494c01e0a8a0667823070
+  reserved-pending-reply.secondmate.open  sha256:c718fec63cbd9f0489123dc5315336828e2c8750992494c01e0a8a0667823070
+  reserved-pending-reply.ship.open  sha256:c718fec63cbd9f0489123dc5315336828e2c8750992494c01e0a8a0667823070
+  reserved-pending-reply.unknown.open  sha256:c718fec63cbd9f0489123dc5315336828e2c8750992494c01e0a8a0667823070
+  slug-resolve.scout.open  sha256:6c0a61a9c69681a81171f962a5aed2d80dcf1a54ba513b7098df5918d15f5afc
+  slug-resolve.secondmate.open  sha256:6c0a61a9c69681a81171f962a5aed2d80dcf1a54ba513b7098df5918d15f5afc
+  slug-resolve.ship.open  sha256:6c0a61a9c69681a81171f962a5aed2d80dcf1a54ba513b7098df5918d15f5afc
+  slug-resolve.unknown.open  sha256:6c0a61a9c69681a81171f962a5aed2d80dcf1a54ba513b7098df5918d15f5afc
+  stamps-with-colons.scout.open  sha256:d6a5fb0773e6cc02fc0963412c548b2b6cc98996f0d6d21245648ed2ef053071
+  stamps-with-colons.secondmate.open  sha256:d6a5fb0773e6cc02fc0963412c548b2b6cc98996f0d6d21245648ed2ef053071
+  stamps-with-colons.ship.open  sha256:d6a5fb0773e6cc02fc0963412c548b2b6cc98996f0d6d21245648ed2ef053071
+  stamps-with-colons.unknown.open  sha256:d6a5fb0773e6cc02fc0963412c548b2b6cc98996f0d6d21245648ed2ef053071
+  verbs-and-guards.scout.open  sha256:3b3a70e8aae89bea83ec184e805ff24cc554ebfdd2232b91c093ae2c3e305e93
+  verbs-and-guards.secondmate.open  sha256:3b3a70e8aae89bea83ec184e805ff24cc554ebfdd2232b91c093ae2c3e305e93
+  verbs-and-guards.ship.open  sha256:3b3a70e8aae89bea83ec184e805ff24cc554ebfdd2232b91c093ae2c3e305e93
+  verbs-and-guards.unknown.open  sha256:3b3a70e8aae89bea83ec184e805ff24cc554ebfdd2232b91c093ae2c3e305e93

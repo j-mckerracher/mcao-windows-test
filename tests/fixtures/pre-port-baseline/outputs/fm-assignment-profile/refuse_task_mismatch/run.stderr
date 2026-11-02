@@ -1,0 +1,1 @@
+error: assignment profile refused: task_id is 'T-1' but this spawn launches task 'T-2'; contradictory decision

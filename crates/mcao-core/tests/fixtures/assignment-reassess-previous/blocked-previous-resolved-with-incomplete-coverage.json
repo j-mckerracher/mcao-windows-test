@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous resolved decision cannot have incomplete change_coverage"
+  ]
+}

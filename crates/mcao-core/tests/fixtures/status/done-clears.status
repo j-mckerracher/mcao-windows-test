@@ -1,0 +1,7 @@
+needs-decision [key=a]: open before done
+blocked [key=b]: also open
+done [key=a] no colon here
+needs-decision [key=c]: opened before the terminal line
+done: PR opened
+needs-decision [key=d]: after the terminal line
+failed [key=x] no colon

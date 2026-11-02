@@ -1,0 +1,1124 @@
+[
+  {
+    "name": "prose-clean-edit",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-fenced-edit-with-risk-trigger",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho two\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": [
+        "breaking-public-contract"
+      ]
+    }
+  },
+  {
+    "name": "prose-clean-edit-with-risk-trigger",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": [
+        "breaking-public-contract"
+      ]
+    }
+  },
+  {
+    "name": "prose-fenced-edit-standard",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho two\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-fenced-edit-small-low-risk",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho two\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": [],
+      "small_low_risk_conditions": {
+        "single_bounded_behavior_change": true,
+        "no_security_or_authorization_change": true,
+        "no_sensitive_data_change": true,
+        "no_destructive_operation": true,
+        "no_merge_delivery_authority_change": true,
+        "no_dispatch_lifecycle_worktree_or_proof_gate_change": true,
+        "no_public_contract_incompatibility": true,
+        "no_data_migration": true,
+        "no_unresolved_cross_component_impact": true,
+        "relevant_focused_verification_identified": true
+      }
+    }
+  },
+  {
+    "name": "prose-edit-after-closing-fence",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text, edited.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-fence-opened-by-edit",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "Intro\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "Intro\n\n```\nnew block\n```\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-blank-lines-added",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-trailing-whitespace",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.   \n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-crlf-only",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\r\n\r\nIntro line.\r\n\r\n```sh\r\necho one\r\n```\r\n\r\nClosing text.\r\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-unicode-edit",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro café ☕ 日本.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-undecodable-worktree",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "hex": "ff0a"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-and-code-small-low-risk",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      },
+      {
+        "path": "scripts/x.sh",
+        "text": "#!/bin/sh\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md",
+        "scripts/x.sh"
+      ],
+      "risk_triggers": [],
+      "small_low_risk_conditions": {
+        "single_bounded_behavior_change": true,
+        "no_security_or_authorization_change": true,
+        "no_sensitive_data_change": true,
+        "no_destructive_operation": true,
+        "no_merge_delivery_authority_change": true,
+        "no_dispatch_lifecycle_worktree_or_proof_gate_change": true,
+        "no_public_contract_incompatibility": true,
+        "no_data_migration": true,
+        "no_unresolved_cross_component_impact": true,
+        "relevant_focused_verification_identified": true
+      }
+    }
+  },
+  {
+    "name": "prose-deleted-fenced-file",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "delete": true
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-very-long-line",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-indented-fence",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "   ```\nx\n   ```\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md",
+        "text": "   ```\ny\n   ```\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-mixed-clean-and-fenced",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/a.md",
+        "text": "one\n"
+      },
+      {
+        "path": "docs/b.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/a.md",
+        "text": "one edited\n"
+      },
+      {
+        "path": "docs/b.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho two\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/a.md",
+        "docs/b.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "prose-untracked-new-file",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/a.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/b.md\",\n      \"audience\": \"public-product\"\n    },\n    {\n      \"path\": \"docs/new.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/new.md",
+        "text": "New page.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/new.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-dot-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \".md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": ".md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": ".md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        ".md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-dotdot-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"..md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "..md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "..md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "..md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-triple-dot-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"...md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "...md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "...md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "...md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-dotdot-upper-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"..MD\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "..MD",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "..MD",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "..MD"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-subdir-dotdot-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"x/..md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "x/..md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "x/..md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "x/..md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-dotdot-sh",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"..sh\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "..sh",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "..sh",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "..sh"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-readme",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"README\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "README",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "README",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "README"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-dotted-stem-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"a.b.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "a.b.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "a.b.md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "a.b.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-dir-dot-md-file",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"dir.md/file\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "dir.md/file",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "dir.md/file",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "dir.md/file"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-trailing-dot",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"a.\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "a.",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "a.",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "a."
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-trailing-dot-in-dir",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/guide.md.\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/guide.md.",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/guide.md.",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/guide.md."
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-hidden-dot-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \".hidden.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": ".hidden.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": ".hidden.md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        ".hidden.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-upper-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"UPPER.MD\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "UPPER.MD",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "UPPER.MD",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "UPPER.MD"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-unicode-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"caf\\u00e9.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "café.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "café.md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "café.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-unicode-upper-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"docs/\\u00fcber.MD\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "docs/über.MD",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "docs/über.MD",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "docs/über.MD"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-unicode-leading-dots-md",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"..r\\u00e9sum\\u00e9.md\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "..résumé.md",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "..résumé.md",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "..résumé.md"
+      ],
+      "risk_triggers": []
+    }
+  },
+  {
+    "name": "path-unicode-dotdot-only",
+    "base": [
+      {
+        "path": "docs/documentation-audiences.json",
+        "text": "{\n  \"surfaces\": [\n    {\n      \"path\": \"..\\u00e9\",\n      \"audience\": \"public-product\"\n    }\n  ]\n}\n"
+      },
+      {
+        "path": "..é",
+        "text": "# Guide\n\nIntro line.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "worktree": [
+      {
+        "path": "..é",
+        "text": "# Guide\n\nIntro line, edited.\n\n```sh\necho one\n```\n\nClosing text.\n"
+      }
+    ],
+    "request": {
+      "task_id": "dpes-884",
+      "pinned_policy_revision": "rev-1",
+      "target_branch": "DPES-751",
+      "comparison_base_commit": "$BASE",
+      "assignment_intent": "port the prose line checks",
+      "expected_surfaces": [
+        "..é"
+      ],
+      "risk_triggers": []
+    }
+  }
+]

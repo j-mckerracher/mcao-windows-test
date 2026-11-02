@@ -1,0 +1,1 @@
+python3 -I -B -X utf8 <reference>/bin/fm-audit-sanitize.py sanitize --config <out>/outputs/fm-audit-sanitize/seeded/inputs/sanitize-config-extra-key.json <out>/outputs/fm-audit-sanitize/seeded/inputs/sanitize-event-seeded.json

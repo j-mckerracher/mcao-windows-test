@@ -1,0 +1,16 @@
+(version 1)
+; Read-safety profile for the bird's-eye proof (DPES-798, T7).
+; Everything is allowed except reads of credential and secret locations under the
+; home directory, passed in as parameters so the profile does not hard-code a user.
+;   HOME_SSH     directory of SSH keys and config
+;   HOME_GH      GitHub CLI configuration, which holds tokens
+;   HOME_DOCKER  Docker client configuration, which can hold registry credentials
+;   HOME_NETRC   netrc file with machine credentials
+; The control for this profile is a read of an ordinary file, which must still succeed.
+; This is a read deny, not a proof of what the observer reads; it shows the observer
+; completes without those paths. Pair it with loopback-only.sb for the network side.
+(allow default)
+(deny file-read* (subpath (param "HOME_SSH")))
+(deny file-read* (subpath (param "HOME_GH")))
+(deny file-read* (subpath (param "HOME_DOCKER")))
+(deny file-read* (literal (param "HOME_NETRC")))

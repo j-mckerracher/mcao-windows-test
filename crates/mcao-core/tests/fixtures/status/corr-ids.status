@@ -1,0 +1,7 @@
+needs-decision corr=0123456789abcdef [key=texte]: wall
+resolved corr=0123456789abcdef [key=texte]: answered
+needs-decision corr=0123456789abcdef corr=fedcba9876543210 [key=two]: twin tokens
+needs-decision corr=0123456789abcde [key=short]: fifteen hex digits is malformed
+needs-decision corr=0123456789abcdef extra [key=prose]: extra word blocks the token
+needs-decision corr=0123456789ABCDEF [key=upper]: uppercase hex is accepted
+resolved corr=zzzzzzzzzzzzzzzz [key=two]: bad token does not close

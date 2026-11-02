@@ -1,0 +1,7 @@
+{
+  "code_root": "code_root_policy_changed",
+  "command": "validate",
+  "pins": {
+    "task": "T-1"
+  }
+}

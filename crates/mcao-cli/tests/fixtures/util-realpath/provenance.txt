@@ -1,0 +1,37 @@
+DPES-864 util-realpath parity fixtures: provenance
+
+Reference function
+  os.path.realpath (strict=False), CPython 3.14.6
+  source: /opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/posixpath.py
+  sha256: 8a5bc2b6674e76efe0f507b873a41d746beba466a191153ed18a7580ef6e08e1
+  Call site: the DPES-864 Jira item names bin/fm-test-run.sh:203. That line is not
+  present in the baseline checked for this slice (commit 976c13e), so the call site
+  is recorded from the item and is not verified against a shell line here.
+
+Interpreter
+  invoked as: python3 -I gen_realpath_fixtures.py <fixtures-dir>
+  generator sha256: 869c027800b7aa35f13b2db868a307e58e5f34c6217d1a8ec8b677e55f7fa6f3
+  (the generator is developer-only and is not part of the repository)
+
+Generation
+  One shared tree (tree.tsv) is built under a fresh canonical temp root. Each case
+  runs os.path.realpath(arg) with the root as the working directory. The root is
+  recorded as @ROOT@, so the saved outputs do not depend on the machine's temp path.
+  The Rust test replaces @ROOT@ with the canonical root it builds.
+
+Symlinks
+  Links are created with os.symlink. Targets are relative except where @ROOT@ marks
+  an absolute target inside the tree. Dangling, self, two-link, and directory cycles,
+  '.' and '..' components, trailing slashes, and a '..' chain that clamps at '/' are
+  all covered. The clamp case expects '/x' on any machine, because its target has
+  more '..' steps than any temp root is deep.
+
+Reference version
+  The oracle is CPython 3.13 and 3.14, which share the iterative algorithm this port
+  follows. CPython 3.11 and 3.12 differ on some loop cases with empty components, so
+  they are not the reference for these fixtures.
+
+Windows
+  These outputs are POSIX outputs. No Windows reference output is recorded. The
+  Windows verbatim-path rule is pinned by unit tests in mcao-core instead, against the
+  rule the firstmate spec records.

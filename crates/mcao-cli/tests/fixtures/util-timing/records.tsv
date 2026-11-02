@@ -1,0 +1,5 @@
+tests/fm-alpha.test.sh	pure-contract-unit	false	0	1200	false	
+tests/fm-beta.test.sh	afk	true	0	0	true	no-tmux
+tests/fm-gamma-ünïcode-😀.test.sh	afk	false	1	45000	false	
+tests/fm-delta.test.sh	herdr-ci	false	0	1200	false	
+tests/fm-epsilon\del.test.sh	herdr-ci	false	0	7	false	reason with "quotes" and /slash

@@ -1,0 +1,63 @@
+{
+  "status": "recorded",
+  "decision": {
+    "contract_version": 1,
+    "decision_id": "dpes-884/1",
+    "task_id": "dpes-884",
+    "assignment_intent": "port the prose line checks",
+    "expected_surfaces": [
+      "docs/guide.md",
+      "scripts/x.sh"
+    ],
+    "pinned_policy_revision": "rev-1",
+    "profile": "small-low-risk",
+    "decision_stage": "final",
+    "classification_status": "resolved",
+    "risk_triggers": [],
+    "change_coverage": {
+      "complete": true,
+      "categories": [
+        "committed",
+        "tracked-working-tree",
+        "untracked",
+        "renamed",
+        "deleted"
+      ]
+    },
+    "reasons": [
+      "scripts/x.sh: code change",
+      "all small-low-risk conditions attested for a single bounded change"
+    ],
+    "required_stages": [
+      "ground-scope",
+      "short-plan",
+      "implement",
+      "focused-review",
+      "verify",
+      "change-reassessment",
+      "delivery-handoff"
+    ],
+    "evidence_obligations": {
+      "tests_required": true,
+      "independent_change_review_required": false
+    },
+    "target_branch": "DPES-751",
+    "comparison_base_commit": "746df261cf5e20dc09150c2ba2d5c123046edad5",
+    "evaluated_change_identity": "sha256:c32bdf63847a2e5d8cf00c7bda12377fea7ce7f94844c22d5e1e6c9262b55070"
+  },
+  "transition": {
+    "previous_profile": null,
+    "effective_profile": "small-low-risk",
+    "escalated": false,
+    "newly_required_stages": [
+      "ground-scope",
+      "short-plan",
+      "implement",
+      "focused-review",
+      "verify",
+      "change-reassessment",
+      "delivery-handoff"
+    ],
+    "evidence_invalidated": false
+  }
+}

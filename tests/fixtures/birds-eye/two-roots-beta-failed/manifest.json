@@ -1,0 +1,16 @@
+{
+  "configured": [
+    "/fleet/alpha",
+    "/fleet/beta"
+  ],
+  "homes": {
+    "/fleet/alpha": {
+      "file": "../snapshots/two-roots-alpha.json",
+      "exit": 0
+    },
+    "/fleet/beta": {
+      "file": "../snapshots/two-roots-beta.json",
+      "exit": 1
+    }
+  }
+}

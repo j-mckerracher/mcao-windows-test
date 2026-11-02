@@ -1,0 +1,11 @@
+{
+  "configured": [
+    "/fleet/ts"
+  ],
+  "homes": {
+    "/fleet/ts": {
+      "file": "../snapshots/timestamps.json",
+      "exit": 0
+    }
+  }
+}

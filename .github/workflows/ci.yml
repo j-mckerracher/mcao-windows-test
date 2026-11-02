@@ -1,0 +1,873 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # DPES-1011 keeps the existing Windows workspace lane as the manual default and adds an
+  # explicitly selected, console-only alternative. All non-Windows jobs skip this event.
+  workflow_dispatch:
+    inputs:
+      windows_test_mode:
+        description: Windows tests to run
+        type: choice
+        options:
+          - workspace
+          - console
+        default: workspace
+        required: true
+
+permissions: {}
+
+# Per-PR supersession: a new push to the same PR replaces that PR's in-flight
+# CI instead of letting superseded heads keep the full hosted-runner fan-out.
+# The group uses the PR number for pull_request events, so every run of one PR
+# shares a group, and falls back to the unique run id for push events, so each
+# main push gets its own group and is never cancelled. Cancellation is likewise
+# limited to pull_request events. Evidence and rationale: the September 12
+# Actions starvation report, section 3 "Workflow mechanics to ship first".
+# The compliance workflow deliberately keeps its own event-specific groups; do
+# not collapse it onto this simpler shape.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event_name }}-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+# Timeout policy: docs/fm-test-portable-shards.md "Timeouts" owns the three
+# tiers and their rationale; tests/fm-ci-workflow.test.sh guards this workflow.
+# Each job comment identifies the tier implemented by its executable value.
+
+jobs:
+  lint:
+    if: github.event_name != 'workflow_dispatch'
+    permissions:
+      contents: read
+    name: Lint ${{ matrix.partition }}
+    runs-on: ubuntu-latest
+    # Normal tier (see the timeout policy above).
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        partition: [1, 2]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install pinned ShellCheck
+        run: |
+          set -eu
+          bin/fm-install-shellcheck.sh "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Install pinned actionlint
+        run: |
+          set -eu
+          bin/fm-install-actionlint.sh "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      # Single owner of the lint definition (shell file set, config, version,
+      # and GitHub workflow lint). Do not re-spell the checks here; keep CI
+      # and the pre-push gate on this script so a self-broken ci.yml still
+      # fails locally before merge.
+      - name: Lint canonical partition
+        env:
+          # Fail closed rather than lint uncapped when a configured per-root
+          # bound (wall deadline or memory rlimit) cannot be enforced here.
+          FM_LINT_REQUIRE_BOUNDS: '1'
+          FM_LINT_JOBS: '1'
+          LINT_PARTITION: ${{ matrix.partition }}
+          LINT_PARTITION_TOTAL: ${{ strategy.job-total }}
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/fm-lint"
+          bin/fm-lint.sh --partition "${LINT_PARTITION}of${LINT_PARTITION_TOTAL}" \
+            --telemetry "$RUNNER_TEMP/fm-lint/partition-${LINT_PARTITION}.tsv"
+      - name: Upload lint telemetry
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fm-lint-telemetry-${{ matrix.partition }}
+          path: |
+            ${{ runner.temp }}/fm-lint/partition-${{ matrix.partition }}.tsv
+            ${{ runner.temp }}/fm-lint/partition-${{ matrix.partition }}.roots.tsv
+          if-no-files-found: warn
+
+  # Deterministic proof that portable parallel shards + portable serial + Herdr
+  # equal the complete tests/*.test.sh inventory with no missing or duplicates,
+  # and that the portable serial CI shards partition that serial lane exactly.
+  test-coverage:
+    if: github.event_name != 'workflow_dispatch'
+    permissions:
+      contents: read
+    name: Test coverage guard
+    runs-on: ubuntu-latest
+    # Fast tier: the coverage guard is a seconds-long local computation.
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Prove complete regression partition
+        run: bin/fm-test-run.sh --check-coverage
+
+  # Two duration-balanced portable parallel shards of the Phase 2 proven-isolated
+  # set only. Composition owner: bin/fm-test-run.sh (docs/fm-test-portable-shards.md).
+  tests-portable-parallel-1:
+    if: github.event_name != 'workflow_dispatch'
+    permissions:
+      contents: read
+    name: Behavior portable parallel 1
+    runs-on: ubuntu-latest
+    # Normal tier (see the timeout policy above).
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install pinned ShellCheck
+        run: |
+          set -eu
+          bin/fm-install-shellcheck.sh "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Install pinned actionlint
+        run: |
+          set -eu
+          bin/fm-install-actionlint.sh "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Install tasks-axi
+        run: |
+          set -eu
+          npm install -g tasks-axi
+          tasks-axi --version
+      - name: Install the Pi package for the Pi extension tests
+        run: |
+          set -eu
+          npm install -g @earendil-works/pi-coding-agent
+          npm ls -g --depth 0 @earendil-works/pi-coding-agent
+      # Timing steps get the binary from their own env, not GITHUB_ENV, so the
+      # lane tests they run do not inherit FM_MCAO_BIN.
+      - name: Build mcao for the timing artifacts
+        run: |
+          set -eu
+          cargo build -p mcao-cli --locked --bin mcao
+      - name: Run portable parallel shard 1
+        env:
+          FM_TIMING_MCAO_BIN: ${{ github.workspace }}/target/debug/mcao
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/fm-test"
+          bin/fm-test-run.sh --lane portable-parallel-1 \
+            --fail-on-gate-skip 'Pi extension typecheck prerequisite not found' \
+            --json "$RUNNER_TEMP/fm-test/fm-test-timing-portable-parallel-1.json"
+      - name: Upload shard 1 timing artifact
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fm-test-timing-portable-parallel-1
+          path: ${{ runner.temp }}/fm-test/fm-test-timing-portable-parallel-1.json
+          if-no-files-found: warn
+
+  tests-portable-parallel-2:
+    if: github.event_name != 'workflow_dispatch'
+    permissions:
+      contents: read
+    name: Behavior portable parallel 2
+    runs-on: ubuntu-latest
+    # Normal tier (see the timeout policy above).
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install pinned ShellCheck
+        run: |
+          set -eu
+          bin/fm-install-shellcheck.sh "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Install pinned actionlint
+        run: |
+          set -eu
+          bin/fm-install-actionlint.sh "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Install tasks-axi
+        run: |
+          set -eu
+          npm install -g tasks-axi
+          tasks-axi --version
+      - name: Install the Pi package for the Pi extension tests
+        run: |
+          set -eu
+          npm install -g @earendil-works/pi-coding-agent
+          npm ls -g --depth 0 @earendil-works/pi-coding-agent
+      - name: Build mcao for the timing artifacts
+        run: |
+          set -eu
+          cargo build -p mcao-cli --locked --bin mcao
+      - name: Run portable parallel shard 2
+        env:
+          FM_TIMING_MCAO_BIN: ${{ github.workspace }}/target/debug/mcao
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/fm-test"
+          bin/fm-test-run.sh --lane portable-parallel-2 \
+            --json "$RUNNER_TEMP/fm-test/fm-test-timing-portable-parallel-2.json"
+      - name: Upload shard 2 timing artifact
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fm-test-timing-portable-parallel-2
+          path: ${{ runner.temp }}/fm-test/fm-test-timing-portable-parallel-2.json
+          if-no-files-found: warn
+
+  # Required portable serial remainder: watcher, lock, AFK, tmux, daemon,
+  # ambiguous, and other stateful tests. Real Herdr stays in tests-herdr.
+  # Split across separate runners so no two of these stateful scripts ever share
+  # a machine: each shard is still strictly serial in itself. Shard membership
+  # and the shard count both belong to bin/fm-test-run.sh, which refuses a lane
+  # whose "ofN" disagrees with it (docs/fm-test-portable-shards.md).
+  tests-portable-serial:
+    if: github.event_name != 'workflow_dispatch'
+    permissions:
+      contents: read
+    name: Behavior portable serial ${{ matrix.shard }}
+    runs-on: ubuntu-latest
+    # Normal tier (see the timeout policy above).
+    timeout-minutes: 30
+    strategy:
+      # Every shard reports so one failure never hides another shard's result.
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Install pinned ShellCheck
+        run: |
+          set -eu
+          bin/fm-install-shellcheck.sh "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Install pinned actionlint
+        run: |
+          set -eu
+          bin/fm-install-actionlint.sh "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Require tmux for e2e tests
+        run: |
+          set -eu
+          command -v tmux >/dev/null || {
+            echo "::error::tmux is required for real afk injection e2e coverage"
+            exit 1
+          }
+          tmux -V
+      - name: Install tasks-axi for backlog-handoff delegation
+        run: |
+          set -eu
+          npm install -g tasks-axi
+          tasks-axi --version
+      # The Pi extension tests read the installed Pi package's own types and
+      # runtime, so without it they gate-skip and pass silently. It is a public
+      # npm package and needs no credential, so CI can hold the real thing.
+      - name: Install the Pi package for the Pi extension tests
+        run: |
+          set -eu
+          npm install -g @earendil-works/pi-coding-agent
+          npm ls -g --depth 0 @earendil-works/pi-coding-agent
+      # The live setup guard (tests/mcao-setup-hve-live-e2e.test.sh) refuses to
+      # pass when no vendor CLI is installed. Its shard is assigned by
+      # bin/fm-test-run.sh from timing hints, so each shard asks the runner
+      # whether it holds the guard instead of naming a shard number here.
+      # Claude Code is the one whose guard path submits no prompt and needs
+      # no sign-in: Codex and Copilot both stop at a login screen.
+      - name: Resolve whether this shard runs the live setup guard
+        id: live-setup-guard
+        env:
+          FM_SERIAL_LANE: portable-serial-${{ matrix.shard }}of${{ strategy.job-total }}
+        run: |
+          set -eu
+          lanes=$(bin/fm-test-run.sh --list --lane "$FM_SERIAL_LANE")
+          if printf '%s\n' "$lanes" | grep -qxF 'tests/mcao-setup-hve-live-e2e.test.sh'; then
+            echo "needs_claude_cli=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "needs_claude_cli=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Install the pinned Claude Code CLI for the live setup guard
+        if: steps.live-setup-guard.outputs.needs_claude_cli == 'true'
+        run: |
+          set -eu
+          npm install -g @anthropic-ai/claude-code@2.1.302
+          claude --version | grep -qx '2.1.302 (Claude Code)' || {
+            echo "::error::expected claude 2.1.302 (Claude Code)"
+            exit 1
+          }
+      - name: Build mcao for the timing artifacts
+        run: |
+          set -eu
+          cargo build -p mcao-cli --locked --bin mcao
+      - name: Run portable serial shard ${{ matrix.shard }}
+        env:
+          # job-total rather than a literal, so shrinking or growing the matrix
+          # without matching bin/fm-test-run.sh is refused instead of quietly
+          # leaving a shard of the required lane unrun.
+          FM_SERIAL_LANE: portable-serial-${{ matrix.shard }}of${{ strategy.job-total }}
+          FM_SERIAL_SHARD: ${{ matrix.shard }}
+          FM_TIMING_MCAO_BIN: ${{ github.workspace }}/target/debug/mcao
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/fm-test"
+          # The Pi package is installed above and CI provides npm and tsc, so
+          # any missing typecheck prerequisite is a broken lane, not a valid skip.
+          bin/fm-test-run.sh --lane "$FM_SERIAL_LANE" \
+            --fail-on-gate-skip 'Pi extension typecheck prerequisite not found' \
+            --json "$RUNNER_TEMP/fm-test/fm-test-timing-portable-serial-${FM_SERIAL_SHARD}.json"
+      - name: Upload portable serial shard ${{ matrix.shard }} timing artifact
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fm-test-timing-portable-serial-${{ matrix.shard }}
+          path: ${{ runner.temp }}/fm-test/fm-test-timing-portable-serial-${{ matrix.shard }}.json
+          if-no-files-found: warn
+
+  # Required real-Herdr lane: pinned install, serial real-herdr-gated family,
+  # hard-fail on "skip: herdr not found". Starts on Linux x86_64; if a genuine
+  # platform invariant fails (focus, cleanup, default-session tripwire), keep
+  # the failure evidence and move the job to macOS rather than skip assertions.
+  tests-herdr:
+    if: github.event_name != 'workflow_dispatch'
+    permissions:
+      contents: read
+    name: Behavior tests (Herdr)
+    runs-on: ubuntu-latest
+    # Heavy tier (see the timeout policy above): the last-resort job backstop.
+    # The family-run step below owns the hang tripwire, so a wedged suite fails
+    # there with the always() cleanup and timing upload still running.
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Require tools for real Herdr
+        run: |
+          set -eu
+          command -v jq >/dev/null || { echo "::error::jq is required"; exit 1; }
+          command -v python3 >/dev/null || { echo "::error::python3 is required"; exit 1; }
+          command -v curl >/dev/null || { echo "::error::curl is required"; exit 1; }
+          command -v tar >/dev/null || { echo "::error::tar is required"; exit 1; }
+          jq --version
+          python3 --version
+      - name: Install pinned Herdr
+        run: |
+          set -eu
+          bin/fm-install-herdr.sh "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Install pinned Treehouse
+        run: |
+          set -eu
+          # Several real-herdr-gated E2E scripts require treehouse for spawn
+          # worktree acquisition (presentation, workspace-per-home, autodetect).
+          bin/fm-install-treehouse.sh "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      - name: Assert Herdr pin and protocol floor
+        run: |
+          set -eu
+          command -v herdr >/dev/null || { echo "::error::herdr not on PATH after install"; exit 1; }
+          command -v treehouse >/dev/null || { echo "::error::treehouse not on PATH after install"; exit 1; }
+          herdr --version
+          treehouse --version
+          status=$(herdr status --json)
+          printf '%s\n' "$status"
+          version=$(printf '%s' "$status" | jq -r '.client.version // empty')
+          protocol=$(printf '%s' "$status" | jq -r '.client.protocol // empty')
+          [ "$version" = "0.7.4" ] || {
+            echo "::error::expected exact Herdr pin 0.7.4, got ${version:-<empty>}"
+            exit 1
+          }
+          case "$protocol" in
+            ''|*[!0-9]*) echo "::error::could not read client protocol"; exit 1 ;;
+          esac
+          [ "$protocol" -ge 16 ] || {
+            echo "::error::herdr protocol $protocol is below the required floor 16"
+            exit 1
+          }
+      - name: Start default Herdr session for fleet-state tripwire
+        run: |
+          set -eu
+          # Lab provision requires exactly one running default session so the
+          # default-session tripwire can arm. Start it headless; never use it
+          # for lab work (tests still refuse default and use fm-lab-* only).
+          mkdir -p "$RUNNER_TEMP/fm-herdr"
+          nohup herdr server >"$RUNNER_TEMP/fm-herdr/default-server.log" 2>&1 &
+          echo $! >"$RUNNER_TEMP/fm-herdr/default-server.pid"
+          attempt=0
+          while [ "$attempt" -lt 150 ]; do
+            running=$(herdr status --json 2>/dev/null | jq -r '.server.running // false' || echo false)
+            if [ "$running" = true ]; then
+              herdr session list --json | jq -e '
+                [.sessions[]? | select(.default == true and .name == "default" and .running == true)]
+                | length == 1
+              ' >/dev/null
+              echo "default Herdr session is running"
+              exit 0
+            fi
+            sleep 0.2
+            attempt=$((attempt + 1))
+          done
+          echo "::error::default Herdr server did not become ready"
+          cat "$RUNNER_TEMP/fm-herdr/default-server.log" || true
+          exit 1
+      - name: Snapshot pre-suite Herdr sessions
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/fm-herdr"
+          bin/fm-herdr-ci-cleanup.sh snapshot "$RUNNER_TEMP/fm-herdr/sessions-before.json"
+      - name: Build mcao for the timing artifacts
+        run: |
+          set -eu
+          cargo build -p mcao-cli --locked --bin mcao
+      - name: Run real-Herdr family (serial, required)
+        id: run-real-herdr-family
+        # Heavy tier step tripwire: above the healthy 7-10 minute wall and far
+        # below the job backstop, so a hang fails this step and cleanup runs.
+        timeout-minutes: 20
+        env:
+          FM_TIMING_MCAO_BIN: ${{ github.workspace }}/target/debug/mcao
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/fm-test"
+          # Serial only. Fail if any script reports herdr not found. Live
+          # harness credential tests stay outside this family (opt-in env only).
+          bin/fm-test-run.sh --family real-herdr-gated \
+            --fail-on-gate-skip 'herdr not found' \
+            --json "$RUNNER_TEMP/fm-test/fm-test-timing-herdr.json"
+      - name: Cleanup job-owned Herdr lab sessions
+        id: cleanup-herdr-lab-sessions
+        if: always()
+        run: |
+          set -eu
+          bin/fm-herdr-ci-cleanup.sh teardown "$RUNNER_TEMP/fm-herdr/sessions-before.json" || {
+            echo "::warning::lab session cleanup reported a problem; see logs"
+            # Surface diagnostics without weakening the suite result above.
+            herdr session list --json || true
+            exit 1
+          }
+      - name: Upload Herdr timing and diagnostics
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fm-test-timing-herdr
+          path: |
+            ${{ runner.temp }}/fm-test/fm-test-timing-herdr.json
+            ${{ runner.temp }}/fm-herdr/sessions-before.json
+            ${{ runner.temp }}/fm-herdr/default-server.log
+          if-no-files-found: warn
+
+  # Aggregate per-lane timing into one summary artifact for critical-path review.
+  tests-timing-aggregate:
+    permissions:
+      contents: read
+    name: Behavior timing aggregate
+    runs-on: ubuntu-latest
+    # Fast tier: aggregation is seconds of work over lane artifacts.
+    timeout-minutes: 5
+    needs:
+      - tests-portable-parallel-1
+      - tests-portable-parallel-2
+      - tests-portable-serial
+      - tests-herdr
+    if: always() && github.event_name != 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Download lane timing artifacts
+        uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: fm-test-timing-*
+          path: ${{ runner.temp }}/fm-test-aggregate
+          merge-multiple: true
+      - name: Build mcao for the timing artifacts
+        run: |
+          set -eu
+          cargo build -p mcao-cli --locked --bin mcao
+      - name: Build aggregate timing summary
+        env:
+          FM_TIMING_MCAO_BIN: ${{ github.workspace }}/target/debug/mcao
+        run: |
+          set -eu
+          mkdir -p "$RUNNER_TEMP/fm-test"
+          shopt -s nullglob
+          inputs=("$RUNNER_TEMP"/fm-test-aggregate/fm-test-timing-*.json)
+          if [ "${#inputs[@]}" -eq 0 ]; then
+            echo "::warning::no per-lane timing JSON found to aggregate"
+            exit 0
+          fi
+          bin/fm-test-run.sh --aggregate-json \
+            "$RUNNER_TEMP/fm-test/fm-test-timing-aggregate.json" \
+            "${inputs[@]}"
+      - name: Upload aggregate timing artifact
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: fm-test-timing-aggregate
+          path: ${{ runner.temp }}/fm-test/fm-test-timing-aggregate.json
+          if-no-files-found: warn
+
+  macos-stock-bash:
+    if: github.event_name != 'workflow_dispatch'
+    permissions:
+      contents: read
+    name: Stock macOS Bash snapshot compatibility
+    runs-on: macos-latest
+    # Normal tier (see the timeout policy above).
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Run snapshot consumers with stock Bash
+        shell: /bin/bash {0}
+        env:
+          PATH: /bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/homebrew/bin
+        run: |
+          set -eu
+          case "$BASH_VERSION" in
+            3.2.57*) ;;
+            *) echo "::error::expected stock macOS Bash 3.2.57, got $BASH_VERSION"; exit 1 ;;
+          esac
+          /bin/bash --version | head -1
+          command -v jq >/dev/null || { echo "::error::jq is required"; exit 1; }
+
+          shell_inventory="$RUNNER_TEMP/fm-shell-inventory"
+          bin/fm-lint.sh --list-files > "$shell_inventory"
+          parse_fail=0
+          while IFS= read -r f; do
+            /bin/bash -n "$f" || { echo "::error::stock macOS Bash 3.2 failed to parse $f"; parse_fail=1; }
+          done < "$shell_inventory"
+          [ "$parse_fail" -eq 0 ] || { echo "::error::stock macOS Bash 3.2 parse sweep failed"; exit 1; }
+
+          command -v npm >/dev/null || { echo "::error::npm is required to install tasks-axi"; exit 1; }
+          npm install -g tasks-axi@0.2.6 >/dev/null
+          PATH="$(npm prefix -g)/bin:$PATH"
+          export PATH
+          command -v tasks-axi >/dev/null || { echo "::error::tasks-axi is required for the stock Bash regressions"; exit 1; }
+
+          snapshot_output=$(/bin/bash tests/fm-fleet-snapshot-view.test.sh)
+          printf '%s\n' "$snapshot_output"
+          snapshot_count=$(printf '%s\n' "$snapshot_output" | grep -c '^ok - ')
+          [ "$snapshot_count" -eq 23 ] || {
+            echo "::error::expected 23 snapshot/fleet-view tests, got $snapshot_count"
+            exit 1
+          }
+
+          bearings_output=$(/bin/bash tests/fm-bearings-snapshot.test.sh)
+          printf '%s\n' "$bearings_output"
+          bearings_count=$(printf '%s\n' "$bearings_output" | grep -c '^ok - ')
+          [ "$bearings_count" -eq 60 ] || {
+            echo "::error::expected 60 Bearings tests, got $bearings_count"
+            exit 1
+          }
+
+          # Same shape for the watcher's churn-deferral regression: an already-
+          # marked churn window expands an empty array that only stock Bash
+          # treats as an unbound variable under set -u.
+          churn_output=$(FM_TEST_ONLY=test_turn_ended_churn_existing_marker_absorbed \
+            /bin/bash tests/fm-watch-triage.test.sh)
+          printf '%s\n' "$churn_output"
+          churn_count=$(printf '%s\n' "$churn_output" | grep -c '^ok - ')
+          [ "$churn_count" -eq 1 ] || {
+            echo "::error::expected 1 watcher churn-deferral bash 3.2 regression, got $churn_count"
+            exit 1
+          }
+
+          # The fork-free hot-path helpers must stay byte-identical to the
+          # commands they replace under stock Bash 3.2, which lacks the
+          # printf %(...)T clock and falls back to date.
+          helpers_output=$(/bin/bash tests/fm-fork-free-helpers.test.sh)
+          printf '%s\n' "$helpers_output"
+          helpers_count=$(printf '%s\n' "$helpers_output" | grep -c '^ok - ')
+          [ "$helpers_count" -eq 6 ] || {
+            echo "::error::expected 6 fork-free helper bash 3.2 regressions, got $helpers_count"
+            exit 1
+          }
+
+          backend_output=$(FM_TEST_ONLY=test_backend_source_requires_adapter_file \
+            FM_TEST_BASH=/bin/bash \
+            /bin/bash tests/fm-backend.test.sh)
+          printf '%s\n' "$backend_output"
+          backend_count=$(printf '%s\n' "$backend_output" | grep -c '^ok - ')
+          [ "$backend_count" -eq 2 ] || {
+            echo "::error::expected 2 backend adapter-file bash 3.2 regressions, got $backend_count"
+            exit 1
+          }
+
+  # Native Windows test lane for the Rust workspace, on the pinned windows-2022 image so runner
+  # drift cannot change the environment. Every preparation step is runner-only; the mcao binary
+  # never performs these steps. Scope and acceptance criteria: DPES-891, DPES-1011.
+  windows-test:
+    if: github.event_name != 'workflow_dispatch' || inputs.windows_test_mode == 'workspace'
+    permissions:
+      contents: read
+    name: Test on Windows (${{ matrix.target }})
+    runs-on: windows-2022
+    # Normal tier (see the timeout policy above).
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [x86_64-pc-windows-msvc, aarch64-pc-windows-msvc]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # .gitattributes sets `* text=auto eol=lf`, so text files must reach the runner with LF endings.
+      # Binary fixtures (attr/-text) keep their checked-in bytes and are not part of this check.
+      - name: Confirm text files are checked out with LF endings
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $eol = @(git ls-files --eol)
+          if ($LASTEXITCODE -ne 0) { throw 'git ls-files --eol failed' }
+          $crlfText = @($eol | Where-Object { $_ -match '\bw/crlf\b' -and $_ -notmatch 'attr/-text' })
+          if ($crlfText.Count -gt 0) {
+            throw "text files were checked out with CRLF: $(($crlfText | Select-Object -First 5) -join '; ')"
+          }
+          $lfText = @($eol | Where-Object { $_ -match '\bw/lf\b' -and $_ -match 'attr/text' })
+          if ($lfText.Count -eq 0) { throw 'no text file reported LF; the eol check did not inspect anything' }
+          Write-Host "$($lfText.Count) text files are checked out with LF endings"
+      # git reads core.longpaths from the system config. The registry flag lets Windows accept
+      # paths past 260 characters for deep worktrees. Both values are read back, not assumed.
+      - name: Enable long paths for git and Windows
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          git config --system core.longpaths true
+          if ($LASTEXITCODE -ne 0) { throw 'git config --system core.longpaths failed' }
+          if ((git config --system --get core.longpaths) -ne 'true') { throw 'core.longpaths is not true' }
+          $fileSystem = 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem'
+          Set-ItemProperty -Path $fileSystem -Name LongPathsEnabled -Value 1 -Type DWord
+          if ((Get-ItemProperty -Path $fileSystem -Name LongPathsEnabled).LongPathsEnabled -ne 1) {
+            throw 'LongPathsEnabled did not take effect'
+          }
+      - name: Install the matrix target
+        shell: pwsh
+        run: |
+          rustup target add ${{ matrix.target }}
+          if ($LASTEXITCODE -ne 0) { throw 'rustup target add failed' }
+      # The restore key keeps the target triple, so an x86_64 cache never seeds an aarch64 build.
+      - name: Restore the cargo cache for this target
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: |
+            ~/.cargo/registry/cache
+            ~/.cargo/registry/index
+            ~/.cargo/git/db
+            target
+          key: cargo-${{ runner.os }}-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            cargo-${{ runner.os }}-${{ matrix.target }}-
+      # The probe lives under RUNNER_TEMP, outside the cached target directory, and removes itself.
+      # git reads core.longpaths when it opens the repository, so git runs from a short repository
+      # and reaches a deep relative file. Running git inside the deep directory would make git change
+      # into that path before any config is read, which fails on a long path regardless of the setting.
+      - name: Confirm git works on paths longer than 260 characters
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $segment = 'worktree-segment-of-thirty-chars'
+          $repo = Join-Path $env:RUNNER_TEMP 'lp'
+          $relDir = (@(1..12 | ForEach-Object { $segment })) -join '\'
+          $relFile = Join-Path $relDir 'probe.txt'
+          $absFile = Join-Path $repo $relFile
+          if ($absFile.Length -le 260) { throw "the test path is only $($absFile.Length) characters" }
+          New-Item -ItemType Directory -Force -Path (Join-Path $repo $relDir) | Out-Null
+          Set-Content -LiteralPath $absFile -Value 'probe' -Encoding utf8
+          git -C $repo init --quiet
+          if ($LASTEXITCODE -ne 0) { throw 'git init failed in the short repository' }
+          git -C $repo add -- $relFile
+          if ($LASTEXITCODE -ne 0) { throw 'git add failed on a long relative path' }
+          $status = @(git -C $repo status --porcelain)
+          if ($LASTEXITCODE -ne 0) { throw 'git status failed on a long relative path' }
+          if (-not ($status -match 'probe\.txt')) { throw "git did not stage the long-path file: $status" }
+          Remove-Item -LiteralPath $repo -Recurse -Force
+          Write-Host "git handled a $($absFile.Length)-character path"
+      - name: Default PATHEXT when the runner leaves it unset
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (-not $env:PATHEXT) {
+            Add-Content -Path $env:GITHUB_ENV -Value 'PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC' -Encoding utf8
+          }
+      # The last step before the tests. It writes the sanitized PATH to GITHUB_ENV, which the test
+      # steps inherit. git.exe lives under Git\cmd, which is not one of the removed directories.
+      # The Windows image ships WSL launchers (bash.exe, sh.exe, wsl.exe) in System32. That entry
+      # holds a launcher, so it leaves PATH whole, which also drops cmd.exe by name. cmd.exe is
+      # restored through a symlink in a shim directory that holds only cmd.exe; no system
+      # executable is deleted or renamed. The loader still finds System32 DLLs without PATH.
+      - name: Remove bash from PATH and keep git
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $bashDirs = @(
+            'C:\Program Files\Git\bin'
+            'C:\Program Files\Git\usr\bin'
+            'C:\msys64\usr\bin'
+            'C:\cygwin64\usr\bin'
+          )
+          $launchers = 'bash.exe', 'sh.exe', 'wsl.exe'
+          $entries = @($env:PATH -split ';' | Where-Object { $_ })
+          $kept = @()
+          foreach ($entry in $entries) {
+            $dir = $entry.TrimEnd('\')
+            $held = @($launchers | Where-Object { Test-Path -LiteralPath (Join-Path $dir $_) })
+            $isBashDir = $bashDirs -contains $dir
+            if ((-not $isBashDir) -and $held.Count -eq 0) { $kept += $entry; continue }
+            $reason = if ($isBashDir) { 'bash directory' } else { "holds $($held -join ', ')" }
+            Write-Host "Removed PATH entry: $entry ($reason)"
+          }
+          $removed = $entries.Count - $kept.Count
+          $shim = Join-Path $env:RUNNER_TEMP 'fm-shell-shim'
+          New-Item -ItemType Directory -Force -Path $shim | Out-Null
+          $cmdLink = Join-Path $shim 'cmd.exe'
+          Remove-Item -LiteralPath $cmdLink -Force -ErrorAction SilentlyContinue
+          New-Item -ItemType SymbolicLink -Path $cmdLink -Target (Join-Path $env:SystemRoot 'System32\cmd.exe') | Out-Null
+          $kept += $shim
+          $newPath = $kept -join ';'
+          $env:PATH = $newPath
+          Add-Content -Path $env:GITHUB_ENV -Value "PATH=$newPath" -Encoding utf8
+          foreach ($name in 'bash', 'sh', 'wsl') {
+            if (Get-Command $name -ErrorAction SilentlyContinue) { throw "$name is still on PATH" }
+          }
+          if (-not (Get-Command cmd -ErrorAction SilentlyContinue)) { throw 'cmd is not reachable by name after bash removal' }
+          if (-not (Get-Command pwsh -ErrorAction SilentlyContinue)) { throw 'pwsh is not reachable by name after bash removal' }
+          Write-Host 'Shell resolution after removal:'
+          Get-Command pwsh, powershell, cmd -ErrorAction SilentlyContinue | Select-Object Name, Source | Format-Table -AutoSize | Out-String -Width 4096 | Write-Host
+          $cmdOut = (& cmd /c 'echo ok')
+          if ($LASTEXITCODE -ne 0 -or $cmdOut -ne 'ok') { throw "cmd /c echo ok failed with exit $LASTEXITCODE" }
+          git --version
+          if ($LASTEXITCODE -ne 0) { throw 'git is not on PATH after bash removal' }
+          Write-Host "Removed $removed PATH entries that hold bash or a WSL launcher; git and cmd stay reachable."
+      - name: Test workspace on the host target
+        if: matrix.target == 'x86_64-pc-windows-msvc'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          # Console encoding belongs to the process, so it is set in the process that runs cargo.
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          # cargo and its test binaries inherit this console, so the encodings must read back as UTF-8.
+          if ([Console]::OutputEncoding.CodePage -ne 65001 -or $OutputEncoding.CodePage -ne 65001) {
+            throw 'console output is not UTF-8 before cargo runs'
+          }
+          cargo test --workspace --locked --target ${{ matrix.target }}
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      # An aarch64 test binary cannot execute on this x86_64 runner, so that leg compiles the tests only.
+      - name: Compile the tests for the cross target
+        if: matrix.target != 'x86_64-pc-windows-msvc'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          if ([Console]::OutputEncoding.CodePage -ne 65001 -or $OutputEncoding.CodePage -ne 65001) {
+            throw 'console output is not UTF-8 before cargo runs'
+          }
+          cargo test --workspace --locked --target ${{ matrix.target }} --no-run
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+  # DPES-1011: This separately gated native lane has no workspace matrix or workspace test command.
+  # .gitattributes enforces LF; these tests use short named-pipe paths and in-memory streams, not
+  # deep filesystem paths or external shell processes, so workspace long-path and bash/WSL setup
+  # is unnecessary. The commands omit --target, so rustup's host target is used; caching is only
+  # a performance optimization. Keep PATHEXT defensive because PowerShell resolves cargo by name.
+  windows-console-test:
+    if: github.event_name == 'workflow_dispatch' && inputs.windows_test_mode == 'console'
+    permissions:
+      contents: read
+    name: Test Windows console targets
+    runs-on: windows-2022
+    # Normal tier (see the timeout policy above).
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+      - name: Default PATHEXT when the runner leaves it unset
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if (-not $env:PATHEXT) {
+            Add-Content -Path $env:GITHUB_ENV -Value 'PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC' -Encoding utf8
+          }
+      - name: Report checked-out SHA and platform
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          if ($env:RUNNER_OS -ne 'Windows' -or $env:RUNNER_ARCH -ne 'X64') {
+            throw "Expected native x86_64 Windows; got $env:RUNNER_OS/$env:RUNNER_ARCH"
+          }
+          $head = (git rev-parse HEAD).Trim()
+          if ($LASTEXITCODE -ne 0) { throw 'git rev-parse HEAD failed' }
+          if ($head -ne $env:GITHUB_SHA) {
+            throw "Checked-out HEAD does not match GITHUB_SHA: $head != $env:GITHUB_SHA"
+          }
+          Write-Output "Checked-out SHA: $head"
+          Write-Output "Platform: windows-2022 ($env:RUNNER_OS/$env:RUNNER_ARCH; x86_64-pc-windows-msvc)"
+      - name: Run only the console integration tests
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+          $OutputEncoding = [System.Text.Encoding]::UTF8
+          if ([Console]::OutputEncoding.CodePage -ne 65001 -or $OutputEncoding.CodePage -ne 65001) {
+            throw 'console output is not UTF-8 before cargo runs'
+          }
+          function Invoke-NativeCargoTest {
+            param([string]$Name, [string[]]$Arguments)
+            $output = & cargo @Arguments
+            $exitCode = $LASTEXITCODE
+            $output | Write-Output
+            if ($exitCode -ne 0) { exit $exitCode }
+            if (-not ($output -match '^running [1-9][0-9]* tests?$')) {
+              throw "$Name matched no native tests"
+            }
+          }
+          Invoke-NativeCargoTest 'console_pipe' @('test', '-p', 'mcao-backend-windows', '--locked', '--test', 'console_pipe')
+          Invoke-NativeCargoTest 'pipe' @('test', '-p', 'mcao-backend-windows', '--locked', '--test', 'pipe')
+          Invoke-NativeCargoTest 'console_server' @('test', '-p', 'mcao-backend-windows', '--locked', '--lib', 'console_server')
+
+  invariants:
+    if: github.event_name != 'workflow_dispatch'
+    permissions:
+      contents: read
+    name: Repo invariants
+    runs-on: ubuntu-latest
+    # Fast tier: the invariant checks are seconds-long file comparisons.
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Compatibility pointers must stay intact
+        run: |
+          set -eu
+          [ ! -L CLAUDE.md ] || { echo "::error::CLAUDE.md must be a real @AGENTS.md pointer file, not a symlink"; exit 1; }
+          tmp=$(mktemp)
+          trap 'rm -f "$tmp"' EXIT
+          printf '%s\n' \
+            '<!-- Points Claude at AGENTS.md via import; edit AGENTS.md, not this file. -->' \
+            '@AGENTS.md' >"$tmp"
+          cmp -s CLAUDE.md "$tmp" || { echo "::error::CLAUDE.md must be the canonical @AGENTS.md pointer"; exit 1; }
+          [ "$(readlink .claude/skills)" = "../.agents/skills" ] || { echo "::error::.claude/skills must be a symlink to ../.agents/skills"; exit 1; }
+      - name: Personal fleet paths must not be tracked
+        run: |
+          set -eu
+          tracked=$(git ls-files -- data state config projects .no-mistakes)
+          if [ -n "$tracked" ]; then
+            echo "::error::Personal fleet paths are tracked in git:"
+            printf '%s\n' "$tracked"
+            exit 1
+          fi

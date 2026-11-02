@@ -1,0 +1,1 @@
+{"committed_seq": 2, "last_seq": 2, "records": 3, "result": "verified", "segments": [{"name": "segment-00000000000000000000.jsonl", "records": 3, "status": "intact"}], "torn_tail": null, "uncommitted_seq": null}

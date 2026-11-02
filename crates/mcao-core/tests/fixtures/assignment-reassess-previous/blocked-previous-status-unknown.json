@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "reasons": [
+    "previous classification_status must be resolved or unresolved"
+  ]
+}

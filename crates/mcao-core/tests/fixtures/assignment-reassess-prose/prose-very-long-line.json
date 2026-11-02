@@ -1,0 +1,59 @@
+{
+  "status": "recorded",
+  "decision": {
+    "contract_version": 1,
+    "decision_id": "dpes-884/1",
+    "task_id": "dpes-884",
+    "assignment_intent": "port the prose line checks",
+    "expected_surfaces": [
+      "docs/guide.md"
+    ],
+    "pinned_policy_revision": "rev-1",
+    "profile": "documentation-only",
+    "decision_stage": "final",
+    "classification_status": "resolved",
+    "risk_triggers": [],
+    "change_coverage": {
+      "complete": true,
+      "categories": [
+        "committed",
+        "tracked-working-tree",
+        "untracked",
+        "renamed",
+        "deleted"
+      ]
+    },
+    "reasons": [
+      "every changed path is prose with no executable or unverifiable lines"
+    ],
+    "required_stages": [
+      "ground-scope",
+      "implement",
+      "focused-review",
+      "verify",
+      "change-reassessment",
+      "delivery-handoff"
+    ],
+    "evidence_obligations": {
+      "tests_required": false,
+      "independent_change_review_required": false
+    },
+    "target_branch": "DPES-751",
+    "comparison_base_commit": "04e0749ef73e751c7f5f3146cff3643cd04d06fb",
+    "evaluated_change_identity": "sha256:217e3ea94db45fe8f2887eec5c34bbc9c84282ae8041c95eb7119c6adf93833c"
+  },
+  "transition": {
+    "previous_profile": null,
+    "effective_profile": "documentation-only",
+    "escalated": false,
+    "newly_required_stages": [
+      "ground-scope",
+      "implement",
+      "focused-review",
+      "verify",
+      "change-reassessment",
+      "delivery-handoff"
+    ],
+    "evidence_invalidated": false
+  }
+}

@@ -1,0 +1,2923 @@
+{
+  "assignment_profile_matches_committed_dpes751_expected": {
+    "meta_high_risk": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "meta_small_low_risk": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_bad_comparison_base_pattern": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_bad_decision_id_pattern": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_base_commit_pin": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_byte_order_mark": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_changed_policy_material": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_contract_version_true": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_contract_version_two": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_control_character_in_string": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_decision_for_other_task": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_documentation_only_with_tests": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_duplicate_key": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_empty_record": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_extra_data": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_final_unresolved": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_final_without_identity": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_incomplete_coverage_for_final": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_infinity_constant": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_invalid_escape": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_missing_comparison_base": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_nan_constant": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_negative_infinity_constant": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_non_string_key": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_not_json": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_require_current_on_superseded": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_revoked_revision": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_risk_trigger_on_standard": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_superseded_revision_on_relaunch": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_target_branch_pin": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_task_mismatch": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_trailing_comma_in_array": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_trailing_comma_in_object": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_unapproved_revision": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_unknown_profile": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_unknown_top_level_key": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_unresolved_on_final_high_risk": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_unsupported_schema_keyword": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "refuse_unterminated_string": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "render_documentation_only": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "render_high_risk": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "render_refused": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "valid_control_characters_are_escaped": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "valid_documentation_only_zero_tests": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "valid_float_one_contract_version": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "valid_high_risk_new_launch": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "valid_high_risk_relaunch": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "valid_reversed_key_order": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "valid_small_low_risk_with_tests": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "valid_trailing_newline_in_comparison_base": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "valid_trailing_newline_in_decision_id": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    },
+    "valid_unicode_task_id_is_not_escaped": {
+      "exit": true,
+      "stderr": true,
+      "stdout": true
+    }
+  },
+  "baseline": {
+    "commit": "d80bcd15f06b79fed639cf028e273306567ffbfd",
+    "reference_checkout": "detached clean checkout of the baseline commit",
+    "utilities": [
+      {
+        "git_blob": "068ef4badfcef42eea8a6139dd51021ff7b934ac",
+        "path": "bin/fm-audit-writer.py",
+        "sha256": "1bef49b51be52aa15cae380537f2367f00e2ab0036ed0922b7a5d6e72b387c25"
+      },
+      {
+        "git_blob": "3435a9b6017ab36c90a62ecb5f3f4ac6e656b532",
+        "path": "bin/fm-audit-sanitize.py",
+        "sha256": "b19a3c61eb29637c9c7875c0268fd81271bab3729220d1c72041fac5840c9afd"
+      },
+      {
+        "git_blob": "dc19f6a546076bddd22c0901e495ffb484300463",
+        "path": "bin/fm-audit-envelope.py",
+        "sha256": "016f54b4f1fa923044fbc842903fd63ccc39de13ab02bed852490770bcffca28"
+      },
+      {
+        "git_blob": "87bf5849a0e8e35b5493b54afd8c174c49d8f5ad",
+        "path": "bin/fm-audit-activity-map.py",
+        "sha256": "2700aba1ebc6d467df2df23b883c8c3f1190c246dfe03babbc1f6d129cbdb172"
+      },
+      {
+        "git_blob": "4061519b07c03a3ebe92458f6fe607f3f7b96074",
+        "path": "bin/fm-assignment-reassess.py",
+        "sha256": "b42de5fbd6f40131219bf278fb00e4ea085b669ae85a9d555c600911742a94f1"
+      },
+      {
+        "git_blob": "922761c7646986a3d1b438388c2ee08dedb41896",
+        "path": "bin/fm-birds-eye-view-serve.py",
+        "sha256": "9f35ee1c9e59126172649ca5aa4686037bde42350b93b70e881bd25b06d1508a"
+      },
+      {
+        "git_blob": "a9ff5e57d361b6e2670d3a70ccebea43dbc04fbf",
+        "path": "bin/fm-assignment-profile.py",
+        "sha256": "98e31c3a47f5e9c9c9509d4b0fc009655d85d9a64ffdc139b3384b44514d9288"
+      }
+    ]
+  },
+  "comparison_to_main": {
+    "integration_commit": "49d7d24594a061181fae2e5326c5b26227ce909c",
+    "integration_ref": "origin/DPES-751",
+    "main_commit": "d80bcd15f06b79fed639cf028e273306567ffbfd",
+    "main_commit_equals_baseline": true,
+    "main_ref": "origin/main",
+    "note": "The baseline is main. Differences on the integration ref are informational and are not part of the baseline.",
+    "utilities_differing_from_main": [],
+    "utilities_differing_on_integration_ref": [
+      {
+        "dpes751_blob": "560f33880ccf570c89c211ae4b777c754e5adc97",
+        "path": "bin/fm-audit-activity-map.py"
+      }
+    ]
+  },
+  "environment": {
+    "git_version": "git version 2.53.0",
+    "invocation": "python3 -I -B -X utf8 <utility> (python -I ignores PYTHON* environment variables)",
+    "kernel": "Darwin 25.6.0",
+    "machine": "arm64",
+    "platform": "macOS-26.7.1-arm64-arm-64bit-Mach-O",
+    "python_executable": "python3",
+    "python_implementation": "CPython",
+    "python_version": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "unicodedata_version": "16.0.0"
+  },
+  "files": {
+    "outputs/fm-assignment-profile/meta_high_risk/run.command": {
+      "bytes": 263,
+      "sha256": "6a8062a9aa17345a3639058fc9a35b99ea1700e7642acd87352f5537f75fdb5b"
+    },
+    "outputs/fm-assignment-profile/meta_high_risk/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/meta_high_risk/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/meta_high_risk/run.stdout": {
+      "bytes": 274,
+      "sha256": "9255277a294b77f1890e8defd82040ccb5f7a91210fb82fdf71f30f267ee13b5"
+    },
+    "outputs/fm-assignment-profile/meta_small_low_risk/run.command": {
+      "bytes": 268,
+      "sha256": "9ecccfb1504dbae5d498e33e113b6072066291261f7f6a400e95f90aa55c7855"
+    },
+    "outputs/fm-assignment-profile/meta_small_low_risk/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/meta_small_low_risk/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/meta_small_low_risk/run.stdout": {
+      "bytes": 273,
+      "sha256": "ff4f078e7557c7db17419ce35f5ad255af596deffc507f88443b7f0c96c3e8eb"
+    },
+    "outputs/fm-assignment-profile/refuse_bad_comparison_base_pattern/run.command": {
+      "bytes": 287,
+      "sha256": "9239435122db91627c7ac614e35aa0efd3e27a4b893859c10fece4f75c1785f4"
+    },
+    "outputs/fm-assignment-profile/refuse_bad_comparison_base_pattern/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_bad_comparison_base_pattern/run.stderr": {
+      "bytes": 107,
+      "sha256": "2a2065a5a2c36ecfd2c2bb17b27fe47a83e86c3f3982735b15d6010e85d050a9"
+    },
+    "outputs/fm-assignment-profile/refuse_bad_comparison_base_pattern/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_bad_decision_id_pattern/run.command": {
+      "bytes": 283,
+      "sha256": "6db745d69d837a297decb18f91f86ca0f1ca0958e631fa8b0d5037e20b6e6dac"
+    },
+    "outputs/fm-assignment-profile/refuse_bad_decision_id_pattern/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_bad_decision_id_pattern/run.stderr": {
+      "bytes": 96,
+      "sha256": "b06897425f19c0198841935ff94bdb227c29e5baa71fd54a7b71772523284079"
+    },
+    "outputs/fm-assignment-profile/refuse_bad_decision_id_pattern/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_base_commit_pin/run.command": {
+      "bytes": 330,
+      "sha256": "2773c444d3841faad79d11eca13011c8aef255bae748d1e8a684f60d95440fcd"
+    },
+    "outputs/fm-assignment-profile/refuse_base_commit_pin/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_base_commit_pin/run.stderr": {
+      "bytes": 208,
+      "sha256": "5a139dccb85c7ac776c46da0c2e637c320e7ecc1e15a6da48059bc654edd9ac3"
+    },
+    "outputs/fm-assignment-profile/refuse_base_commit_pin/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_byte_order_mark/run.command": {
+      "bytes": 275,
+      "sha256": "1aff803acb3b170f9ebaf1edf209a994cac2cf8fc34aba63d12c8f4c27d9aafb"
+    },
+    "outputs/fm-assignment-profile/refuse_byte_order_mark/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_byte_order_mark/run.stderr": {
+      "bytes": 130,
+      "sha256": "50a4ca550a99a929eb9814cc322d4d48706d22d0340ee2c8a206ae95670b3274"
+    },
+    "outputs/fm-assignment-profile/refuse_byte_order_mark/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_changed_policy_material/run.command": {
+      "bytes": 298,
+      "sha256": "285f7b4a219d274dd364846eea7bd553d456daf7655a73ce9a16d171be8b8df2"
+    },
+    "outputs/fm-assignment-profile/refuse_changed_policy_material/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_changed_policy_material/run.stderr": {
+      "bytes": 213,
+      "sha256": "2982c5482567d407901a7b92f36e4106cba046f120ebd4eea334f18f5daa4b61"
+    },
+    "outputs/fm-assignment-profile/refuse_changed_policy_material/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_contract_version_true/run.command": {
+      "bytes": 281,
+      "sha256": "6901558a143ea037122ed5ef139912737850cd9489a8622dae4bb9365f2bccff"
+    },
+    "outputs/fm-assignment-profile/refuse_contract_version_true/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_contract_version_true/run.stderr": {
+      "bytes": 78,
+      "sha256": "63cbf9330d7ee58188856114c081726a6626ab27bb5981f20bc0701504925987"
+    },
+    "outputs/fm-assignment-profile/refuse_contract_version_true/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_contract_version_two/run.command": {
+      "bytes": 280,
+      "sha256": "396a2b4b962fc5bb660d3c275c52edd2e72f33741c2e7724cfe01acfd6d2b7a5"
+    },
+    "outputs/fm-assignment-profile/refuse_contract_version_two/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_contract_version_two/run.stderr": {
+      "bytes": 78,
+      "sha256": "63cbf9330d7ee58188856114c081726a6626ab27bb5981f20bc0701504925987"
+    },
+    "outputs/fm-assignment-profile/refuse_contract_version_two/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_control_character_in_string/run.command": {
+      "bytes": 287,
+      "sha256": "60cacf716a60bef7de405dc97a7a03162e16176ddd6d6c66efb7c5353ae333f1"
+    },
+    "outputs/fm-assignment-profile/refuse_control_character_in_string/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_control_character_in_string/run.stderr": {
+      "bytes": 113,
+      "sha256": "285e094a8049a302bab03121957e36b3e838e7dac879c74833deb8327a0befec"
+    },
+    "outputs/fm-assignment-profile/refuse_control_character_in_string/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_decision_for_other_task/run.command": {
+      "bytes": 283,
+      "sha256": "c327be4e269eb6545a1927853fbc27cc748dae475724b9e07f49cc4e7c13e6d8"
+    },
+    "outputs/fm-assignment-profile/refuse_decision_for_other_task/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_decision_for_other_task/run.stderr": {
+      "bytes": 93,
+      "sha256": "f44db8e5cb3356c1bf830e71f43b241c88a4bc3f30de4e160fb0c539f8fbfbf3"
+    },
+    "outputs/fm-assignment-profile/refuse_decision_for_other_task/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_documentation_only_with_tests/run.command": {
+      "bytes": 289,
+      "sha256": "e493d832f48314fcb6b3519aed05c1b89a43915813286bf2bcdd0e7ff3582d37"
+    },
+    "outputs/fm-assignment-profile/refuse_documentation_only_with_tests/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_documentation_only_with_tests/run.stderr": {
+      "bytes": 101,
+      "sha256": "6d907fb8a6680f3d7d0cdcf93fcb9394a23c9913d1f88353b741b44f01d3976f"
+    },
+    "outputs/fm-assignment-profile/refuse_documentation_only_with_tests/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_duplicate_key/run.command": {
+      "bytes": 273,
+      "sha256": "1e40205665f8239fbb4bbc10d6120085586d54f32279f3205265ef8aad5acc3a"
+    },
+    "outputs/fm-assignment-profile/refuse_duplicate_key/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_duplicate_key/run.stderr": {
+      "bytes": 73,
+      "sha256": "ff503fd040217cdb21c8f3a30ea55cecb5c4d929006ca34e7dbb9c3675033ad3"
+    },
+    "outputs/fm-assignment-profile/refuse_duplicate_key/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_empty_record/run.command": {
+      "bytes": 272,
+      "sha256": "8366bff101d8fa9644675976eb1a9912268e2036fa361bed7b0d2227ce51b88f"
+    },
+    "outputs/fm-assignment-profile/refuse_empty_record/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_empty_record/run.stderr": {
+      "bytes": 100,
+      "sha256": "2dedaa62ff739962cb6e460a41aa0c256fba95f40287896be528e3f2d6943450"
+    },
+    "outputs/fm-assignment-profile/refuse_empty_record/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_extra_data/run.command": {
+      "bytes": 270,
+      "sha256": "04a007a788f65ad59a1f1b5e44f074b7b861cd665d63504cbfca7bec3f0d68ce"
+    },
+    "outputs/fm-assignment-profile/refuse_extra_data/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_extra_data/run.stderr": {
+      "bytes": 95,
+      "sha256": "fd4db9d1800e8183e7700644114eb9977a8e02a016cb146d2a29246e0daf90ff"
+    },
+    "outputs/fm-assignment-profile/refuse_extra_data/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_final_unresolved/run.command": {
+      "bytes": 276,
+      "sha256": "95a47e30d4d0a9a9063c113b1d551c18b3da03fe9629d037c5ca96b2394828c8"
+    },
+    "outputs/fm-assignment-profile/refuse_final_unresolved/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_final_unresolved/run.stderr": {
+      "bytes": 89,
+      "sha256": "73263afdedbe16bc0c829bf12c729f362d589958bd5ad2a8e0bcf60f57951a5d"
+    },
+    "outputs/fm-assignment-profile/refuse_final_unresolved/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_final_without_identity/run.command": {
+      "bytes": 282,
+      "sha256": "e8aa234db41b2a99ec5c234e3f415316e6348e9fe43cfd0be40883223f2dfd42"
+    },
+    "outputs/fm-assignment-profile/refuse_final_without_identity/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_final_without_identity/run.stderr": {
+      "bytes": 89,
+      "sha256": "73263afdedbe16bc0c829bf12c729f362d589958bd5ad2a8e0bcf60f57951a5d"
+    },
+    "outputs/fm-assignment-profile/refuse_final_without_identity/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_incomplete_coverage_for_final/run.command": {
+      "bytes": 289,
+      "sha256": "14d9fdc0b1deba82c6cc77cd8cb1760fbfe21bb7ff52ad0ea3b6da0681222638"
+    },
+    "outputs/fm-assignment-profile/refuse_incomplete_coverage_for_final/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_incomplete_coverage_for_final/run.stderr": {
+      "bytes": 89,
+      "sha256": "73263afdedbe16bc0c829bf12c729f362d589958bd5ad2a8e0bcf60f57951a5d"
+    },
+    "outputs/fm-assignment-profile/refuse_incomplete_coverage_for_final/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_infinity_constant/run.command": {
+      "bytes": 277,
+      "sha256": "7a88baf03e2ee9a9165586e70ebdf44b958d5e59707caf2ed377ec52ee2eb909"
+    },
+    "outputs/fm-assignment-profile/refuse_infinity_constant/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_infinity_constant/run.stderr": {
+      "bytes": 87,
+      "sha256": "bbb2e88d493c8ad153aed390c45fa5845f902cdc709aa6bac297c736a7fc9615"
+    },
+    "outputs/fm-assignment-profile/refuse_infinity_constant/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_invalid_escape/run.command": {
+      "bytes": 274,
+      "sha256": "a57f484bb30e932a803ea2503e4fcd9f13c798013d24cfa481463a1179de5a32"
+    },
+    "outputs/fm-assignment-profile/refuse_invalid_escape/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_invalid_escape/run.stderr": {
+      "bytes": 100,
+      "sha256": "40924ac42a05180f0a26b9ca47ffc0bdd3b764361e5c0b71f336ab3d650e9b5f"
+    },
+    "outputs/fm-assignment-profile/refuse_invalid_escape/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_missing_comparison_base/run.command": {
+      "bytes": 283,
+      "sha256": "103381af4582b51df300cd4f80f88a09da6dfa106cc617735bd2bfd69994b809"
+    },
+    "outputs/fm-assignment-profile/refuse_missing_comparison_base/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_missing_comparison_base/run.stderr": {
+      "bytes": 86,
+      "sha256": "5bce04b301f05dcbf1a835fdba4206a2ae2372708cb355aa040ee397a29c7ab3"
+    },
+    "outputs/fm-assignment-profile/refuse_missing_comparison_base/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_nan_constant/run.command": {
+      "bytes": 272,
+      "sha256": "a13cc1e568bf1b607e5a845722a465a13c40392ffe4ba1b9adf2d7956519ce11"
+    },
+    "outputs/fm-assignment-profile/refuse_nan_constant/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_nan_constant/run.stderr": {
+      "bytes": 82,
+      "sha256": "40b691aec4ada64247317ffc548d667eb562a21ce004ba66cf194b6934ba79cd"
+    },
+    "outputs/fm-assignment-profile/refuse_nan_constant/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_negative_infinity_constant/run.command": {
+      "bytes": 286,
+      "sha256": "a33acb107647d5c91c576b462f992396e717860bd3a4df4ad89cefcc89d015f7"
+    },
+    "outputs/fm-assignment-profile/refuse_negative_infinity_constant/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_negative_infinity_constant/run.stderr": {
+      "bytes": 88,
+      "sha256": "2767254c999a083778db3b56b4af0f7aaf81df19ece5c6d2687a8e913fd85ecc"
+    },
+    "outputs/fm-assignment-profile/refuse_negative_infinity_constant/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_non_string_key/run.command": {
+      "bytes": 274,
+      "sha256": "60ccab669ea6c2e10a202b8c7b0b3ddbcddf8cda392e1a48bef68de35c65644d"
+    },
+    "outputs/fm-assignment-profile/refuse_non_string_key/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_non_string_key/run.stderr": {
+      "bytes": 134,
+      "sha256": "a06604877533cdab632d325699b3ae0c3770c5916214778f96fae5329f922deb"
+    },
+    "outputs/fm-assignment-profile/refuse_non_string_key/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_not_json/run.command": {
+      "bytes": 268,
+      "sha256": "be57468889d5ceb1ee01eb8e4628190950fafda7b3db4ad24c242858659803d9"
+    },
+    "outputs/fm-assignment-profile/refuse_not_json/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_not_json/run.stderr": {
+      "bytes": 100,
+      "sha256": "2dedaa62ff739962cb6e460a41aa0c256fba95f40287896be528e3f2d6943450"
+    },
+    "outputs/fm-assignment-profile/refuse_not_json/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_require_current_on_superseded/run.command": {
+      "bytes": 383,
+      "sha256": "4b4b644d07cf82cb24a2d2542a609d15e9284d27c5a5a2f960d338aa08e4c529"
+    },
+    "outputs/fm-assignment-profile/refuse_require_current_on_superseded/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_require_current_on_superseded/run.stderr": {
+      "bytes": 204,
+      "sha256": "1ad77495eddba573b14de93a55f7429ca65fe3dac0bc2d73da89c70c55a67f9c"
+    },
+    "outputs/fm-assignment-profile/refuse_require_current_on_superseded/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_revoked_revision/run.command": {
+      "bytes": 276,
+      "sha256": "03046f7844c2a54e0070bae55810b5e3bb0030f2dc0036b6a86776fdec3bb464"
+    },
+    "outputs/fm-assignment-profile/refuse_revoked_revision/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_revoked_revision/run.stderr": {
+      "bytes": 106,
+      "sha256": "11bf443638ca3a0d7a63038856d2058ae83b6a12c173711397fca796904bf191"
+    },
+    "outputs/fm-assignment-profile/refuse_revoked_revision/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_risk_trigger_on_standard/run.command": {
+      "bytes": 284,
+      "sha256": "86db87cd4762e8bc74e53b3068eda3018fcd1acc80725c0017f21965e4f5f3ff"
+    },
+    "outputs/fm-assignment-profile/refuse_risk_trigger_on_standard/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_risk_trigger_on_standard/run.stderr": {
+      "bytes": 89,
+      "sha256": "73263afdedbe16bc0c829bf12c729f362d589958bd5ad2a8e0bcf60f57951a5d"
+    },
+    "outputs/fm-assignment-profile/refuse_risk_trigger_on_standard/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_superseded_revision_on_relaunch/run.command": {
+      "bytes": 291,
+      "sha256": "a95dfc86c5a5ea703704010d4ee490194776170d71621c7dfbe32a49cc768757"
+    },
+    "outputs/fm-assignment-profile/refuse_superseded_revision_on_relaunch/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_superseded_revision_on_relaunch/run.stderr": {
+      "bytes": 213,
+      "sha256": "13aa2f4e8e35d17f0365e3afa0e23318a267ad3c595a8068124add146a5a9c7a"
+    },
+    "outputs/fm-assignment-profile/refuse_superseded_revision_on_relaunch/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_target_branch_pin/run.command": {
+      "bytes": 301,
+      "sha256": "269c8111cddf6adb9b1f74f8dc3293e81e7658f625d8ff3c67893750e15b12fe"
+    },
+    "outputs/fm-assignment-profile/refuse_target_branch_pin/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_target_branch_pin/run.stderr": {
+      "bytes": 111,
+      "sha256": "91ef6b0bda1fdd735251502001facb224a4125ebf71bba5e8d3e948e2e058374"
+    },
+    "outputs/fm-assignment-profile/refuse_target_branch_pin/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_task_mismatch/run.command": {
+      "bytes": 273,
+      "sha256": "5c36fa34c9f797abea7bce493312a75af882cff613c89b062b089a26f20839a1"
+    },
+    "outputs/fm-assignment-profile/refuse_task_mismatch/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_task_mismatch/run.stderr": {
+      "bytes": 111,
+      "sha256": "66b65532bf452328d0cb151dff6e6154dc4409418969e67f0618fa8aedb0c6b8"
+    },
+    "outputs/fm-assignment-profile/refuse_task_mismatch/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_trailing_comma_in_array/run.command": {
+      "bytes": 283,
+      "sha256": "1f6bfa33473799791c081bad28908e370542839f487130c4221b334868d256fb"
+    },
+    "outputs/fm-assignment-profile/refuse_trailing_comma_in_array/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_trailing_comma_in_array/run.stderr": {
+      "bytes": 127,
+      "sha256": "a0118f44d32b1b564ed6c59ed783f8689c43ec2ab37ed3297be4f99e26133be3"
+    },
+    "outputs/fm-assignment-profile/refuse_trailing_comma_in_array/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_trailing_comma_in_object/run.command": {
+      "bytes": 284,
+      "sha256": "0f029e73074192496e394c11c0afab65f7e8b97f854b03f73dc85d2a3d03e368"
+    },
+    "outputs/fm-assignment-profile/refuse_trailing_comma_in_object/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_trailing_comma_in_object/run.stderr": {
+      "bytes": 134,
+      "sha256": "a06604877533cdab632d325699b3ae0c3770c5916214778f96fae5329f922deb"
+    },
+    "outputs/fm-assignment-profile/refuse_trailing_comma_in_object/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_unapproved_revision/run.command": {
+      "bytes": 279,
+      "sha256": "c0e8a4f1001d8b468db586e313618a0231e645756bf4712ae2da2afeca2def93"
+    },
+    "outputs/fm-assignment-profile/refuse_unapproved_revision/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_unapproved_revision/run.stderr": {
+      "bytes": 187,
+      "sha256": "9874e0bbf3271ab95e1d5f90ccf5eec5460e877db0619ce6bf52c925092759d6"
+    },
+    "outputs/fm-assignment-profile/refuse_unapproved_revision/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_unknown_profile/run.command": {
+      "bytes": 275,
+      "sha256": "68fe99eea50e2bc054bf4123be7b1f987bb2149b47f2d832824d2ff04a63917b"
+    },
+    "outputs/fm-assignment-profile/refuse_unknown_profile/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_unknown_profile/run.stderr": {
+      "bytes": 92,
+      "sha256": "a2b675f94c6f2f2b4226b5b0c551c8656ed6fcc8d1ed5b92287c398d2b7a013a"
+    },
+    "outputs/fm-assignment-profile/refuse_unknown_profile/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_unknown_top_level_key/run.command": {
+      "bytes": 281,
+      "sha256": "d1e8418f4ee18121f5211c2f8b8aa79e6d0d17fe1b2d8ca3e2ea7682b221adec"
+    },
+    "outputs/fm-assignment-profile/refuse_unknown_top_level_key/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_unknown_top_level_key/run.stderr": {
+      "bytes": 100,
+      "sha256": "0987371b030fb163f961162b0ffbda320d91331390b59b11133abd23aec7d01e"
+    },
+    "outputs/fm-assignment-profile/refuse_unknown_top_level_key/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_unresolved_on_final_high_risk/run.command": {
+      "bytes": 289,
+      "sha256": "ff4530a0e0e39730712e28f175aafee5b16a284a74adc16ffa2dc19118895c77"
+    },
+    "outputs/fm-assignment-profile/refuse_unresolved_on_final_high_risk/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_unresolved_on_final_high_risk/run.stderr": {
+      "bytes": 89,
+      "sha256": "73263afdedbe16bc0c829bf12c729f362d589958bd5ad2a8e0bcf60f57951a5d"
+    },
+    "outputs/fm-assignment-profile/refuse_unresolved_on_final_high_risk/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_unsupported_schema_keyword/run.command": {
+      "bytes": 297,
+      "sha256": "d06b3909e76a6091c4c7a555dde4402eccc4e7030b237c5b801aadb13abfce71"
+    },
+    "outputs/fm-assignment-profile/refuse_unsupported_schema_keyword/run.exit": {
+      "bytes": 2,
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    "outputs/fm-assignment-profile/refuse_unsupported_schema_keyword/run.stderr": {
+      "bytes": 82,
+      "sha256": "3a229c77929e6c2dea0ef75ddd7f1f0509afcdbcefb2980e521ea770312ea22e"
+    },
+    "outputs/fm-assignment-profile/refuse_unsupported_schema_keyword/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/refuse_unterminated_string/run.command": {
+      "bytes": 279,
+      "sha256": "de3cfcd2449e5dae7e2925c04817ff1ae57cecfad3e2e241c117d139eb4af78a"
+    },
+    "outputs/fm-assignment-profile/refuse_unterminated_string/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/refuse_unterminated_string/run.stderr": {
+      "bytes": 116,
+      "sha256": "789162b60af8ff964f584970bad13893cfef2d75d4b6b6a7e4bcd9fc87c0ad28"
+    },
+    "outputs/fm-assignment-profile/refuse_unterminated_string/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/render_documentation_only/run.command": {
+      "bytes": 276,
+      "sha256": "60451feaf3576597c3fdba8b54ea87248ba7ff8cd39f6dad2054bf264860c7c7"
+    },
+    "outputs/fm-assignment-profile/render_documentation_only/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/render_documentation_only/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/render_documentation_only/run.stdout": {
+      "bytes": 645,
+      "sha256": "a0ba27618f2fc380b53e00d217cd18684feabba68e3ee29122081299dc33740c"
+    },
+    "outputs/fm-assignment-profile/render_high_risk/run.command": {
+      "bytes": 267,
+      "sha256": "2c7058ebefb4fe8257cd659145d2f7bdb1f5be936db6fde4975aea11c8e4da27"
+    },
+    "outputs/fm-assignment-profile/render_high_risk/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/render_high_risk/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/render_high_risk/run.stdout": {
+      "bytes": 708,
+      "sha256": "0e7561dad3c263a7f0ce90b78f7b27ddf1be9f03e94c2bcded91f088454ca285"
+    },
+    "outputs/fm-assignment-profile/render_refused/run.command": {
+      "bytes": 265,
+      "sha256": "fe744f33d885536ca8ff78b2ed793055e7001978772d6e54c01362c157dc27fa"
+    },
+    "outputs/fm-assignment-profile/render_refused/run.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-assignment-profile/render_refused/run.stderr": {
+      "bytes": 92,
+      "sha256": "a2b675f94c6f2f2b4226b5b0c551c8656ed6fcc8d1ed5b92287c398d2b7a013a"
+    },
+    "outputs/fm-assignment-profile/render_refused/run.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/valid_control_characters_are_escaped/run.command": {
+      "bytes": 278,
+      "sha256": "c2eb33931c09cfd169dce5024fbe2551076bb934f501040d2c9bff4c81809954"
+    },
+    "outputs/fm-assignment-profile/valid_control_characters_are_escaped/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/valid_control_characters_are_escaped/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/valid_control_characters_are_escaped/run.stdout": {
+      "bytes": 1080,
+      "sha256": "a3dcf156598b04f538f23bfb13bd4faff65921d7669c6cae647312c202dba622"
+    },
+    "outputs/fm-assignment-profile/valid_documentation_only_zero_tests/run.command": {
+      "bytes": 288,
+      "sha256": "9bfa1c2732afed3f35d24a09c2b1e81452e779a9427b44822cc156ddacce5e68"
+    },
+    "outputs/fm-assignment-profile/valid_documentation_only_zero_tests/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/valid_documentation_only_zero_tests/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/valid_documentation_only_zero_tests/run.stdout": {
+      "bytes": 1031,
+      "sha256": "b6bacb4be42a75a50f0b305b22440291480bd695b1f77abf863805574d4aeb16"
+    },
+    "outputs/fm-assignment-profile/valid_float_one_contract_version/run.command": {
+      "bytes": 274,
+      "sha256": "5d35d90b7ee20a2d3a7321426a7adc1a84b6ffb20e66f030af029cb4b9106783"
+    },
+    "outputs/fm-assignment-profile/valid_float_one_contract_version/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/valid_float_one_contract_version/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/valid_float_one_contract_version/run.stdout": {
+      "bytes": 1114,
+      "sha256": "21bd9d25022bcd86240af941d83a9bd7cce2326edf56ca7f8b328ac1db61cc27"
+    },
+    "outputs/fm-assignment-profile/valid_high_risk_new_launch/run.command": {
+      "bytes": 373,
+      "sha256": "04dbb125f7a4e88f7d2c62ea098809132f49a8ee3a224634512f0f669cfc172c"
+    },
+    "outputs/fm-assignment-profile/valid_high_risk_new_launch/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/valid_high_risk_new_launch/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/valid_high_risk_new_launch/run.stdout": {
+      "bytes": 1112,
+      "sha256": "5bd2027ddb7d13bfb8e953fc46b2881359ea9c755c21a7c99be2bc42ef4607be"
+    },
+    "outputs/fm-assignment-profile/valid_high_risk_relaunch/run.command": {
+      "bytes": 277,
+      "sha256": "c57c968d4ef659764aa73016ce427f6c195cdc62620c1a74dc1196d34466baef"
+    },
+    "outputs/fm-assignment-profile/valid_high_risk_relaunch/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/valid_high_risk_relaunch/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/valid_high_risk_relaunch/run.stdout": {
+      "bytes": 1112,
+      "sha256": "5bd2027ddb7d13bfb8e953fc46b2881359ea9c755c21a7c99be2bc42ef4607be"
+    },
+    "outputs/fm-assignment-profile/valid_reversed_key_order/run.command": {
+      "bytes": 277,
+      "sha256": "4951c4c8bc60022db606aace165188fea9665020f30b48dc8485e8d8a642a79d"
+    },
+    "outputs/fm-assignment-profile/valid_reversed_key_order/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/valid_reversed_key_order/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/valid_reversed_key_order/run.stdout": {
+      "bytes": 1112,
+      "sha256": "5bd2027ddb7d13bfb8e953fc46b2881359ea9c755c21a7c99be2bc42ef4607be"
+    },
+    "outputs/fm-assignment-profile/valid_small_low_risk_with_tests/run.command": {
+      "bytes": 284,
+      "sha256": "b6f0056d56425d060d438901b07551e76391d2dd552abd0e0143b52d1397bf1b"
+    },
+    "outputs/fm-assignment-profile/valid_small_low_risk_with_tests/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/valid_small_low_risk_with_tests/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/valid_small_low_risk_with_tests/run.stdout": {
+      "bytes": 1044,
+      "sha256": "de147a7087b474bd6525994eee472ab9638f111a992016665593ae0738d21cde"
+    },
+    "outputs/fm-assignment-profile/valid_trailing_newline_in_comparison_base/run.command": {
+      "bytes": 283,
+      "sha256": "5dfcfc7e50a5ce95e01f740ef4d24718354f0383ad34c6ecdd5289f1a82cdee6"
+    },
+    "outputs/fm-assignment-profile/valid_trailing_newline_in_comparison_base/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/valid_trailing_newline_in_comparison_base/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/valid_trailing_newline_in_comparison_base/run.stdout": {
+      "bytes": 1114,
+      "sha256": "4b762c75a022ea3825ef99a98417cabe394b9d80ee71fa98996a7f0d2784353f"
+    },
+    "outputs/fm-assignment-profile/valid_trailing_newline_in_decision_id/run.command": {
+      "bytes": 290,
+      "sha256": "bec758cf5fca683bc807ce21ed59e5c33ce68d65296960f32148b0943993cb76"
+    },
+    "outputs/fm-assignment-profile/valid_trailing_newline_in_decision_id/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/valid_trailing_newline_in_decision_id/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/valid_trailing_newline_in_decision_id/run.stdout": {
+      "bytes": 1114,
+      "sha256": "7481ad604514771b27c14967350fb4b8faa31484e89d68a68751d08f7b7187e5"
+    },
+    "outputs/fm-assignment-profile/valid_unicode_task_id_is_not_escaped/run.command": {
+      "bytes": 278,
+      "sha256": "dbcdc8a4473be5c970cd1241d1fca34fe0a386b8cb88b58ed3076505c023109e"
+    },
+    "outputs/fm-assignment-profile/valid_unicode_task_id_is_not_escaped/run.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-profile/valid_unicode_task_id_is_not_escaped/run.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-profile/valid_unicode_task_id_is_not_escaped/run.stdout": {
+      "bytes": 1114,
+      "sha256": "6fcf4cd4d647779f3248e64dd85b3a27ffba377cae33ec12cc9da8ad75d1ca09"
+    },
+    "outputs/fm-assignment-reassess/repo/collect-clean.command": {
+      "bytes": 154,
+      "sha256": "54b158854124e88594683bfc087a0c343183e655aed860f8a8ea3ff5da88a473"
+    },
+    "outputs/fm-assignment-reassess/repo/collect-clean.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-reassess/repo/collect-clean.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-reassess/repo/collect-clean.stdout": {
+      "bytes": 274,
+      "sha256": "68a956ad29cda105511db6abb64b900c98d995b03efb2b3d92ce692332354ded"
+    },
+    "outputs/fm-assignment-reassess/repo/collect-dirty.command": {
+      "bytes": 154,
+      "sha256": "54b158854124e88594683bfc087a0c343183e655aed860f8a8ea3ff5da88a473"
+    },
+    "outputs/fm-assignment-reassess/repo/collect-dirty.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-reassess/repo/collect-dirty.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-reassess/repo/collect-dirty.stdout": {
+      "bytes": 501,
+      "sha256": "db86f09e29e8a04d8b067381b4d0eca4c8ec35e5f8d2a3caad97ffe03a1b4ec8"
+    },
+    "outputs/fm-assignment-reassess/repo/inputs/request-high-risk.json": {
+      "bytes": 416,
+      "sha256": "4b14a415e1d73891d4d7bc255090b454c26e12f4728a353385db26f7baa1c684"
+    },
+    "outputs/fm-assignment-reassess/repo/inputs/request-no-trigger.json": {
+      "bytes": 358,
+      "sha256": "0e2d5b204e5e12f2f5a897fc262651db44c7f635cc268e68778117260801ef73"
+    },
+    "outputs/fm-assignment-reassess/repo/reassess-high-risk.command": {
+      "bytes": 182,
+      "sha256": "52aaa205f862fe50623e2c2fccccd1e16af0143aa4d7a2427011b7945c8bc2f8"
+    },
+    "outputs/fm-assignment-reassess/repo/reassess-high-risk.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-reassess/repo/reassess-high-risk.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-reassess/repo/reassess-high-risk.stdout": {
+      "bytes": 1910,
+      "sha256": "ad132dd9d1734f34e9484aedbb2ffbbbbc12a4e9c9619a756bc12a755cc7e5fe"
+    },
+    "outputs/fm-assignment-reassess/repo/reassess-no-trigger.command": {
+      "bytes": 183,
+      "sha256": "22634aaa14a2806ac735a746a686ce78b1e1d65d0d9a01978e72e9dbce453f62"
+    },
+    "outputs/fm-assignment-reassess/repo/reassess-no-trigger.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-assignment-reassess/repo/reassess-no-trigger.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-assignment-reassess/repo/reassess-no-trigger.stdout": {
+      "bytes": 1776,
+      "sha256": "f87b87c85fcb2b09b8746f458c3e712c28dbc31ce1299f3a4ff8d633e2601081"
+    },
+    "outputs/fm-audit-activity-map/projection/inputs/sanitize-config-extra-key.json": {
+      "bytes": 107,
+      "sha256": "2d5116eae9e4e1dc54cf59189d31cc16e8fc1555bc76c08efd67f502ccc7b634"
+    },
+    "outputs/fm-audit-activity-map/projection/inputs/sanitize-config.json": {
+      "bytes": 85,
+      "sha256": "e624e0ad4a69ae871dcbb49b0b63458a8c667511e4a836ce7729ec22822f5756"
+    },
+    "outputs/fm-audit-activity-map/projection/inputs/sanitize-event-seeded.json": {
+      "bytes": 955,
+      "sha256": "92faf6937c778dd2d89c7b3995f28e535f04466788fe43e39b48857df0ec0d0f"
+    },
+    "outputs/fm-audit-activity-map/projection/map-accepted.command": {
+      "bytes": 229,
+      "sha256": "2a1d447ba95d5ce2cd70d7f85ef36231b2dd2e4c5fc4dd8d4cc36a0f0390eeae"
+    },
+    "outputs/fm-audit-activity-map/projection/map-accepted.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-audit-activity-map/projection/map-accepted.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-activity-map/projection/map-accepted.stdout": {
+      "bytes": 2196,
+      "sha256": "f81b56f6e18ddf10623ba16e5ee30855a8dd7e1f74dd5ad523a7d09d7d70dba9"
+    },
+    "outputs/fm-audit-activity-map/projection/map-missing-user.command": {
+      "bytes": 233,
+      "sha256": "97548c3811956aedcdb57b0785d18019e632d017cb5f2df8efac7862d6325242"
+    },
+    "outputs/fm-audit-activity-map/projection/map-missing-user.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-activity-map/projection/map-missing-user.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-activity-map/projection/map-missing-user.stdout": {
+      "bytes": 75,
+      "sha256": "0e231ff3847efcda7a9f3b3cd55b5054311fcca24db01a0fdef894d7cb77b0b9"
+    },
+    "outputs/fm-audit-envelope/envelope-accepted/validate.command": {
+      "bytes": 168,
+      "sha256": "24f3d5548a4a9dc41899eda26e444df7e7c1b315b6eb3ed7be551152ebb285da"
+    },
+    "outputs/fm-audit-envelope/envelope-accepted/validate.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-audit-envelope/envelope-accepted/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-accepted/validate.stdout": {
+      "bytes": 49,
+      "sha256": "f561567e41deb4225811dab73f559df2bea197faa711b92d4e305b23de376a52"
+    },
+    "outputs/fm-audit-envelope/envelope-actor-mismatch/validate.command": {
+      "bytes": 174,
+      "sha256": "b52f6df70656b3662bc29f67b3a9cc963149a69ab9225772551e7456b3cafa92"
+    },
+    "outputs/fm-audit-envelope/envelope-actor-mismatch/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-actor-mismatch/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-actor-mismatch/validate.stdout": {
+      "bytes": 101,
+      "sha256": "6eda66dd86ef2c10ed03a4d8e02b216f3b5c4d0563d00aa7041bc2849cd48da2"
+    },
+    "outputs/fm-audit-envelope/envelope-bad-ts/validate.command": {
+      "bytes": 166,
+      "sha256": "64905a54f9cf0b6d8bcd631ae6d9072178952926eb2ce1fa8a19ce6537afe23e"
+    },
+    "outputs/fm-audit-envelope/envelope-bad-ts/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-bad-ts/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-bad-ts/validate.stdout": {
+      "bytes": 95,
+      "sha256": "c88e86c8bc5580e5153f2dee1d41b9aa14b9eba578a90d7200b3bdaa27734826"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-offset-edge-next-day/validate.command": {
+      "bytes": 188,
+      "sha256": "fa6017de2cd6d16e0f4235697cea20d49ddd289598bbfc78fb8f7c081ffcc048"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-offset-edge-next-day/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-offset-edge-next-day/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-offset-edge-next-day/validate.stdout": {
+      "bytes": 102,
+      "sha256": "c8400655e9d3ddcce836e76b3a35502eef212b7001ddae072e0803ad5f91a85e"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-offset-edge/validate.command": {
+      "bytes": 179,
+      "sha256": "5d869d2be267eefdfd79de6a3db9e76cd4995834ff063fb6ad81482dabab6220"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-offset-edge/validate.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-offset-edge/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-offset-edge/validate.stdout": {
+      "bytes": 49,
+      "sha256": "f561567e41deb4225811dab73f559df2bea197faa711b92d4e305b23de376a52"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-spring-forward/validate.command": {
+      "bytes": 182,
+      "sha256": "f0bfddf9f0de1e3802511a4b9df01aa12efcd4cd3638f1e376490129ae88bd3a"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-spring-forward/validate.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-spring-forward/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-chicago-spring-forward/validate.stdout": {
+      "bytes": 49,
+      "sha256": "f561567e41deb4225811dab73f559df2bea197faa711b92d4e305b23de376a52"
+    },
+    "outputs/fm-audit-envelope/envelope-day-key-mismatch/validate.command": {
+      "bytes": 176,
+      "sha256": "3dc5504ff2488807135139aa0bd6f4bc56c4bfb5967b037c782cf9d326c3b862"
+    },
+    "outputs/fm-audit-envelope/envelope-day-key-mismatch/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-day-key-mismatch/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-day-key-mismatch/validate.stdout": {
+      "bytes": 102,
+      "sha256": "c8400655e9d3ddcce836e76b3a35502eef212b7001ddae072e0803ad5f91a85e"
+    },
+    "outputs/fm-audit-envelope/envelope-duplicate-key/validate.command": {
+      "bytes": 173,
+      "sha256": "b3cbd07a0ed79d78b3bf7013e67e3c401d9f22e363db3a14869646dd8739d550"
+    },
+    "outputs/fm-audit-envelope/envelope-duplicate-key/validate.exit": {
+      "bytes": 2,
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    "outputs/fm-audit-envelope/envelope-duplicate-key/validate.stderr": {
+      "bytes": 141,
+      "sha256": "c0b3d79cc93b32b40f1dbc54401835113f1b49993b2c5611f7f0349f1015a8f2"
+    },
+    "outputs/fm-audit-envelope/envelope-duplicate-key/validate.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-extra-member/validate.command": {
+      "bytes": 172,
+      "sha256": "40ac2001f63dc7a11b980d546a23453dc300a02ddac289ee57e6d9ab0bdb5815"
+    },
+    "outputs/fm-audit-envelope/envelope-extra-member/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-extra-member/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-extra-member/validate.stdout": {
+      "bytes": 92,
+      "sha256": "9b8fba2e2e4c91c550c102708ffc53aebbd144e072650520eed47e99249cc7ad"
+    },
+    "outputs/fm-audit-envelope/envelope-missing-event/validate.command": {
+      "bytes": 173,
+      "sha256": "5446949f863a4bd1a10077ea92c719a40b49dd0f5d949a0996016f4fc69205da"
+    },
+    "outputs/fm-audit-envelope/envelope-missing-event/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-missing-event/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-missing-event/validate.stdout": {
+      "bytes": 98,
+      "sha256": "5c86d7827f440ef5045dbc6a862e6226089dd1367642d1ca15aa085076c3522a"
+    },
+    "outputs/fm-audit-envelope/envelope-missing-user/validate.command": {
+      "bytes": 172,
+      "sha256": "87a2cb4d615abe73596ab7eb1d1b8128967cc8866281eae4524742d94df2386a"
+    },
+    "outputs/fm-audit-envelope/envelope-missing-user/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-missing-user/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-missing-user/validate.stdout": {
+      "bytes": 102,
+      "sha256": "0dd77c55930888aff3c38534ad6d0890a8534b094e529001ef89c38d3e98f407"
+    },
+    "outputs/fm-audit-envelope/envelope-nan/validate.command": {
+      "bytes": 163,
+      "sha256": "0408c5452604385499d49cb6a930de88320681ae3aabf094a5f22351bfc73da0"
+    },
+    "outputs/fm-audit-envelope/envelope-nan/validate.exit": {
+      "bytes": 2,
+      "sha256": "53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3"
+    },
+    "outputs/fm-audit-envelope/envelope-nan/validate.stderr": {
+      "bytes": 138,
+      "sha256": "6b56061ddc76979e0d2285b049a06976cd3f4603064c12c071e6410bc3e5751f"
+    },
+    "outputs/fm-audit-envelope/envelope-nan/validate.stdout": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-null-user-id/validate.command": {
+      "bytes": 172,
+      "sha256": "7b8da4e95ac817bfa8fbd77df1e87dc777d0d8969c2250fe8830fa0c8b226b0e"
+    },
+    "outputs/fm-audit-envelope/envelope-null-user-id/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-null-user-id/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-null-user-id/validate.stdout": {
+      "bytes": 105,
+      "sha256": "023d25d281b5fc1acef3f6ca44444ba11d859f9dfcf8f6392e40df9bd5cd276c"
+    },
+    "outputs/fm-audit-envelope/envelope-pending-user-id/validate.command": {
+      "bytes": 175,
+      "sha256": "a282faecfe9ee8d164d293df1c3dffe2e872d3ac4a2d5415b1406b69a645f394"
+    },
+    "outputs/fm-audit-envelope/envelope-pending-user-id/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-pending-user-id/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-pending-user-id/validate.stdout": {
+      "bytes": 105,
+      "sha256": "023d25d281b5fc1acef3f6ca44444ba11d859f9dfcf8f6392e40df9bd5cd276c"
+    },
+    "outputs/fm-audit-envelope/envelope-seq-one-null-prev/validate.command": {
+      "bytes": 177,
+      "sha256": "5b57b005754dc4e6480ce4dcc3aa8f1ff1de25eeba0ee433f147c9a8572a1c77"
+    },
+    "outputs/fm-audit-envelope/envelope-seq-one-null-prev/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-seq-one-null-prev/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-seq-one-null-prev/validate.stdout": {
+      "bytes": 102,
+      "sha256": "474cb973911f1a450d2d6eeb359a3767fb954e425e16ff59e21ca533f06d0377"
+    },
+    "outputs/fm-audit-envelope/envelope-unknown-zone/validate.command": {
+      "bytes": 172,
+      "sha256": "a4f1dbceb04aa933455cb203c93c040652795b1d4a8bd6a6d6d27e0e8e752784"
+    },
+    "outputs/fm-audit-envelope/envelope-unknown-zone/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-unknown-zone/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-unknown-zone/validate.stdout": {
+      "bytes": 106,
+      "sha256": "97b7b787b3a96c39e22b2676583ae7b7650314e8dea9299ab554b03b7c168580"
+    },
+    "outputs/fm-audit-envelope/envelope-zone-traversal/validate.command": {
+      "bytes": 174,
+      "sha256": "c4bfaeb5c26cd69d6f73f05ad622d2744c624e208fa475f1002bd92561b72419"
+    },
+    "outputs/fm-audit-envelope/envelope-zone-traversal/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/envelope-zone-traversal/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/envelope-zone-traversal/validate.stdout": {
+      "bytes": 106,
+      "sha256": "97b7b787b3a96c39e22b2676583ae7b7650314e8dea9299ab554b03b7c168580"
+    },
+    "outputs/fm-audit-envelope/ledger-accepted/validate.command": {
+      "bytes": 173,
+      "sha256": "bed444539cfe111873e8504ed84ea07286a3386837a7fded0b10b62eaa0cc757"
+    },
+    "outputs/fm-audit-envelope/ledger-accepted/validate.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-audit-envelope/ledger-accepted/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/ledger-accepted/validate.stdout": {
+      "bytes": 56,
+      "sha256": "b44fcc1f0a821458c2142db425b6f20116b96919dc3653887bba2e74d4d3eeca"
+    },
+    "outputs/fm-audit-envelope/ledger-wrong-version/validate.command": {
+      "bytes": 178,
+      "sha256": "f47d690c5dede9055536d007795bdcae035d268f4d06dd942b69ca4ca11e0dc6"
+    },
+    "outputs/fm-audit-envelope/ledger-wrong-version/validate.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-envelope/ledger-wrong-version/validate.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-envelope/ledger-wrong-version/validate.stdout": {
+      "bytes": 101,
+      "sha256": "33fea716378e02e3a63e54401f821c8c84ae703fcf17844e686f40827faf8829"
+    },
+    "outputs/fm-audit-sanitize/config-extra-key/sanitize.command": {
+      "bytes": 227,
+      "sha256": "bb370808f39f554016a48574df4a678375ae093f8eee13f1ffa153941289eff0"
+    },
+    "outputs/fm-audit-sanitize/config-extra-key/sanitize.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-sanitize/config-extra-key/sanitize.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-sanitize/config-extra-key/sanitize.stdout": {
+      "bytes": 65,
+      "sha256": "6ed7a6d70a1aeec746a1ac92c740bd74296b76d5b92f6c932f1f0987f996cbbc"
+    },
+    "outputs/fm-audit-sanitize/seeded/inputs/sanitize-config-extra-key.json": {
+      "bytes": 107,
+      "sha256": "2d5116eae9e4e1dc54cf59189d31cc16e8fc1555bc76c08efd67f502ccc7b634"
+    },
+    "outputs/fm-audit-sanitize/seeded/inputs/sanitize-config.json": {
+      "bytes": 85,
+      "sha256": "e624e0ad4a69ae871dcbb49b0b63458a8c667511e4a836ce7729ec22822f5756"
+    },
+    "outputs/fm-audit-sanitize/seeded/inputs/sanitize-event-seeded.json": {
+      "bytes": 955,
+      "sha256": "92faf6937c778dd2d89c7b3995f28e535f04466788fe43e39b48857df0ec0d0f"
+    },
+    "outputs/fm-audit-sanitize/seeded/sanitize.command": {
+      "bytes": 217,
+      "sha256": "9c716ce5886b57057ae7d3a2a333012d1a8be1d7928f032edd3c8c2082da3a47"
+    },
+    "outputs/fm-audit-sanitize/seeded/sanitize.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-audit-sanitize/seeded/sanitize.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-sanitize/seeded/sanitize.stdout": {
+      "bytes": 815,
+      "sha256": "78f2fbe3079fd4e19afce7971e652b8fad46952fc4b55856240533fd92ff9a0a"
+    },
+    "outputs/fm-audit-writer/chain/append-0.command": {
+      "bytes": 141,
+      "sha256": "63ff235b714c200ecaacc1980054471c02b0f4466e838a9ea69c0cb73e31382a"
+    },
+    "outputs/fm-audit-writer/chain/append-0.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-audit-writer/chain/append-0.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-writer/chain/append-0.stdout": {
+      "bytes": 86,
+      "sha256": "d2f728ec576aaf10cf2ddfac83df5a7e673b33b383968cbd01d42387124124c1"
+    },
+    "outputs/fm-audit-writer/chain/append-1.command": {
+      "bytes": 141,
+      "sha256": "65879d080d2dee0faf910824258991ab244ca48235cb1258354975e0cdadbc10"
+    },
+    "outputs/fm-audit-writer/chain/append-1.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-audit-writer/chain/append-1.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-writer/chain/append-1.stdout": {
+      "bytes": 86,
+      "sha256": "78564da7e6e4db3147e74ef8148b7d3610ba786fa188162f694a9dbd41f48bc3"
+    },
+    "outputs/fm-audit-writer/chain/append-2.command": {
+      "bytes": 141,
+      "sha256": "cda865e2c93bbe796a8304fd5588d6c224f4aeaddf4b2ac997a374749133cf2f"
+    },
+    "outputs/fm-audit-writer/chain/append-2.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-audit-writer/chain/append-2.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-writer/chain/append-2.stdout": {
+      "bytes": 86,
+      "sha256": "98d69ce85e6ae177ef059d69b6c063394cba0e92dfd0c39cdd4193b63bf49815"
+    },
+    "outputs/fm-audit-writer/chain/append-refused-seq.command": {
+      "bytes": 171,
+      "sha256": "8b6f5376e03cd3d4c90c2c252f651b64ab2c7f32a9ce17bc49fc4e2e01d8ff64"
+    },
+    "outputs/fm-audit-writer/chain/append-refused-seq.exit": {
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "outputs/fm-audit-writer/chain/append-refused-seq.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-writer/chain/append-refused-seq.stdout": {
+      "bytes": 96,
+      "sha256": "2cde69b700786252bc7acfd42df14d2fb824655394c60612cb429dd40252de60"
+    },
+    "outputs/fm-audit-writer/chain/inputs/append-0.json": {
+      "bytes": 854,
+      "sha256": "9871a9650b303170e589d661ebfbe7ef3742d36e2c84b297cb2272b033e2f0f0"
+    },
+    "outputs/fm-audit-writer/chain/inputs/append-1.json": {
+      "bytes": 854,
+      "sha256": "0535399fe5b9c7e37cae0cb22aa61f25a6bb9f48efae1adf55702de02d6a3a19"
+    },
+    "outputs/fm-audit-writer/chain/inputs/append-2.json": {
+      "bytes": 854,
+      "sha256": "f1214b1d00d2cf20d96a696e4c02591ed546f9f5d6b87dcd43d1961799a13917"
+    },
+    "outputs/fm-audit-writer/chain/project-ledger.command": {
+      "bytes": 92,
+      "sha256": "d730827a29304a73464c62a0e9a6a9dd267130c49d4e0183a40125785032b5ab"
+    },
+    "outputs/fm-audit-writer/chain/project-ledger.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-audit-writer/chain/project-ledger.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-writer/chain/project-ledger.stdout": {
+      "bytes": 207,
+      "sha256": "306cf7b8d5cd194947e7a0f6041f3145c6b7a26d12f04d14147c181856219e6a"
+    },
+    "outputs/fm-audit-writer/chain/store/.lock": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-writer/chain/store/checkpoint.json": {
+      "bytes": 154,
+      "sha256": "d31800c1608640c4468f021ab61de40713b29abfd6581e19f93cb3b808898ce7"
+    },
+    "outputs/fm-audit-writer/chain/store/segment-00000000000000000000.jsonl": {
+      "bytes": 2397,
+      "sha256": "a3062981d3ba258762f4da86ef483937c0aeeca61607411429183866e805406b"
+    },
+    "outputs/fm-audit-writer/chain/verify.command": {
+      "bytes": 84,
+      "sha256": "0952390dc8b6a56939daac2af03fb2aef075ce08a4e4bf2d8b147669bab0f610"
+    },
+    "outputs/fm-audit-writer/chain/verify.exit": {
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "outputs/fm-audit-writer/chain/verify.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-audit-writer/chain/verify.stdout": {
+      "bytes": 212,
+      "sha256": "3f157e5db6bf46e07e98aa224ee627120fc93d81f932b4b321d8c69be19881d1"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/app-css.command": {
+      "bytes": 205,
+      "sha256": "69004abdb5e1f6894b39e3bae659989f363d3475e0c13771453ceb1af806974f"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/app-css.exit": {
+      "bytes": 4,
+      "sha256": "c11e3f4837efde2441e23a7b9da02131f53bf59fddeb7147c4ab81afe400460f"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/app-css.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/app-css.stdout": {
+      "bytes": 11656,
+      "sha256": "b83f172cb401165e62354afbe5954f6274cd5cb9685b5571522e16ec886c12b8"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/app-js.command": {
+      "bytes": 204,
+      "sha256": "4f9199843be71c2092d498655b58514f5223083f9ed6e7a7ade1b4c794aae1cc"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/app-js.exit": {
+      "bytes": 4,
+      "sha256": "c11e3f4837efde2441e23a7b9da02131f53bf59fddeb7147c4ab81afe400460f"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/app-js.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/app-js.stdout": {
+      "bytes": 64285,
+      "sha256": "4a77225baabb5d6e0fe73146e9ff1f15a098a8655f2e819a8eeddd9e011505d2"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/missing.command": {
+      "bytes": 205,
+      "sha256": "2b9206906a3e88c9ab65b76e75abd8e895daa0debc2c9c5e5ad065f37c6f3992"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/missing.exit": {
+      "bytes": 4,
+      "sha256": "f8bf41177a5f5e808a7ccb648b51080b031f15ca8018d91a576263d6cc626eb6"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/missing.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/missing.stdout": {
+      "bytes": 22,
+      "sha256": "edc3eb965bbb9f431defb60c6a5610cc050bbb9e8a8765dff9cb380efe2f0aa0"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/root.command": {
+      "bytes": 198,
+      "sha256": "0fec6585bfd9b27a73e1498c43513914fe33e1087982ad21241ae343513998cb"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/root.exit": {
+      "bytes": 4,
+      "sha256": "c11e3f4837efde2441e23a7b9da02131f53bf59fddeb7147c4ab81afe400460f"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/root.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "outputs/fm-birds-eye-view-serve/assets/root.stdout": {
+      "bytes": 5389,
+      "sha256": "aa08fa0c9071d42a7e9cfcf931d0217db9c866badf116896156e1d23cd2b5f54"
+    }
+  },
+  "generator": {
+    "path": "tests/fixtures/pre-port-baseline/generate.py",
+    "sha256": "88ad970fa0952ce1373bf92b00b79dbc9254a0c8947f27258fe11cd6688f5dc5"
+  },
+  "owner_decision": "DPES-884 and DPES-957 owner decision (2026-11-01): main commit d80bcd15f06b79fed639cf028e273306567ffbfd is the replacement pre-port Python reference baseline, superseding the unavailable DPES-803 QA-tag baseline. It asserts no tag recovery, historical equivalence, or passing parity.",
+  "schema": "mcao.pre-port-baseline.v1",
+  "steps": [
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-writer.py append --store <tmp>/store <out>/outputs/fm-audit-writer/chain/inputs/append-0.json",
+      "exit": 0,
+      "inputs": {
+        "outputs/fm-audit-writer/chain/inputs/append-0.json": "9871a9650b303170e589d661ebfbe7ef3742d36e2c84b297cb2272b033e2f0f0"
+      },
+      "path": "outputs/fm-audit-writer/chain/append-0",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "d2f728ec576aaf10cf2ddfac83df5a7e673b33b383968cbd01d42387124124c1"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-writer.py append --store <tmp>/store <out>/outputs/fm-audit-writer/chain/inputs/append-1.json",
+      "exit": 0,
+      "inputs": {
+        "outputs/fm-audit-writer/chain/inputs/append-1.json": "0535399fe5b9c7e37cae0cb22aa61f25a6bb9f48efae1adf55702de02d6a3a19"
+      },
+      "path": "outputs/fm-audit-writer/chain/append-1",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "78564da7e6e4db3147e74ef8148b7d3610ba786fa188162f694a9dbd41f48bc3"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-writer.py append --store <tmp>/store <out>/outputs/fm-audit-writer/chain/inputs/append-2.json",
+      "exit": 0,
+      "inputs": {
+        "outputs/fm-audit-writer/chain/inputs/append-2.json": "f1214b1d00d2cf20d96a696e4c02591ed546f9f5d6b87dcd43d1961799a13917"
+      },
+      "path": "outputs/fm-audit-writer/chain/append-2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "98d69ce85e6ae177ef059d69b6c063394cba0e92dfd0c39cdd4193b63bf49815"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-writer.py append --store <tmp>/store <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-seq-one-null-prev.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-seq-one-null-prev.json": "278b0183018f0e19a841fa75aee8a2d01a1956913f0ba77635f3dfe52f13db4b"
+      },
+      "path": "outputs/fm-audit-writer/chain/append-refused-seq",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "2cde69b700786252bc7acfd42df14d2fb824655394c60612cb429dd40252de60"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-writer.py verify --store <tmp>/store",
+      "exit": 0,
+      "inputs": {},
+      "path": "outputs/fm-audit-writer/chain/verify",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "3f157e5db6bf46e07e98aa224ee627120fc93d81f932b4b321d8c69be19881d1"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-writer.py project-ledger --store <tmp>/store",
+      "exit": 0,
+      "inputs": {},
+      "path": "outputs/fm-audit-writer/chain/project-ledger",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "306cf7b8d5cd194947e7a0f6041f3145c6b7a26d12f04d14147c181856219e6a"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-accepted.json",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-accepted.json": "dc298f53b76cd2e87754e068743d491fa3a6961ed6e5af3b21bef1ee12cc68bb"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-accepted/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f561567e41deb4225811dab73f559df2bea197faa711b92d4e305b23de376a52"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-actor-mismatch.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-actor-mismatch.json": "c01e7a9821db8ae11cf9fe7a0ced40930e377a358b20c0805174540c0687d3bd"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-actor-mismatch/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "6eda66dd86ef2c10ed03a4d8e02b216f3b5c4d0563d00aa7041bc2849cd48da2"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-bad-ts.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-bad-ts.json": "8a3f1933bd1dbd09ec61b009c1926c019a3381c874d4b766a88aab37b15d2316"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-bad-ts/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "c88e86c8bc5580e5153f2dee1d41b9aa14b9eba578a90d7200b3bdaa27734826"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-chicago-offset-edge-next-day.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-chicago-offset-edge-next-day.json": "f30ff5790c69df6b9dd6638921decbd84c58fe7ab02d95168ef6c2d5794d39c2"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-chicago-offset-edge-next-day/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "c8400655e9d3ddcce836e76b3a35502eef212b7001ddae072e0803ad5f91a85e"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-chicago-offset-edge.json",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-chicago-offset-edge.json": "98bc4c30614277cdac5602ffda5055818038706e138ae47a7c724dacf710cd0d"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-chicago-offset-edge/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f561567e41deb4225811dab73f559df2bea197faa711b92d4e305b23de376a52"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-chicago-spring-forward.json",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-chicago-spring-forward.json": "5dd2a1fe1ff1d80e149a8632918f275826715ab1415e23dd1fcd66df49c88375"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-chicago-spring-forward/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f561567e41deb4225811dab73f559df2bea197faa711b92d4e305b23de376a52"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-day-key-mismatch.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-day-key-mismatch.json": "6c161228d5189fadb0fbc67b61613aa1da0b7de26aae061e22a6502afe0d223e"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-day-key-mismatch/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "c8400655e9d3ddcce836e76b3a35502eef212b7001ddae072e0803ad5f91a85e"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-duplicate-key.json",
+      "exit": 2,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-duplicate-key.json": "09b3e93eabedf15b9b2a9c4418f5f825e5add83cabedf54af199bbf6762b33f4"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-duplicate-key/validate",
+      "stderr_sha256": "c0b3d79cc93b32b40f1dbc54401835113f1b49993b2c5611f7f0349f1015a8f2",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-extra-member.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-extra-member.json": "493988d8633c0db94e513228d41028b267ad177e08b1bc1d7ea5af35c58ae937"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-extra-member/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "9b8fba2e2e4c91c550c102708ffc53aebbd144e072650520eed47e99249cc7ad"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-missing-event.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-missing-event.json": "c805fb1be968ad191dc9f898451bdb7ab3efec1b191bfa05087d6aee6654ccf5"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-missing-event/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "5c86d7827f440ef5045dbc6a862e6226089dd1367642d1ca15aa085076c3522a"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-missing-user.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-missing-user.json": "0a0e01bff6e0f1698014f3cb8535544db02b1b7d59c6a9dbbe7e7308047aa0f1"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-missing-user/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "0dd77c55930888aff3c38534ad6d0890a8534b094e529001ef89c38d3e98f407"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-nan.json",
+      "exit": 2,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-nan.json": "b9718f003616e7a160a56a600f23013a433fdcb0b00e4e115d8a65e799ffc0e4"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-nan/validate",
+      "stderr_sha256": "6b56061ddc76979e0d2285b049a06976cd3f4603064c12c071e6410bc3e5751f",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-null-user-id.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-null-user-id.json": "9be39bb8c793bc8974b27a4d652879003869646da15d22ad02848cc69b6b145c"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-null-user-id/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "023d25d281b5fc1acef3f6ca44444ba11d859f9dfcf8f6392e40df9bd5cd276c"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-pending-user-id.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-pending-user-id.json": "7e94680ac6ab5bf6239a49aeb7899805b5ba08c562c762f2b96ca1b9cc115053"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-pending-user-id/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "023d25d281b5fc1acef3f6ca44444ba11d859f9dfcf8f6392e40df9bd5cd276c"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-seq-one-null-prev.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-seq-one-null-prev.json": "278b0183018f0e19a841fa75aee8a2d01a1956913f0ba77635f3dfe52f13db4b"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-seq-one-null-prev/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "474cb973911f1a450d2d6eeb359a3767fb954e425e16ff59e21ca533f06d0377"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-unknown-zone.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-unknown-zone.json": "793bfb9c48fcbf20e3f70359641b50bcae46dfb5d437ea59bd48d55952062371"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-unknown-zone/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "97b7b787b3a96c39e22b2676583ae7b7650314e8dea9299ab554b03b7c168580"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition envelope <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-zone-traversal.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-zone-traversal.json": "376d4f4eaa06db2d15147a7c8ebb5cfac3e6a7de1675e61eff33f949e4c57063"
+      },
+      "path": "outputs/fm-audit-envelope/envelope-zone-traversal/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "97b7b787b3a96c39e22b2676583ae7b7650314e8dea9299ab554b03b7c168580"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition fleet_ledger_v1 <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/ledger-accepted.json",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/ledger-accepted.json": "e48439ecb7ab226b21de7b82658cc1e1493781176cdc4f3b6393923e082304c9"
+      },
+      "path": "outputs/fm-audit-envelope/ledger-accepted/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "b44fcc1f0a821458c2142db425b6f20116b96919dc3653887bba2e74d4d3eeca"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-envelope.py validate --definition fleet_ledger_v1 <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/ledger-wrong-version.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/ledger-wrong-version.json": "fd3cb72547887fe05d9242c4c7224d4a5cfe3ac0e60c5712319ee79909c67f4c"
+      },
+      "path": "outputs/fm-audit-envelope/ledger-wrong-version/validate",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "33fea716378e02e3a63e54401f821c8c84ae703fcf17844e686f40827faf8829"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-sanitize.py sanitize --config <out>/outputs/fm-audit-sanitize/seeded/inputs/sanitize-config.json <out>/outputs/fm-audit-sanitize/seeded/inputs/sanitize-event-seeded.json",
+      "exit": 0,
+      "inputs": {
+        "outputs/fm-audit-sanitize/seeded/inputs/sanitize-config.json": "e624e0ad4a69ae871dcbb49b0b63458a8c667511e4a836ce7729ec22822f5756",
+        "outputs/fm-audit-sanitize/seeded/inputs/sanitize-event-seeded.json": "92faf6937c778dd2d89c7b3995f28e535f04466788fe43e39b48857df0ec0d0f"
+      },
+      "path": "outputs/fm-audit-sanitize/seeded/sanitize",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "78f2fbe3079fd4e19afce7971e652b8fad46952fc4b55856240533fd92ff9a0a"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-sanitize.py sanitize --config <out>/outputs/fm-audit-sanitize/seeded/inputs/sanitize-config-extra-key.json <out>/outputs/fm-audit-sanitize/seeded/inputs/sanitize-event-seeded.json",
+      "exit": 1,
+      "inputs": {
+        "outputs/fm-audit-sanitize/seeded/inputs/sanitize-config-extra-key.json": "2d5116eae9e4e1dc54cf59189d31cc16e8fc1555bc76c08efd67f502ccc7b634",
+        "outputs/fm-audit-sanitize/seeded/inputs/sanitize-event-seeded.json": "92faf6937c778dd2d89c7b3995f28e535f04466788fe43e39b48857df0ec0d0f"
+      },
+      "path": "outputs/fm-audit-sanitize/config-extra-key/sanitize",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "6ed7a6d70a1aeec746a1ac92c740bd74296b76d5b92f6c932f1f0987f996cbbc"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-activity-map.py map --config <out>/outputs/fm-audit-activity-map/projection/inputs/sanitize-config.json <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-accepted.json",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-accepted.json": "dc298f53b76cd2e87754e068743d491fa3a6961ed6e5af3b21bef1ee12cc68bb",
+        "outputs/fm-audit-activity-map/projection/inputs/sanitize-config.json": "e624e0ad4a69ae871dcbb49b0b63458a8c667511e4a836ce7729ec22822f5756"
+      },
+      "path": "outputs/fm-audit-activity-map/projection/map-accepted",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f81b56f6e18ddf10623ba16e5ee30855a8dd7e1f74dd5ad523a7d09d7d70dba9"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-audit-activity-map.py map --config <out>/outputs/fm-audit-activity-map/projection/inputs/sanitize-config.json <inputs>/crates/mcao-cli/tests/fixtures/audit-validate/envelope-missing-user.json",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-cli/tests/fixtures/audit-validate/envelope-missing-user.json": "0a0e01bff6e0f1698014f3cb8535544db02b1b7d59c6a9dbbe7e7308047aa0f1",
+        "outputs/fm-audit-activity-map/projection/inputs/sanitize-config.json": "e624e0ad4a69ae871dcbb49b0b63458a8c667511e4a836ce7729ec22822f5756"
+      },
+      "path": "outputs/fm-audit-activity-map/projection/map-missing-user",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "0e231ff3847efcda7a9f3b3cd55b5054311fcca24db01a0fdef894d7cb77b0b9"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-reassess.py collect --repo <tmp>/reassess-repo --base-commit fbe5fcadd1c8862194ac9156e06e78c9fe10adbc",
+      "exit": 0,
+      "inputs": {},
+      "path": "outputs/fm-assignment-reassess/repo/collect-clean",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "68a956ad29cda105511db6abb64b900c98d995b03efb2b3d92ce692332354ded"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-reassess.py collect --repo <tmp>/reassess-repo --base-commit fbe5fcadd1c8862194ac9156e06e78c9fe10adbc",
+      "exit": 0,
+      "inputs": {},
+      "path": "outputs/fm-assignment-reassess/repo/collect-dirty",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "db86f09e29e8a04d8b067381b4d0eca4c8ec35e5f8d2a3caad97ffe03a1b4ec8"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-reassess.py reassess --repo <tmp>/reassess-repo --request <out>/outputs/fm-assignment-reassess/repo/inputs/request-high-risk.json",
+      "exit": 0,
+      "inputs": {
+        "outputs/fm-assignment-reassess/repo/inputs/request-high-risk.json": "4b14a415e1d73891d4d7bc255090b454c26e12f4728a353385db26f7baa1c684"
+      },
+      "path": "outputs/fm-assignment-reassess/repo/reassess-high-risk",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "ad132dd9d1734f34e9484aedbb2ffbbbbc12a4e9c9619a756bc12a755cc7e5fe"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-reassess.py reassess --repo <tmp>/reassess-repo --request <out>/outputs/fm-assignment-reassess/repo/inputs/request-no-trigger.json",
+      "exit": 0,
+      "inputs": {
+        "outputs/fm-assignment-reassess/repo/inputs/request-no-trigger.json": "0e2d5b204e5e12f2f5a897fc262651db44c7f635cc268e68778117260801ef73"
+      },
+      "path": "outputs/fm-assignment-reassess/repo/reassess-no-trigger",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "f87b87c85fcb2b09b8746f458c3e712c28dbc31ce1299f3a4ff8d633e2601081"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py meta --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/meta_high_risk/record.json --task T-1",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/meta_high_risk/case.json": "9098172e20f5e0a247dc3e5f22a3323c01b9e4fa86a3ad54d5d205530337b9e8",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/meta_high_risk/record.json": "f626037db423d12fbf20b423c10fba721176a41ba1f509b38bf00f97f28f3a88",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/meta_high_risk/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "9255277a294b77f1890e8defd82040ccb5f7a91210fb82fdf71f30f267ee13b5"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py meta --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/meta_small_low_risk/record.json --task T-1",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/meta_small_low_risk/case.json": "9098172e20f5e0a247dc3e5f22a3323c01b9e4fa86a3ad54d5d205530337b9e8",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/meta_small_low_risk/record.json": "f2babe3c112977f91d420b3a3f2dc9c05b856a13669f0d1c5342907455c2d007",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/meta_small_low_risk/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "ff4f078e7557c7db17419ce35f5ad255af596deffc507f88443b7f0c96c3e8eb"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_bad_comparison_base_pattern/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_bad_comparison_base_pattern/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_bad_comparison_base_pattern/record.json": "63f63a1033a7d723e50a147c1c684c64ad72c9f6478a07a9da52160f18af23b6",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_bad_comparison_base_pattern/run",
+      "stderr_sha256": "2a2065a5a2c36ecfd2c2bb17b27fe47a83e86c3f3982735b15d6010e85d050a9",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_bad_decision_id_pattern/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_bad_decision_id_pattern/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_bad_decision_id_pattern/record.json": "9af2127a354038bdb74137558e1a7de1ba2c94c4de0b59d06684782d52bde01f",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_bad_decision_id_pattern/run",
+      "stderr_sha256": "b06897425f19c0198841935ff94bdb227c29e5baa71fd54a7b71772523284079",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_base_commit_pin/record.json --task T-1 --base-commit fedcba9876543210fedcba9876543210fedcba98",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_base_commit_pin/case.json": "5966fbb456f5b5249eaf381ac9e31a1f12837d4b2f6c323ae647801a15ecde3e",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_base_commit_pin/record.json": "f626037db423d12fbf20b423c10fba721176a41ba1f509b38bf00f97f28f3a88",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_base_commit_pin/run",
+      "stderr_sha256": "5a139dccb85c7ac776c46da0c2e637c320e7ecc1e15a6da48059bc654edd9ac3",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_byte_order_mark/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_byte_order_mark/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_byte_order_mark/record.json": "243eed51578a7546c21900cce2cc146c683617872ef5dcb8de7ec6d01d3732a6",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_byte_order_mark/run",
+      "stderr_sha256": "50a4ca550a99a929eb9814cc322d4d48706d22d0340ee2c8a206ae95670b3274",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root_policy_changed --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_changed_policy_material/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_changed_policy_material/case.json": "fc713b6c7e072f7455eee896d6a9ccb14f1538fd549accb5a37588d703a33280",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_changed_policy_material/record.json": "f626037db423d12fbf20b423c10fba721176a41ba1f509b38bf00f97f28f3a88",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root_policy_changed/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root_policy_changed/docs/assignment-profile-policy.md": "af271342095d1e526299a48b1b23ea49923e4e3c81cad97976a14b10fbdd17d8",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root_policy_changed/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_changed_policy_material/run",
+      "stderr_sha256": "2982c5482567d407901a7b92f36e4106cba046f120ebd4eea334f18f5daa4b61",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_contract_version_true/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_contract_version_true/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_contract_version_true/record.json": "eeada1f337cce64c91e3465b27fc2070602328fefd65f4f6bd7d3f2b669b8342",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_contract_version_true/run",
+      "stderr_sha256": "63cbf9330d7ee58188856114c081726a6626ab27bb5981f20bc0701504925987",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_contract_version_two/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_contract_version_two/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_contract_version_two/record.json": "cc199ec8b8da29fab77ac27a99653fcfad4454ea21b7ee3542d4008dfb72344c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_contract_version_two/run",
+      "stderr_sha256": "63cbf9330d7ee58188856114c081726a6626ab27bb5981f20bc0701504925987",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_control_character_in_string/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_control_character_in_string/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_control_character_in_string/record.json": "7e04e020e51a90fd7fd04320eb8a1ed459fe0e804363fd7240b1449a053402f2",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_control_character_in_string/run",
+      "stderr_sha256": "285e094a8049a302bab03121957e36b3e838e7dac879c74833deb8327a0befec",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_decision_for_other_task/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_decision_for_other_task/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_decision_for_other_task/record.json": "d8ff1a1199448e33623c65cff9997d1dc72629bc2e7c6bc9f4c5e7ea780eec1b",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_decision_for_other_task/run",
+      "stderr_sha256": "f44db8e5cb3356c1bf830e71f43b241c88a4bc3f30de4e160fb0c539f8fbfbf3",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_documentation_only_with_tests/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_documentation_only_with_tests/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_documentation_only_with_tests/record.json": "243548366f920599cb4ceec38dac037d77a0767b7dd163ce6626c0ddebe0d68c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_documentation_only_with_tests/run",
+      "stderr_sha256": "6d907fb8a6680f3d7d0cdcf93fcb9394a23c9913d1f88353b741b44f01d3976f",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_duplicate_key/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_duplicate_key/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_duplicate_key/record.json": "4c151a4b5da1d85daefa852c6631bb436b84594edbfc8175aaf261c004a27db1",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_duplicate_key/run",
+      "stderr_sha256": "ff503fd040217cdb21c8f3a30ea55cecb5c4d929006ca34e7dbb9c3675033ad3",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_empty_record/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_empty_record/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_empty_record/record.json": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_empty_record/run",
+      "stderr_sha256": "2dedaa62ff739962cb6e460a41aa0c256fba95f40287896be528e3f2d6943450",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_extra_data/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_extra_data/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_extra_data/record.json": "219891f3f847c566bcccdf5a7349370b28b05660364a9348381429d666eed3c6",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_extra_data/run",
+      "stderr_sha256": "fd4db9d1800e8183e7700644114eb9977a8e02a016cb146d2a29246e0daf90ff",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_final_unresolved/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_final_unresolved/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_final_unresolved/record.json": "1fac0935dc7e103f668f8f81a5d0064040927ebbc7cdd4d8b500a68e233f7c1f",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_final_unresolved/run",
+      "stderr_sha256": "73263afdedbe16bc0c829bf12c729f362d589958bd5ad2a8e0bcf60f57951a5d",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_final_without_identity/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_final_without_identity/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_final_without_identity/record.json": "4422683859458d7fe27f27cc3e9adfcdb34c27a35ff6d6b51072449230631db5",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_final_without_identity/run",
+      "stderr_sha256": "73263afdedbe16bc0c829bf12c729f362d589958bd5ad2a8e0bcf60f57951a5d",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_incomplete_coverage_for_final/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_incomplete_coverage_for_final/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_incomplete_coverage_for_final/record.json": "80388cf88f0b087bbd7af119f268a41960e7142f152e6fdde8ebdd68d1bf12b8",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_incomplete_coverage_for_final/run",
+      "stderr_sha256": "73263afdedbe16bc0c829bf12c729f362d589958bd5ad2a8e0bcf60f57951a5d",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_infinity_constant/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_infinity_constant/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_infinity_constant/record.json": "f99ab9ecf4ba244934ef8cd8a717f358b322506eb7ae47e628e3c6726f636eae",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_infinity_constant/run",
+      "stderr_sha256": "bbb2e88d493c8ad153aed390c45fa5845f902cdc709aa6bac297c736a7fc9615",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_invalid_escape/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_invalid_escape/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_invalid_escape/record.json": "adb65ea37d8b164632616cbc9c0c821d50b45b5550088741c6833a3055dfb528",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_invalid_escape/run",
+      "stderr_sha256": "40924ac42a05180f0a26b9ca47ffc0bdd3b764361e5c0b71f336ab3d650e9b5f",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_missing_comparison_base/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_missing_comparison_base/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_missing_comparison_base/record.json": "69739298099ea0934b502ee0eb652b68a79e56a745b45cdb2d7364021e19170b",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_missing_comparison_base/run",
+      "stderr_sha256": "5bce04b301f05dcbf1a835fdba4206a2ae2372708cb355aa040ee397a29c7ab3",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_nan_constant/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_nan_constant/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_nan_constant/record.json": "515ccd37b62d9ae664bb5608f23509d0f8b49bfcd7da065f6751290681558337",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_nan_constant/run",
+      "stderr_sha256": "40b691aec4ada64247317ffc548d667eb562a21ce004ba66cf194b6934ba79cd",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_negative_infinity_constant/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_negative_infinity_constant/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_negative_infinity_constant/record.json": "8ea7a35ac8502360825fc3bc3d55f7619bd93d89f99d43cff4b3495657e6ebcf",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_negative_infinity_constant/run",
+      "stderr_sha256": "2767254c999a083778db3b56b4af0f7aaf81df19ece5c6d2687a8e913fd85ecc",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_non_string_key/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_non_string_key/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_non_string_key/record.json": "8f1081936a1cefa3e9c7a36fda5486ce8b2392a3fb7481fda0b27e9325434b09",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_non_string_key/run",
+      "stderr_sha256": "a06604877533cdab632d325699b3ae0c3770c5916214778f96fae5329f922deb",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_not_json/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_not_json/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_not_json/record.json": "3c48773b404d850071dff4006d4ef0d7302d1343aefc58fbc84d730753de8831",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_not_json/run",
+      "stderr_sha256": "2dedaa62ff739962cb6e460a41aa0c256fba95f40287896be528e3f2d6943450",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_require_current_on_superseded/record.json --task T-1 --target-branch main --base-commit 0123456789abcdef0123456789abcdef01234567 --require-current",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_require_current_on_superseded/case.json": "0d73d800f76b890ee02d8030518b78915b1ea74019e2f04f67a77336ee9ac765",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_require_current_on_superseded/record.json": "1e1b4b91a2afa4e6f9ae798cc58e7c208ed9243b6b1563a909752251a63bc66a",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_require_current_on_superseded/run",
+      "stderr_sha256": "1ad77495eddba573b14de93a55f7429ca65fe3dac0bc2d73da89c70c55a67f9c",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_revoked_revision/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_revoked_revision/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_revoked_revision/record.json": "490ebbaab8a2de1fc759055e93c320add153bfde94f7980a10ac5669a1e8ee64",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_revoked_revision/run",
+      "stderr_sha256": "11bf443638ca3a0d7a63038856d2058ae83b6a12c173711397fca796904bf191",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_risk_trigger_on_standard/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_risk_trigger_on_standard/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_risk_trigger_on_standard/record.json": "b22f5b23b9d0bacad28ec44a4e17c29497d2a4fe09cbff4e8fa8512ede5f5c96",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_risk_trigger_on_standard/run",
+      "stderr_sha256": "73263afdedbe16bc0c829bf12c729f362d589958bd5ad2a8e0bcf60f57951a5d",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_superseded_revision_on_relaunch/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_superseded_revision_on_relaunch/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_superseded_revision_on_relaunch/record.json": "1e1b4b91a2afa4e6f9ae798cc58e7c208ed9243b6b1563a909752251a63bc66a",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_superseded_revision_on_relaunch/run",
+      "stderr_sha256": "13aa2f4e8e35d17f0365e3afa0e23318a267ad3c595a8068124add146a5a9c7a",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_target_branch_pin/record.json --task T-1 --target-branch release",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_target_branch_pin/case.json": "6a043956306e3f38a7d4256c5f92924fa29a49a393fca45fb7a548ce7a5556f3",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_target_branch_pin/record.json": "f626037db423d12fbf20b423c10fba721176a41ba1f509b38bf00f97f28f3a88",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_target_branch_pin/run",
+      "stderr_sha256": "91ef6b0bda1fdd735251502001facb224a4125ebf71bba5e8d3e948e2e058374",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_task_mismatch/record.json --task T-2",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_task_mismatch/case.json": "531d724f74247b53dcb1e09cc05c4f9492fb555fc1fd7ce8ab0e71a825826c9d",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_task_mismatch/record.json": "f626037db423d12fbf20b423c10fba721176a41ba1f509b38bf00f97f28f3a88",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_task_mismatch/run",
+      "stderr_sha256": "66b65532bf452328d0cb151dff6e6154dc4409418969e67f0618fa8aedb0c6b8",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_trailing_comma_in_array/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_trailing_comma_in_array/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_trailing_comma_in_array/record.json": "f293d3aef96f19bda65b1b40019fd3a798c931b86277a9b44ff27f6cd98f29a9",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_trailing_comma_in_array/run",
+      "stderr_sha256": "a0118f44d32b1b564ed6c59ed783f8689c43ec2ab37ed3297be4f99e26133be3",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_trailing_comma_in_object/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_trailing_comma_in_object/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_trailing_comma_in_object/record.json": "4440fe776c3914095a4549d56594c07f74d9f199901b430f95911278aae10c11",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_trailing_comma_in_object/run",
+      "stderr_sha256": "a06604877533cdab632d325699b3ae0c3770c5916214778f96fae5329f922deb",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unapproved_revision/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unapproved_revision/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unapproved_revision/record.json": "f5eb77570d8c40b4e96b58e31ccbfe038523ea0497290dbde1d15891427d659f",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_unapproved_revision/run",
+      "stderr_sha256": "9874e0bbf3271ab95e1d5f90ccf5eec5460e877db0619ce6bf52c925092759d6",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unknown_profile/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unknown_profile/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unknown_profile/record.json": "a437d17ae6cf7e298e9939dc1ee0ec2c676d337bdea9d427a16726f6426b3c8c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_unknown_profile/run",
+      "stderr_sha256": "a2b675f94c6f2f2b4226b5b0c551c8656ed6fcc8d1ed5b92287c398d2b7a013a",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unknown_top_level_key/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unknown_top_level_key/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unknown_top_level_key/record.json": "e7b00c923527a722b6b845d2f987c0466d561921e0477a13a24c8152eb903dbe",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_unknown_top_level_key/run",
+      "stderr_sha256": "0987371b030fb163f961162b0ffbda320d91331390b59b11133abd23aec7d01e",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unresolved_on_final_high_risk/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unresolved_on_final_high_risk/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unresolved_on_final_high_risk/record.json": "1fac0935dc7e103f668f8f81a5d0064040927ebbc7cdd4d8b500a68e233f7c1f",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_unresolved_on_final_high_risk/run",
+      "stderr_sha256": "73263afdedbe16bc0c829bf12c729f362d589958bd5ad2a8e0bcf60f57951a5d",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root_bad_schema --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unsupported_schema_keyword/record.json --task T-1",
+      "exit": 2,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unsupported_schema_keyword/case.json": "634f5ef7c9c621e6729a5f20969f1cc0a2136036dbe81e6e0787654425f83a79",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unsupported_schema_keyword/record.json": "f626037db423d12fbf20b423c10fba721176a41ba1f509b38bf00f97f28f3a88",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root_bad_schema/docs/assignment-profile-decision.v1.schema.json": "382d5018e9d30124dd0a9fa4b2a6f098fcaf90900d799696965609d8854fe244",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root_bad_schema/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root_bad_schema/docs/assignment-profile-revisions.json": "ac6d9521d256d34e2fe0acbb0c2d12bc1ac4de239b0dfdd9fc87904d5bfe628c"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_unsupported_schema_keyword/run",
+      "stderr_sha256": "3a229c77929e6c2dea0ef75ddd7f1f0509afcdbcefb2980e521ea770312ea22e",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unterminated_string/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unterminated_string/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/refuse_unterminated_string/record.json": "4691d3fdf3d3a42c6ac608f4ab263f42689bc8011283c7699ddc12f533d72605",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/refuse_unterminated_string/run",
+      "stderr_sha256": "789162b60af8ff964f584970bad13893cfef2d75d4b6b6a7e4bcd9fc87c0ad28",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py render --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/render_documentation_only/record.json --task T-1",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/render_documentation_only/case.json": "05e1c37f7f3803dbaf08b152fd91eca7380164cd01ce1f187168641a1ecf004d",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/render_documentation_only/record.json": "a20be2053cd4f27965e06d7d3f410f3dbf1c7059c75bb267230e8949cded2bf1",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/render_documentation_only/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "a0ba27618f2fc380b53e00d217cd18684feabba68e3ee29122081299dc33740c"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py render --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/render_high_risk/record.json --task T-1",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/render_high_risk/case.json": "05e1c37f7f3803dbaf08b152fd91eca7380164cd01ce1f187168641a1ecf004d",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/render_high_risk/record.json": "f626037db423d12fbf20b423c10fba721176a41ba1f509b38bf00f97f28f3a88",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/render_high_risk/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "0e7561dad3c263a7f0ce90b78f7b27ddf1be9f03e94c2bcded91f088454ca285"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py render --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/render_refused/record.json --task T-1",
+      "exit": 1,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/render_refused/case.json": "05e1c37f7f3803dbaf08b152fd91eca7380164cd01ce1f187168641a1ecf004d",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/render_refused/record.json": "a437d17ae6cf7e298e9939dc1ee0ec2c676d337bdea9d427a16726f6426b3c8c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/render_refused/run",
+      "stderr_sha256": "a2b675f94c6f2f2b4226b5b0c551c8656ed6fcc8d1ed5b92287c398d2b7a013a",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_control_characters_are_escaped/record.json",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_control_characters_are_escaped/case.json": "f70cc20399a27349947932dcf5d3313bcdf6ffd8811f60d67f4aca6992e856be",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_control_characters_are_escaped/record.json": "37aed87851cf9b64046fef98c3a5b807727ade14bd74a4ecb6f202a8e5f7f260",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/valid_control_characters_are_escaped/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "a3dcf156598b04f538f23bfb13bd4faff65921d7669c6cae647312c202dba622"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_documentation_only_zero_tests/record.json --task T-1",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_documentation_only_zero_tests/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_documentation_only_zero_tests/record.json": "a20be2053cd4f27965e06d7d3f410f3dbf1c7059c75bb267230e8949cded2bf1",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/valid_documentation_only_zero_tests/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "b6bacb4be42a75a50f0b305b22440291480bd695b1f77abf863805574d4aeb16"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_float_one_contract_version/record.json",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_float_one_contract_version/case.json": "f70cc20399a27349947932dcf5d3313bcdf6ffd8811f60d67f4aca6992e856be",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_float_one_contract_version/record.json": "c8e61c46e0dd4939307b404f2ec312fd01923e8dce88b6ed53953767632b9b7c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/valid_float_one_contract_version/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "21bd9d25022bcd86240af941d83a9bd7cce2326edf56ca7f8b328ac1db61cc27"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_high_risk_new_launch/record.json --task T-1 --target-branch main --base-commit 0123456789abcdef0123456789abcdef01234567 --require-current",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_high_risk_new_launch/case.json": "0d73d800f76b890ee02d8030518b78915b1ea74019e2f04f67a77336ee9ac765",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_high_risk_new_launch/record.json": "f626037db423d12fbf20b423c10fba721176a41ba1f509b38bf00f97f28f3a88",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/valid_high_risk_new_launch/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "5bd2027ddb7d13bfb8e953fc46b2881359ea9c755c21a7c99be2bc42ef4607be"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_high_risk_relaunch/record.json --task T-1",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_high_risk_relaunch/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_high_risk_relaunch/record.json": "f626037db423d12fbf20b423c10fba721176a41ba1f509b38bf00f97f28f3a88",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/valid_high_risk_relaunch/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "5bd2027ddb7d13bfb8e953fc46b2881359ea9c755c21a7c99be2bc42ef4607be"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_reversed_key_order/record.json --task T-1",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_reversed_key_order/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_reversed_key_order/record.json": "39e6253b2b9ec12aa347fd70f0e17b8fc0638dd0e5c753e5f311ca1e210244e1",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/valid_reversed_key_order/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "5bd2027ddb7d13bfb8e953fc46b2881359ea9c755c21a7c99be2bc42ef4607be"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_small_low_risk_with_tests/record.json --task T-1",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_small_low_risk_with_tests/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_small_low_risk_with_tests/record.json": "f2babe3c112977f91d420b3a3f2dc9c05b856a13669f0d1c5342907455c2d007",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/valid_small_low_risk_with_tests/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "de147a7087b474bd6525994eee472ab9638f111a992016665593ae0738d21cde"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_trailing_newline_in_comparison_base/record.json",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_trailing_newline_in_comparison_base/case.json": "f70cc20399a27349947932dcf5d3313bcdf6ffd8811f60d67f4aca6992e856be",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_trailing_newline_in_comparison_base/record.json": "cf7786b2b48c83895c12d544a638fde299d956242c150f46b004767ecfaa59b5",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/valid_trailing_newline_in_comparison_base/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "4b762c75a022ea3825ef99a98417cabe394b9d80ee71fa98996a7f0d2784353f"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_trailing_newline_in_decision_id/record.json --task T-1",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_trailing_newline_in_decision_id/case.json": "8d9563a23fa5782c8878e773b138f329119b0fe990795a35b5aaaf4a845bec29",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_trailing_newline_in_decision_id/record.json": "dd6d7e16b09dc8b153820325280bec47f5bd6636adea49d850d776273e829483",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/valid_trailing_newline_in_decision_id/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "7481ad604514771b27c14967350fb4b8faa31484e89d68a68751d08f7b7187e5"
+    },
+    {
+      "command": "python3 -I -B -X utf8 <reference>/bin/fm-assignment-profile.py validate --code-root <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/code_root --record <inputs>/crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_unicode_task_id_is_not_escaped/record.json",
+      "exit": 0,
+      "inputs": {
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_unicode_task_id_is_not_escaped/case.json": "f70cc20399a27349947932dcf5d3313bcdf6ffd8811f60d67f4aca6992e856be",
+        "crates/mcao-core/tests/fixtures/assignment_profile/cases/valid_unicode_task_id_is_not_escaped/record.json": "08531f99882dfc49a1ccebfe0df7a71fe7eee19beb3f0d93e2d0194a807f226b",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-decision.v1.schema.json": "c527088c323c73f9433a3c340ac05109664df2f2e9976e5b95605bd854a3498c",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-policy.md": "220a4948831d02b885a5af26454d9d0d93f353d7c4c85e780d47fc6a18171245",
+        "crates/mcao-core/tests/fixtures/assignment_profile/code_root/docs/assignment-profile-revisions.json": "0aa50fe21dc9847ece416a0a4b6c06cad6e3836f0aa84e920fc99bd9d4557133"
+      },
+      "path": "outputs/fm-assignment-profile/valid_unicode_task_id_is_not_escaped/run",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "6fcf4cd4d647779f3248e64dd85b3a27ffba377cae33ec12cc9da8ad75d1ca09"
+    },
+    {
+      "command": "GET / (command: python3 -I -B -X utf8 fm-birds-eye-view-serve.py --assets assets/birds-eye-view --model bin/fm-birds-eye-model.sh --capture bin/fm-birds-eye-capture.sh --interval 5 --port '<port>')",
+      "exit": 200,
+      "inputs": {
+        "assets/birds-eye-view/app.css": "b83f172cb401165e62354afbe5954f6274cd5cb9685b5571522e16ec886c12b8",
+        "assets/birds-eye-view/app.js": "4a77225baabb5d6e0fe73146e9ff1f15a098a8655f2e819a8eeddd9e011505d2",
+        "assets/birds-eye-view/index.html": "aa08fa0c9071d42a7e9cfcf931d0217db9c866badf116896156e1d23cd2b5f54"
+      },
+      "path": "outputs/fm-birds-eye-view-serve/assets/root",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "aa08fa0c9071d42a7e9cfcf931d0217db9c866badf116896156e1d23cd2b5f54"
+    },
+    {
+      "command": "GET /app.css (command: python3 -I -B -X utf8 fm-birds-eye-view-serve.py --assets assets/birds-eye-view --model bin/fm-birds-eye-model.sh --capture bin/fm-birds-eye-capture.sh --interval 5 --port '<port>')",
+      "exit": 200,
+      "inputs": {
+        "assets/birds-eye-view/app.css": "b83f172cb401165e62354afbe5954f6274cd5cb9685b5571522e16ec886c12b8",
+        "assets/birds-eye-view/app.js": "4a77225baabb5d6e0fe73146e9ff1f15a098a8655f2e819a8eeddd9e011505d2",
+        "assets/birds-eye-view/index.html": "aa08fa0c9071d42a7e9cfcf931d0217db9c866badf116896156e1d23cd2b5f54"
+      },
+      "path": "outputs/fm-birds-eye-view-serve/assets/app-css",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "b83f172cb401165e62354afbe5954f6274cd5cb9685b5571522e16ec886c12b8"
+    },
+    {
+      "command": "GET /app.js (command: python3 -I -B -X utf8 fm-birds-eye-view-serve.py --assets assets/birds-eye-view --model bin/fm-birds-eye-model.sh --capture bin/fm-birds-eye-capture.sh --interval 5 --port '<port>')",
+      "exit": 200,
+      "inputs": {
+        "assets/birds-eye-view/app.css": "b83f172cb401165e62354afbe5954f6274cd5cb9685b5571522e16ec886c12b8",
+        "assets/birds-eye-view/app.js": "4a77225baabb5d6e0fe73146e9ff1f15a098a8655f2e819a8eeddd9e011505d2",
+        "assets/birds-eye-view/index.html": "aa08fa0c9071d42a7e9cfcf931d0217db9c866badf116896156e1d23cd2b5f54"
+      },
+      "path": "outputs/fm-birds-eye-view-serve/assets/app-js",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "4a77225baabb5d6e0fe73146e9ff1f15a098a8655f2e819a8eeddd9e011505d2"
+    },
+    {
+      "command": "GET /missing (command: python3 -I -B -X utf8 fm-birds-eye-view-serve.py --assets assets/birds-eye-view --model bin/fm-birds-eye-model.sh --capture bin/fm-birds-eye-capture.sh --interval 5 --port '<port>')",
+      "exit": 404,
+      "inputs": {
+        "assets/birds-eye-view/app.css": "b83f172cb401165e62354afbe5954f6274cd5cb9685b5571522e16ec886c12b8",
+        "assets/birds-eye-view/app.js": "4a77225baabb5d6e0fe73146e9ff1f15a098a8655f2e819a8eeddd9e011505d2",
+        "assets/birds-eye-view/index.html": "aa08fa0c9071d42a7e9cfcf931d0217db9c866badf116896156e1d23cd2b5f54"
+      },
+      "path": "outputs/fm-birds-eye-view-serve/assets/missing",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "edc3eb965bbb9f431defb60c6a5610cc050bbb9e8a8765dff9cb380efe2f0aa0"
+    }
+  ]
+}

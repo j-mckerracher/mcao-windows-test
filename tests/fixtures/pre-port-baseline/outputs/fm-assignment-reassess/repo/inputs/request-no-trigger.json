@@ -1,0 +1,13 @@
+{
+  "assignment_intent": "Reassess the profile from the actual change set.",
+  "comparison_base_commit": "fbe5fcadd1c8862194ac9156e06e78c9fe10adbc",
+  "expected_surfaces": [
+    "README.md",
+    "docs/guide.md",
+    "bin/tool.sh"
+  ],
+  "pinned_policy_revision": "rev-test-1",
+  "risk_triggers": [],
+  "target_branch": "main",
+  "task_id": "dpes-765-demo"
+}

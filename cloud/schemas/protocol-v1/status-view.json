@@ -1,0 +1,231 @@
+{
+  "$defs": {
+    "EffectiveRun": {
+      "additionalProperties": false,
+      "description": "What the run is pinned to. Client-chosen model and resource class; server-resolved image.",
+      "properties": {
+        "image_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Image Digest",
+          "type": "string"
+        },
+        "model": {
+          "const": "gemini-3.8-flash",
+          "title": "Model",
+          "type": "string"
+        },
+        "resource_class": {
+          "const": "standard",
+          "title": "Resource Class",
+          "type": "string"
+        }
+      },
+      "required": [
+        "model",
+        "resource_class",
+        "image_digest"
+      ],
+      "title": "EffectiveRun",
+      "type": "object"
+    },
+    "FailureCode": {
+      "enum": [
+        "upload_expired",
+        "queued_expired",
+        "deadline_exceeded",
+        "startup_timeout",
+        "heartbeat_lost",
+        "launch_uncertain",
+        "worker_failed",
+        "owner_cancelled",
+        "checksum_mismatch",
+        "missing_result"
+      ],
+      "title": "FailureCode",
+      "type": "string"
+    },
+    "Freshness": {
+      "enum": [
+        "fresh",
+        "stale",
+        "clock_anomaly"
+      ],
+      "title": "Freshness",
+      "type": "string"
+    },
+    "RunState": {
+      "enum": [
+        "awaiting_upload",
+        "queued",
+        "dispatching",
+        "starting",
+        "running",
+        "collecting",
+        "reconciling",
+        "cancel_requested",
+        "succeeded",
+        "failed",
+        "timed_out",
+        "cancelled"
+      ],
+      "title": "RunState",
+      "type": "string"
+    },
+    "RunView": {
+      "additionalProperties": false,
+      "properties": {
+        "attempt": {
+          "minimum": 1,
+          "title": "Attempt",
+          "type": "integer",
+          "x-origin": "server-derived"
+        },
+        "deadline_at": {
+          "format": "date-time",
+          "title": "Deadline At",
+          "type": "string",
+          "x-origin": "server-derived"
+        },
+        "failure": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TypedFailure"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "x-origin": "server-derived"
+        },
+        "freshness": {
+          "$ref": "#/$defs/Freshness",
+          "x-origin": "server-derived"
+        },
+        "last_seen_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Last Seen At",
+          "x-origin": "server-derived"
+        },
+        "max_attempts": {
+          "minimum": 1,
+          "title": "Max Attempts",
+          "type": "integer",
+          "x-origin": "server-derived"
+        },
+        "owner_id": {
+          "title": "Owner Id",
+          "type": "string",
+          "x-origin": "server-derived"
+        },
+        "run_id": {
+          "pattern": "^run_[0-9a-f]{32}$",
+          "title": "Run Id",
+          "type": "string",
+          "x-origin": "server-derived"
+        },
+        "server_time": {
+          "format": "date-time",
+          "title": "Server Time",
+          "type": "string",
+          "x-origin": "server-derived"
+        },
+        "state": {
+          "$ref": "#/$defs/RunState",
+          "x-origin": "server-derived"
+        },
+        "version": {
+          "minimum": 0,
+          "title": "Version",
+          "type": "integer",
+          "x-origin": "server-derived"
+        }
+      },
+      "required": [
+        "run_id",
+        "owner_id",
+        "state",
+        "version",
+        "attempt",
+        "max_attempts",
+        "deadline_at",
+        "server_time",
+        "freshness"
+      ],
+      "title": "RunView",
+      "type": "object"
+    },
+    "TypedFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "$ref": "#/$defs/FailureCode"
+        },
+        "message": {
+          "default": "",
+          "maxLength": 512,
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "title": "Retryable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "retryable"
+      ],
+      "title": "TypedFailure",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Latest accepted status snapshot. Not a history; history is the event log.\n\nresult_available is true only when an accepted result exists for the current attempt. It is\nnot a promise that the result's artifacts are downloadable; GET result verifies those.",
+  "properties": {
+    "effective": {
+      "$ref": "#/$defs/EffectiveRun"
+    },
+    "log_watermark": {
+      "minimum": 0,
+      "title": "Log Watermark",
+      "type": "integer"
+    },
+    "result_available": {
+      "title": "Result Available",
+      "type": "boolean"
+    },
+    "retained_from": {
+      "minimum": 1,
+      "title": "Retained From",
+      "type": "integer"
+    },
+    "run": {
+      "$ref": "#/$defs/RunView"
+    },
+    "status_seq": {
+      "minimum": 0,
+      "title": "Status Seq",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "run",
+    "effective",
+    "result_available",
+    "status_seq",
+    "log_watermark",
+    "retained_from"
+  ],
+  "title": "StatusView",
+  "type": "object"
+}

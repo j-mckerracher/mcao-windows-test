@@ -1,0 +1,12 @@
+[package]
+name = "mcao-backend-windows"
+description = "PROPOSED (DPES-752 unconfirmed): Windows Job Object, suspended-process and ConPTY prototype."
+version.workspace = true
+edition.workspace = true
+publish = false
+
+[dependencies]
+mcao-core = { path = "../mcao-core" }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { workspace = true, features = ["Win32_Security_Authorization"] }

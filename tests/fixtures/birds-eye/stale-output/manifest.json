@@ -1,0 +1,11 @@
+{
+  "configured": [
+    "/fleet/alpha"
+  ],
+  "homes": {
+    "/fleet/alpha": {
+      "file": "../snapshots/alpha-older.json",
+      "exit": 0
+    }
+  }
+}
