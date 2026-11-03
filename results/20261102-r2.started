@@ -1,0 +1,6 @@
+RUN_ID: 20261102-r2
+COMMIT: 37a2078dc62874448470360fb01d29241f5874cf
+started_utc: 2026-11-03T05:44:31Z
+MODE: targeted
+ROWS: W-06,W-17,W-21
+NOTES: rerun W-21 (W-49 runs, 20 isolated)
