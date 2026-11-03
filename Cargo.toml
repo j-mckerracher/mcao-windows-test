@@ -14,6 +14,9 @@ edition = "2024"
 
 [workspace.dependencies]
 clap = { version = "4.6.7", features = ["derive"] }
+# Bundled SQLite: the no-mistakes database readers run on the SQLite version this build compiles.
+# Default features are off: they add the wasm-only sqlite-wasm-rs and the statement cache, which the readers do not use.
+rusqlite = { version = "0.41.1", default-features = false, features = ["bundled"] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 # Exact pin: the audit hash chain hashes with this SHA-256 (DPES-884 section 9).

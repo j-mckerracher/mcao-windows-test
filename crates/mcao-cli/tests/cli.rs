@@ -6,6 +6,9 @@ use std::path::Path;
 use std::process::{Command, Output, Stdio};
 use std::{env, fs};
 
+#[cfg(unix)]
+const UTIL_USAGE: &str = "usage: mcao util <now-ms|awaiting-hold-ids|awaiting-hold-object|nm-run-inventory|nm-spend-record>\n";
+#[cfg(not(unix))]
 const UTIL_USAGE: &str = "usage: mcao util <now-ms|awaiting-hold-ids|awaiting-hold-object>\n";
 
 /// Builds an `mcao` invocation whose colour output does not depend on the caller's environment.
@@ -87,6 +90,35 @@ fn util_arguments_reach_util_unchanged() {
     ];
     for args in cases {
         let output = mcao(args);
+        assert_eq!(output.status.code(), Some(2), "{args:?}");
+        assert!(output.stdout.is_empty(), "{args:?}");
+        assert_eq!(
+            String::from_utf8_lossy(&output.stderr),
+            UTIL_USAGE,
+            "{args:?}"
+        );
+    }
+}
+
+#[cfg(unix)]
+#[test]
+fn util_usage_names_the_no_mistakes_readers_on_unix() {
+    assert!(
+        UTIL_USAGE.contains("|nm-run-inventory|nm-spend-record>"),
+        "{UTIL_USAGE}"
+    );
+    let output = mcao(&["util", "nope"]);
+    assert_eq!(output.status.code(), Some(2));
+    assert_eq!(String::from_utf8_lossy(&output.stderr), UTIL_USAGE);
+}
+
+#[cfg(not(unix))]
+#[test]
+fn util_usage_does_not_name_the_no_mistakes_readers_off_unix() {
+    // The readers are not compiled off unix, so their names fall through to the unknown-command usage.
+    assert!(!UTIL_USAGE.contains("nm-"), "{UTIL_USAGE}");
+    for args in [["util", "nm-run-inventory"], ["util", "nm-spend-record"]] {
+        let output = mcao(&args);
         assert_eq!(output.status.code(), Some(2), "{args:?}");
         assert!(output.stdout.is_empty(), "{args:?}");
         assert_eq!(

@@ -1,0 +1,21 @@
+{
+  "inventory": {
+    "created": [
+      "state.sqlite-shm",
+      "state.sqlite-wal"
+    ],
+    "exit": 0,
+    "ledger_hex": null,
+    "stdout": "count: 0 of 0 total\nruns[0]{id,branch,status,head,pr}:\n"
+  },
+  "spend": {
+    "created": [
+      "pipeline-spend.jsonl",
+      "state.sqlite-shm",
+      "state.sqlite-wal"
+    ],
+    "exit": 0,
+    "ledger_hex": "7b227461736b223a22222c22737061776e5f67656e223a6e756c6c2c227265636f726465645f6174223a223c7265636f726465645f61743e222c22736f75726365223a22756e617661696c61626c65222c22726561736f6e223a2263616e6e6f742072656164206e6f2d6d697374616b65732073746174653a206e6f207265706f7369746f727920222c227265706f223a6e756c6c2c226272616e6368223a6e756c6c2c2273696e6365223a6e756c6c2c22746f74616c223a6e756c6c2c2272756e73223a5b5d2c22707572706f736573223a5b5d7d0a",
+    "stdout": "recorded  -\n"
+  }
+}

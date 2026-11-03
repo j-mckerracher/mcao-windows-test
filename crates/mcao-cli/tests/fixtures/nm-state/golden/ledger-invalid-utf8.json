@@ -1,0 +1,20 @@
+{
+  "inventory": {
+    "created": [
+      "state.sqlite-shm",
+      "state.sqlite-wal"
+    ],
+    "exit": 0,
+    "ledger_hex": null,
+    "stdout": "count: 3 of 3 total\nruns[3]{id,branch,status,head,pr}:\n  \"run-new\",\"feat/x\",\"completed\",\"abcdef1234\",\"\"\n  \"run-mid\",\"feat/x\",\"failed\",\"abcdef1234\",\"\"\n  \"run-old\",\"feat/x\",\"completed\",\"abcdef1234\",\"\"\n"
+  },
+  "spend": {
+    "created": [
+      "state.sqlite-shm",
+      "state.sqlite-wal"
+    ],
+    "exit": 1,
+    "ledger_hex": "7b227461736b223a226f74686572227d0aff0a",
+    "stdout": ""
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "inventory": {
+    "created": [],
+    "exit": 0,
+    "ledger_hex": null,
+    "stdout": "count: 1 of 1 total\nruns[1]{id,branch,status,head,pr}:\n  \"run-m1\",\"feat/x\",\"completed\",\"abcdef1234\",\"\"\n"
+  },
+  "spend": {
+    "created": [],
+    "exit": 1,
+    "ledger_hex": null,
+    "stdout": ""
+  }
+}

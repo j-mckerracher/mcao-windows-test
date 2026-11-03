@@ -72,7 +72,7 @@ struct SupportRecord {
 }
 
 /// Each entry states the crate's own platform support and the source it was read from.
-const SUPPORT_RECORDS: [SupportRecord; 4] = [
+const SUPPORT_RECORDS: [SupportRecord; 15] = [
     // libc 0.2.191: docs.rs `targets` list x86_64-pc-windows-msvc, and src/lib.rs has `#[cfg(windows)]` items.
     SupportRecord {
         name: "libc",
@@ -95,6 +95,72 @@ const SUPPORT_RECORDS: [SupportRecord; 4] = [
     SupportRecord {
         name: "serde_json",
         version: "1.0.154",
+        families: &[Family::Unix, Family::Windows],
+    },
+    // rusqlite 0.41.1: Cargo.toml feature `bundled-windows` builds the bundled SQLite on Windows; src/lib.rs has `cfg(unix)` arms beside shared code. The unix-only gate is the workspace's, not the crate's.
+    SupportRecord {
+        name: "rusqlite",
+        version: "0.41.1",
+        families: &[Family::Unix, Family::Windows],
+    },
+    // libsqlite3-sys 0.39.1: build.rs has `win_target()` and `is_compiler("msvc")` paths for the bundled build, and the `bundled-windows` feature.
+    SupportRecord {
+        name: "libsqlite3-sys",
+        version: "0.39.1",
+        families: &[Family::Unix, Family::Windows],
+    },
+    // bitflags 2.13.2: pure Rust; src has no `cfg(unix)`, `cfg(windows)`, or `target_os` gate. Transitive of rusqlite; not declared by the workspace.
+    SupportRecord {
+        name: "bitflags",
+        version: "2.13.2",
+        families: &[Family::Unix, Family::Windows],
+    },
+    // fallible-iterator 0.3.0: pure Rust; src has no platform gate. Transitive of rusqlite.
+    SupportRecord {
+        name: "fallible-iterator",
+        version: "0.3.0",
+        families: &[Family::Unix, Family::Windows],
+    },
+    // fallible-streaming-iterator 0.1.9: pure Rust; src has no platform gate. Transitive of rusqlite.
+    SupportRecord {
+        name: "fallible-streaming-iterator",
+        version: "0.1.9",
+        families: &[Family::Unix, Family::Windows],
+    },
+    // smallvec 1.16.4: pure Rust; src has no platform gate. Transitive of rusqlite.
+    SupportRecord {
+        name: "smallvec",
+        version: "1.16.4",
+        families: &[Family::Unix, Family::Windows],
+    },
+    // cc 1.11.0: build-time only (libsqlite3-sys build script); src has `cfg(unix)` and `cfg(windows)` arms, so it builds on both families.
+    SupportRecord {
+        name: "cc",
+        version: "1.11.0",
+        families: &[Family::Unix, Family::Windows],
+    },
+    // find-msvc-tools 0.1.15: build-time only; src/lib.rs keeps the public API on every platform (no `cfg(windows)` on it), with Windows-only search code behind `cfg(windows)`.
+    SupportRecord {
+        name: "find-msvc-tools",
+        version: "0.1.15",
+        families: &[Family::Unix, Family::Windows],
+    },
+    // pkg-config 0.3.34: build-time only; src/lib.rs has `target_os` checks for messages and search roots and a `target.contains("windows")` branch, so it builds on both families.
+    SupportRecord {
+        name: "pkg-config",
+        version: "0.3.34",
+        families: &[Family::Unix, Family::Windows],
+    },
+    // shlex 2.0.1: build-time only; src has no platform gate (`cfg(unix)` appears only in a doc example).
+    SupportRecord {
+        name: "shlex",
+        version: "2.0.1",
+        families: &[Family::Unix, Family::Windows],
+    },
+    // vcpkg 0.2.15: build-time only; src/lib.rs:1345 picks the MSVC lookup at run time by `target.contains("-pc-windows-msvc")`, not by a `cfg`. libsqlite3-sys reaches it only through its non-bundled build path (build.rs `try_vcpkg`); the bundled build skips that path unless `LIBSQLITE3_SYS_USE_PKG_CONFIG` is set.
+    SupportRecord {
+        name: "vcpkg",
+        version: "0.2.15",
         families: &[Family::Unix, Family::Windows],
     },
 ];
@@ -405,6 +471,29 @@ fn every_unconditional_declaration_is_in_every_product_graph() {
         checked > 0,
         "no unconditional declaration in a product package; the positive control is empty"
     );
+}
+
+/// The SQLite reader crates are unix-only in mcao-cli. The exclusion check above cannot see them:
+/// rusqlite's record lists both families, so it is in neither family-only set. This test therefore
+/// names the two crates; the unix graph must hold them too, so the names are known to match.
+#[test]
+fn sqlite_reader_crates_are_absent_from_the_windows_graph() {
+    let windows = normal_dependencies("mcao-cli", WINDOWS);
+    assert!(
+        windows.contains("mcao-cli"),
+        "positive control: mcao-cli missing from its own {WINDOWS} graph: {windows:?}"
+    );
+    let unix = normal_dependencies("mcao-cli", LINUX);
+    for krate in ["rusqlite", "libsqlite3-sys"] {
+        assert!(
+            unix.contains(krate),
+            "positive control: {krate} missing from the mcao-cli graph on {LINUX}: {unix:?}"
+        );
+        assert!(
+            !windows.contains(krate),
+            "{krate} leaked into the mcao-cli graph on {WINDOWS}: {windows:?}"
+        );
+    }
 }
 
 /// A platform-only package is not a product, so its own graph is checked here on the other

@@ -5,17 +5,18 @@
 The agent reads this block at the start of every run. Keep the four lines in this exact form (`KEY: value`, one per line, no extra text on the key lines). Only the fenced block is parsed; the bullets below it describe the fields.
 
 ```text
-RUN_ID: 20261103-r5
-MODE: targeted
-ROWS: W-21,W-58
+RUN_ID: 20261103-r6
+MODE: full
+ROWS: ALL
 NOTES: rerun W-21
 ```
 
 - A `RUN_ID` of `none` is the idle state. The agent does nothing else while it reads `none`.
 - Any other `RUN_ID` is a new run request. The id is a single token such as `20261103-091500`.
-- `MODE: full` runs every row in section 4 except W-49 and W-50. `MODE: targeted` runs only the rows named in `ROWS` plus W-01. W-49 and W-50 are excluded from both and run only under the rerun bullet below.
+- `MODE: full` runs every row in section 4 except W-49, W-50, and W-58. `MODE: targeted` runs only rows named in `ROWS` plus W-01. W-49, W-50, and W-58 are excluded from both modes and run only under the rerun bullet below.
 - `ROWS: ALL`, or a comma-separated list of row ids such as `W-06,W-21`. Ignored for `MODE: full`. `ROWS: ALL` does not select W-49 or W-50, and naming either in `ROWS` does not run it.
 - W-49 and W-50, the explicit reruns of the UNRESOLVED W-21 test, run only when the `NOTES` key line is exactly `NOTES: rerun W-21`, in either mode. The match is literal and case-sensitive: `NOTES: rerun W-21` must be the whole line, and any other `NOTES` value does not trigger it. `ROWS` naming W-49 or W-50 does not trigger it. Without that exact line W-49 and W-50 are each recorded `SKIPPED`, reason `not requested`. W-21 is never retried automatically; W-49 and W-50 are its only reruns.
+- W-58, the launch-route diagnostic in section 4.9, uses the same gate as W-49 and W-50 in either mode: it runs only when the `NOTES` key line is exactly `NOTES: rerun W-21`, and naming it in `ROWS` does not trigger it. Otherwise it is recorded `SKIPPED`, reason `not requested`.
 - `NOTES:` is free text. Read it before running rows.
 - This block is committed in the idle state. The repository owner fills it when publishing a run request.
 - A request cannot contain the hash of the commit it asks to test. The commit under test is the tip of `origin/windows-verification` that the agent fetched in step 1 of the loop, recorded with `git rev-parse HEAD` before any row runs. The run's `<RUN_ID>.started` file and the report's `Commit tested` field carry that hash.
@@ -158,7 +159,7 @@ The agent repeats this procedure forever. Between checks it waits 60 seconds and
    Read the `Current request` block of `docs/windows-native-verification.md` in the test checkout. Take the `RUN_ID`, `MODE`, `ROWS`, and `NOTES` values from the four key lines. If `RUN_ID` is `none`, wait 60 seconds and repeat.
 3. Skip a request that has results already. Pull the results checkout (`git -C $Push pull --rebase`). If `results/<RUN_ID>.zip` already exists on the branch, skip the run and go to step 1. Do not write a second result for the same RUN_ID.
 4. Record the commit under test (`$tip`). In the results checkout write `results/<RUN_ID>.started` with the UTC start time and `$tip`, publish it (section 2.6), and continue. A `.started` file is published before any row runs.
-5. Run what the request names, in the order of section 4: `MODE: full` runs every row except W-49 and W-50; `MODE: targeted` runs only the rows in `ROWS` plus W-01; W-49 and W-50 run only when the `NOTES` key line is exactly `NOTES: rerun W-21` (Current request section, either mode); naming W-49 or W-50 in `ROWS` does not trigger them, and otherwise each is recorded `SKIPPED`, reason `not requested`. Follow the standing procedure in sections 3 and 4. Each row's log goes to `%LOCALAPPDATA%\mcao-winverify\<RUN_ID>\logs\`. Fill in the report template (`docs/windows-native-verification-report-template.md` in the test checkout, copied to the run folder at the start of the run).
+5. Run what the request names, in the order of section 4: `MODE: full` runs every row except W-49, W-50, and W-58; `MODE: targeted` runs only the rows in `ROWS` plus W-01; W-49 and W-50 run only when the `NOTES` key line is exactly `NOTES: rerun W-21` (Current request section, either mode); naming W-49 or W-50 in `ROWS` does not trigger them, and otherwise each is recorded `SKIPPED`, reason `not requested`. W-58 (section 4.9) uses that same gate in either mode: it runs only when the `NOTES` key line is exactly `NOTES: rerun W-21`, and is otherwise recorded `SKIPPED`, reason `not requested`. Follow the standing procedure in sections 3 and 4. Each row's log goes to `%LOCALAPPDATA%\mcao-winverify\<RUN_ID>\logs\`. Fill in the report template (`docs/windows-native-verification-report-template.md` in the test checkout, copied to the run folder at the start of the run).
 6. After the last row record `git -C $Clone status --porcelain` in the report. It must be empty.
 7. Write the report to `%LOCALAPPDATA%\mcao-winverify\<RUN_ID>\<RUN_ID>-SUMMARY.md`: run id, commit tested, start and end times, a table of every row (PASS, FAIL, FAIL (vacuous), SKIPPED, TIMEOUT, or SPEC-ONLY observed; exit code; tests run), each failure quoted exactly (test name, panic message with file and line, last 30 log lines), surprises and differences, questions. Use only those six row statuses; the report template, section 3, defines them.
 8. Redact the run folder (section 8), zip it to `%LOCALAPPDATA%\mcao-winverify\<RUN_ID>.zip`, copy `<RUN_ID>.zip` and `<RUN_ID>-SUMMARY.md` into `results/` of the results checkout, write the run id alone to `results/LATEST` as the LAST file, and publish (section 2.6) with the message `results: <RUN_ID>`.
@@ -727,7 +728,7 @@ Rows W-51 to W-58 are read-only observations. None has a pass or fail beyond its
 | W-55 | `[System.IO.File]::Open` on a directory with read access, the open that `sync_dir` needs | not a Cargo test | Record only. Expected: `UnauthorizedAccessException` (access denied, os error 5). This confirms the mechanism behind PR 464's `audit_writer` gate and the owner decision about `sync_dir` on Windows. | `logs\W-55.log` | 2 min | 753 (writer, owner decision) | SPEC-ONLY observed |
 | W-56 | child pwsh with an environment of `PATH`, `PATHEXT=.COM;.EXE;.BAT;.CMD`, `GIT_CONFIG_NOSYSTEM=1`, and `GIT_CONFIG_GLOBAL=/dev/null` only: `git init`, add, commit, then `git config --show-origin --list`; the exit code of each git step is recorded. `PATHEXT` is set because PowerShell 7 cannot resolve a bare `git` name without it (run 20261103-r3 exited with "The term 'git' is not recognized") | not a Cargo test | Record only. Expected: every git step exits 0 and `git config --show-origin --list` names no file under the user profile, because `USERPROFILE` is absent in the child. This is the input to the W-06 `assignment_reassess*` question. | `logs\W-56.log` | 2 min | 759 (assignment_reassess, SPEC-ONLY) | SPEC-ONLY observed |
 | W-57 | presence, length, and drive-rooted shape of `USERPROFILE`, `LOCALAPPDATA`, `OneDrive`, `OneDriveCommercial`, and `OneDriveConsumer` in the test process; no path text is printed | not a Cargo test | Record only. Expected: the three OneDrive variables are empty on this laptop, as the first run recorded. This is the hermetic environment reason in PR 464's `Command` changes. | `logs\W-57.log` | 1 min | 892 (guard environment) | SPEC-ONLY observed |
-| W-58 | diagnostic, runs only when the `NOTES` key line is exactly `NOTES: rerun W-21`: the isolated escalation test (`escalation_sends_a_second_ctrl_c_then_terminates_the_tree_at_the_wait -- --exact`) launched five ways in the same agent session, three runs each: `direct-start-process` (as W-49), `in-process` (`& cargo` in the current shell), `child-powershell51` (Windows PowerShell 5.1 from `$env:SystemRoot`), `cmd-c` (`cmd.exe /c`), and `new-console-window` (`cmd.exe` in its own console window). It also records the host name, shell version, whether stdin and stdout are redirected, and the names of up to six ancestor processes (no command lines) | not a Cargo test | Record only. Expected: unknown. Run 20261103-r3 and r4 failed the test under `pwsh 7.4.14` in every run, while run 20261102-r1 (`pwsh 7.4.14`) delivered Ctrl+C and run 20261102-r2 (`powershell.exe 5.1`) passed. The Windows backend code is identical between r2 and r4. The row separates the shell version from the way the agent session launches its shell (console host, inherited Ctrl+C-ignored state, process group). If one variant passes and the direct launch fails, the launch route is the cause; if all five fail, the agent session's console state is. | `logs\W-58.log` | 10 min | 752 AC3, 755 AC1-AC3 | SPEC-ONLY observed |
+| W-58 | diagnostic, runs only when the `NOTES` key line is exactly `NOTES: rerun W-21`, in either mode (naming W-58 in `ROWS` does not trigger it): the isolated escalation test (`escalation_sends_a_second_ctrl_c_then_terminates_the_tree_at_the_wait -- --exact`) launched five ways in the same agent session, three runs each: `direct-start-process` (as W-49), `in-process` (`& cargo` inside a bounded child `pwsh`, because the session process cannot be bounded from within; it differs from `direct-start-process` only by that extra PowerShell layer, so it is not a copy of the session's own launch route), `child-powershell51` (Windows PowerShell 5.1 from `$env:SystemRoot`), `cmd-c` (`cmd.exe /c`), and `new-console-window` (`cmd.exe` in its own console window). It also records the PowerShell host name (`$Host.Name`, not the machine name), the shell version, whether stdin and stdout are redirected, and the names of up to five ancestor processes (no command lines). A failed build records its exit code and last 30 lines and skips the variants. Expected: unknown. Baselines for this test: run 20261102-r1 (`pwsh 7.4.14`) passed 12 of 20 W-49 runs and failed 8 at `interrupt.rs:523` (`left: Exited`, `right: TerminatedJob`); run 20261102-r2 (`powershell.exe 5.1`) passed 20 of 20; run 20261103-r4 (`pwsh 7.4.14`, at `aa580151`) passed 0 of 20, every run failing at `interrupt.rs:576`. Run 20261103-r3 (`pwsh 7.4.14`, `NOTES: none`) ran no W-49 runs; its single whole-binary W-21 run failed 5 of 23 interrupt tests (`interrupt.rs:339`, `:480`, `:576`, `:626`, `:643`). Run 20261103-r5 (verification-repo commit `9ba202c3`, the pre-review W-58 block, `ConsoleHost` `pwsh 7.4.14`, stdin and stdout redirected) failed all 15 runs at `interrupt.rs:576:5`, including the Windows PowerShell 5.1 child; r5 does not evidence the corrected block at `1807478c`. The `crates/mcao-backend-windows` code is identical between r2 and r4: that crate has no diff between `58b79e35` and `aa580151`, and the r2 mapping to `58b79e35` is an inference, since the r2 summary records only its verification-repo commit. The row separates the shell version from the way the agent session launches its shell (console host, inherited Ctrl+C-ignored state, process group). If one variant passes and the direct launch fails, the launch route is the cause; if all five fail, the agent session's console state is. | `logs\W-58.log` (full output of every run; the last 30 lines of each non-zero run are stdout then stderr) | 30-minute row budget shared by the build and all runs; each run capped at 120 s and killed with its process tree (`taskkill /T /F`) recorded `TIMEOUT`; runs left when the budget ends are recorded `TIMEOUT` | record only: context for 752 AC3 and 755 AC1-AC3, no pass or fail | SPEC-ONLY observed |
 
 The probe block. Run it after the W-50 block, in the same session, after the section 3 helper:
 
@@ -957,9 +958,16 @@ Invoke-Row -Id 'W-58' -MinTests 0 -Command 'escalation test launched five ways i
     return
   }
   $env:CARGO_TARGET_DIR = $Target
-  "host=$($Host.Name) shell=$($PSVersionTable.PSVersion) stdinRedirected=$([Console]::IsInputRedirected) stdoutRedirected=$([Console]::IsOutputRedirected)"
-  $ancestor = $PID
-  for ($depth = 0; $depth -lt 6; $depth++) {
+  $shell = (Get-Process -Id $PID).Path
+  $ps51 = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+  $rowBudgetMs = 1800000
+  $runLimitMs = 120000
+  $rowStart = Get-Date
+  $rowTimedOut = $false
+  "psHost=$($Host.Name) shell=$($PSVersionTable.PSVersion) stdinRedirected=$([Console]::IsInputRedirected) stdoutRedirected=$([Console]::IsOutputRedirected)"
+  $ancestor = (Get-CimInstance -ClassName Win32_Process -Filter "ProcessId=$PID" -ErrorAction SilentlyContinue).ParentProcessId
+  for ($depth = 1; $depth -le 5; $depth++) {
+    if (-not $ancestor) { break }
     $proc = Get-CimInstance -ClassName Win32_Process -Filter "ProcessId=$ancestor" -ErrorAction SilentlyContinue
     if (-not $proc) { break }
     "ancestor$depth=$($proc.Name) pid=$($proc.ProcessId)"
@@ -968,37 +976,60 @@ Invoke-Row -Id 'W-58' -MinTests 0 -Command 'escalation test launched five ways i
   $w58Test = 'escalation_sends_a_second_ctrl_c_then_terminates_the_tree_at_the_wait'
   $w58Args = @('test', '-p', 'mcao-backend-windows', '--locked', '--test', 'interrupt', $w58Test, '--', '--exact')
   $w58Line = "cargo test -p mcao-backend-windows --locked --test interrupt $w58Test -- --exact"
-  # Build once so the timed runs do not include compilation.
-  Push-Location -LiteralPath $Clone
-  & cargo test -p mcao-backend-windows --locked --test interrupt --no-run 2>&1 | Select-Object -Last 2
-  Pop-Location
-  $ps51 = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+  # Build once, bounded by the row budget, so the timed runs do not include compilation. Its exit code is recorded.
+  $buildOut = Join-Path $Results 'W-58-build.out'
+  $buildErr = Join-Path $Results 'W-58-build.err'
+  $buildLimitMs = $rowBudgetMs - [int]((Get-Date) - $rowStart).TotalMilliseconds
+  $build = Start-Process -FilePath 'cargo' -ArgumentList @('test', '-p', 'mcao-backend-windows', '--locked', '--test', 'interrupt', '--no-run') -WorkingDirectory $Clone -NoNewWindow -PassThru -RedirectStandardOutput $buildOut -RedirectStandardError $buildErr
+  if ($build.WaitForExit($buildLimitMs)) {
+    $buildCode = $build.ExitCode
+  } else {
+    & taskkill.exe /PID $build.Id /T /F | Out-Null
+    [void]$build.WaitForExit(10000)
+    $buildCode = 'TIMEOUT'
+  }
+  $buildText = @()
+  foreach ($file in $buildOut, $buildErr) {
+    if (Test-Path -LiteralPath $file) {
+      $buildText += @(Get-Content -LiteralPath $file)
+      Remove-Item -LiteralPath $file
+    }
+  }
+  $buildText
+  "build exit=$buildCode"
+  if ("$buildCode" -ne '0') {
+    'build failed: the five variants were not run; last 30 lines of build output follow'
+    $buildText | Select-Object -Last 30
+    $global:LASTEXITCODE = $buildCode
+    return
+  }
   foreach ($variant in 'direct-start-process', 'in-process', 'child-powershell51', 'cmd-c', 'new-console-window') {
     for ($run = 1; $run -le 3; $run++) {
       $outFile = Join-Path $Results "W-58-$variant-$run.out"
       $errFile = Join-Path $Results "W-58-$variant-$run.err"
-      $code = 'n/a'
-      if ($variant -eq 'in-process') {
-        Push-Location -LiteralPath $Clone
-        & cargo @w58Args *> $outFile
-        $code = $LASTEXITCODE
-        Pop-Location
+      $spentMs = [int]((Get-Date) - $rowStart).TotalMilliseconds
+      $limitMs = [Math]::Min($runLimitMs, $rowBudgetMs - $spentMs)
+      if ($limitMs -le 0) {
+        $rowTimedOut = $true
+        "variant=$variant run=$run exit=TIMEOUT: row budget ended before this run"
+        continue
+      }
+      $startArgs = @{ WorkingDirectory = $Clone; PassThru = $true }
+      switch ($variant) {
+        'direct-start-process' { $startArgs += @{ FilePath = 'cargo'; ArgumentList = $w58Args; NoNewWindow = $true; RedirectStandardOutput = $outFile; RedirectStandardError = $errFile } }
+        'in-process' { $startArgs += @{ FilePath = $shell; ArgumentList = @('-NoProfile', '-Command', "& cargo $($w58Args -join ' '); exit `$LASTEXITCODE"); NoNewWindow = $true; RedirectStandardOutput = $outFile; RedirectStandardError = $errFile } }
+        'child-powershell51' { $startArgs += @{ FilePath = $ps51; ArgumentList = @('-NoProfile', '-Command', "$w58Line; exit `$LASTEXITCODE"); NoNewWindow = $true; RedirectStandardOutput = $outFile; RedirectStandardError = $errFile } }
+        'cmd-c' { $startArgs += @{ FilePath = $env:ComSpec; ArgumentList = @('/c', $w58Line); NoNewWindow = $true; RedirectStandardOutput = $outFile; RedirectStandardError = $errFile } }
+        'new-console-window' { $startArgs += @{ FilePath = $env:ComSpec; ArgumentList = @('/c', "$w58Line > `"$outFile`" 2>&1") } }
+      }
+      $started = Start-Process @startArgs
+      if ($started.WaitForExit($limitMs)) {
+        $code = $started.ExitCode
       } else {
-        $startArgs = @{ WorkingDirectory = $Clone; PassThru = $true }
-        switch ($variant) {
-          'direct-start-process' { $startArgs += @{ FilePath = 'cargo'; ArgumentList = $w58Args; NoNewWindow = $true; RedirectStandardOutput = $outFile; RedirectStandardError = $errFile } }
-          'child-powershell51' { $startArgs += @{ FilePath = $ps51; ArgumentList = @('-NoProfile', '-Command', $w58Line); NoNewWindow = $true; RedirectStandardOutput = $outFile; RedirectStandardError = $errFile } }
-          'cmd-c' { $startArgs += @{ FilePath = $env:ComSpec; ArgumentList = @('/c', $w58Line); NoNewWindow = $true; RedirectStandardOutput = $outFile; RedirectStandardError = $errFile } }
-          'new-console-window' { $startArgs += @{ FilePath = $env:ComSpec; ArgumentList = @('/c', "$w58Line > `"$outFile`" 2>&1") } }
-        }
-        $started = Start-Process @startArgs
-        if ($started.WaitForExit(120000)) {
-          $code = $started.ExitCode
-        } else {
-          & taskkill.exe /PID $started.Id /T /F | Out-Null
-          [void]$started.WaitForExit(10000)
-          $code = 'TIMEOUT'
-        }
+        & taskkill.exe /PID $started.Id /T /F | Out-Null
+        [void]$started.WaitForExit(10000)
+        $code = 'TIMEOUT'
+        if ($limitMs -lt $runLimitMs) { $rowTimedOut = $true }
       }
       $text = @()
       foreach ($file in $outFile, $errFile) {
@@ -1007,9 +1038,20 @@ Invoke-Row -Id 'W-58' -MinTests 0 -Command 'escalation test launched five ways i
           Remove-Item -LiteralPath $file
         }
       }
-      $detail = @($text | Where-Object { $_ -match 'panicked at|both reach the stub|test result' }) -join ' | '
-      "variant=$variant run=$run exit=$code $detail"
+      "variant=$variant run=$run exit=$code"
+      $text
+      $hits = @($text | Where-Object { $_ -match 'panicked at|left:|right:|both reach the stub|test result|^running' })
+      "variant=$variant run=$run filtered: $($hits -join ' | ')"
+      if ("$code" -ne '0') {
+        "variant=$variant run=$run last 30 lines:"
+        $text | Select-Object -Last 30
+      }
     }
+  }
+  if ($rowTimedOut) {
+    'W-58 row TIMEOUT: the 30-minute row budget ended the loop; runs marked TIMEOUT above did not complete'
+    $global:LASTEXITCODE = 'TIMEOUT'
+    return
   }
   $global:LASTEXITCODE = 0
 }
@@ -1044,10 +1086,10 @@ These are the Jira criteria the rows above provide evidence for. The criterion t
 
 | Work item | Criteria with evidence from this packet | Rows | Not covered by this packet |
 | --- | --- | --- | --- |
-| DPES-752 | AC1 (partial: build, probe, and backend tests on native Windows; the no-WSL-on-PATH condition is W-29), AC3 (interrupt escalation: W-21 UNRESOLVED on the first run, passing once in run 20261102-r2; W-49 rerun 20 of 20 in run 20261102-r2), AC4 (partial: `cargo check` on the three pinned targets, W-04 and W-18) | W-01, W-03, W-04, W-18, W-21, W-27, W-28, W-29, W-30, W-49, W-50, W-51 to W-57 (diagnostic) | AC2, AC5 (decision record review, owner); the evidence record schema from the decision record |
+| DPES-752 | AC1 (partial: build, probe, and backend tests on native Windows; the no-WSL-on-PATH condition is W-29), AC3 (interrupt escalation: W-21 UNRESOLVED on the first run, passing once in run 20261102-r2; W-49 rerun 20 of 20 in run 20261102-r2), AC4 (partial: `cargo check` on the three pinned targets, W-04 and W-18) | W-01, W-03, W-04, W-18, W-21, W-27, W-28, W-29, W-30, W-49, W-50, W-51 to W-58 (record only) | AC2, AC5 (decision record review, owner); the evidence record schema from the decision record |
 | DPES-753 | Audit writer on Windows: refusal exit 7 for the writer commands (W-47); unix-only writer tests run 0 here (W-41, W-42, W-46) | W-41, W-42, W-46, W-47 | Writer behaviour on unix; the hash chain on Windows (no Windows run of the writer commands) |
 | DPES-754 | AC2 (Git missing, exit 3), AC3 (non-ASCII FM_HOME, exit path printed), AC5 (`--help` and `--version` offline, no home created), AC1 partial (Windows build only) | W-31 to W-35, W-38 | AC1 (clean-host install, no `bash.exe`/`wsl.exe`/`sh.exe` observed during install), AC4 second half and the statically linked clean Windows 10/11 claim |
-| DPES-755 | AC1 (Job Object cleanup, partial), AC2 (interrupt, stop-or-kill ladder, UNRESOLVED on the first run; W-49 reruns 20 of 20 passing in run 20261102-r2), AC3 (state classification, partial via backend tests), AC5 (compile gate) | W-18, W-19 to W-22, W-49, W-50 | AC4 reconnection across controller restart (no row); live Blocked/Idle classification for a real worker |
+| DPES-755 | AC1 (Job Object cleanup, partial), AC2 (interrupt, stop-or-kill ladder, UNRESOLVED on the first run; W-49 reruns 20 of 20 passing in run 20261102-r2), AC3 (state classification, partial via backend tests), AC5 (compile gate) | W-18, W-19 to W-22, W-49, W-50, W-58 (record only) | AC4 reconnection across controller restart (no row); live Blocked/Idle classification for a real worker |
 | DPES-759 | AC1 (format, lint, test on Windows host), AC2 (tests pass on native OS, host target only, with `--no-fail-fast`), AC4 (no bash.exe on PATH, W-29 partial), AC5 (clippy warnings fail the gate, W-05) | W-01, W-04, W-05, W-06, W-15, W-17, W-29 | AC3 redacted artifacts on failure (CI-only), AC6 missing-infrastructure behaviour of the GitHub runner, the required-check configuration (owner and admin), and the Python-free gate (DPES-884) |
 | DPES-883 | AC1-AC3 (ring buffer unit tests), AC4-AC6 (pipe lifecycle), AC7-AC9 (codec unit tests, if present under `console_server`), AC22 (ACL) | W-23 to W-26 | AC10-AC15 `mcao peek` and read-only attach from a real terminal; AC16-AC21 live attach behaviour; AC23 backlog disconnect under real load |
 | DPES-884 | Validator on Windows: unset-home rejection recorded under the default home (W-48); the `cfg(unix)` zone cases do not run (W-17) | W-17, W-48, W-48-c | The zone-bearing cases on Windows (no zoneinfo, documented gap); the reference parity on Windows |

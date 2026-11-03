@@ -19,3 +19,5 @@ toml = "0.8.23"
 [target.'cfg(unix)'.dependencies]
 # openpty, fork, and the signal calls of `mcao herdr lab-viewer`. The version matches mcao-core's.
 libc = "0.2.191"
+# Read-only no-mistakes state database for the unix shell readers. Windows builds do not compile the bundled SQLite C code.
+rusqlite.workspace = true

@@ -16,8 +16,16 @@ use mcao_core::util::path;
 mod durable;
 #[cfg(unix)]
 mod kimi;
+#[cfg(unix)]
+mod nm_state;
+#[cfg(unix)]
+mod nm_state_cli;
 mod timing;
 
+/// The usage line on unix also names the no-mistakes readers; Windows builds do not compile them.
+#[cfg(unix)]
+pub const USAGE: &str = "usage: mcao util <now-ms|awaiting-hold-ids|awaiting-hold-object|nm-run-inventory|nm-spend-record>";
+#[cfg(not(unix))]
 pub const USAGE: &str = "usage: mcao util <now-ms|awaiting-hold-ids|awaiting-hold-object>";
 const REALPATH_USAGE: &str = "usage: mcao util realpath <path>";
 const DURABLE_USAGE: &str = "usage: mcao util durable-sync <path>";
@@ -37,6 +45,10 @@ pub fn run(args: &[String]) -> ExitCode {
         [command, rest @ ..] if command == "aggregate-timing-json" => timing::aggregate(rest),
         [command, rest @ ..] if command == "write-timing-json" => timing::write(rest),
         [command, rest @ ..] if command == "kimi-turnend" => kimi_turnend(rest),
+        #[cfg(unix)]
+        [command, rest @ ..] if command == "nm-run-inventory" => nm_state_cli::inventory(rest),
+        #[cfg(unix)]
+        [command, rest @ ..] if command == "nm-spend-record" => nm_state_cli::spend_record(rest),
         _ => usage(USAGE),
     }
 }

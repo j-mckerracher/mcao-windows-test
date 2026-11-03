@@ -13,6 +13,10 @@ const ROWS_CASES: usize = 35;
 const SHOW_CASES: usize = 87;
 const CLOCK_ROWS: usize = 10;
 const TRACEBACK_HEADER: &str = "Traceback (most recent call last):";
+#[cfg(unix)]
+const UTIL_USAGE: &str = "usage: mcao util <now-ms|awaiting-hold-ids|awaiting-hold-object|nm-run-inventory|nm-spend-record>\n";
+#[cfg(not(unix))]
+const UTIL_USAGE: &str = "usage: mcao util <now-ms|awaiting-hold-ids|awaiting-hold-object>\n";
 
 fn fixtures() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures")
@@ -152,10 +156,7 @@ fn unknown_util_command_prints_usage_and_exits_two() {
         .expect("mcao runs");
     assert_eq!(output.status.code(), Some(2));
     assert!(output.stdout.is_empty());
-    assert_eq!(
-        String::from_utf8_lossy(&output.stderr),
-        "usage: mcao util <now-ms|awaiting-hold-ids|awaiting-hold-object>\n"
-    );
+    assert_eq!(String::from_utf8_lossy(&output.stderr), UTIL_USAGE);
 }
 
 fn wall_ms() -> i64 {
