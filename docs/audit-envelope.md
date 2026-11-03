@@ -84,7 +84,8 @@ Checks run in this order, and the first failing check decides the reason:
 ## Rejection records
 
 Every rejection appends one line to `audit-rejections.jsonl` in the home's state directory: `FM_STATE_OVERRIDE` when set, otherwise `FM_HOME/state`.
-With neither set, the validator refuses to record and exits `2`, so a rejection is never silent.
+On hosts other than Windows, with neither set, the validator refuses to record and exits `2`, so a rejection is never silent.
+On Windows, the Rust port uses the default home, `%LOCALAPPDATA%\mcao\home`, in place of an unset `FM_HOME`, so with neither set the record goes to that home's `state` directory; the Python reference refuses on every host.
 The record holds only `v` (`1`), `rejected_at` (epoch seconds), `definition`, `reason`, and `paths`.
 Those are fixed enums and schema-defined JSON Pointers, so a record never carries an identity value, a timezone, or any other input value.
 A rejection that cannot be recorded, such as a missing state directory, prints no rejected result, reports the cause on stderr, and exits `2`.

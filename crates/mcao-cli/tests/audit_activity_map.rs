@@ -7,7 +7,7 @@
 
 use std::fs;
 use std::path::{Path, PathBuf};
-use std::process::{Command, Output, Stdio};
+use std::process::{Command, Output};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 /// The synthetic home key the reference's test config uses. It is not a credential.
@@ -53,10 +53,6 @@ fn fixture(name: &str) -> String {
         .expect("an envelope fixture")
 }
 
-fn golden(name: &str) -> String {
-    fs::read_to_string(fixture_dir().join("audit-activity-map").join(name)).expect("a golden")
-}
-
 fn config(scratch: &Scratch) -> PathBuf {
     scratch.write(
         "config.json",
@@ -88,6 +84,11 @@ fn status(output: &Output) -> i32 {
 #[cfg(unix)]
 mod zone_bearing {
     use super::*;
+    use std::process::Stdio;
+
+    fn golden(name: &str) -> String {
+        fs::read_to_string(fixture_dir().join("audit-activity-map").join(name)).expect("a golden")
+    }
 
     #[test]
     fn an_accepted_record_maps_to_the_reference_output() {

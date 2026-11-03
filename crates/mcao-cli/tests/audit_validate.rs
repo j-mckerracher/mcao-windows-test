@@ -6,9 +6,8 @@
 //! command's zone-bearing cases run only on Unix.
 
 use std::fs;
-use std::io::Write;
 use std::path::{Path, PathBuf};
-use std::process::{Command, Output, Stdio};
+use std::process::{Command, Output};
 use std::time::{SystemTime, UNIX_EPOCH};
 
 /// A scratch directory under the system temp dir, removed when the test ends.
@@ -63,22 +62,24 @@ fn status(output: &Output) -> i32 {
     output.status.code().expect("an exit status")
 }
 
-/// Asserts the command printed exactly `expected` on stdout and exited with `code`.
-fn assert_result(output: &Output, expected: &str, code: i32) {
-    assert_eq!(stdout(output), format!("{expected}\n"));
-    assert_eq!(
-        status(output),
-        code,
-        "stderr: {}",
-        String::from_utf8_lossy(&output.stderr)
-    );
-}
-
 #[cfg(unix)]
 mod zone_bearing {
     use super::*;
+    use std::io::Write;
+    use std::process::Stdio;
 
     const ACCEPTED: &str = r#"{"result": "accepted", "definition": "envelope"}"#;
+
+    /// Asserts the command printed exactly `expected` on stdout and exited with `code`.
+    fn assert_result(output: &Output, expected: &str, code: i32) {
+        assert_eq!(stdout(output), format!("{expected}\n"));
+        assert_eq!(
+            status(output),
+            code,
+            "stderr: {}",
+            String::from_utf8_lossy(&output.stderr)
+        );
+    }
 
     #[test]
     fn a_valid_envelope_is_accepted_and_records_nothing() {
@@ -289,13 +290,51 @@ fn an_unknown_definition_is_a_usage_error() {
     assert_eq!(status(&output), 2);
 }
 
+/// With neither `FM_HOME` nor `FM_STATE_OVERRIDE`, the rejection has no state directory. Windows
+/// resolves the default home under `LOCALAPPDATA` instead, so that points at a scratch directory
+/// with no state beneath it, and the test never touches the machine's own default home.
 #[test]
 fn a_rejection_without_a_state_directory_is_not_printed() {
+    let scratch = Scratch::new("no-state");
     let path = fixture("envelope-day-key-mismatch.json");
-    let output = validate(&[path.to_str().unwrap()], None);
+    let output = Command::new(env!("CARGO_BIN_EXE_mcao"))
+        .args(["audit", "validate", path.to_str().unwrap()])
+        .env_remove("FM_HOME")
+        .env_remove("FM_STATE_OVERRIDE")
+        .env("LOCALAPPDATA", &scratch.0)
+        .output()
+        .expect("mcao runs");
     assert_eq!(stdout(&output), "");
     assert_eq!(status(&output), 2);
-    assert!(String::from_utf8_lossy(&output.stderr).contains("FM_HOME or FM_STATE_OVERRIDE"));
+    let stderr = String::from_utf8_lossy(&output.stderr);
+    assert!(stderr.contains("rejection not recorded"), "{stderr}");
+    if cfg!(unix) {
+        assert!(stderr.contains("FM_HOME or FM_STATE_OVERRIDE"), "{stderr}");
+    }
+}
+
+/// On Windows, an unset `FM_HOME` selects the default home under `LOCALAPPDATA`, so the rejection is
+/// recorded in that home's state directory. `LOCALAPPDATA` is a scratch directory here.
+#[cfg(windows)]
+#[test]
+fn a_rejection_is_recorded_under_the_windows_default_home() {
+    let scratch = Scratch::new("default-home");
+    let state = scratch.0.join("mcao").join("home").join("state");
+    fs::create_dir_all(&state).expect("the default home's state directory");
+    let path = fixture("envelope-day-key-mismatch.json");
+    let output = Command::new(env!("CARGO_BIN_EXE_mcao"))
+        .args(["audit", "validate", path.to_str().unwrap()])
+        .env_remove("FM_HOME")
+        .env_remove("FM_STATE_OVERRIDE")
+        .env("LOCALAPPDATA", &scratch.0)
+        .output()
+        .expect("mcao runs");
+    assert_eq!(
+        stdout(&output),
+        "{\"result\": \"rejected\", \"definition\": \"envelope\", \"reason\": \"day_key_mismatch\", \"paths\": [\"/day_key\"]}\n"
+    );
+    assert_eq!(status(&output), 1);
+    assert!(state.join("audit-rejections.jsonl").is_file());
 }
 
 #[test]

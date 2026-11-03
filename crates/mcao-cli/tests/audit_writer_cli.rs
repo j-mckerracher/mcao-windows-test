@@ -407,16 +407,17 @@ fn a_rejected_envelope_is_recorded_and_exits_one() {
 fn a_rejection_with_no_state_location_is_not_recorded_and_exits_two() {
     let scratch = Scratch::new("no-state");
     let refused = refused_envelope();
-    let output = mcao(
-        &[
-            "append",
-            "--store",
-            scratch.store().to_str().unwrap(),
-            refused.to_str().unwrap(),
-        ],
-        None,
-        None,
-    );
+    // Windows resolves the default home under LOCALAPPDATA when FM_HOME is unset, so that points at
+    // the scratch directory, which has no state beneath it.
+    let output = Command::new(env!("CARGO_BIN_EXE_mcao"))
+        .args(["audit", "append", "--store"])
+        .arg(scratch.store())
+        .arg(&refused)
+        .env_remove("FM_HOME")
+        .env_remove("FM_STATE_OVERRIDE")
+        .env("LOCALAPPDATA", &scratch.0)
+        .output()
+        .expect("mcao runs");
     assert!(stdout(&output).is_empty(), "stdout: {}", stdout(&output));
     assert_eq!(status(&output), 2, "stderr: {}", stderr(&output));
     assert!(
@@ -517,4 +518,348 @@ fn an_unreadable_input_file_is_an_input_error() {
     );
     assert!(stdout(&output).is_empty(), "stdout: {}", stdout(&output));
     assert_eq!(status(&output), 2, "stderr: {}", stderr(&output));
+}
+
+// The reference expected values below come from `bin/fm-audit-writer.py` run with
+// `python3 -I -B -X utf8` on the committed baseline chain store
+// (tests/fixtures/pre-port-baseline/outputs/fm-audit-writer/chain/store) and its inputs
+// (chain/inputs/append-N.json). Each test's comment names the exact reference command. No value
+// here is produced by this crate.
+
+/// The record for seq 3 that the reference appends to the baseline store with `append-0.json`.
+const RECORD_SEQ3: &str = r#"{"actor":{"id":"hmac-sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef","type":"user"},"agent":{"harness":"claude","model":null,"role":"firstmate"},"category":"lifecycle","commit":null,"day_key":"2026-10-15","event":"task.dispatched","event_id":"018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f90","home_id":"5f1c2b3a-4d5e-4f60-8a71-92b3c4d5e6f7","outcome":"success","platform":"mcao","pr":null,"prev_hash":"sha256:cb74a51e88132d54e517ec8630d67c53446f2091d5f113b85abde183d0c77bb4","repo":"mc-innersource/motif-hve-multi-agent-orchestrator","schema":"mcao.audit-envelope.v1","seq":3,"session_id":"sess-1","task_id":"fix-login","ts":"2026-10-16T02:00:00.000Z","user":{"id":"hmac-sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef","identity_source":"github_login","timezone":"America/Chicago"}}"#;
+/// The record for seq 4 that the reference appends after an uncommitted seq 3 is adopted.
+const RECORD_SEQ4: &str = r#"{"actor":{"id":"hmac-sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef","type":"user"},"agent":{"harness":"claude","model":null,"role":"firstmate"},"category":"lifecycle","commit":null,"day_key":"2026-10-15","event":"task.dispatched","event_id":"018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f90","home_id":"5f1c2b3a-4d5e-4f60-8a71-92b3c4d5e6f7","outcome":"success","platform":"mcao","pr":null,"prev_hash":"sha256:204ad84928c9e0b0db25778cb4586097f90866fe4911f5ba4c9d3b14532d4bfe","repo":"mc-innersource/motif-hve-multi-agent-orchestrator","schema":"mcao.audit-envelope.v1","seq":4,"session_id":"sess-1","task_id":"fix-login","ts":"2026-10-16T02:00:00.000Z","user":{"id":"hmac-sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef","identity_source":"github_login","timezone":"America/Chicago"}}"#;
+/// The checkpoint the reference writes after seq 3 is committed in `segment-...0000.jsonl`.
+const CHECKPOINT_SEQ3: &str = concat!(
+    r#"{"last_hash":"sha256:204ad84928c9e0b0db25778cb4586097f90866fe4911f5ba4c9d3b14532d4bfe","last_seq":3,"segment":"segment-00000000000000000000.jsonl","v":1}"#,
+    "\n"
+);
+/// The checkpoint the reference writes after seq 4 is committed in `segment-...0000.jsonl`.
+const CHECKPOINT_SEQ4: &str = concat!(
+    r#"{"last_hash":"sha256:d68ee79a025fd71ac13385d52bd0c24d19f68f8bf2087efe64d1d9bc13e5094a","last_seq":4,"segment":"segment-00000000000000000000.jsonl","v":1}"#,
+    "\n"
+);
+/// The unterminated tail the torn-tail cases append to the segment: nine bytes.
+const TORN_TAIL: &[u8] = b"{\"partial";
+
+const STDOUT_CLEAN: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f90", "result": "committed", "seq": 3}"#,
+    "\n"
+);
+const STDOUT_TORN: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f90", "recovered": {"torn_tail": {"bytes": 9, "segment": "segment-00000000000000000000.jsonl"}}, "result": "committed", "seq": 3}"#,
+    "\n"
+);
+const STDOUT_ADOPTED: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f90", "recovered": {"adopted": {"segment": "segment-00000000000000000000.jsonl", "seq": 3}}, "result": "committed", "seq": 4}"#,
+    "\n"
+);
+const STDOUT_BOTH: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f90", "recovered": {"adopted": {"segment": "segment-00000000000000000000.jsonl", "seq": 3}, "torn_tail": {"bytes": 9, "segment": "segment-00000000000000000000.jsonl"}}, "result": "committed", "seq": 4}"#,
+    "\n"
+);
+
+const ROT1_STDOUT_0: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f90", "result": "committed", "seq": 0}"#,
+    "\n"
+);
+const ROT1_STDOUT_1: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f91", "result": "committed", "seq": 1}"#,
+    "\n"
+);
+const ROT1_STDOUT_2: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f92", "result": "committed", "seq": 2}"#,
+    "\n"
+);
+const ROT2_STDOUT_0: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f90", "result": "committed", "seq": 0}"#,
+    "\n"
+);
+const ROT2_STDOUT_1: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f91", "result": "committed", "seq": 1}"#,
+    "\n"
+);
+const ROT2_STDOUT_2: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f92", "result": "committed", "seq": 2}"#,
+    "\n"
+);
+const ROT2_STDOUT_3: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f90", "result": "committed", "seq": 3}"#,
+    "\n"
+);
+const ROT2_STDOUT_4: &str = concat!(
+    r#"{"event_id": "018f3b7e-9c1a-7d2e-8f3a-4b5c6d7e8f91", "result": "committed", "seq": 4}"#,
+    "\n"
+);
+/// The checkpoint after three records at `--segment-records 1`: seq 2 in segment 2.
+const CHECKPOINT_ROTATE1: &str = concat!(
+    r#"{"last_hash":"sha256:cb74a51e88132d54e517ec8630d67c53446f2091d5f113b85abde183d0c77bb4","last_seq":2,"segment":"segment-00000000000000000002.jsonl","v":1}"#,
+    "\n"
+);
+/// The checkpoint after five records at `--segment-records 2`: seq 4 in segment 4.
+const CHECKPOINT_ROTATE2: &str = concat!(
+    r#"{"last_hash":"sha256:9bd372ad92781635c1949f85f9d17eb664bb0a4a1b73d79b652111409bdc3dac","last_seq":4,"segment":"segment-00000000000000000004.jsonl","v":1}"#,
+    "\n"
+);
+
+/// The baseline chain segment's bytes, which hold the records for seq 0 to 2.
+fn baseline_segment() -> Vec<u8> {
+    fs::read(baseline_store_file(FIRST_SEGMENT)).expect("the baseline segment")
+}
+
+fn baseline_store_file(name: &str) -> PathBuf {
+    Path::new(env!("CARGO_MANIFEST_DIR")).join(format!(
+        "../../tests/fixtures/pre-port-baseline/outputs/fm-audit-writer/chain/store/{name}"
+    ))
+}
+
+/// Copies the baseline chain's segment and checkpoint into `store`.
+fn write_baseline_store(store: &Path) {
+    fs::create_dir_all(store).expect("creating store");
+    fs::copy(
+        baseline_store_file(FIRST_SEGMENT),
+        store.join(FIRST_SEGMENT),
+    )
+    .expect("copying segment");
+    fs::copy(
+        baseline_store_file("checkpoint.json"),
+        store.join("checkpoint.json"),
+    )
+    .expect("copying checkpoint");
+}
+
+/// Adds bytes to the end of a segment file, as a crash mid-append would leave them.
+fn append_raw(path: &Path, bytes: &[u8]) {
+    let mut file = fs::OpenOptions::new()
+        .append(true)
+        .open(path)
+        .expect("opening the segment");
+    file.write_all(bytes).expect("writing the segment");
+}
+
+/// A stored line: the reference's canonical record followed by its newline.
+fn stored_line(record: &str) -> Vec<u8> {
+    format!("{record}\n").into_bytes()
+}
+
+/// The store with the record for seq 3 written to its segment but not committed: the checkpoint
+/// still names seq 2, which is the state a crash between the record write and the checkpoint
+/// publish leaves.
+fn write_uncommitted_record_store(store: &Path) {
+    write_baseline_store(store);
+    append_raw(&store.join(FIRST_SEGMENT), &stored_line(RECORD_SEQ3));
+}
+
+fn append_first_input(store: &Path, state: &Path) -> Output {
+    let input = chain_input(0);
+    mcao(
+        &[
+            "append",
+            "--store",
+            store.to_str().unwrap(),
+            input.to_str().unwrap(),
+        ],
+        Some(state),
+        None,
+    )
+}
+
+fn append_input_with_segment_records(
+    store: &Path,
+    state: &Path,
+    records: &str,
+    index: usize,
+) -> Output {
+    let input = chain_input(index);
+    mcao(
+        &[
+            "append",
+            "--store",
+            store.to_str().unwrap(),
+            "--segment-records",
+            records,
+            input.to_str().unwrap(),
+        ],
+        Some(state),
+        None,
+    )
+}
+
+/// The segment file names in `store`, sorted.
+fn segment_names(store: &Path) -> Vec<String> {
+    let mut names: Vec<String> = fs::read_dir(store)
+        .expect("reading store")
+        .map(|entry| entry.expect("store entry").file_name())
+        .filter_map(|name| name.into_string().ok())
+        .filter(|name| name.starts_with("segment-"))
+        .collect();
+    names.sort();
+    names
+}
+
+/// Reference: `bin/fm-audit-writer.py append --store <copy of the baseline store> chain/inputs/append-0.json`
+/// on the baseline store as committed, with nothing added. The `committed` line has no `recovered`.
+#[test]
+fn append_to_a_clean_store_prints_no_recovered_member() {
+    let scratch = Scratch::new("clean-append");
+    write_baseline_store(&scratch.store());
+    let output = append_first_input(&scratch.store(), &scratch.state());
+    assert_eq!(stdout(&output), STDOUT_CLEAN, "stderr: {}", stderr(&output));
+    assert_eq!(status(&output), 0, "stderr: {}", stderr(&output));
+    let mut segment = baseline_segment();
+    segment.extend(stored_line(RECORD_SEQ3));
+    assert_eq!(
+        fs::read(scratch.store().join(FIRST_SEGMENT)).expect("the segment"),
+        segment
+    );
+    assert_eq!(
+        fs::read(scratch.store().join("checkpoint.json")).expect("the checkpoint"),
+        CHECKPOINT_SEQ3.as_bytes()
+    );
+}
+
+/// Reference: the baseline store with `b'{"partial'` (9 bytes, no newline) appended to its segment,
+/// then `bin/fm-audit-writer.py append --store <that store> chain/inputs/append-0.json`. The
+/// `recovered` member names the truncated tail, and the truncation leaves the committed segment.
+#[test]
+fn append_after_a_torn_tail_prints_the_truncated_bytes_as_recovered() {
+    let scratch = Scratch::new("torn-append");
+    write_baseline_store(&scratch.store());
+    append_raw(&scratch.store().join(FIRST_SEGMENT), TORN_TAIL);
+    let output = append_first_input(&scratch.store(), &scratch.state());
+    assert_eq!(stdout(&output), STDOUT_TORN, "stderr: {}", stderr(&output));
+    assert_eq!(status(&output), 0, "stderr: {}", stderr(&output));
+    let mut segment = baseline_segment();
+    segment.extend(stored_line(RECORD_SEQ3));
+    assert_eq!(
+        fs::read(scratch.store().join(FIRST_SEGMENT)).expect("the segment"),
+        segment
+    );
+    assert_eq!(
+        fs::read(scratch.store().join("checkpoint.json")).expect("the checkpoint"),
+        CHECKPOINT_SEQ3.as_bytes()
+    );
+}
+
+/// Reference: the baseline store with the seq 3 record of the clean case written to the segment and
+/// the checkpoint still at seq 2, then `bin/fm-audit-writer.py append --store <that store>
+/// chain/inputs/append-0.json`. The `adopted` member names seq 3, and the new record is seq 4.
+#[test]
+fn append_after_an_uncommitted_record_adopts_it_and_prints_it_as_recovered() {
+    let scratch = Scratch::new("adopted-append");
+    write_uncommitted_record_store(&scratch.store());
+    let output = append_first_input(&scratch.store(), &scratch.state());
+    assert_eq!(
+        stdout(&output),
+        STDOUT_ADOPTED,
+        "stderr: {}",
+        stderr(&output)
+    );
+    assert_eq!(status(&output), 0, "stderr: {}", stderr(&output));
+    let mut segment = baseline_segment();
+    segment.extend(stored_line(RECORD_SEQ3));
+    segment.extend(stored_line(RECORD_SEQ4));
+    assert_eq!(
+        fs::read(scratch.store().join(FIRST_SEGMENT)).expect("the segment"),
+        segment
+    );
+    assert_eq!(
+        fs::read(scratch.store().join("checkpoint.json")).expect("the checkpoint"),
+        CHECKPOINT_SEQ4.as_bytes()
+    );
+}
+
+/// Reference: the uncommitted seq 3 store of the adopted case with `b'{"partial'` appended after it,
+/// then `bin/fm-audit-writer.py append --store <that store> chain/inputs/append-0.json`. Both
+/// members appear, in the reference's sorted key order.
+#[test]
+fn append_after_a_torn_tail_and_an_uncommitted_record_prints_both_repairs() {
+    let scratch = Scratch::new("both-append");
+    write_uncommitted_record_store(&scratch.store());
+    append_raw(&scratch.store().join(FIRST_SEGMENT), TORN_TAIL);
+    let output = append_first_input(&scratch.store(), &scratch.state());
+    assert_eq!(stdout(&output), STDOUT_BOTH, "stderr: {}", stderr(&output));
+    assert_eq!(status(&output), 0, "stderr: {}", stderr(&output));
+    let mut segment = baseline_segment();
+    segment.extend(stored_line(RECORD_SEQ3));
+    segment.extend(stored_line(RECORD_SEQ4));
+    assert_eq!(
+        fs::read(scratch.store().join(FIRST_SEGMENT)).expect("the segment"),
+        segment
+    );
+    assert_eq!(
+        fs::read(scratch.store().join("checkpoint.json")).expect("the checkpoint"),
+        CHECKPOINT_SEQ4.as_bytes()
+    );
+}
+
+/// Reference: three runs of `bin/fm-audit-writer.py append --store <empty store> --segment-records 1
+/// chain/inputs/append-{0,1,2}.json`. Each record starts its own segment, so the checkpoint names
+/// seq 2 in segment 2. An off-by-one at the threshold (`>=` to `>`) keeps seq 1 in segment 0.
+#[test]
+fn segment_records_of_one_starts_a_segment_for_every_record() {
+    let scratch = Scratch::new("rotate-one");
+    let expected = [ROT1_STDOUT_0, ROT1_STDOUT_1, ROT1_STDOUT_2];
+    for (index, stdout_line) in expected.iter().enumerate() {
+        let output =
+            append_input_with_segment_records(&scratch.store(), &scratch.state(), "1", index);
+        assert_eq!(
+            stdout(&output),
+            *stdout_line,
+            "append {index}: {}",
+            stderr(&output)
+        );
+        assert_eq!(status(&output), 0, "append {index}: {}", stderr(&output));
+    }
+    assert_eq!(
+        segment_names(&scratch.store()),
+        [
+            "segment-00000000000000000000.jsonl",
+            "segment-00000000000000000001.jsonl",
+            "segment-00000000000000000002.jsonl",
+        ]
+    );
+    assert_eq!(
+        fs::read(scratch.store().join("checkpoint.json")).expect("the checkpoint"),
+        CHECKPOINT_ROTATE1.as_bytes()
+    );
+}
+
+/// Reference: five runs of `bin/fm-audit-writer.py append --store <empty store> --segment-records 2
+/// chain/inputs/append-{0,1,2,0,1}.json`. Segments start at seq 0, 2, and 4, so the threshold is
+/// reached after every second record, and the checkpoint names seq 4 in segment 4.
+#[test]
+fn segment_records_of_two_rotates_after_every_second_record() {
+    let scratch = Scratch::new("rotate-two");
+    let expected = [
+        ROT2_STDOUT_0,
+        ROT2_STDOUT_1,
+        ROT2_STDOUT_2,
+        ROT2_STDOUT_3,
+        ROT2_STDOUT_4,
+    ];
+    for (index, stdout_line) in expected.iter().enumerate() {
+        let output =
+            append_input_with_segment_records(&scratch.store(), &scratch.state(), "2", index % 3);
+        assert_eq!(
+            stdout(&output),
+            *stdout_line,
+            "append {index}: {}",
+            stderr(&output)
+        );
+        assert_eq!(status(&output), 0, "append {index}: {}", stderr(&output));
+    }
+    assert_eq!(
+        segment_names(&scratch.store()),
+        [
+            "segment-00000000000000000000.jsonl",
+            "segment-00000000000000000002.jsonl",
+            "segment-00000000000000000004.jsonl",
+        ]
+    );
+    assert_eq!(
+        fs::read(scratch.store().join("checkpoint.json")).expect("the checkpoint"),
+        CHECKPOINT_ROTATE2.as_bytes()
+    );
 }

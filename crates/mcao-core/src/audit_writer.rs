@@ -19,8 +19,6 @@
 //!
 //! - Off unix, the reference's `flock` on `.lock` is not taken: [`StoreLock`] is cfg(unix).
 //!   Concurrent writers there are not excluded, so they can lose or duplicate sequence numbers.
-//! - The `recovered` report of a repair. The repair steps themselves (genesis checkpoint,
-//!   torn-tail truncation, adoption of one uncommitted record) are performed.
 //! - The rejection record the reference writes to the state directory.
 //! - Duplicate-key refusal at parse time. A stored line is accepted only when it equals the
 //!   canonical form of its parsed value, which excludes duplicate keys.
@@ -144,6 +142,31 @@ impl From<PublishError> for WriterError {
     }
 }
 
+/// An uncommitted record that a repair adopted into the checkpoint.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Adopted {
+    /// The sequence number of the adopted record.
+    pub seq: i64,
+    /// The segment that holds the adopted record.
+    pub segment: String,
+}
+
+/// What the repair before an append did, as the reference's `recovered` result member.
+#[derive(Debug, Clone, Default, PartialEq, Eq)]
+pub struct Recovery {
+    /// The unterminated tail that was truncated, when there was one.
+    pub torn_tail: Option<TornTail>,
+    /// The uncommitted record that was adopted, when there was one.
+    pub adopted: Option<Adopted>,
+}
+
+impl Recovery {
+    /// True when the repair changed nothing, so the append result has no `recovered` member.
+    pub fn is_empty(&self) -> bool {
+        self.torn_tail.is_none() && self.adopted.is_none()
+    }
+}
+
 /// A committed append.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Committed {
@@ -151,6 +174,8 @@ pub struct Committed {
     pub seq: i64,
     /// The `event_id` of the committed envelope.
     pub event_id: String,
+    /// The repair the append ran before it committed.
+    pub recovered: Recovery,
 }
 
 /// One segment as a verification walk saw it.
@@ -242,7 +267,7 @@ impl<'a> AuditStore<'a> {
             .unwrap_or_default();
         create_store_dir(&self.dir)?;
         let _lock = StoreLock::acquire(&self.dir, false)?;
-        let state = self.repair()?;
+        let (state, recovered) = self.repair()?;
         let seq = state.last_seq + 1;
         record.insert("seq".to_owned(), json!(seq));
         record.insert(
@@ -250,7 +275,11 @@ impl<'a> AuditStore<'a> {
             state.last_hash.clone().map_or(Value::Null, Value::String),
         );
         self.commit(&Value::Object(record), seq, &state)?;
-        Ok(Committed { seq, event_id })
+        Ok(Committed {
+            seq,
+            event_id,
+            recovered,
+        })
     }
 
     /// Walks every segment and the checkpoint without repairing anything.
@@ -338,24 +367,33 @@ impl<'a> AuditStore<'a> {
 
     /// Verifies the store, then performs the repairs the next append needs: genesis checkpoint
     /// for an empty store, truncation of a torn tail, and adoption of one uncommitted record.
-    /// Returns the committed state the new record links to.
-    fn repair(&self) -> Result<Checkpoint, WriterError> {
+    /// Returns the committed state the new record links to, and what the repairs changed.
+    fn repair(&self) -> Result<(Checkpoint, Recovery), WriterError> {
         let walk = self.walk()?;
         let state = Checkpoint {
             last_seq: walk.last_seq,
             last_hash: walk.last_hash.clone(),
             segment: walk.last_segment.clone(),
         };
+        let mut recovered = Recovery::default();
         if !walk.present {
             self.publish_checkpoint(&GENESIS)?;
         }
         if let Some(torn) = &walk.torn {
             truncate_durably(&self.dir.join(&torn.segment), torn.good_size)?;
+            recovered.torn_tail = Some(TornTail {
+                segment: torn.segment.clone(),
+                bytes: torn.bytes,
+            });
         }
         if walk.ahead == 1 {
             self.publish_checkpoint(&state)?;
+            recovered.adopted = state.segment.clone().map(|segment| Adopted {
+                seq: state.last_seq,
+                segment,
+            });
         }
-        Ok(state)
+        Ok((state, recovered))
     }
 
     fn commit(&self, record: &Value, seq: i64, state: &Checkpoint) -> Result<(), WriterError> {

@@ -14,9 +14,9 @@ use std::process::ExitCode;
 use clap::Args;
 use mcao_core::McaoError;
 use mcao_core::audit_writer::{
-    AuditStore, SEGMENT_RECORDS, StoreRefusal, VerifyReport, WriterError,
+    AuditStore, Committed, Recovery, SEGMENT_RECORDS, StoreRefusal, VerifyReport, WriterError,
 };
-use serde_json::{Value, json};
+use serde_json::{Map, Value, json};
 
 use super::{input, input_failure, py_json, record_rejection, tzif};
 
@@ -67,12 +67,7 @@ pub fn run_append(args: &AppendArgs) -> ExitCode {
         AuditStore::with_segment_records(&args.store, args.segment_records, &tzif::utc_offset_secs);
     match store.append(document) {
         Ok(committed) => {
-            let result = json!({
-                "event_id": committed.event_id,
-                "result": "committed",
-                "seq": committed.seq,
-            });
-            println!("{}", py_json(&result));
+            println!("{}", py_json(&committed_json(&committed)));
             ExitCode::SUCCESS
         }
         Err(WriterError::Rejected(rejection)) => {
@@ -179,6 +174,38 @@ fn store_input_failure(command: &str, error: &WriterError) -> ExitCode {
         _ => "cannot canonicalize the record".to_owned(),
     };
     input_failure(command, &message)
+}
+
+/// The `committed` result line. It carries the `recovered` member only when the append repaired the
+/// store first.
+fn committed_json(committed: &Committed) -> Value {
+    let mut result = json!({
+        "event_id": committed.event_id,
+        "result": "committed",
+        "seq": committed.seq,
+    });
+    if !committed.recovered.is_empty() {
+        result["recovered"] = recovered_json(&committed.recovered);
+    }
+    result
+}
+
+/// The `recovered` member: each repair that ran, and only those.
+fn recovered_json(recovered: &Recovery) -> Value {
+    let mut members = Map::new();
+    if let Some(torn) = &recovered.torn_tail {
+        members.insert(
+            "torn_tail".to_owned(),
+            json!({"segment": torn.segment, "bytes": torn.bytes}),
+        );
+    }
+    if let Some(adopted) = &recovered.adopted {
+        members.insert(
+            "adopted".to_owned(),
+            json!({"segment": adopted.segment, "seq": adopted.seq}),
+        );
+    }
+    Value::Object(members)
 }
 
 /// A refusal result line, with the reason, sequence, segment, paths, and intact segments.

@@ -217,7 +217,11 @@ fn append_entry(state: &Path, key: &str, entry: &Entry) -> io::Result<()> {
         return Ok(());
     }
     let state = fs::canonicalize(state)?;
+    // The unix lock holds the mirror until the append returns, so its guard stays bound here.
+    #[cfg(unix)]
     let _lock = acquire(&state)?;
+    #[cfg(not(unix))]
+    acquire(&state)?;
     append_locked(&state, key, entry)
 }
 

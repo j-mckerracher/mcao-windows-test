@@ -28,7 +28,9 @@ const CLEARED: [&str; 10] = [
     "CLAUDE_PROJECT_DIR",
 ];
 /// Written by the session-start child stub when the hook runs it, so a run is observable.
+#[cfg(unix)]
 const CHILD_MARKER: &str = "child-ran";
+#[cfg(unix)]
 const MIRROR: &str = ".host-mirror.jsonl";
 const KEY: &str = "main-session-key";
 

@@ -8,7 +8,9 @@ use std::io::Write;
 #[cfg(unix)]
 use std::os::unix::fs::PermissionsExt;
 use std::path::{Path, PathBuf};
-use std::process::{Child, Command, Output, Stdio};
+#[cfg(unix)]
+use std::process::Child;
+use std::process::{Command, Output, Stdio};
 
 use serde_json::json;
 
