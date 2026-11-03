@@ -1001,6 +1001,7 @@ mod tests {
         serde_json::from_str(APPEND_INPUTS[index]).expect("committed append input parses")
     }
 
+    #[cfg(unix)]
     fn segment_lines(store: &Path, name: &str) -> Vec<String> {
         fs::read_to_string(store.join(name))
             .expect("reading segment")
@@ -1031,6 +1032,10 @@ mod tests {
         assert_eq!(report.uncommitted_seq, None);
     }
 
+    // The tests that append are unix-only. Off unix `sync_dir` opens the store directory with
+    // `File::open`, which Windows refuses (os error 5), and the CLI refuses the writer off unix.
+    // The empty-store and rejected-envelope tests run on every platform.
+    #[cfg(unix)]
     #[test]
     fn audit_writer_links_each_record_to_the_hash_of_the_previous_line() {
         let scratch = Scratch::new("link");
@@ -1055,6 +1060,7 @@ mod tests {
         assert_eq!(store.verify().expect("chain verifies").last_seq, 2);
     }
 
+    #[cfg(unix)]
     #[test]
     fn audit_writer_refuses_a_record_edited_after_commit() {
         let scratch = Scratch::new("tamper");
@@ -1079,6 +1085,7 @@ mod tests {
         }
     }
 
+    #[cfg(unix)]
     #[test]
     fn audit_writer_rotates_segments_and_links_across_them() {
         let scratch = Scratch::new("rotate");
@@ -1121,6 +1128,7 @@ mod tests {
         );
     }
 
+    #[cfg(unix)]
     const FIRST_SEGMENT: &str = "segment-00000000000000000000.jsonl";
 
     /// Expected results come from `bin/fm-audit-writer.py` at d80bcd15, run offline with
@@ -1128,6 +1136,7 @@ mod tests {
     /// tested name: `verify --store DIR` and `append --store DIR <inputs>/append-0.json` both exit
     /// with `reason` `segment_gap`, `seq` 3, the tested name as `segment`, and only the first
     /// segment intact. Each name has 20 digits and a value beyond i64; one carries a leading zero.
+    #[cfg(unix)]
     #[test]
     fn audit_writer_refuses_a_segment_name_beyond_i64_as_a_gap() {
         for name in [
@@ -1172,6 +1181,7 @@ mod tests {
     /// The reference's `SEGMENT_RE` does not match a 21-digit name, so it neither scans nor refuses
     /// that file. The same offline run gives `verify` exit 0 with `last_seq` 2, and `append` commits
     /// seq 3 into the first segment.
+    #[cfg(unix)]
     #[test]
     fn audit_writer_skips_a_segment_name_outside_the_reference_pattern() {
         let scratch = Scratch::new("segment-pattern");
@@ -1238,6 +1248,7 @@ mod tests {
     /// a directory at the checkpoint's temporary path makes the publish fail. Run through the reference
     /// (d80bcd15, offline, `python3 -I -B -X utf8`) on the same store, `append` exits 3 with
     /// `may_be_durable` false and an unchanged segment.
+    #[cfg(unix)]
     #[test]
     fn audit_writer_rolls_back_a_record_whose_checkpoint_publish_failed() {
         let scratch = Scratch::new("rollback");

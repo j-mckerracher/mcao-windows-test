@@ -24,6 +24,9 @@ fn durable_sync(cwd: &Path, args: &[&str]) -> Output {
         .expect("run mcao")
 }
 
+// Off unix `sync_file` refuses by design (`src/util/durable.rs`), so only the exit-0 cases are
+// unix-only.
+#[cfg(unix)]
 #[test]
 fn durable_sync_of_a_file_exits_zero_with_no_output() {
     let dir = scratch("file");
@@ -34,6 +37,7 @@ fn durable_sync_of_a_file_exits_zero_with_no_output() {
     assert!(output.stderr.is_empty());
 }
 
+#[cfg(unix)]
 #[test]
 fn durable_sync_resolves_dot_dot_before_choosing_the_parent() {
     let dir = scratch("dotdot");

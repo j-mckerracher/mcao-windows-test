@@ -22,17 +22,23 @@
 
 use std::fs;
 use std::path::{Path, PathBuf};
+#[cfg(unix)]
 use std::time::{SystemTime, UNIX_EPOCH};
 
+#[cfg(unix)]
 use mcao_core::audit_writer::{AuditStore, Committed, VerifyReport, WriterError};
 use mcao_core::canonical_json::try_to_canonical_string;
 use mcao_core::sha256::hex_digest;
-use serde_json::{Value, json};
+use serde_json::Value;
+#[cfg(unix)]
+use serde_json::json;
 
 const CHAIN_PREFIX: &str = "outputs/fm-audit-writer/chain/";
+#[cfg(unix)]
 const EXPECTED_STEPS: usize = 6;
 
 /// A chain step the Rust writer is known to answer differently from the reference.
+#[cfg(unix)]
 struct KnownGap {
     /// The step name, such as `append-0`.
     step: &'static str,
@@ -41,6 +47,7 @@ struct KnownGap {
 }
 
 /// No chain step differs from the reference. Add an entry only for a real, documented difference.
+#[cfg(unix)]
 const KNOWN_GAPS: &[KnownGap] = &[];
 
 /// Fixed UTC-5 offset for America/Chicago at every instant: right for daylight time, wrong for
@@ -53,18 +60,22 @@ fn baseline_dir() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/pre-port-baseline")
 }
 
+#[cfg(unix)]
 fn repo_root() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("../..")
 }
 
+#[cfg(unix)]
 fn read_baseline(relative: &str) -> Vec<u8> {
     let path = baseline_dir().join(relative);
     fs::read(&path).unwrap_or_else(|err| panic!("reading {}: {err}", path.display()))
 }
 
 /// A scratch directory, removed when the test ends.
+#[cfg(unix)]
 struct Scratch(PathBuf);
 
+#[cfg(unix)]
 impl Scratch {
     fn new(label: &str) -> Self {
         let nanos = SystemTime::now()
@@ -78,6 +89,7 @@ impl Scratch {
     }
 }
 
+#[cfg(unix)]
 impl Drop for Scratch {
     fn drop(&mut self) {
         let _ = fs::remove_dir_all(&self.0);
@@ -85,6 +97,7 @@ impl Drop for Scratch {
 }
 
 /// One recorded step, with the paths it names resolved.
+#[cfg(unix)]
 struct Step {
     name: String,
     subcommand: String,
@@ -95,6 +108,7 @@ struct Step {
 }
 
 /// Reads the chain steps from the manifest, in manifest order.
+#[cfg(unix)]
 fn chain_steps() -> Vec<Step> {
     let manifest_raw =
         fs::read(baseline_dir().join("manifest.json")).expect("reading manifest.json");
@@ -112,6 +126,7 @@ fn chain_steps() -> Vec<Step> {
 }
 
 /// Parses one recorded command. Only `append` names an input file, as its last argument.
+#[cfg(unix)]
 fn parse_step(command: &str, name: &str) -> Step {
     let tokens: Vec<&str> = command.split_whitespace().collect();
     let tool = tokens
@@ -144,11 +159,13 @@ fn parse_step(command: &str, name: &str) -> Step {
 }
 
 /// The stdout a JSON-result step prints for a committed append.
+#[cfg(unix)]
 fn committed_value(committed: &Committed) -> Value {
     json!({"result": "committed", "seq": committed.seq, "event_id": committed.event_id})
 }
 
 /// The stdout a JSON-result step prints for a rejected envelope.
+#[cfg(unix)]
 fn rejected_value(rejection: &mcao_core::audit_envelope::Rejection) -> Value {
     json!({
         "definition": "envelope",
@@ -159,6 +176,7 @@ fn rejected_value(rejection: &mcao_core::audit_envelope::Rejection) -> Value {
 }
 
 /// The stdout a `verify` step prints, with the reference's key names.
+#[cfg(unix)]
 fn verify_value(report: &VerifyReport) -> Value {
     json!({
         "committed_seq": report.committed_seq,
@@ -179,12 +197,14 @@ fn verify_value(report: &VerifyReport) -> Value {
 }
 
 /// What one step printed: a JSON result value, or the raw ledger bytes.
+#[cfg(unix)]
 enum Stdout {
     Json(Value),
     Bytes(Vec<u8>),
 }
 
 /// Runs one step against `store`. Returns the exit status and stdout the Rust writer produces.
+#[cfg(unix)]
 fn run_step(step: &Step, store: &AuditStore) -> Result<(i64, Stdout), String> {
     match step.subcommand.as_str() {
         "append" => {
@@ -221,6 +241,7 @@ fn run_step(step: &Step, store: &AuditStore) -> Result<(i64, Stdout), String> {
 
 /// The recorded stdout differs from the observed stdout, or `None` when they match. JSON-result
 /// steps compare parsed values; the ledger compares bytes.
+#[cfg(unix)]
 fn stdout_mismatch(step: &Step, observed: &Stdout) -> Option<String> {
     match observed {
         Stdout::Json(value) => {
@@ -242,6 +263,7 @@ fn stdout_mismatch(step: &Step, observed: &Stdout) -> Option<String> {
 }
 
 /// Mismatches of one step, or an empty list when it matches the recorded result.
+#[cfg(unix)]
 fn step_mismatches(step: &Step, observed: Result<(i64, Stdout), String>) -> Vec<String> {
     let (exit, stdout) = match observed {
         Ok(result) => result,
@@ -266,6 +288,7 @@ fn step_mismatches(step: &Step, observed: Result<(i64, Stdout), String>) -> Vec<
     mismatches
 }
 
+#[cfg(unix)]
 fn known_gap(step: &str) -> Option<&'static KnownGap> {
     KNOWN_GAPS.iter().find(|gap| gap.step == step)
 }
@@ -302,6 +325,9 @@ fn chain_baseline_fixtures_match_the_manifest() {
 }
 
 /// Replays the chain case and compares every step and the final store with the baseline.
+/// Unix-only: the replay appends, and off unix the CLI refuses the writer (`unlocked_platform_refusal`
+/// in `crates/mcao-cli/src/audit/writer.rs`).
+#[cfg(unix)]
 #[test]
 fn chain_baseline_replays_every_recorded_step() {
     let steps = chain_steps();

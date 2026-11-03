@@ -112,6 +112,13 @@ fn run_writer_with_lock_wait(
         .env_remove("FM_HOME")
         .env_remove("CLAUDE_PROJECT_DIR")
         .env_remove(LOCK_WAIT_ENV)
+        // The home guard resolves the default home from these on Windows, so a OneDrive-synced
+        // profile on the host must not make the writer stand down.
+        .env("LOCALAPPDATA", root)
+        .env("USERPROFILE", root)
+        .env_remove("OneDrive")
+        .env_remove("OneDriveCommercial")
+        .env_remove("OneDriveConsumer")
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
@@ -137,6 +144,7 @@ fn prompt(prompt_id: &str, text: &str) -> String {
 }
 
 /// Replaces the epoch, which varies per run, so a record compares exactly.
+#[cfg(unix)]
 fn without_epoch(line: &str) -> String {
     let start = line.find("\"epoch\":").expect("record has an epoch") + "\"epoch\":".len();
     let end = start
@@ -146,6 +154,7 @@ fn without_epoch(line: &str) -> String {
     format!("{}0{}", &line[..start], &line[end..])
 }
 
+#[cfg(unix)]
 #[test]
 fn prompt_submit_appends_one_user_record_and_exits_0() {
     let (root, state) = scratch("append");
@@ -162,6 +171,7 @@ fn prompt_submit_appends_one_user_record_and_exits_0() {
     );
 }
 
+#[cfg(unix)]
 #[test]
 fn turn_end_records_main_text_with_trailing_whitespace_trimmed() {
     let (root, state) = scratch("stop");
@@ -180,6 +190,7 @@ fn turn_end_records_main_text_with_trailing_whitespace_trimmed() {
     );
 }
 
+#[cfg(unix)]
 #[test]
 fn cursor_beside_the_mirror_raises_the_next_sequence_number() {
     let (root, state) = scratch("cursor");
@@ -479,6 +490,24 @@ fn existing_bytes_are_kept_and_an_unparseable_line_is_skipped_for_the_sequence()
     );
 }
 
+/// Off unix the writer's lock is a stub that always fails (`src/hook/host_mirror.rs`, `acquire`),
+/// and `run` discards that failure, so a valid prompt exits 0 and records nothing.
+#[cfg(not(unix))]
+#[test]
+fn prompt_submit_records_nothing_when_the_mirror_lock_is_unsupported() {
+    let (root, state) = scratch("unsupported-lock");
+    let output = run_writer(
+        &root,
+        &state,
+        "claude",
+        Some(KEY),
+        &prompt("p1", "unlocked"),
+    );
+    assert_eq!(output.status.code(), Some(0));
+    assert!(output.stdout.is_empty() && output.stderr.is_empty());
+    assert!(!mirror_path(&state).exists());
+}
+
 #[test]
 fn stands_down_without_key_harness_state_or_payload() {
     let (root, state) = scratch("stand-down");
@@ -528,6 +557,7 @@ fn claude_foreign_host_payload_and_user_task_notification_are_dropped() {
     assert!(read_mirror(&state).is_empty());
 }
 
+#[cfg(unix)]
 #[test]
 fn same_id_and_text_is_recorded_once_and_changed_text_is_recorded() {
     let (root, state) = scratch("dedupe");
@@ -540,6 +570,7 @@ fn same_id_and_text_is_recorded_once_and_changed_text_is_recorded() {
     assert!(lines[1].starts_with(r#"{"seq":2,"#));
 }
 
+#[cfg(unix)]
 #[test]
 fn file_at_the_trim_threshold_keeps_its_newest_199_entries_plus_the_new_one() {
     let (root, state) = scratch("trim");
@@ -558,6 +589,7 @@ fn file_at_the_trim_threshold_keeps_its_newest_199_entries_plus_the_new_one() {
     assert!(lines[199].starts_with(r#"{"seq":301,"#));
 }
 
+#[cfg(unix)]
 #[test]
 fn text_over_the_cap_keeps_head_and_tail_around_the_omitted_count() {
     let (root, state) = scratch("cap");
@@ -571,6 +603,7 @@ fn text_over_the_cap_keeps_head_and_tail_around_the_omitted_count() {
 }
 
 /// Records one prompt and returns the text field of the record it appended.
+#[cfg(unix)]
 fn recorded_text(root: &Path, state: &Path, text: &str) -> String {
     run_writer(root, state, "claude", Some(KEY), &prompt("p1", text));
     let record: serde_json::Value =
@@ -581,6 +614,7 @@ fn recorded_text(root: &Path, state: &Path, text: &str) -> String {
         .to_owned()
 }
 
+#[cfg(unix)]
 #[test]
 fn multibyte_text_over_the_cap_counts_characters_not_bytes() {
     let (root, state) = scratch("cap-multibyte");
@@ -599,6 +633,7 @@ fn multibyte_text_over_the_cap_counts_characters_not_bytes() {
     assert_eq!(recorded_text(&root, &state, &text), expected);
 }
 
+#[cfg(unix)]
 #[test]
 fn multibyte_text_at_the_cap_is_recorded_whole() {
     let (root, state) = scratch("cap-multibyte-exact");
@@ -607,6 +642,7 @@ fn multibyte_text_at_the_cap_is_recorded_whole() {
     assert_eq!(recorded_text(&root, &state, &text), text);
 }
 
+#[cfg(unix)]
 #[test]
 fn multibyte_text_one_character_over_the_cap_is_truncated_by_characters() {
     let (root, state) = scratch("cap-multibyte-plus-one");
@@ -624,6 +660,7 @@ fn multibyte_text_one_character_over_the_cap_is_truncated_by_characters() {
     assert_eq!(recorded_text(&root, &state, &text), expected);
 }
 
+#[cfg(unix)]
 #[test]
 fn control_and_del_characters_are_escaped_as_jq_escapes_them() {
     let (root, state) = scratch("escape");

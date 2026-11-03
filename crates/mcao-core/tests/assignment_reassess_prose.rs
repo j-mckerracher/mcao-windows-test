@@ -18,6 +18,13 @@ use std::process::Command;
 /// Set on the re-executed test binary that runs the cases. Without it the child test does nothing.
 const CASE_CHILD: &str = "MCAO_ASSIGNMENT_REASSESS_PROSE_CHILD";
 
+/// Cases whose file name ends in a dot. Win32 path parsing strips a trailing dot from a file name
+/// unless the `\\?\` prefix is used (Microsoft naming conventions), so on Windows the replay
+/// creates `a` for the case's `a.`. The harness uses ordinary paths, so these are skipped on
+/// Windows only. Their classification is covered without the disk by
+/// `path_class_follows_python_splitext`.
+const WINDOWS_UNREPRESENTABLE: [&str; 2] = ["path-trailing-dot", "path-trailing-dot-in-dir"];
+
 /// The environment the generator gave every reference run and every repository command.
 const GENERATOR_ENV: [(&str, &str); 8] = [
     ("GIT_CONFIG_NOSYSTEM", "1"),
@@ -68,6 +75,7 @@ fn every_prose_case_matches_the_python_reference() {
         String::from_utf8_lossy(&output.stdout),
         String::from_utf8_lossy(&output.stderr)
     );
+    print!("{}", String::from_utf8_lossy(&output.stdout));
 }
 
 /// Re-executed by `every_prose_case_matches_the_python_reference` with [`CASE_CHILD`] set.
@@ -97,13 +105,29 @@ fn prose_child_runs_every_case() {
     let scratch = env::temp_dir().join(format!("mcao-prose-cases-{}", std::process::id()));
     let _ = fs::remove_dir_all(&scratch);
     let mut failures = Vec::new();
+    let mut replayed = 0;
     for case in &cases {
         let name = case["name"].as_str().expect("case name");
+        if cfg!(windows) && WINDOWS_UNREPRESENTABLE.contains(&name) {
+            println!("known gap on Windows, not replayed: {name}");
+            continue;
+        }
+        replayed += 1;
         if let Err(message) = replay_case(&scratch, case) {
             failures.push(format!("{name}: {message}"));
         }
     }
+    println!("replayed {replayed} of {} prose cases", cases.len());
     let _ = fs::remove_dir_all(&scratch);
+    let expected_replayed = if cfg!(windows) {
+        cases.len() - WINDOWS_UNREPRESENTABLE.len()
+    } else {
+        cases.len()
+    };
+    assert_eq!(
+        replayed, expected_replayed,
+        "replayed {replayed} prose cases, expected {expected_replayed} on this platform"
+    );
     assert!(
         failures.is_empty(),
         "{} of {} prose cases differ from the reference:\n{}",

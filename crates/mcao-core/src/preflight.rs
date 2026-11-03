@@ -1,5 +1,5 @@
 //! Windows file-system preflight rules (DPES-888): the path-length budget, the OneDrive home rule,
-//! and symbolic-link support.
+//! the UNC home warning, and symbolic-link support.
 //!
 //! The path-length and OneDrive rules are pure functions over values their caller has already
 //! read from the host, so they run on every platform. Reading the host values, such as the
@@ -30,8 +30,8 @@ pub const TOOL_WARNING_LENGTH: usize = 240;
 /// Environment variables that name a OneDrive root on Windows.
 pub const ONEDRIVE_ENV_VARS: [&str; 3] = ["OneDrive", "OneDriveCommercial", "OneDriveConsumer"];
 
-/// The relocation that a refused OneDrive home names: the Windows default home, which lies under
-/// `%LOCALAPPDATA%` and is not synced by OneDrive.
+/// The relocation that a refused OneDrive home and a UNC home warning name: the Windows default
+/// home, which lies under `%LOCALAPPDATA%` and is not synced by OneDrive.
 pub const ONEDRIVE_RELOCATION: &str = r"%LOCALAPPDATA%\mcao\home";
 
 /// The path-length ceiling in force on a Windows host.
@@ -351,6 +351,50 @@ fn onedrive_warning(home: &Path, folder: &Path) -> String {
          sync; set FM_HOME to {ONEDRIVE_RELOCATION} or another folder that OneDrive does not sync",
         home.display(),
         folder.display()
+    )
+}
+
+/// The outcome of the UNC rule for an operational home.
+#[derive(Debug, PartialEq, Eq)]
+pub enum UncCheck {
+    /// The home is not written as a UNC share path.
+    Clear,
+    /// The home is a UNC share path. It stays usable; the message gives the relocation.
+    Warning(String),
+}
+
+/// Checks an operational home for a UNC share path: `\\server\share\...`, or the verbatim
+/// `\\?\UNC\server\share\...` form. Such a home is warned about, never refused. The caller runs
+/// the OneDrive rule first, so a OneDrive refusal is reported without this warning.
+///
+/// The check reads only the text of `home`: it touches no file system and no network. A device path
+/// (`\\.\`) and a verbatim path naming a drive (`\\?\C:\`) are not UNC. Forward-slash spellings are
+/// not UNC here, because the Windows-form rule reads a leading `\\` only with backslashes.
+pub fn check_home_not_unc(home: &Path) -> UncCheck {
+    if is_unc_form(&home.to_string_lossy()) {
+        UncCheck::Warning(unc_warning(home))
+    } else {
+        UncCheck::Clear
+    }
+}
+
+/// Whether `text` names a UNC share: a `\\` prefix that is neither a device (`\\.\`) nor a verbatim
+/// (`\\?\`) prefix, or the verbatim `\\?\UNC\` prefix, matched ASCII-case-insensitively.
+fn is_unc_form(text: &str) -> bool {
+    if let Some(rest) = text.strip_prefix(r"\\?\") {
+        return rest
+            .get(..4)
+            .is_some_and(|head| head.eq_ignore_ascii_case(r"UNC\"));
+    }
+    text.strip_prefix(r"\\")
+        .is_some_and(|rest| !rest.starts_with(r".\") && !rest.starts_with(r"?\"))
+}
+
+fn unc_warning(home: &Path) -> String {
+    format!(
+        "operational home {} is a UNC share path; state, locks, and atomic renames over a network \
+         share are not safe to assume; set FM_HOME to {ONEDRIVE_RELOCATION} or another local folder",
+        home.display()
     )
 }
 

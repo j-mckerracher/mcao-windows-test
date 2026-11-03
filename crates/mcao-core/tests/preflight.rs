@@ -3,8 +3,8 @@ use std::path::Path;
 
 use mcao_core::preflight::{
     CLASSIC_PATH_LIMIT, EXTENDED_PATH_LIMIT, ONEDRIVE_RELOCATION, OneDriveCheck, PathCheck,
-    PathLimit, TOOL_WARNING_LENGTH, check_home_outside_onedrive, check_path_len, default_home,
-    projected_path_len, refuse_onedrive_home,
+    PathLimit, TOOL_WARNING_LENGTH, UncCheck, check_home_not_unc, check_home_outside_onedrive,
+    check_path_len, default_home, projected_path_len, refuse_onedrive_home,
 };
 use mcao_core::state::TaskId;
 
@@ -454,4 +454,50 @@ fn a_disk_prefixed_home_under_the_root_is_still_refused() {
     .expect_err("the plain disk form is compared and matches");
 
     assert!(error.to_string().contains("named by OneDrive"), "{error}");
+}
+
+#[test]
+fn a_unc_share_home_warns_with_the_relocation() {
+    for home in [
+        r"\\server\share\fm",
+        r"\\?\UNC\server\share\fm",
+        r"\\?\unc\server\share\fm",
+    ] {
+        let message = match check_home_not_unc(Path::new(home)) {
+            UncCheck::Warning(message) => message,
+            other => panic!("{home} should warn, got {other:?}"),
+        };
+
+        assert!(message.contains("UNC share path"), "{message}");
+        assert!(message.contains("network share"), "{message}");
+        assert!(message.contains(ONEDRIVE_RELOCATION), "{message}");
+    }
+}
+
+#[test]
+fn a_drive_device_or_unix_home_is_not_unc() {
+    for home in [
+        r"C:\Users\u\fm",
+        "C:/Users/u/fm",
+        r"c:\fm",
+        r"\\?\C:\Users\u\fm",
+        r"\\.\C:\Users\u\fm",
+        "/home/u/fm",
+        "fm",
+    ] {
+        assert_eq!(
+            check_home_not_unc(Path::new(home)),
+            UncCheck::Clear,
+            "{home}"
+        );
+    }
+}
+
+#[test]
+fn a_forward_slash_spelling_is_not_unc_under_the_windows_form_rules() {
+    // The Windows-form rule reads a leading `\\` only, so `//server/share` is not checked as UNC.
+    assert_eq!(
+        check_home_not_unc(Path::new("//server/share/fm")),
+        UncCheck::Clear
+    );
 }

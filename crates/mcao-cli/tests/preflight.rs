@@ -417,3 +417,49 @@ fn preflight_exits_three_naming_onedrive_for_a_home_under_a_onedrive_root() {
     assert!(stderr.contains("FM_HOME OneDrive"), "{stderr}");
     assert!(stderr.contains("OneDrive"), "{stderr}");
 }
+
+#[cfg(windows)]
+#[test]
+fn preflight_warns_and_passes_for_a_unc_home_without_touching_the_share() {
+    let dir = scratch("unc-home");
+    fake_tool(&dir, "git");
+    fake_tool(&dir, "gh");
+    let home = r"\\server\share\mcao\home";
+
+    let output = preflight(dir.as_os_str(), &[("FM_HOME", OsStr::new(home))]);
+
+    assert_eq!(output.status.code(), Some(0), "{}", stderr_of(&output));
+    let stdout = stdout_of(&output);
+    assert!(stdout.contains("FM_HOME UNC: warning:"), "{stdout}");
+    assert!(stdout.contains("network share"), "{stdout}");
+    assert!(stdout.contains("all checks passed"), "{stdout}");
+    assert!(output.stderr.is_empty(), "{}", stderr_of(&output));
+}
+
+#[cfg(windows)]
+#[test]
+fn preflight_refuses_a_unc_home_under_onedrive_before_the_unc_warning() {
+    let dir = scratch("unc-onedrive-home");
+    fake_tool(&dir, "git");
+    fake_tool(&dir, "gh");
+    let root = r"\\server\share\OneDrive";
+    let home = format!(r"{root}\fm");
+
+    let output = preflight(
+        dir.as_os_str(),
+        &[
+            ("FM_HOME", OsStr::new(&home)),
+            ("OneDrive", OsStr::new(root)),
+        ],
+    );
+
+    assert_eq!(output.status.code(), Some(3), "{}", stderr_of(&output));
+    assert!(
+        !stdout_of(&output).contains("FM_HOME UNC"),
+        "{}",
+        stdout_of(&output)
+    );
+    let stderr = stderr_of(&output);
+    assert!(stderr.contains("FM_HOME OneDrive"), "{stderr}");
+    assert!(stderr.contains("named by OneDrive"), "{stderr}");
+}

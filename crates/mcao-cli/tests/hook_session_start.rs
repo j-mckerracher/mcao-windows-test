@@ -10,6 +10,11 @@
 //! - `jq` on `PATH` for the foreign-host case only. The shell's foreign-host predicate calls `jq`,
 //!   and without it the payload is not foreign, so that case prints `SKIP` and returns. The
 //!   missing-`jq` case builds its own `PATH` without `jq` and runs on every host.
+//!
+//! Unix-only: Windows has no runtime parity for this hook, because the session-lock ancestry walk
+//! needs `ps` and `kill`. `docs/hook-source.md` records that no Windows runtime test exists.
+
+#![cfg(unix)]
 
 #[cfg(unix)]
 use std::ffi::OsString;

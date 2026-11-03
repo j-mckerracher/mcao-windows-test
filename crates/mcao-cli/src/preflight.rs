@@ -12,8 +12,8 @@ use std::process::ExitCode;
 
 use mcao_core::McaoError;
 use mcao_core::preflight::{
-    OneDriveCheck, PathCheck, PathLimit, check_gh, check_git, check_home_budget,
-    check_home_outside_onedrive,
+    OneDriveCheck, PathCheck, PathLimit, UncCheck, check_gh, check_git, check_home_budget,
+    check_home_not_unc, check_home_outside_onedrive,
 };
 
 /// Runs `mcao preflight` against the process environment and returns its exit status.
@@ -48,10 +48,9 @@ pub fn run_checks(
     Ok(())
 }
 
-/// Checks the `FM_HOME` path length and OneDrive placement. The home is printed as given, so a
-/// space, a non-ASCII character, or a `$` reaches the operator unchanged. A relative home is
-/// refused, because both rules need the full path. A home under a OneDrive root is refused, while a
-/// home under a sync folder named beneath the profile only prints a warning.
+/// Checks the `FM_HOME` path length and placement. The home is printed as given, so a space, a
+/// non-ASCII character, or a `$` reaches the operator unchanged. A relative home is refused, because
+/// every rule needs the full path. The placement rules are those of [`check_home_placement`].
 fn check_fm_home(
     home: &OsStr,
     env: &impl Fn(&str) -> Option<OsString>,
@@ -89,11 +88,26 @@ fn check_fm_home(
         )?;
     }
 
+    check_home_placement(path, text, env, out)
+}
+
+/// Prints the OneDrive line and the UNC line for an absolute `path` printed as `text`. A OneDrive
+/// refusal returns before the UNC rule runs, so it prints no UNC line. A UNC home only warns, and a
+/// home that is neither UNC nor under OneDrive prints nothing beyond the OneDrive line.
+fn check_home_placement(
+    path: &Path,
+    text: &str,
+    env: &impl Fn(&str) -> Option<OsString>,
+    out: &mut impl Write,
+) -> Result<(), McaoError> {
     match check_home_outside_onedrive(path, env)
         .map_err(|error| named("FM_HOME OneDrive", error))?
     {
         OneDriveCheck::Clear => writeln!(out, "FM_HOME OneDrive: ok ({text})")?,
         OneDriveCheck::Warning(message) => writeln!(out, "FM_HOME OneDrive: warning: {message}")?,
+    }
+    if let UncCheck::Warning(message) = check_home_not_unc(path) {
+        writeln!(out, "FM_HOME UNC: warning: {message}")?;
     }
     Ok(())
 }
@@ -103,5 +117,52 @@ fn named(check: &str, error: McaoError) -> McaoError {
     match error {
         McaoError::Preflight(message) => McaoError::Preflight(format!("{check}: {message}")),
         other => other,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use mcao_core::preflight::ONEDRIVE_RELOCATION;
+
+    use super::*;
+
+    fn no_env(_: &str) -> Option<OsString> {
+        None
+    }
+
+    /// Runs the placement rules for `home` with no OneDrive or profile variables set.
+    fn placement(home: &str) -> Result<String, McaoError> {
+        let mut out = Vec::new();
+        check_home_placement(Path::new(home), home, &no_env, &mut out)?;
+        Ok(String::from_utf8(out).expect("output is UTF-8"))
+    }
+
+    #[test]
+    fn a_unc_home_prints_the_unc_warning_after_the_onedrive_line_and_passes() {
+        for home in [r"\\server\share\fm", r"\\?\UNC\server\share\fm"] {
+            let stdout = placement(home).unwrap_or_else(|error| panic!("{home} passes: {error}"));
+            let unc = format!(
+                "FM_HOME UNC: warning: operational home {home} is a UNC share path; state, locks, \
+                 and atomic renames over a network share are not safe to assume; set FM_HOME to \
+                 {ONEDRIVE_RELOCATION} or another local folder\n"
+            );
+
+            assert_eq!(
+                stdout,
+                format!("FM_HOME OneDrive: ok ({home})\n{unc}"),
+                "{home}"
+            );
+        }
+    }
+
+    #[test]
+    fn a_local_home_prints_only_the_onedrive_line() {
+        for home in [r"C:\Users\u\fm", r"\\?\C:\Users\u\fm", "/opt/fm"] {
+            assert_eq!(
+                placement(home).expect("a local home passes"),
+                format!("FM_HOME OneDrive: ok ({home})\n"),
+                "{home}"
+            );
+        }
     }
 }
