@@ -10,6 +10,7 @@
 use mcao_core::assignment_reassess::{collect, parse_request, reassess, render_reassess};
 use serde_json::Value;
 use std::env;
+use std::ffi::OsString;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
@@ -29,6 +30,19 @@ const GENERATOR_ENV: [(&str, &str); 8] = [
     ("GIT_COMMITTER_DATE", "2026-10-16T02:00:00Z"),
 ];
 
+/// The Windows variables that `env::temp_dir()` reads. Every `env_clear()` child that may use a
+/// temp directory gets them, because without them the child's temp directory is the Windows
+/// directory, which is not writable. Unix reads `TMPDIR`, which the children already receive.
+fn windows_temp_env() -> Vec<(&'static str, OsString)> {
+    if !cfg!(windows) {
+        return Vec::new();
+    }
+    ["TEMP", "TMP", "USERPROFILE"]
+        .into_iter()
+        .filter_map(|name| env::var_os(name).map(|value| (name, value)))
+        .collect()
+}
+
 fn fixture_root() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures/assignment-reassess-prose")
 }
@@ -43,6 +57,7 @@ fn every_prose_case_matches_the_python_reference() {
         .env_clear()
         .env("PATH", env::var_os("PATH").unwrap_or_default())
         .env("TMPDIR", env::temp_dir())
+        .envs(windows_temp_env())
         .envs(GENERATOR_ENV)
         .env(CASE_CHILD, "1")
         .output()
@@ -179,6 +194,7 @@ fn git(repo: &Path, args: &[&str]) -> Result<String, String> {
         .args(args)
         .env_clear()
         .env("PATH", env::var_os("PATH").unwrap_or_default())
+        .envs(windows_temp_env())
         .envs(GENERATOR_ENV)
         .output()
         .map_err(|err| format!("running git: {err}"))?;

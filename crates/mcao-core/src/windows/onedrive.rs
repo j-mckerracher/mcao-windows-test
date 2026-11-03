@@ -101,10 +101,8 @@ mod tests {
     #[test]
     fn a_verbatim_home_is_compared_without_its_prefix() {
         let verbatim = format!(r"\\?\{}", host("/home/u/Sync/mcao"));
-        let message = match detect_sync_conflict_with(
-            Path::new(&verbatim),
-            only("OneDrive", &host("/home/u/Sync")),
-        ) {
+        let env = only("OneDrive", "/home/u/Sync");
+        let message = match detect_sync_conflict_with(Path::new(&verbatim), env) {
             Err(McaoError::Preflight(message)) => message,
             other => panic!("expected Err(McaoError::Preflight), got {other:?}"),
         };

@@ -9,13 +9,15 @@
 //! - `ctrl-event:<n> at=<ms>` says a console control event reached the stub, and
 //!   when, in milliseconds after the stub installed its handler. 0 is Ctrl+C and 1 is
 //!   Ctrl+Break. The stub ignores the event, so the marker shows delivery without a stop.
+//! - `grandchild-ready` says the uncooperative stub's grandchild installed its handler,
+//!   which the stub waits for before it prints `op-running`.
 //!
 //! The stub tests are ignored and run only through that re-exec.
 
 #![cfg(windows)]
 
 use std::env;
-use std::io::{self, Read};
+use std::io::{self, BufRead, BufReader, Read};
 use std::ops::{Deref, DerefMut};
 use std::path::PathBuf;
 use std::process::{Command, Stdio};
@@ -54,6 +56,8 @@ const SIZE: ConsoleSize = ConsoleSize {
 const STATUS_CONTROL_C_EXIT: u32 = 0xC000_013A;
 /// The marker the Escape stub prints after its operation stops.
 const STOPPED: &[u8] = b"op-stopped";
+/// The marker the uncooperative stub's grandchild prints once its handler is installed.
+const GRANDCHILD_READY: &str = "grandchild-ready";
 
 /// The waits used by every ladder test. Short enough to keep the suite quick and
 /// long enough for the console to deliver a key or an event on a loaded runner.
@@ -205,6 +209,28 @@ fn interrupt_stub_ends_on_ctrl_c() {
     thread::sleep(STUB_SLEEP);
 }
 
+/// Reads the grandchild's output until its ready marker. Output that ends first means the
+/// grandchild died before it installed its handler, so the stub fails rather than print
+/// `op-running` for a child that cannot take a Ctrl+C. The marker is matched as a substring
+/// because libtest may print its `test <name> ... ` prefix on the same line under `--nocapture`
+/// (seen with one test thread).
+fn wait_for_grandchild_ready(output: &mut impl BufRead) {
+    let mut line = String::new();
+    loop {
+        line.clear();
+        let read = output
+            .read_line(&mut line)
+            .expect("the grandchild's output is readable");
+        assert_ne!(
+            read, 0,
+            "the grandchild exited before it installed its handler"
+        );
+        if line.contains(GRANDCHILD_READY) {
+            return;
+        }
+    }
+}
+
 /// Re-exec stub: ignores every key and every console control event, and keeps a
 /// grandchild that does the same.
 #[test]
@@ -212,12 +238,21 @@ fn interrupt_stub_ends_on_ctrl_c() {
 fn interrupt_stub_uncooperative() {
     install_ignoring_handler();
     let mut grandchild = Command::new(this_exe())
-        .args(["--exact", "interrupt_stub_idle", "--ignored"])
+        .args(["--exact", "interrupt_stub_idle", "--ignored", "--nocapture"])
         .stdin(Stdio::null())
-        .stdout(Stdio::null())
+        .stdout(Stdio::piped())
         .stderr(Stdio::null())
         .spawn()
         .expect("the stub starts its grandchild");
+    // This read end stays open until the stub exits, so the grandchild's later console
+    // output does not hit a closed pipe.
+    let mut output = BufReader::new(
+        grandchild
+            .stdout
+            .take()
+            .expect("the grandchild's output is piped"),
+    );
+    wait_for_grandchild_ready(&mut output);
     println!("op-running");
     // The job ends both processes, which ends this wait.
     grandchild.wait().expect("the stub waits on its grandchild");
@@ -228,6 +263,7 @@ fn interrupt_stub_uncooperative() {
 #[ignore = "re-exec stub; run only by the ladder tests"]
 fn interrupt_stub_idle() {
     install_ignoring_handler();
+    println!("{GRANDCHILD_READY}");
     thread::sleep(STUB_SLEEP);
 }
 

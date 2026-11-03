@@ -11,6 +11,7 @@ use mcao_core::assignment_reassess::{
 use mcao_core::sha256::hex_digest;
 use serde_json::Value;
 use std::env;
+use std::ffi::OsString;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process;
@@ -59,6 +60,19 @@ const GENERATOR_GIT_ENV: [(&str, &str); 2] = [
 /// Set on the re-executed test binary that runs the replay. Without it the child test does nothing.
 const REPLAY_CHILD: &str = "MCAO_ASSIGNMENT_REASSESS_REPLAY_CHILD";
 
+/// The Windows variables that `env::temp_dir()` reads. Every `env_clear()` child that may use a
+/// temp directory gets them, because without them the child's temp directory is the Windows
+/// directory, which is not writable. Unix reads `TMPDIR`, which the children already receive.
+fn windows_temp_env() -> Vec<(&'static str, OsString)> {
+    if !cfg!(windows) {
+        return Vec::new();
+    }
+    ["TEMP", "TMP", "USERPROFILE"]
+        .into_iter()
+        .filter_map(|name| env::var_os(name).map(|value| (name, value)))
+        .collect()
+}
+
 /// Runs git with the generator's environment: no system or global config and a fixed identity.
 fn git(dir: &Path, args: &[&str]) -> String {
     let output = Command::new("git")
@@ -67,6 +81,7 @@ fn git(dir: &Path, args: &[&str]) -> String {
         .args(args)
         .env_clear()
         .env("PATH", env::var_os("PATH").unwrap_or_default())
+        .envs(windows_temp_env())
         .envs(git_env())
         .output()
         .expect("running git");
@@ -101,6 +116,7 @@ fn build_base_repo(repo: &Path) -> String {
         .arg(repo)
         .env_clear()
         .env("PATH", env::var_os("PATH").unwrap_or_default())
+        .envs(windows_temp_env())
         .envs(git_env())
         .status()
         .expect("running git init");
@@ -214,6 +230,7 @@ fn every_reassess_fixture_replays_to_the_recorded_output() {
         .env_clear()
         .env("PATH", env::var_os("PATH").unwrap_or_default())
         .env("TMPDIR", env::temp_dir())
+        .envs(windows_temp_env())
         .envs(GENERATOR_GIT_ENV)
         .env(REPLAY_CHILD, "1")
         .output()

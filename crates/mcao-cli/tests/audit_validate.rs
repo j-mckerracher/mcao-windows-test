@@ -315,13 +315,16 @@ fn a_rejection_without_a_state_directory_is_not_printed() {
 
 /// On Windows, an unset `FM_HOME` selects the default home under `LOCALAPPDATA`, so the rejection is
 /// recorded in that home's state directory. `LOCALAPPDATA` is a scratch directory here.
+///
+/// The fixture is rejected by the actor check, which runs before the zone lookup. Windows has no
+/// zoneinfo database, so a zone-bearing fixture would be refused as `/user/timezone` there instead.
 #[cfg(windows)]
 #[test]
 fn a_rejection_is_recorded_under_the_windows_default_home() {
     let scratch = Scratch::new("default-home");
     let state = scratch.0.join("mcao").join("home").join("state");
     fs::create_dir_all(&state).expect("the default home's state directory");
-    let path = fixture("envelope-day-key-mismatch.json");
+    let path = fixture("envelope-actor-mismatch.json");
     let output = Command::new(env!("CARGO_BIN_EXE_mcao"))
         .args(["audit", "validate", path.to_str().unwrap()])
         .env_remove("FM_HOME")
@@ -331,7 +334,7 @@ fn a_rejection_is_recorded_under_the_windows_default_home() {
         .expect("mcao runs");
     assert_eq!(
         stdout(&output),
-        "{\"result\": \"rejected\", \"definition\": \"envelope\", \"reason\": \"day_key_mismatch\", \"paths\": [\"/day_key\"]}\n"
+        "{\"result\": \"rejected\", \"definition\": \"envelope\", \"reason\": \"schema_invalid\", \"paths\": [\"/actor/id\"]}\n"
     );
     assert_eq!(status(&output), 1);
     assert!(state.join("audit-rejections.jsonl").is_file());
