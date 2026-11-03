@@ -1,5 +1,5 @@
 //! The `fm-resource-admission.v1` JSON shape for `mcao resources admit`, built from an
-//! [`Admission`]. The subcommand is not yet wired into the CLI, so nothing prints this shape yet.
+//! [`Admission`]. `mcao resources admit` prints it on stdout.
 //!
 //! The view borrows from the admission. Around its `snapshot` it adds only the envelope keys
 //! (`schema`, `disposition`, `kind`, `task`, `message`). The snapshot is the `fm-resource-snapshot.v1`
@@ -39,8 +39,7 @@ impl<'a> AdmissionView<'a> {
     }
 }
 
-/// Renders `admission` for `req` as one line of JSON, the planned output of `mcao resources admit`
-/// (not yet wired).
+/// Renders `admission` for `req` as one line of JSON, the stdout of `mcao resources admit`.
 ///
 /// `message` is `null` on admit and the deferral line on defer. The serialized view holds only
 /// strings, numbers, and nulls, so serialization cannot fail.

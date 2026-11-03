@@ -11,7 +11,7 @@ use super::{Breach, Evaluation, ResourceKind};
 use crate::state::TaskId;
 
 /// The kind of start being admitted. Serialized names are the `--kind` values of
-/// `mcao resources admit`, which is not yet wired into the CLI.
+/// `mcao resources admit`.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize)]
 #[serde(rename_all = "snake_case")]
 pub enum StartKind {

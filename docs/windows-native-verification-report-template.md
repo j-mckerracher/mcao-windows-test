@@ -78,7 +78,7 @@ Columns:
 | W-15 | `cargo test -p mcao-cli --locked --test toolchain` | 8 | `<n>` | `<n>` | `<n>` | `<status>` | VERIFIED-ON-WINDOWS | `<yes | no>` | `logs/W-15.log` | `<notes>` |
 | W-16 | `cargo test -p mcao-cli --locked --test herdr_lab_viewer` | 4 | `<n>` | `<n>` | `<n>` | `<status>` | VERIFIED-ON-WINDOWS | `<yes | no>` | `logs/W-16.log` | `<notes>` |
 | W-17 | `cargo test -p mcao-cli --locked --test audit_validate --test audit_activity_map` | audit_validate 7; audit_activity_map 8 | `<n>` | `<n>` | `<n>` | `<status>` | VERIFIED-ON-WINDOWS (run 20261102-r2); first run OBSERVED-FAIL | `<yes | no>` | `logs/W-17.log` | `<notes; ok-line count; zone cases skipped by cfg; per-binary counts>` |
-| W-18 | `cargo check --workspace --locked --target x86_64-unknown-linux-gnu`, then `--target aarch64-apple-darwin` | n/a | n/a | `<n>` / `<n>` | `<n>` / `<n>` | `<status>` | VERIFIED-ON-WINDOWS | `<yes | no>` | `logs/W-18-linux.log`, `logs/W-18-darwin.log` | `<notes>` |
+| W-18 | `cargo check --workspace --exclude mcao-cli --locked --target x86_64-unknown-linux-gnu`, then `--target aarch64-apple-darwin` | n/a | n/a | `<n>` / `<n>` | `<n>` / `<n>` | `<status>` | SPEC-ONLY for the form above; OBSERVED-FAIL (run 20261103-r6, form without `--exclude`) | yes | `logs/W-18-linux.log`, `logs/W-18-darwin.log` | `<notes>` |
 | W-19 | `cargo test -p mcao-backend-windows --locked --test job` | 4 running lines totalling 10 tests (7+1+1+1) | `<n>` | `<n>` | `<n>` | `<status>` | VERIFIED-ON-WINDOWS | `<yes | no>` | `logs/W-19.log` | `<notes>` |
 | W-20 | `cargo test -p mcao-backend-windows --locked --test backend` | 14 | `<n>` | `<n>` | `<n>` | `<status>` | VERIFIED-ON-WINDOWS | `<yes | no>` | `logs/W-20.log` | `<notes>` |
 | W-21 | `cargo test -p mcao-backend-windows --locked --test interrupt` | running 23 tests; 16 passed; 7 ignored (re-exec stubs); 0 failed | `<n>` | `<n>` | `<n>` | `<status>` | VERIFIED-ON-WINDOWS (run 20261102-r2); first run UNRESOLVED | `<yes | no>` | `logs/W-21.log` | `<notes; failing test name; left and right values; interrupt.rs line>` |
@@ -130,13 +130,13 @@ Record the result per Jira criterion, using the mapping in `windows-native-verif
 | --- | --- | --- | --- | --- |
 | DPES-752 | AC1 (partial) | W-02, W-03, W-27, W-28, W-29 | `<covered / partial / not run>` | `<reason>` |
 | DPES-752 | AC3 | W-21, W-49, W-58 (record only) | `<covered / partial / unresolved / not run>` | `<reason>` |
-| DPES-752 | AC4 (partial) | W-04, W-18 | `<...>` | `<...>` |
+| DPES-752 | AC4 (partial: host target, W-04, and the two cross targets without mcao-cli, W-18) | W-04, W-18 | `<...>` | `<...>` |
 | DPES-753 | writer refusal on Windows | W-41, W-42, W-46, W-47 | `<...>` | `<...>` |
 | DPES-754 | AC2 | W-34 | `<...>` | `<...>` |
 | DPES-754 | AC3 | W-35 | `<...>` | `<...>` |
 | DPES-754 | AC5 | W-31, W-32, W-38 | `<...>` | `<...>` |
 | DPES-755 | AC1, AC2, AC3 (partial) | W-19 to W-21, W-49, W-50, W-58 (record only) | `<...>` | `<...>` |
-| DPES-755 | AC5 | W-18 | `<...>` | `<...>` |
+| DPES-755 | AC5 (partial: W-18 excludes mcao-cli) | W-18 | `<...>` | `<...>` |
 | DPES-759 | AC1, AC2, AC4 (partial), AC5 | W-04, W-05, W-06, W-29 | `<...>` | `<...>` |
 | DPES-883 | AC1-AC6, AC7-AC9, AC22 (partial) | W-23 to W-26 | `<...>` | `<...>` |
 | DPES-884 | validator on Windows | W-17, W-48, W-48-c | `<...>` | `<...>` |
@@ -145,7 +145,7 @@ Record the result per Jira criterion, using the mapping in `windows-native-verif
 | DPES-892 | AC3 (registry, partial), AC4, AC5, AC8 (partial) | W-10, W-11, W-13, W-37, W-37b, W-38, W-43, W-44 | `<...>` | `<...>` |
 | DPES-892 | UNC home warning and exit 0 (PR 467) | W-36 | `<covered / partial / not run>` | `<reason; a Windows run must show the warning line>` |
 
-Not covered by this packet, by design: DPES-752 AC2, AC5 (owner decisions); DPES-754 AC1 and AC4 second half (managed install and clean-host proof); DPES-755 AC4 (reconnect); DPES-883 AC10-AC21 live attach and `mcao peek`; DPES-885 live keystrokes, resize, and the Windows steer end-to-end test; DPES-889 AC11 (Unix side); DPES-892 AC1, AC2, AC6, AC7, AC9. Any claim beyond the coverage above is not supported by this run.
+Not covered by this packet, by design: DPES-752 AC2, AC5 (owner decisions); mcao-cli on the two cross targets (W-18 excludes it); the no-mistakes readers `mcao util nm-run-inventory` and `mcao util nm-spend-record` (Unix-only, no row); DPES-754 AC1 and AC4 second half (managed install and clean-host proof); DPES-755 AC4 (reconnect); DPES-883 AC10-AC21 live attach and `mcao peek`; DPES-885 live keystrokes, resize, and the Windows steer end-to-end test; DPES-889 AC11 (Unix side); DPES-892 AC1, AC2, AC6, AC7, AC9. Any claim beyond the coverage above is not supported by this run.
 
 ## 5. Full logs
 
