@@ -5,10 +5,10 @@
 The agent reads this block at the start of every run. Keep the four lines in this exact form (`KEY: value`, one per line, no extra text on the key lines). Only the fenced block is parsed; the bullets below it describe the fields.
 
 ```text
-RUN_ID: 20261103-r3
-MODE: full
-ROWS: ALL
-NOTES: none
+RUN_ID: 20261103-r4
+MODE: targeted
+ROWS: W-21,W-56
+NOTES: rerun W-21
 ```
 
 - A `RUN_ID` of `none` is the idle state. The agent does nothing else while it reads `none`.
@@ -725,7 +725,7 @@ Rows W-51 to W-57 are read-only observations. None has a pass or fail beyond its
 | W-53 | `where.exe bash`, `bash --version`, and `test -r` on the backslash path and on the forward-slash path of `bin\fm-sessionstart-nudge.sh` (read only, the script is not run) | not a Cargo test | Record only. Expected: the backslash form is not readable from `bash` and the forward-slash form is. This decides the hook oracle fix in `hook_session_start.rs`. Record which `bash` ran (the full path printed as `bash used (full path)`). The Git for Windows `bash.exe` under `Program Files` is preferred and run by full path. `C:\Windows\System32\bash.exe` is the WSL launcher and is never started: when no Git for Windows or non-System32 bash exists, the bash steps are `SKIPPED` with the reason `WSL launcher only`. `wsl.exe` is never invoked. Each bash step is bounded (30 s): a step that does not exit is killed with its process tree and recorded `TIMEOUT`. | `logs\W-53.log` | 2 min | 759 (hook oracle) | SPEC-ONLY observed |
 | W-54 | python: `zoneinfo.TZPATH`, whether the `tzdata` package is present (checked, never installed), `ZoneInfo('America/Chicago')`, and the reference `bin\fm-audit-envelope.py validate` on `envelope-day-key-mismatch.json` with `FM_STATE_OVERRIDE` under the run folder | not a Cargo test | Record only. If `python --version` does not exit 0 with a `Python x.y` line (the Microsoft Store alias stub fails that check), the row is `SKIPPED` with `python absent`. Each python step is bounded (30 s for `--version`, 60 s for the probe and the reference): a step that does not exit is killed with its process tree and the row is recorded `TIMEOUT`. Expected on a stock Windows Python without `tzdata`: `ZoneInfo` fails and the reference prints `schema_invalid /user/timezone`, which would match the Rust result. Not verified until this row runs. | `logs\W-54.log` | 2 min | 884 AC3 (zone gap) | SPEC-ONLY observed (or SKIPPED) |
 | W-55 | `[System.IO.File]::Open` on a directory with read access, the open that `sync_dir` needs | not a Cargo test | Record only. Expected: `UnauthorizedAccessException` (access denied, os error 5). This confirms the mechanism behind PR 464's `audit_writer` gate and the owner decision about `sync_dir` on Windows. | `logs\W-55.log` | 2 min | 753 (writer, owner decision) | SPEC-ONLY observed |
-| W-56 | child pwsh with an environment of `PATH`, `GIT_CONFIG_NOSYSTEM=1`, and `GIT_CONFIG_GLOBAL=/dev/null` only: `git init`, add, commit, then `git config --show-origin --list`; the exit code of each git step is recorded | not a Cargo test | Record only. Expected: every git step exits 0 and `git config --show-origin --list` names no file under the user profile, because `USERPROFILE` is absent in the child. This is the input to the W-06 `assignment_reassess*` question. | `logs\W-56.log` | 2 min | 759 (assignment_reassess, SPEC-ONLY) | SPEC-ONLY observed |
+| W-56 | child pwsh with an environment of `PATH`, `PATHEXT=.COM;.EXE;.BAT;.CMD`, `GIT_CONFIG_NOSYSTEM=1`, and `GIT_CONFIG_GLOBAL=/dev/null` only: `git init`, add, commit, then `git config --show-origin --list`; the exit code of each git step is recorded. `PATHEXT` is set because PowerShell 7 cannot resolve a bare `git` name without it (run 20261103-r3 exited with "The term 'git' is not recognized") | not a Cargo test | Record only. Expected: every git step exits 0 and `git config --show-origin --list` names no file under the user profile, because `USERPROFILE` is absent in the child. This is the input to the W-06 `assignment_reassess*` question. | `logs\W-56.log` | 2 min | 759 (assignment_reassess, SPEC-ONLY) | SPEC-ONLY observed |
 | W-57 | presence, length, and drive-rooted shape of `USERPROFILE`, `LOCALAPPDATA`, `OneDrive`, `OneDriveCommercial`, and `OneDriveConsumer` in the test process; no path text is printed | not a Cargo test | Record only. Expected: the three OneDrive variables are empty on this laptop, as the first run recorded. This is the hermetic environment reason in PR 464's `Command` changes. | `logs\W-57.log` | 1 min | 892 (guard environment) | SPEC-ONLY observed |
 
 The probe block. Run it after the W-50 block, in the same session, after the section 3 helper:
@@ -936,7 +936,7 @@ Invoke-Row -Id 'W-56' -MinTests 0 -Command 'child git init, add, commit, config 
   $repo = Join-Path $Root 'w56-repo'
   Remove-Item -LiteralPath $repo -Recurse -Force -ErrorAction SilentlyContinue
   New-Item -ItemType Directory -Force -Path $repo | Out-Null
-  Invoke-ChildCapture -FileName $shell -Arguments "-NoProfile -ExecutionPolicy Bypass -File `"$gitChildPath`" -Repo `"$repo`"" -ChildEnv @{ PATH = $env:Path; GIT_CONFIG_NOSYSTEM = '1'; GIT_CONFIG_GLOBAL = '/dev/null' }
+  Invoke-ChildCapture -FileName $shell -Arguments "-NoProfile -ExecutionPolicy Bypass -File `"$gitChildPath`" -Repo `"$repo`"" -ChildEnv @{ PATH = $env:Path; PATHEXT = '.COM;.EXE;.BAT;.CMD'; GIT_CONFIG_NOSYSTEM = '1'; GIT_CONFIG_GLOBAL = '/dev/null' }
   Remove-Item -LiteralPath $repo -Recurse -Force -ErrorAction SilentlyContinue
 }
 
