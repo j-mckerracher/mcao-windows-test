@@ -48,7 +48,7 @@ Redact before saving: Windows user name as `<user>`, machine name as `<host>`, O
 
 ## 3. Summary table
 
-One row per matrix row in `windows-native-verification.md` section 4 (W-01 to W-57, with W-39 as a reference line; W-48-c, W-50, and W-51 to W-57 are new in the second request).
+One row per matrix row in `windows-native-verification.md` section 4 (W-01 to W-58, with W-39 as a reference line; W-48-c, W-50, and W-51 to W-57 are new in the second request; W-58 is a diagnostic that runs only with `NOTES: rerun W-21`).
 
 Status values for a run, the same six that packet section 2.4 step 7 lists: `PASS`, `FAIL`, `FAIL (vacuous)`, `SKIPPED`, `TIMEOUT`, `SPEC-ONLY observed`. `FAIL (vacuous)` is a row whose log shows no `running N tests` line with N of at least 1, while the row expects tests. A row the packet marks UNRESOLVED (W-21) is recorded as `FAIL` when its run fails; the packet's UNRESOLVED label stays in the Packet status column. W-49 is `PASS` only when all 20 runs pass. It is `TIMEOUT` when the packet's 30-minute row budget ends its loop before run 20 (a run killed at its 10-minute limit counts as a failed run); otherwise it is `FAIL`, with the counts in Notes. W-49 and W-50 are `SKIPPED`, reason `not requested`, unless the request `NOTES` key line is exactly `NOTES: rerun W-21` (packet section 4.8); naming W-49 or W-50 in `ROWS` does not trigger them. W-50 is `PASS` only when its three runs each exit 0 with `16 passed; 0 failed; 7 ignored`. `SPEC-ONLY observed` is a row whose expectation the packet marks SPEC-ONLY and whose log shows the actual result; record the result, not a pass. `TIMEOUT` is a row stopped at the packet's 30-minute limit, or a W-49 run killed at its 10-minute limit (recorded as that run's exit `TIMEOUT` in `rows.tsv`). `SKIPPED` rows give their reason in Notes.
 
@@ -120,6 +120,7 @@ Columns:
 | W-55 | `[System.IO.File]::Open` on a directory | not a Cargo test | n/a | `<n>` | `<n>` | `<status>` | SPEC-ONLY observed (or SKIPPED) | yes | `logs/W-55.log` | `<notes; record only, no pass or fail>` |
 | W-56 | child git init, add, commit, config origins, cleared environment | not a Cargo test | n/a | `<n>` | `<n>` | `<status>` | SPEC-ONLY observed (or SKIPPED) | yes | `logs/W-56.log` | `<notes; record only, no pass or fail>` |
 | W-57 | presence, length, and drive-rooted shape of profile and OneDrive variables (no path text) | not a Cargo test | n/a | `<n>` | `<n>` | `<status>` | SPEC-ONLY observed (or SKIPPED) | yes | `logs/W-57.log` | `<notes; record only, no pass or fail>` |
+| W-58 | escalation test launched five ways in one session (diagnostic; only with `NOTES: rerun W-21`) | not a Cargo test | n/a | `<n>` | `<n>` | `<status>` | SPEC-ONLY observed (or SKIPPED) | yes | `logs/W-58.log` | `<one line per variant and run: exit code and panic text; record only, no pass or fail>` |
 
 ## 4. Acceptance coverage (for the owner)
 

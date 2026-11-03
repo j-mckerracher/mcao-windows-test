@@ -5,9 +5,9 @@
 The agent reads this block at the start of every run. Keep the four lines in this exact form (`KEY: value`, one per line, no extra text on the key lines). Only the fenced block is parsed; the bullets below it describe the fields.
 
 ```text
-RUN_ID: 20261103-r4
+RUN_ID: 20261103-r5
 MODE: targeted
-ROWS: W-21,W-56
+ROWS: W-21,W-58
 NOTES: rerun W-21
 ```
 
@@ -31,7 +31,7 @@ What this packet covers, without credentials:
 - The Windows process backend tests and the console pipe tests, run as ordinary native tests.
 - The `mcao-probe` stub-harness run that CI also performs (no harness, no credentials).
 - Platform-leakage guard, state-encoding and task-id rules (DPES-889), and the audit zone gap.
-- Diagnostic probes (W-51 to W-57) for the open Windows questions from the first loop run: temp directory under a cleared environment, direct `.sh` launch, bash path forms, Python zone data, directory open, git under a cleared environment, and environment presence.
+- Diagnostic probes (W-51 to W-58) for the open Windows questions from the first loop run: temp directory under a cleared environment, direct `.sh` launch, bash path forms, Python zone data, directory open, git under a cleared environment, environment presence, and (W-58, only with `NOTES: rerun W-21`) the escalation test launched five ways.
 
 What this packet cannot cover, and must not be reported as covered:
 
@@ -716,7 +716,7 @@ if (-not $RerunRequested) {
 
 ### 4.9 Diagnostic probes for the first run's open questions
 
-Rows W-51 to W-57 are read-only observations. None has a pass or fail beyond its own recording. Each runs in a child process where stated, writes only under the run folder, and installs nothing (no `pip install`, no package, no installer). Each `Invoke-Row` is `-MinTests 0`. Each action ends by setting `$global:LASTEXITCODE` (`0`, the child's exit code, or `TIMEOUT`), so the recorded exit code is the one the action sets, not a stale value.
+Rows W-51 to W-58 are read-only observations. None has a pass or fail beyond its own recording. Each runs in a child process where stated, writes only under the run folder, and installs nothing (no `pip install`, no package, no installer). Each `Invoke-Row` is `-MinTests 0`. Each action ends by setting `$global:LASTEXITCODE` (`0`, the child's exit code, or `TIMEOUT`), so the recorded exit code is the one the action sets, not a stale value.
 
 | ID | Command | Expected tests run | Expected result | Capture | Timeout | Acceptance | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -727,6 +727,7 @@ Rows W-51 to W-57 are read-only observations. None has a pass or fail beyond its
 | W-55 | `[System.IO.File]::Open` on a directory with read access, the open that `sync_dir` needs | not a Cargo test | Record only. Expected: `UnauthorizedAccessException` (access denied, os error 5). This confirms the mechanism behind PR 464's `audit_writer` gate and the owner decision about `sync_dir` on Windows. | `logs\W-55.log` | 2 min | 753 (writer, owner decision) | SPEC-ONLY observed |
 | W-56 | child pwsh with an environment of `PATH`, `PATHEXT=.COM;.EXE;.BAT;.CMD`, `GIT_CONFIG_NOSYSTEM=1`, and `GIT_CONFIG_GLOBAL=/dev/null` only: `git init`, add, commit, then `git config --show-origin --list`; the exit code of each git step is recorded. `PATHEXT` is set because PowerShell 7 cannot resolve a bare `git` name without it (run 20261103-r3 exited with "The term 'git' is not recognized") | not a Cargo test | Record only. Expected: every git step exits 0 and `git config --show-origin --list` names no file under the user profile, because `USERPROFILE` is absent in the child. This is the input to the W-06 `assignment_reassess*` question. | `logs\W-56.log` | 2 min | 759 (assignment_reassess, SPEC-ONLY) | SPEC-ONLY observed |
 | W-57 | presence, length, and drive-rooted shape of `USERPROFILE`, `LOCALAPPDATA`, `OneDrive`, `OneDriveCommercial`, and `OneDriveConsumer` in the test process; no path text is printed | not a Cargo test | Record only. Expected: the three OneDrive variables are empty on this laptop, as the first run recorded. This is the hermetic environment reason in PR 464's `Command` changes. | `logs\W-57.log` | 1 min | 892 (guard environment) | SPEC-ONLY observed |
+| W-58 | diagnostic, runs only when the `NOTES` key line is exactly `NOTES: rerun W-21`: the isolated escalation test (`escalation_sends_a_second_ctrl_c_then_terminates_the_tree_at_the_wait -- --exact`) launched five ways in the same agent session, three runs each: `direct-start-process` (as W-49), `in-process` (`& cargo` in the current shell), `child-powershell51` (Windows PowerShell 5.1 from `$env:SystemRoot`), `cmd-c` (`cmd.exe /c`), and `new-console-window` (`cmd.exe` in its own console window). It also records the host name, shell version, whether stdin and stdout are redirected, and the names of up to six ancestor processes (no command lines) | not a Cargo test | Record only. Expected: unknown. Run 20261103-r3 and r4 failed the test under `pwsh 7.4.14` in every run, while run 20261102-r1 (`pwsh 7.4.14`) delivered Ctrl+C and run 20261102-r2 (`powershell.exe 5.1`) passed. The Windows backend code is identical between r2 and r4. The row separates the shell version from the way the agent session launches its shell (console host, inherited Ctrl+C-ignored state, process group). If one variant passes and the direct launch fails, the launch route is the cause; if all five fail, the agent session's console state is. | `logs\W-58.log` | 10 min | 752 AC3, 755 AC1-AC3 | SPEC-ONLY observed |
 
 The probe block. Run it after the W-50 block, in the same session, after the section 3 helper:
 
@@ -947,11 +948,76 @@ Invoke-Row -Id 'W-57' -MinTests 0 -Command 'presence, length, and drive-rooted s
   }
   $global:LASTEXITCODE = 0
 }
+
+Invoke-Row -Id 'W-58' -MinTests 0 -Command 'escalation test launched five ways in one session (diagnostic; only with NOTES: rerun W-21)' -Action {
+  $w58Notes = @(Get-Content -LiteralPath (Join-Path $Clone 'docs\windows-native-verification.md') -ErrorAction Stop | Where-Object { $_ -cmatch '^NOTES: ' })
+  if (-not (($w58Notes.Count -gt 0) -and ($w58Notes[0] -ceq 'NOTES: rerun W-21'))) {
+    'W-58 SKIPPED: reason not requested'
+    $global:LASTEXITCODE = 0
+    return
+  }
+  $env:CARGO_TARGET_DIR = $Target
+  "host=$($Host.Name) shell=$($PSVersionTable.PSVersion) stdinRedirected=$([Console]::IsInputRedirected) stdoutRedirected=$([Console]::IsOutputRedirected)"
+  $ancestor = $PID
+  for ($depth = 0; $depth -lt 6; $depth++) {
+    $proc = Get-CimInstance -ClassName Win32_Process -Filter "ProcessId=$ancestor" -ErrorAction SilentlyContinue
+    if (-not $proc) { break }
+    "ancestor$depth=$($proc.Name) pid=$($proc.ProcessId)"
+    $ancestor = $proc.ParentProcessId
+  }
+  $w58Test = 'escalation_sends_a_second_ctrl_c_then_terminates_the_tree_at_the_wait'
+  $w58Args = @('test', '-p', 'mcao-backend-windows', '--locked', '--test', 'interrupt', $w58Test, '--', '--exact')
+  $w58Line = "cargo test -p mcao-backend-windows --locked --test interrupt $w58Test -- --exact"
+  # Build once so the timed runs do not include compilation.
+  Push-Location -LiteralPath $Clone
+  & cargo test -p mcao-backend-windows --locked --test interrupt --no-run 2>&1 | Select-Object -Last 2
+  Pop-Location
+  $ps51 = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
+  foreach ($variant in 'direct-start-process', 'in-process', 'child-powershell51', 'cmd-c', 'new-console-window') {
+    for ($run = 1; $run -le 3; $run++) {
+      $outFile = Join-Path $Results "W-58-$variant-$run.out"
+      $errFile = Join-Path $Results "W-58-$variant-$run.err"
+      $code = 'n/a'
+      if ($variant -eq 'in-process') {
+        Push-Location -LiteralPath $Clone
+        & cargo @w58Args *> $outFile
+        $code = $LASTEXITCODE
+        Pop-Location
+      } else {
+        $startArgs = @{ WorkingDirectory = $Clone; PassThru = $true }
+        switch ($variant) {
+          'direct-start-process' { $startArgs += @{ FilePath = 'cargo'; ArgumentList = $w58Args; NoNewWindow = $true; RedirectStandardOutput = $outFile; RedirectStandardError = $errFile } }
+          'child-powershell51' { $startArgs += @{ FilePath = $ps51; ArgumentList = @('-NoProfile', '-Command', $w58Line); NoNewWindow = $true; RedirectStandardOutput = $outFile; RedirectStandardError = $errFile } }
+          'cmd-c' { $startArgs += @{ FilePath = $env:ComSpec; ArgumentList = @('/c', $w58Line); NoNewWindow = $true; RedirectStandardOutput = $outFile; RedirectStandardError = $errFile } }
+          'new-console-window' { $startArgs += @{ FilePath = $env:ComSpec; ArgumentList = @('/c', "$w58Line > `"$outFile`" 2>&1") } }
+        }
+        $started = Start-Process @startArgs
+        if ($started.WaitForExit(120000)) {
+          $code = $started.ExitCode
+        } else {
+          & taskkill.exe /PID $started.Id /T /F | Out-Null
+          [void]$started.WaitForExit(10000)
+          $code = 'TIMEOUT'
+        }
+      }
+      $text = @()
+      foreach ($file in $outFile, $errFile) {
+        if (Test-Path -LiteralPath $file) {
+          $text += @(Get-Content -LiteralPath $file)
+          Remove-Item -LiteralPath $file
+        }
+      }
+      $detail = @($text | Where-Object { $_ -match 'panicked at|both reach the stub|test result' }) -join ' | '
+      "variant=$variant run=$run exit=$code $detail"
+    }
+  }
+  $global:LASTEXITCODE = 0
+}
 ```
 
 ## 5. Live behaviour without credentials
 
-Only the stub-harness probe (W-28) and the native test binaries (W-19 to W-27, W-41 to W-46, W-49, W-50) exercise live process behaviour here. They start a trivial child, observe it, and stop it. No row starts a real worker, a harness, or a service. The diagnostic rows W-51 to W-57 start child processes (pwsh, a direct `.sh` launch expected to fail, bash, python, git) and read environment variable presence; they install nothing and write only under the run folder.
+Only the stub-harness probe (W-28) and the native test binaries (W-19 to W-27, W-41 to W-46, W-49, W-50) exercise live process behaviour here. They start a trivial child, observe it, and stop it. No row starts a real worker, a harness, or a service. The diagnostic rows W-51 to W-57 start child processes (pwsh, a direct `.sh` launch expected to fail, bash, python, git) and read environment variable presence; W-58 starts the escalation test through five launch routes (same cargo test, no new code). They install nothing and write only under the run folder.
 
 Items that need a credential or a managed laptop install are not live rows. They appear in the anomalies section if the agent sees them, and otherwise in section 6 as not covered.
 
