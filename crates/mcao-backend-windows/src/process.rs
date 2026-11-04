@@ -21,6 +21,7 @@ use windows_sys::Win32::Foundation::{
     ERROR_INVALID_PARAMETER, FILETIME, HANDLE, INVALID_HANDLE_VALUE, WAIT_FAILED, WAIT_OBJECT_0,
     WAIT_TIMEOUT,
 };
+use windows_sys::Win32::System::Console::SetConsoleCtrlHandler;
 use windows_sys::Win32::System::Threading::{
     CREATE_NEW_PROCESS_GROUP, CREATE_SUSPENDED, CreateProcessW, EXTENDED_STARTUPINFO_PRESENT,
     GetExitCodeProcess, GetProcessTimes, INFINITE, OpenProcess, PROCESS_INFORMATION,
@@ -322,6 +323,10 @@ impl AssignedChild {
 /// handles are then set to `INVALID_HANDLE_VALUE`, so it cannot inherit redirected
 /// parent handles in place of the pseudoconsole. With `group` set to
 /// [`ProcessGroup::New`], the child leads a new console process group.
+///
+/// A console child is created with this process's CTRL+C ignore attribute cleared,
+/// see [`clear_inherited_ctrl_c_ignore`]. Otherwise a caller that ignores CTRL+C
+/// passes that ignore on, and an interrupt written to the child never reaches it.
 fn create_suspended(
     program: &Path,
     args: &[&str],
@@ -334,6 +339,9 @@ fn create_suspended(
     let mut flags = CREATE_SUSPENDED;
     if group == ProcessGroup::New {
         flags |= CREATE_NEW_PROCESS_GROUP;
+    }
+    if console.is_some() {
+        clear_inherited_ctrl_c_ignore()?;
     }
     let startup_size = match console {
         Some(attributes) => {
@@ -384,6 +392,22 @@ fn create_suspended(
         thread,
         pid: info.dwProcessId,
     })
+}
+
+/// Restores normal CTRL+C processing in this process, which clears the ignore
+/// attribute that `SetConsoleCtrlHandler(NULL, TRUE)` sets.
+///
+/// Windows copies that attribute into every child the process creates, and a child
+/// that inherits it drops CTRL+C before any handler runs. The call changes only this
+/// process. It also changes what this process does with CTRL+C afterwards, and the
+/// previous state cannot be read back, so it is not restored.
+fn clear_inherited_ctrl_c_ignore() -> io::Result<()> {
+    // SAFETY: A NULL handler with FALSE restores normal CTRL+C processing. The call
+    // takes no pointers and changes only this process's attribute.
+    if unsafe { SetConsoleCtrlHandler(None, 0) } == 0 {
+        return Err(io::Error::last_os_error());
+    }
+    Ok(())
 }
 
 /// Kills a child on a failure path where the original error is the one to report.
