@@ -5,7 +5,7 @@
 The agent reads this block at the start of every run. Keep the four lines in this exact form (`KEY: value`, one per line, no extra text on the key lines). Only the fenced block is parsed; the bullets below it describe the fields.
 
 ```text
-RUN_ID: 20261103-r8
+RUN_ID: 20261103-r9
 MODE: targeted
 ROWS: W-21
 NOTES: rerun W-21

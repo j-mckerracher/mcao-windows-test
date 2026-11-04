@@ -324,9 +324,9 @@ impl AssignedChild {
 /// parent handles in place of the pseudoconsole. With `group` set to
 /// [`ProcessGroup::New`], the child leads a new console process group.
 ///
-/// A console child is created with this process's CTRL+C ignore attribute cleared,
-/// see [`clear_inherited_ctrl_c_ignore`]. Otherwise a caller that ignores CTRL+C
-/// passes that ignore on, and an interrupt written to the child never reaches it.
+/// Every child is created with this process's CTRL+C ignore attribute cleared, see
+/// [`clear_inherited_ctrl_c_ignore`]. A caller that ignores CTRL+C would otherwise pass that
+/// ignore on, and an interrupt written to the child would never reach it.
 fn create_suspended(
     program: &Path,
     args: &[&str],
@@ -340,9 +340,7 @@ fn create_suspended(
     if group == ProcessGroup::New {
         flags |= CREATE_NEW_PROCESS_GROUP;
     }
-    if console.is_some() {
-        clear_inherited_ctrl_c_ignore()?;
-    }
+    clear_inherited_ctrl_c_ignore();
     let startup_size = match console {
         Some(attributes) => {
             startup.lpAttributeList = attributes.as_mut_ptr();
@@ -394,20 +392,33 @@ fn create_suspended(
     })
 }
 
-/// Restores normal CTRL+C processing in this process, which clears the ignore
-/// attribute that `SetConsoleCtrlHandler(NULL, TRUE)` sets.
+/// Clears this process's CTRL+C ignore attribute, which `SetConsoleCtrlHandler(NULL, TRUE)`
+/// sets. Windows copies that attribute into every child the process creates, and a child that
+/// inherits it drops CTRL+C before any handler runs.
 ///
-/// Windows copies that attribute into every child the process creates, and a child
-/// that inherits it drops CTRL+C before any handler runs. The call changes only this
-/// process. It also changes what this process does with CTRL+C afterwards, and the
-/// previous state cannot be read back, so it is not restored.
-fn clear_inherited_ctrl_c_ignore() -> io::Result<()> {
-    // SAFETY: A NULL handler with FALSE restores normal CTRL+C processing. The call
-    // takes no pointers and changes only this process's attribute.
+/// This changes the calling process, not only the child. Afterwards this process no longer
+/// ignores CTRL+C, so a user's CTRL+C ends mcao, as it does for any default console program.
+/// The previous state is not restored: Windows has no way to read the attribute back, and
+/// setting it unconditionally would be wrong when it was never set.
+///
+/// A failure is not fatal. The spawn continues, and the failure is written to stderr as a
+/// diagnostic, so the child may inherit the ignore attribute.
+///
+/// The clear runs before `CreateProcessW` and is not undone if `CreateProcessW` fails, so the
+/// caller's CTRL+C state stays changed after a failed spawn.
+///
+/// Microsoft documents that `AttachConsole` and `FreeConsole` (used by `ctrl_break.rs`) reset
+/// the client's control-handler table. Whether that also resets this attribute is undocumented
+/// and was not analyzed.
+pub(crate) fn clear_inherited_ctrl_c_ignore() {
+    // SAFETY: A NULL handler with FALSE restores normal CTRL+C processing. The call takes no
+    // pointers and changes only this process's attribute.
     if unsafe { SetConsoleCtrlHandler(None, 0) } == 0 {
-        return Err(io::Error::last_os_error());
+        eprintln!(
+            "mcao: could not clear the inherited CTRL+C ignore attribute: {}",
+            io::Error::last_os_error()
+        );
     }
-    Ok(())
 }
 
 /// Kills a child on a failure path where the original error is the one to report.

@@ -796,6 +796,24 @@ fn threshold_grammar_accepts_upper_bounds() {
 }
 
 #[test]
+fn running_agents_accepts_off_and_both_range_endpoints() {
+    for (value, expected) in [("off", None), ("1", Some(1)), ("999999", Some(999_999))] {
+        let loaded = parse_thresholds(
+            &format!("running_agents {value}\n"),
+            "/cfg/resource-thresholds",
+        );
+        assert_eq!(
+            loaded.warning, None,
+            "running_agents {value} must be accepted"
+        );
+        assert_eq!(
+            loaded.thresholds.running_agents, expected,
+            "running_agents {value}"
+        );
+    }
+}
+
+#[test]
 fn threshold_warning_line_number_counts_comments_and_blank_lines() {
     let loaded = parse_thresholds(
         "# host limits\n\nmemory_used_pct 50\nbogus_key 1\n",

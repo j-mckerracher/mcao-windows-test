@@ -162,6 +162,10 @@ impl Session {
         size: ConsoleSize,
         group: ProcessGroup,
     ) -> io::Result<Self> {
+        // Cleared before ConPty::open, which creates the pseudoconsole host from this process,
+        // so the host is never created while this process ignores CTRL+C. Whether the host is
+        // affected by that attribute is not observed on Windows.
+        process::clear_inherited_ctrl_c_ignore();
         let (console, io) = ConPty::open(size)?;
         let mut reader = OutputReader::start(io.output)?;
         match process::spawn_in_job_with_console(&job, program, args, &console, group) {

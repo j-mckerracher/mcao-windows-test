@@ -24,8 +24,12 @@ use windows_sys::Win32::System::Console::SetConsoleCtrlHandler;
 
 /// Long enough for a loaded runner to start the stub and print its marker.
 const WAIT: Duration = Duration::from_secs(20);
-/// The escalation wait. A CTRL+C that reaches the stub ends it well inside this.
-const INTERRUPT_WAIT: Duration = Duration::from_secs(5);
+/// A ceiling for the escalation, not a sleep: `escalate` returns as soon as the job is empty.
+/// It bounds only a failing run; a loaded runner cannot fail a passing one within it.
+const INTERRUPT_WAIT: Duration = Duration::from_secs(60);
+/// The exit status of a console process that the default CTRL+C handler ends. A process that the
+/// job's terminate call ends exits with 0x1F instead.
+const STATUS_CONTROL_C_EXIT: u32 = 0xC000_013A;
 /// Long enough that the job, not the stub's own sleep, ends the stub.
 const STUB_SLEEP: Duration = Duration::from_secs(120);
 /// A pseudoconsole wide enough that the short markers never wrap.
@@ -51,10 +55,11 @@ fn this_exe() -> PathBuf {
 
 #[test]
 fn ctrl_c_ends_a_child_when_the_caller_ignores_ctrl_c() {
-    // SAFETY: A NULL handler with TRUE sets this process's ignore-CTRL+C attribute.
-    // The call takes no pointers and changes only this process.
+    // SAFETY: A NULL handler with TRUE sets this process's ignore-CTRL+C attribute. The call
+    // takes no pointers and changes only this process.
     let set = unsafe { SetConsoleCtrlHandler(None, 1) };
-    assert_ne!(set, 0, "this process ignores CTRL+C before the spawn");
+    // The attribute cannot be read back, so its effect is observed through the stub's exit status.
+    assert_ne!(set, 0, "SetConsoleCtrlHandler(NULL, TRUE) must succeed");
 
     let args = [
         "--exact",
@@ -72,11 +77,30 @@ fn ctrl_c_ends_a_child_when_the_caller_ignores_ctrl_c() {
         .expect("the output buffer is readable");
     assert!(ready, "the stub prints its ready marker");
 
+    assert!(
+        running
+            .0
+            .child()
+            .wait_timeout(Duration::ZERO)
+            .expect("the stub's state is readable")
+            .is_none(),
+        "the stub is running before the CTRL+C"
+    );
     let outcome = escalate(&mut running.0, INTERRUPT_WAIT).expect("the escalation runs");
     assert_eq!(
         outcome,
         mcao_backend_windows::interrupt::Escalation::Exited,
         "the CTRL+C ended the stub; TerminatedJob means the stub ignored it"
+    );
+    let status = running
+        .0
+        .child()
+        .wait_timeout(INTERRUPT_WAIT)
+        .expect("the stub's exit status is readable");
+    assert_eq!(
+        status,
+        Some(STATUS_CONTROL_C_EXIT),
+        "the stub must end on the default CTRL+C handler; exit 0x1F means the job's terminate call ended it"
     );
 }
 
